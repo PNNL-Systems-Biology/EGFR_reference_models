@@ -1,3 +1,3 @@
-## Working repo for the EGF reference model.
+## Working repository for the EGF reference model.
 
 
