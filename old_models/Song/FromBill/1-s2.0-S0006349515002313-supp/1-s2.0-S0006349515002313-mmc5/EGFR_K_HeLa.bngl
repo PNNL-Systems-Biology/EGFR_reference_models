@@ -1,0 +1,435 @@
+##########################################################################################
+###                                                                                                                                                                                                                                                                
+###                     Model of EGFR phosphotyrosine signaling as implied by the 
+###						proteomic studies of Hause et al                                                                             
+###                                                                           
+##########################################################################################
+
+
+##########################################################################################
+####                                  Parameters              
+##########################################################################################
+
+
+begin parameters
+
+
+#######################      Modeling Parameters    ######################################
+NA 	              6.02e23 # Avogadro's number (molecues/mol)
+f                 1      # Fraction of the cell to simulate
+Vcy	              2e-12 # Cytoplasmic Volume(L) -Excluding intracellular compartment volumes
+Asurf			  1e-7 # surface area, in dm^2 for consistents w/ MacDonald and Pike data
+Vex				  1e-9 # extracellular volume
+
+#########################    Rate Constants   ##############################
+## Equilibrium association constants from MacDonald JL & Pike LJ, PNAS 2008 (note corrected version)
+
+K11 	4.6e9  # Units: /M in MacDonald & Pike
+L20		5.3e11  # Units: /mol/dm^2 in MacDonald & Pike
+K21		5.3e9	# Units: /M in MacDonald & Pike
+K22		3.4e8	# Units: /M in MacDonald & Pike
+
+EGFkm1		  0.01
+EGFkm2		  0.01
+EGFkm3		  0.01
+
+EGFkp1		  0 #K11*EGFkm1/(f*NA*Vex)
+EGFkp2		  0 #K21*EGFkm2/(f*NA*Vex)
+EGFkp3		  0 #K22*EGFkm3/(f*NA*Vex)
+
+Dimkm1		  0.01
+Dimkm2		  0.01
+Dimkm3		  0.01
+
+Dimkp1		  L20*Dimkm1/(f*NA*Asurf)		
+Dimkp2		  L20*K21*Dimkm2/(K11*f*NA*Asurf)
+Dimkp3		  L20*K21*K22*Dimkm3/(K11*K11*f*NA*Asurf)
+
+
+kint 0.005
+krec 0.005
+kdeg 0.002
+
+
+
+###  proteins
+
+EGFtot	2e5*f
+
+BLKtot		242*f
+EGFRtot		92675*f
+GRB2tot		628016*f
+GRB7tot	 	460 *f
+HSH2Dtot	124 *f
+PIK3R1tot	448*f
+PIK3R2tot	16715*f
+PIK3R3tot	2060*f
+PTK6tot	 	1759*f
+PTPN11tot	299893*f
+RASA1tot	26455*f
+SH2B2tot	7693*f
+SHBtot		859*f
+SHC1tot	 	111966*f
+SRCtot		1220*f
+TECtot		424*f
+VAV1tot		59*f
+VAV2tot		106531*f
+YES1tot		63595*f
+
+
+#########################    Rate Constants   ##############################
+
+
+#### Phosphorylation of receptor tyrosines
+
+
+k_kinase 0.1
+k_phosphatase 0.1
+
+#### SH2 and PTB binding to phosphotyrosine residues
+# Kd; units in microM (Hause et al)
+# nomenclature: kD(receptor)(pY residue)(protein w/SH2 or PTB)(specific SH2 or PTB)
+
+KdErbB1_1016_PIK3R1N	4.70*1e-6
+KdErbB1_1016_PIK3R2N	2.48*1e-6
+KdErbB1_1016_PIK3R3C	1.35*1e-6
+KdErbB1_1016_PIK3R3N	3.21*1e-6
+KdErbB1_1016_PTK6	3.04*1e-6
+KdErbB1_1016_RASA1N	1.67*1e-6
+KdErbB1_1016_SHC1	7.53*1e-6
+KdErbB1_1016_SRC	3.95*1e-6
+KdErbB1_1016_VAV1	13.00*1e-6
+KdErbB1_1016_VAV2	4.10*1e-6
+KdErbB1_1016_YES1	8.18*1e-6
+KdErbB1_1092_GRB2	2.60*1e-6
+KdErbB1_1092_GRB7	9.31*1e-6
+KdErbB1_1092_HSH2D	6.32*1e-6
+KdErbB1_1092_PIK3R2N	18.16*1e-6
+KdErbB1_1092_PIK3R3C	14.73*1e-6
+KdErbB1_1092_PIK3R3N	9.51*1e-6
+KdErbB1_1110_RASA1C	6.22*1e-6
+KdErbB1_1110_RASA1N	9.40*1e-6
+KdErbB1_1110_SHB	11.73*1e-6
+KdErbB1_1110_SHC1PTB	0.41*1e-6
+KdErbB1_1110_SRC	5.16*1e-6
+KdErbB1_1172_PIK3R3C	12.59*1e-6
+KdErbB1_1172_PIK3R3N	3.60*1e-6
+KdErbB1_1172_PTK6	6.74*1e-6
+KdErbB1_1172_RASA1N	4.17*1e-6
+KdErbB1_1172_SHC1PTB	0.07*1e-6
+KdErbB1_1172_YES1	2.26*1e-6
+KdErbB1_1197_SHC1	15.92*1e-6
+KdErbB1_1197_SHC1PTB	1.42*1e-6
+KdErbB1_998_BLK	9.34*1e-6
+KdErbB1_998_PIK3R3N	8.54*1e-6
+KdErbB1_998_PTPN11N	13.07*1e-6
+KdErbB1_998_RASA1N	2.85*1e-6
+KdErbB1_998_SH2B2	5.34*1e-6
+KdErbB1_998_SHC1PTB	2.84*1e-6
+KdErbB1_998_TEC	11.36*1e-6
+KdErbB1_998_YES1	7.05*1e-6
+
+
+# ka; 2nd order rate constant for association of protein w/ SH2 and/or PTB domain and pY on receptor
+
+ka_SH2PTB	1e6/(f*NA*Vcy)  
+
+#####
+
+# kd; first order rate constant for dissociation between pY on receptor and SH2 or PTB containing protein
+# nomenclature: kd(receptor)(pY residue)(protein w/ SH2 or PTB)(specific SH2 or PTB)
+
+
+kdErbB1_1016_PIK3R1N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_PIK3R1N
+kdErbB1_1016_PIK3R2N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_PIK3R2N
+kdErbB1_1016_PIK3R3C	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_PIK3R3C
+kdErbB1_1016_PIK3R3N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_PIK3R3N
+kdErbB1_1016_PTK6	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_PTK6
+kdErbB1_1016_RASA1N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_RASA1N
+kdErbB1_1016_SHC1	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_SHC1
+kdErbB1_1016_SRC	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_SRC
+kdErbB1_1016_VAV1	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_VAV1
+kdErbB1_1016_VAV2	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_VAV2
+kdErbB1_1016_YES1	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1016_YES1
+kdErbB1_1092_GRB2	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1092_GRB2
+kdErbB1_1092_GRB7	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1092_GRB7
+kdErbB1_1092_HSH2D	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1092_HSH2D
+kdErbB1_1092_PIK3R2N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1092_PIK3R2N
+kdErbB1_1092_PIK3R3C	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1092_PIK3R3C
+kdErbB1_1092_PIK3R3N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1092_PIK3R3N
+kdErbB1_1110_RASA1C	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1110_RASA1C
+kdErbB1_1110_RASA1N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1110_RASA1N
+kdErbB1_1110_SHB	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1110_SHB
+kdErbB1_1110_SHC1PTB	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1110_SHC1PTB
+kdErbB1_1110_SRC	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1110_SRC
+kdErbB1_1172_PIK3R3C	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1172_PIK3R3C
+kdErbB1_1172_PIK3R3N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1172_PIK3R3N
+kdErbB1_1172_PTK6	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1172_PTK6
+kdErbB1_1172_RASA1N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1172_RASA1N
+kdErbB1_1172_SHC1PTB	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1172_SHC1PTB
+kdErbB1_1172_YES1	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1172_YES1
+kdErbB1_1197_SHC1	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1197_SHC1
+kdErbB1_1197_SHC1PTB	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_1197_SHC1PTB
+kdErbB1_998_BLK	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_BLK
+kdErbB1_998_PIK3R3N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_PIK3R3N
+kdErbB1_998_PTPN11N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_PTPN11N
+kdErbB1_998_RASA1N	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_RASA1N
+kdErbB1_998_SH2B2	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_SH2B2
+kdErbB1_998_SHC1PTB	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_SHC1PTB
+kdErbB1_998_TEC	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_TEC
+kdErbB1_998_YES1	(f*NA*Vcy)*ka_SH2PTB*KdErbB1_998_YES1
+
+end parameters
+
+
+############################################################################################
+####                                     Parameters       
+############################################################################################
+
+
+
+############################################################################################
+####                                      Molecules          
+############################################################################################
+
+
+begin molecule types
+
+EGF(rec,loc~e~int)
+EGFR(loc~m~int,lig,dim,Y998~Y~pY,Y1016~Y~pY,Y1092~Y~pY,Y1110~Y~pY,Y1172~Y~pY,Y1197~Y~pY)
+
+I()
+Trash()
+
+#### SH2 AND PTB CONTAINING PROTEINS
+
+BLK(SH2)
+GRB2(SH2)
+GRB7(SH2)
+HSH2D(SH2)
+PIK3R1(SH2)
+PIK3R2(SH2)
+PIK3R3(SH2N,SH2C)
+PTK6(SH2)
+PTPN11(SH2)
+RASA1(SH2N,SH2C)
+SH2B2(SH2)
+SHB(SH2)
+SHC1(SH2,PTB)
+SRC(SH2)
+TEC(SH2)
+VAV1(SH2)
+VAV2(SH2)
+YES1(SH2)
+
+
+end molecule types
+
+
+###############################################################################################
+####                                        Molecules          
+###############################################################################################
+
+
+###############################################################################################
+####                                         Species          
+###############################################################################################
+
+
+begin species
+
+EGF(rec,loc~e)	EGFtot					
+EGFR(loc~m,lig,dim,Y998~Y,Y1016~Y,Y1092~Y,Y1110~Y,Y1172~Y,Y1197~Y)    	EGFRtot
+
+I() 	1
+Trash() 0
+
+#### SH2 AND PTB CONTAINING PROTEINS
+
+BLK(SH2)	BLKtot
+GRB2(SH2)	GRB2tot
+GRB7(SH2)	GRB7tot
+HSH2D(SH2)	HSH2Dtot
+PIK3R1(SH2)	PIK3R1tot
+PIK3R2(SH2)	PIK3R2tot
+PIK3R3(SH2N,SH2C)	PIK3R3tot
+PTK6(SH2)	PTK6tot
+PTPN11(SH2)	PTPN11tot
+RASA1(SH2N,SH2C)	RASA1tot
+SH2B2(SH2)	SH2B2tot
+SHB(SH2)	SHBtot
+SHC1(SH2,PTB)	SHC1tot
+SRC(SH2)	SRCtot
+TEC(SH2)	TECtot
+VAV1(SH2)	VAV1tot
+VAV2(SH2)	VAV2tot
+YES1(SH2)	YES1tot
+
+
+end species
+
+
+##############################################################################################
+####                                      Species    
+##############################################################################################
+
+
+
+
+##############################################################################################
+####                                    Observables    
+##############################################################################################
+
+
+begin observables
+
+Molecules EGFRpY998		EGFR(Y998~pY!?) #total phosphorylated pY998
+Molecules EGFRpY1016		EGFR(Y1016~pY!?) #total phosphorylated pY1016
+Molecules EGFRpY1092		EGFR(Y1092~pY!?) #total phosphorylated pY1092
+Molecules EGFRpY1110		EGFR(Y1110~pY!?) #total phosphorylated pY1110
+Molecules EGFRpY1172		EGFR(Y1172~pY!?) #total phosphorylated pY1172
+Molecules EGFRpY1197		EGFR(Y1197~pY!?) #total phosphorylated pY1197
+
+### reader protein observables, from lowest affinity to highest
+
+Molecules	SHC1boundEGFR	SHC1().EGFR() 		#7.0e-8
+Molecules	PIK3R3boundEGFR	PIK3R3().EGFR()		#1.35e-6
+Molecules	RASA1boundEGFR	RASA1().EGFR()			#1.67e-6
+Molecules	YES1boundEGFR	YES1().EGFR()						#2.26e-6
+Molecules	PIK3R2boundEGFR	PIK3R2().EGFR()					#2.48e-6
+Molecules	GRB2boundEGFR	GRB2().EGFR()						#2.6e-6
+Molecules	PTK6boundEGFR	PTK6().EGFR()						#3.04e-6
+Molecules	SRCboundEGFR	SRC().EGFR()						#3.95e-6
+Molecules	VAV2boundEGFR	VAV2().EGFR()						#4.10e-6
+Molecules	PIK3R1boundEGFR	PIK3R1().EGFR()					#4.70e-6
+Molecules	SH2B2boundEGFR	SH2B2().EGFR()					#5.34e-6
+Molecules	HSH2DboundEGFR	HSH2D().EGFR()					#6.32e-6
+Molecules	GRB7boundEGFR	GRB7().EGFR()						#9.31e-6
+Molecules	BLKboundEGFR	BLK().EGFR()						#9.34e-6
+Molecules	TECboundEGFR	TEC().EGFR()						#1.14e-5
+Molecules	SHBboundEGFR	SHB().EGFR()						#1.17e-5
+Molecules	VAV1boundEGFR	VAV1().EGFR()						#1.30e-5
+Molecules	PTPN11boundEGFR	PTPN11().EGFR()					#1.31e-5
+
+end observables
+
+
+####################################################################################################
+####                               Observables        
+####################################################################################################
+
+
+
+
+####################################################################################################
+####                               Rules                 
+####################################################################################################
+
+
+begin reaction rules
+
+
+#### Step 1: Ligand binding/kinase activation ##############
+1    EGFR(loc~m,lig,dim) + EGF(loc~e,rec) <-> EGFR(loc~m,lig!1,dim).EGF(loc~e,rec!1)     EGFkp1,EGFkm1
+2    EGFR(loc~m,lig,dim!1).EGFR(loc~m,lig,dim!1) + EGF(loc~e,rec) <-> EGFR(loc~m,lig,dim!1).EGFR(loc~m,lig!2,dim!1).EGF(loc~e,rec!2)     EGFkp2,EGFkm2
+3    EGF(loc~e,rec!2).EGFR(loc~m,lig!2,dim!1).EGFR(loc~m,lig,dim!1) + EGF(loc~e,rec) <-> EGF(loc~e,rec!2).EGFR(loc~m,lig!2,dim!1).EGFR(loc~m,lig!3,dim!1).EGF(loc~e,rec!3)     EGFkp3,EGFkm3
+
+#### STEP 2:  RECEPTOR DIMERIZATION ########################
+# EGFR/EGFR dimerization with 2, 1, or no EGF bound
+
+4    EGFR(loc~m,lig,dim) + EGFR(loc~m,lig,dim) <-> EGFR(loc~m,lig,dim!1).EGFR(loc~m,lig,dim!1)       Dimkp1,Dimkm1
+5    EGFR(loc~m,lig!1,dim).EGF(loc~e,rec!1) + EGFR(loc~m,lig,dim) <-> EGFR(loc~m,lig!1,dim!2).EGF(loc~e,rec!1).EGFR(loc~m,lig,dim!2)     Dimkp2,Dimkm2
+6    EGFR(loc~m,lig!1,dim).EGF(loc~e,rec!1) + EGFR(loc~m,lig!2,dim).EGF(loc~e,rec!2) <-> EGFR(loc~m,lig!1,dim!3).EGF(loc~e,rec!1).EGFR(loc~m,lig!2,dim!3).EGF(loc~e,rec!2)   Dimkp3,Dimkm3
+
+#### Step 3: Phosphorylation of receptor tyrosines
+
+7    EGFR(dim!+,lig!+,Y998~Y)  -> EGFR(dim!+,lig!+,Y998~pY)      k_kinase
+8    EGFR(dim!+,lig!+,Y1016~Y)  -> EGFR(dim!+,lig!+,Y1016~pY)      k_kinase
+9    EGFR(dim!+,lig!+,Y1092~Y)  -> EGFR(dim!+,lig!+,Y1092~pY)      k_kinase
+10    EGFR(dim!+,lig!+,Y1110~Y)  -> EGFR(dim!+,lig!+,Y1110~pY)      k_kinase
+11    EGFR(dim!+,lig!+,Y1172~Y)  -> EGFR(dim!+,lig!+,Y1172~pY)      k_kinase
+12    EGFR(dim!+,lig!+,Y1197~Y)  -> EGFR(dim!+,lig!+,Y1197~pY)      k_kinase
+
+13   EGFR(dim!1,lig!+).EGFR(dim!1,Y998~Y)  -> EGFR(dim!1,lig!+).EGFR(dim!1,Y998~pY)      k_kinase
+14   EGFR(dim!1,lig!+).EGFR(dim!1,Y1016~Y)  -> EGFR(dim!1,lig!+).EGFR(dim!1,Y1016~pY)      k_kinase
+15   EGFR(dim!1,lig!+).EGFR(dim!1,Y1092~Y)  -> EGFR(dim!1,lig!+).EGFR(dim!1,Y1092~pY)      k_kinase
+16   EGFR(dim!1,lig!+).EGFR(dim!1,Y1110~Y)  -> EGFR(dim!1,lig!+).EGFR(dim!1,Y1110~pY)      k_kinase
+17   EGFR(dim!1,lig!+).EGFR(dim!1,Y1172~Y)  -> EGFR(dim!1,lig!+).EGFR(dim!1,Y1172~pY)      k_kinase
+18   EGFR(dim!1,lig!+).EGFR(dim!1,Y1197~Y)  -> EGFR(dim!1,lig!+).EGFR(dim!1,Y1197~pY)      k_kinase
+
+#### Step 4: Dephosphorylation of receptor tyrosines
+
+19   EGFR(Y998~pY)  -> EGFR(Y998~Y)      k_phosphatase
+20   EGFR(Y1016~pY)  -> EGFR(Y1016~Y)      k_phosphatase
+21   EGFR(Y1092~pY)  -> EGFR(Y1092~Y)      k_phosphatase
+22   EGFR(Y1110~pY)  -> EGFR(Y1110~Y)      k_phosphatase
+23   EGFR(Y1172~pY)  -> EGFR(Y1172~Y)      k_phosphatase
+24   EGFR(Y1197~pY)  -> EGFR(Y1197~Y)      k_phosphatase
+
+#### Step 5: SH2 and PTB binding to phosphotyrosine residues
+
+25	EGFR(Y1016~pY)	+	PIK3R1(SH2)	<->	EGFR(Y1016~pY!1).PIK3R1(SH2!1)	ka_SH2PTB,	kdErbB1_1016_PIK3R1N
+26	EGFR(Y1016~pY)	+	PIK3R2(SH2)	<->	EGFR(Y1016~pY!1).PIK3R2(SH2!1)	ka_SH2PTB,	kdErbB1_1016_PIK3R2N
+27	EGFR(Y1016~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y1016~pY!1).PIK3R3(SH2C!1,SH2N)	ka_SH2PTB,	kdErbB1_1016_PIK3R3C
+28	EGFR(Y1016~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y1016~pY!1).PIK3R3(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_1016_PIK3R3N
+29	EGFR(Y1016~pY)	+	PTK6(SH2)	<->	EGFR(Y1016~pY!1).PTK6(SH2!1)	ka_SH2PTB,	kdErbB1_1016_PTK6
+30	EGFR(Y1016~pY)	+	RASA1(SH2C,SH2N)	<->	EGFR(Y1016~pY!1).RASA1(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_1016_RASA1N
+31	EGFR(Y1016~pY)	+	SHC1(SH2,PTB)	<->	EGFR(Y1016~pY!1).SHC1(SH2!1,PTB)	ka_SH2PTB,	kdErbB1_1016_SHC1
+32	EGFR(Y1016~pY)	+	SRC(SH2)	<->	EGFR(Y1016~pY!1).SRC(SH2!1)	ka_SH2PTB,	kdErbB1_1016_SRC
+33	EGFR(Y1016~pY)	+	VAV1(SH2)	<->	EGFR(Y1016~pY!1).VAV1(SH2!1)	ka_SH2PTB,	kdErbB1_1016_VAV1
+34	EGFR(Y1016~pY)	+	VAV2(SH2)	<->	EGFR(Y1016~pY!1).VAV2(SH2!1)	ka_SH2PTB,	kdErbB1_1016_VAV2
+35	EGFR(Y1016~pY)	+	YES1(SH2)	<->	EGFR(Y1016~pY!1).YES1(SH2!1)	ka_SH2PTB,	kdErbB1_1016_YES1
+36	EGFR(Y1092~pY)	+	GRB2(SH2)	<->	EGFR(Y1092~pY!1).GRB2(SH2!1)	ka_SH2PTB,	kdErbB1_1092_GRB2
+37	EGFR(Y1092~pY)	+	GRB7(SH2)	<->	EGFR(Y1092~pY!1).GRB7(SH2!1)	ka_SH2PTB,	kdErbB1_1092_GRB7
+38	EGFR(Y1092~pY)	+	HSH2D(SH2)	<->	EGFR(Y1092~pY!1).HSH2D(SH2!1)	ka_SH2PTB,	kdErbB1_1092_HSH2D
+39	EGFR(Y1092~pY)	+	PIK3R2(SH2)	<->	EGFR(Y1092~pY!1).PIK3R2(SH2!1)	ka_SH2PTB,	kdErbB1_1092_PIK3R2N
+40	EGFR(Y1092~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y1092~pY!1).PIK3R3(SH2C!1,SH2N)	ka_SH2PTB,	kdErbB1_1092_PIK3R3C
+41	EGFR(Y1092~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y1092~pY!1).PIK3R3(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_1092_PIK3R3N
+42	EGFR(Y1110~pY)	+	RASA1(SH2C,SH2N)	<->	EGFR(Y1110~pY!1).RASA1(SH2C!1,SH2N)	ka_SH2PTB,	kdErbB1_1110_RASA1C
+43	EGFR(Y1110~pY)	+	RASA1(SH2C,SH2N)	<->	EGFR(Y1110~pY!1).RASA1(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_1110_RASA1N
+44	EGFR(Y1110~pY)	+	SHB(SH2)	<->	EGFR(Y1110~pY!1).SHB(SH2!1)	ka_SH2PTB,	kdErbB1_1110_SHB
+45	EGFR(Y1110~pY)	+	SHC1(SH2,PTB)	<->	EGFR(Y1110~pY!1).SHC1(SH2,PTB!1)	ka_SH2PTB,	kdErbB1_1110_SHC1PTB
+46	EGFR(Y1110~pY)	+	SRC(SH2)	<->	EGFR(Y1110~pY!1).SRC(SH2!1)	ka_SH2PTB,	kdErbB1_1110_SRC
+47	EGFR(Y1172~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y1172~pY!1).PIK3R3(SH2C!1,SH2N)	ka_SH2PTB,	kdErbB1_1172_PIK3R3C
+48	EGFR(Y1172~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y1172~pY!1).PIK3R3(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_1172_PIK3R3N
+49	EGFR(Y1172~pY)	+	PTK6(SH2)	<->	EGFR(Y1172~pY!1).PTK6(SH2!1)	ka_SH2PTB,	kdErbB1_1172_PTK6
+50	EGFR(Y1172~pY)	+	RASA1(SH2C,SH2N)	<->	EGFR(Y1172~pY!1).RASA1(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_1172_RASA1N
+51	EGFR(Y1172~pY)	+	SHC1(SH2,PTB)	<->	EGFR(Y1172~pY!1).SHC1(SH2,PTB!1)	ka_SH2PTB,	kdErbB1_1172_SHC1PTB
+52	EGFR(Y1172~pY)	+	YES1(SH2)	<->	EGFR(Y1172~pY!1).YES1(SH2!1)	ka_SH2PTB,	kdErbB1_1172_YES1
+53	EGFR(Y1197~pY)	+	SHC1(SH2,PTB)	<->	EGFR(Y1197~pY!1).SHC1(SH2!1,PTB)	ka_SH2PTB,	kdErbB1_1197_SHC1
+54	EGFR(Y1197~pY)	+	SHC1(SH2,PTB)	<->	EGFR(Y1197~pY!1).SHC1(SH2,PTB!1)	ka_SH2PTB,	kdErbB1_1197_SHC1PTB
+55	EGFR(Y998~pY)	+	BLK(SH2)	<->	EGFR(Y998~pY!1).BLK(SH2!1)	ka_SH2PTB,	kdErbB1_998_BLK
+56	EGFR(Y998~pY)	+	PIK3R3(SH2C,SH2N)	<->	EGFR(Y998~pY!1).PIK3R3(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_998_PIK3R3N
+57	EGFR(Y998~pY)	+	PTPN11(SH2)	<->	EGFR(Y998~pY!1).PTPN11(SH2!1)	ka_SH2PTB,	kdErbB1_998_PTPN11N
+58	EGFR(Y998~pY)	+	RASA1(SH2C,SH2N)	<->	EGFR(Y998~pY!1).RASA1(SH2C,SH2N!1)	ka_SH2PTB,	kdErbB1_998_RASA1N
+59	EGFR(Y998~pY)	+	SH2B2(SH2)	<->	EGFR(Y998~pY!1).SH2B2(SH2!1)	ka_SH2PTB,	kdErbB1_998_SH2B2
+60	EGFR(Y998~pY)	+	SHC1(SH2,PTB)	<->	EGFR(Y998~pY!1).SHC1(SH2,PTB!1)	ka_SH2PTB,	kdErbB1_998_SHC1PTB
+61	EGFR(Y998~pY)	+	TEC(SH2)	<->	EGFR(Y998~pY!1).TEC(SH2!1)	ka_SH2PTB,	kdErbB1_998_TEC
+62	EGFR(Y998~pY)	+	YES1(SH2)	<->	EGFR(Y998~pY!1).YES1(SH2!1)	ka_SH2PTB,	kdErbB1_998_YES1
+
+# internalization of ligand bound receptor
+63 EGF(rec!3,loc~e).EGFR(dim!1,lig!3,loc~m).EGFR(dim!1,lig,loc~m) <-> EGF(rec!3,loc~int).EGFR(dim!1,lig!3,loc~int).EGFR(dim!1,lig,loc~int)	kint, krec
+64 EGF(rec!3,loc~e).EGFR(dim!1,lig!3,loc~m).EGFR(dim!1,lig!2,loc~m).EGF(rec!2,loc~e) <-> EGF(rec!3,loc~int).EGFR(dim!1,lig!3,loc~int).EGFR(dim!1,lig!2,loc~int).EGF(rec!2,loc~int)	kint, krec
+
+# degradation of internalized receptor and ligand
+65 EGF(rec!2,loc~int).EGFR(lig!2,dim!1,loc~int).EGFR(dim!1,lig,loc~int)	 -> Trash() kdeg DeleteMolecules
+66 EGF(rec!2,loc~int).EGFR(lig!2,dim!1,loc~int).EGFR(lig!3,dim!1,loc~int).EGF(rec!3,loc~int) -> Trash() kdeg DeleteMolecules
+
+
+end reaction rules
+
+
+####################################################################################################
+####                                            Rules                 
+####################################################################################################
+
+
+
+####################################################################################################
+####                                           Actions                
+####################################################################################################
+
+
+#ACTIONS
+
+writeXML();

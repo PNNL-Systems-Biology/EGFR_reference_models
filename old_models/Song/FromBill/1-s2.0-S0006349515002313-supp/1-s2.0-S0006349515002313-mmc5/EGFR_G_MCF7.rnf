@@ -1,0 +1,17 @@
+-xml EGFR_G_MCF7.xml
+-v
+-o EGFR_G_MCF7.gdat
+
+begin
+
+sim 3600 60 
+
+set EGFkp1		  7.6412e-5
+set EGFkp2		  8.8039e-5
+set EGFkp3		  5.6478e-6
+update
+
+sim 1800 30
+
+end
+

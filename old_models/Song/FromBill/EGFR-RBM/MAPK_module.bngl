@@ -1,0 +1,172 @@
+begin model
+
+# References
+# 1. Kulak NA et al. (2014) Nat Methods 11: 319-324.
+
+begin parameters
+
+# Avogadro constant
+NA 6.02214e23 # [=] molecules per mol
+
+# fraction of a cell to consider in a simulation
+#   This parameter can be set to a value <1 to accelerate stochastic simulation.
+f 1.0 # [=] dimensionless, 0<=f<=1
+
+# cytoplasmic volume
+V f*1.5e-12 # [=] L (1.5 pL)
+
+# HeLa cell protein copy numbers
+HRAS_total   131924*f # [=] molecules per cell (Ref 1)
+KRAS_total   196598*f # [=] molecules per cell (assumed)
+NRAS_total    32806*f # [=] molecules per cell (Ref 1) 
+RAS_total    361328*f # [=] molecules per cell [RAS]=[HRAS]+[KRAS]+[NRAS]
+ARAF_total    50606*f # [=] molecules per cell (Ref 1)
+BRAF_total     4993*f # [=] molecules per cell (Ref 1)
+RAF1_total    35757*f # [=] molecules per cell (Ref 1) RAF1 is also known as CRAF
+RAF_total     91356*f # [=] molecules per cell [RAF]=[ARAF]+[BRAF]+[RAF1]
+MAP2K1_total 170516*f # [=] molecules per cell (Ref 1) MAP2K1 is also known as MEK1
+MAP2K2_total 325020*f # [=] molecules per cell (Ref 1) MAP2K2 is also known as MEK2
+MEK_total    495536*f # [=] molecules per cell [MEK]=[MAP2K1]+[MAP2K2]
+MAPK1_total  544669*f # [=] molecules per cell (Ref 1) MAPK1 is also known as ERK2
+MAPK3_total   58855*f # [=] molecules per cell (Ref 1) MAPK3 is also known as ERK1
+ERK_total    603524*f # [=] molecules per cell [ERK]=[MAPK1]+[MAPK3]
+
+# rate constants (chosen somewhat arbitrarily)
+#   Consider using more reasoned parameter estimates.
+kp1 1e6/(NA*V)
+km1 0.1
+k_act 2
+k_deact 1
+kp2 1e6/(NA*V)
+km2 0.1
+kcat2 1
+kp3 1e6/(NA*V)
+km3 0.1
+kphos3 1
+kp4 5e5/(NA*V)
+km4 1
+kcat4 1
+kdephos5 0.1
+
+end parameters
+
+begin molecule types
+
+RAS(G~GTP)
+
+# MAPKKK (RAF)
+#   RBD: Ras binding domain
+#   kin: S/T kinase domain
+#   state: activity of kinase (on/off)
+RAF(RBD,kin,state~on~off)
+
+# MAPKK (MEK)
+#   Residue numbering is for MEK1.
+#   D: delta or D domain (a linear motif responsible for interaction with CD domain in ERK)
+#   The MEK kinase domain is considered implicitly.
+#   S: substrates of RAF (S218 and S222)
+#     ~0: unphosphorylated
+#     ~P: singly phosphorylated
+#     ~PP: doubly phosphorylated
+#   T292: substrate of ERK
+MEK(D,S~0~P~PP,T292~0~P)
+
+# MAPK (ERK)
+#   Residue numbering is for ERK2.
+#   kin: kinase domain
+#   S: substrates of MEK (T185 and Y187)
+#     ~0: unphosphorylated
+#     ~P: singly phosphorylated
+#     ~PP: doubly phosphorylated
+#   T185 and Y187: substrates of MEK
+#   CD: CD domain (a linear motif responsible for interaction D domain in MEK)
+ERK(kin,S~0~P~PP,CD) 
+
+end molecule types
+
+begin seed species
+RAS(G~GTP) 0.02*RAS_total # 2% of RAS is loaded with GTP
+RAF(RBD,kin,state~off) RAF_total
+MEK(D,S~0,T292~0) MEK_total
+ERK(kin,S~0,CD) ERK_total
+end seed species
+
+begin observables
+Molecules activatedRAS RAS(G~GTP!?)
+Molecules activatedRAF RAF(state~on)
+Molecules activatedMEK MEK(S~PP!?)
+Molecules activatedERK ERK(S~PP!?)
+end observables
+
+begin reaction rules
+
+# The mechanisms encoded in rules are simplifications;
+#   consider refining the rules to better capture known mechanisms.
+
+# RAF binds RAS
+RAF(RBD)+RAS(G~GTP)<->RAF(RBD!1).RAS(G~GTP!1) kp1,km1
+
+# activation of RAS-bound RAF
+#   NB: RAF dimerization is not considered.
+RAF(RBD!+,state~off)->RAF(RBD!+,state~on) k_act
+
+# spontaneous deactivation of RAF
+#   By specifying that kin must be free, we are saying that RAF cannot be
+#   deactivated while its kinase domain is bound (to a substrate).
+RAF(kin,state~on)->RAF(kin,state~off) k_deact
+
+# RAF-mediated phosphorylation of MEK
+#   A Michaelis-Menten mechanism is assumed.
+#   0->P
+RAF(kin,state~on)+MEK(D,S~0)->RAF(kin!1,state~on).MEK(D,S~0!1) 2*kp2
+RAF(kin!1).MEK(S~0!1)->RAF(kin)+MEK(S~0) km2
+RAF(kin!1).MEK(S~0!1)->RAF(kin)+MEK(S~P) kcat2
+#   P->PP
+RAF(kin,state~on)+MEK(D,S~P)->RAF(kin!1,state~on).MEK(D,S~P!1) kp2
+RAF(kin!1).MEK(S~P!1)->RAF(kin)+MEK(S~P) km2
+RAF(kin!1).MEK(S~P!1)->RAF(kin)+MEK(S~PP) kcat2
+
+# We will assume that ~PP is required for catalytic activity,
+#   but not for kinase-substrate interactions.
+
+# MEK-mediated phosphorylation of ERK
+#   MEK and ERK first associate via D:CD interaction.
+#   Phosphorylation of ERK then occurs within a complex
+#   via a pseudo first-order process.
+MEK(D)+ERK(kin,CD)->MEK(D!1).ERK(kin,CD!1) kp3
+MEK(D!1).ERK(CD!1)->MEK(D)+ERK(CD) km3
+MEK(D!1,S~PP).ERK(S~0,CD!1)->MEK(D!1,S~PP).ERK(S~P,CD!1) 2*kphos3
+MEK(D!1,S~PP).ERK(S~P,CD!1)->MEK(D!1,S~PP).ERK(S~PP,CD!1) kphos3
+
+# negative feedback regulation of MEK by ERK
+#   ERK phosphorylates T292 in MEK1.
+#   pT292 recruits a phosphatase that dephosphorylates MEK1 and MEK2 in complex with MEK1.
+ERK(kin,CD)+MEK(D,T292~0)->ERK(kin!1,CD).MEK(D,T292~0!1) kp4
+ERK(kin!1).MEK(T292~0!1)->ERK(kin)+MEK(T292~0) km4
+ERK(kin!1,S~PP).MEK(T292~0!1)->ERK(kin,S~PP).MEK(T292~P) kcat4
+
+# dephosphorylation reactions
+MEK(T292~P)->MEK(T292~0) kdephos5 
+MEK(S~PP,T292~0)->MEK(S~P,T292~0) 2*kdephos5 
+MEK(S~P,T292~0)->MEK(S~0,T292~0) kdephos5
+MEK(S~PP,T292~P)->MEK(S~P,T292~P) 2*5*kdephos5 # the factor of 5 accounts implicitly for the phosphatase that interacts with pT292 
+MEK(S~P,T292~P)->MEK(S~0,T292~P) 5*kdephos5 # the factor of 5 accounts implicitly for the phosphatase that interacts with pT292 
+ERK(S~PP)->ERK(S~P) 2*kdephos5
+ERK(S~P)->ERK(S~0) kdephos5
+
+end reaction rules
+
+end model
+
+begin actions
+
+generate_network({overwrite=>1})
+
+# equilibrate
+simulate({method=>"ode",t_start=>0,t_end=>100,n_steps=>100})
+
+# simulate response to a 10-fold step increase in amount of GTP-loaded Ras
+setConcentration("RAS(G~GTP)",72266)
+simulate({continue=>1,method=>"ode",t_start=>100,t_end=>200,n_steps=>100})
+
+end actions

@@ -1,0 +1,360 @@
+begin model
+
+# References
+# 1. Kulak NA et al. (2014) Nat Methods 11: 319-324.
+# 2. Engelmann BW et al. (2014) Mol Cell Proteomics
+# 3. Leung KK et al. (2014) Mol Cell Proteomics 13: 1705-1723.
+# 4. Hause RJ Jr et al. (2012) PLoS ONE 7: e44471.
+# 5. McDonald CB et al. (2009) Biochemistry 48: 4074-4085.
+# 6. McDonald CB et al. (2013) J Mol Recognit 26: 92-103.
+# 7. Tan CW et al. (2012) PLoS ONE 7: e31882.
+# 8. Macdonald JL, Pike LJ (2008) Proc Natl Acad Sci USA 105: 112-117.
+# 9. Macdonald-Obermann JL, Pike LJ (2009) J Biol Chem 284: 13570-13576.
+# 10. Elleman TC et al. (2001) Biochemistry 40: 8930-8939.
+# 11. Low-Nam ST et al. (2011) Nat Struct Mol Biol 18: 1244-1249.
+# 12. Kleiman LB et al. (2011) Mol Cell 43: 723Ð737.
+
+begin parameters
+
+# Avogadro constant
+NA 6.02214e23 # [=] molecules per mol
+
+# fraction of cell to consider in a stochastic simulation
+f 1.0 # [=] dimensionless, 0<=f<=1
+
+# cytoplasmic volume
+#   A volume of 1 to 2 pL is typical for a mammalian cell (Ref 7).
+V f*1.5e-12 # [=] L (1.5 pL)
+
+# cell density (cells are growing in suspension)
+den 1.0e9 # [=] cells per L (1.0e6 cells per ml) 
+
+# volume of extracellular fluid surrounding a cell
+Vex=f/den
+
+# The quantities NA*V and NA*Vex will be used as unit conversion factors.
+#   NA*V converts a cytoplasmic concentration from M to molecules/cell.
+#   NA*Vex converts an extracellular concentration from M to molecules/cell.
+
+# ligand dose
+EGF_conc 1.0e-10 # [=] M (0.1 nM)
+EGF_total=EGF_conc*(NA*Vex) # [=] copies per cell (60,000 when f=1)
+
+# HeLa cell protein copy numbers measured by Mann and co-workers;
+#   see Supplementary Table S2 in Ref 1.
+GRB2_total   628016*f # [=] molecules per cell
+PTPN11_total 299893*f # [=] molecules per cell
+SHC1_total   111966*f # [=] molecules per cell
+EGFR_total    92674*f # [=] molecules per cell
+RASA1_total   26455*f # [=] molecules per cell
+SOS1_total     7565*f # [=] molecules per cell
+GAB1_total     1531*f # [=] molecules per cell
+
+# parameters for binding interactions
+
+# KD for EGF-EGFR binding (Refs 8 and 9)
+KD1 1.0e-9*(NA*Vex) # [=] molecules per cell
+# NB: this KD is rougly the one estimated for cases where the receptor
+#     cannot become phosphorylated.
+
+# KD for EGFR-EGFR binding
+#   This parameter is set so that EGFR_total/KD2 >> 1.
+KD2=EGFR_total/10 # [=] molecules per cell
+
+# KD's for pY:SH2/PID domain interactions were measured by Jones and co-workers; 
+#   see Supplementary Table 1 in Ref 3.
+#   NB: GAB1 Y627 (Y659) is called Y657 (Y689) in Supplementary Table 1 (Ref 3).
+
+# EGFR pY1016:RASA1 nSH2-cSH2
+KD12 1.10e-6*(NA*V) # [=] molecules per cell
+
+# EGFR pY1092:GRB2 SH2
+KD13 1.60e-6*(NA*V) # [=] molecules per cell
+
+# EGFR pY1110:GRB2 SH2
+KD14 0.41e-6*(NA*V) # [=] molecules per cell
+
+# EGFR pY1172:SHC1 PID
+KD15 0.07e-6*(NA*V) # [=] molecules per cell
+
+# EGFR pY1197:SHC1 PID
+KD16 1.42e-6*(NA*V) # [=] molecules per cell
+
+# GAB1 pY627:PTPN11 nSH2
+KD19 0.71e-6*(NA*V) # [=] molecules per cell
+
+# Relative KD's for pY:SH2 domain interactions were measured by Nash and co-workers;
+#   see Supplementary Table 2 in Ref 2.
+KD11_div_KD14=exp(4.999349023)/exp(-0.144319839) # = 171.3 (dimensionless)
+KD18_div_KD14=exp(-0.068917416)/exp(-0.144319839) # = 1.078 (dimensionless)
+
+# EGFR pY1016:PTPN11 nSH2
+KD11=KD11_div_KD14*KD14 # [=] molecules per cell
+#   = 171.3*0.41e-6 = 71.0e-6 [=] M
+
+# SHC1 pY427:GRB2 SH2
+KD18=KD18_div_KD14*KD14 # [=] molecules per cell
+#   = 1.078*0.41e-6 = 0.44e-6 [=] M
+
+# Check Ref 4 for other KD measurments for pY:SH2 domain interactions.
+
+# A KD was measured by Farooq and co-workers
+#   for GRB2 nSH3 domain interaction with proline-rich sequences in SOS1;
+#   see Table 1 in Ref 6. See also Ref 5.
+# SOS1 PRR:GRB2 nSH3
+KD24 6.83e-6*(NA*V) # [=] molecules per cell
+
+# A KD was measured by Farooq and co-workers
+#   for GRB2 cSH3 domain interaction with proline-rich sequences in GAB1;
+#   see Table 2 in Ref 6.
+# GAB1 PRS:GRB2 cSH3
+KD25 7.58e-6*(NA*V) # [=] molecules per cell
+
+# Below we will use the relation KDX = kmX/kpX to assign values to rate constants
+#   that are consistent with KD's.
+
+# dissocation rate constant for EGF-EGFR interaction
+km1 0.02 # [=] /s (Ref 10)
+kp1=km1/KD1 # [=] /(molecule/cell)/s (2e7 /M/s)
+
+# dissociation rate constant for EGFR-EGFR interaction
+km2 0.272 # [=] /s (Ref 11)
+kp2=km2/KD2 # [=] /(molecule/cell)/s
+
+# A typical assocation rate constant for a protein-protein interaction
+kon 1.0e6 # [=] /M/s
+
+kp11=kon/(NA*V) # [=] /(molecule/cell)/s
+km11=kp11*KD11
+kp12=kon/(NA*V) # [=] /(molecule/cell)/s
+km12=kp12*KD12
+kp13=kon/(NA*V) # [=] /(molecule/cell)/s
+km13=kp13*KD13
+kp14=kon/(NA*V) # [=] /(molecule/cell)/s
+km14=kp14*KD14
+kp15=kon/(NA*V) # [=] /(molecule/cell)/s
+km15=kp15*KD15
+kp16=kon/(NA*V) # [=] /(molecule/cell)/s
+km16=kp16*KD16
+kp18=kon/(NA*V) # [=] /(molecule/cell)/s
+km18=kp18*KD18
+kp19=kon/(NA*V) # [=] /(molecule/cell)/s
+km19=kp19*KD19
+kp24=kon/(NA*V) # [=] /(molecule/cell)/s
+km24=kp24*KD24
+kp25=kon/(NA*V) # [=] /(molecule/cell)/s
+km25=kp25*KD25
+
+# To start, let's consider only a single GRB2 binding site in EGFR (Y1110 or Ygrb2)
+# Likewise, let's consider only a single SHC1 binding site in EGFR (Y1172 or Yshc1)
+kpgrb2=kp14
+kmgrb2=km14
+kpshc1=kp15
+kmshc1=km15
+
+# parameters for catalytic interactions
+
+# generic (pseudo first-order) dephosphorylation rate constant
+#   This value corresponds to a half-life of 15 s and represents a lower bound.
+kd 0.05 # [=] /s (Ref 12)
+
+# rate constant for PTPN11-mediated dephosphorylation reactions
+#   This parameter is set so that kdSHP2/kd >> 1 and kdSHP2 > kp.
+kdSHP2 1 # [=] /s 
+
+# generic (pseudo first-order) phosphorylation rate constant
+#   This parameter is set so that kp/kd >> 1.
+kp 0.5 # [=] /s
+
+end parameters
+
+begin molecule types
+
+# ligand, growth factor
+EGF(EGFL)
+
+# receptor tyrosine kinase, growth factor receptor
+#   I_III: domains I and III in the ectodomain
+#   Y1016 (UniProt numbering): Y992 in mature form of the receptor
+#   Ygrb2: Y1092 and Y1110 (Y1068 and Y1086 in mature EGFR)
+#   Yshc1: Y1172 and Y1197 (Y1148 and Y1173 in mature EGFR)
+EGFR(I_III,II,Y1016~0~P,Ygrb2~0~P,Yshc1~0~P)
+
+# adaptor protein
+#   nSH3: N-terminal SH3 domain
+#   cSH3: C-terminal SH3 domain
+GRB2(nSH3,SH2,cSH3)
+
+# adaptor protein
+#   PID: PTB
+#   Y317 in the p52 isoform | Y427 in the p66 isoform
+SHC1(PID,Y427~0~P)
+
+# protein tyrosine phosphatase 
+#   also known as SHP-2
+#   nSH2: N-terminal SH2 domain
+#   No binding data for the C-terminal SH2 domain, so it is omitted
+PTPN11(nSH2)
+
+# GTPase activating protein (GAP)
+#   also known as p120 RasGAP
+#   SH2: tandem SH2 domains
+RASA1(tSH2)
+
+# adaptor
+#   PRS: proline-rich sequence
+GAB1(PRS,Y627~0~P)
+
+# guanine nucleotide exchange factor (GEF)
+#   PRR: proline-rich region (contains >=4 proline-rich sequences)
+SOS1(PRR)
+
+end molecule types
+
+begin seed species
+EGF(EGFL) EGF_total
+EGFR(I_III,II,Y1016~0,Ygrb2~0,Yshc1~0) EGFR_total
+GRB2(nSH3,SH2,cSH3) GRB2_total
+SHC1(PID,Y427~0) SHC1_total
+PTPN11(nSH2) PTPN11_total
+RASA1(tSH2) RASA1_total
+GAB1(PRS,Y627~0) GAB1_total
+SOS1(PRR) SOS1_total
+end seed species
+
+begin observables
+Molecules freeEGF EGF(EGFL)
+Molecules boundEGF EGF(EGFL!+)
+Molecules EGFRmonomers EGFR(II)
+Molecules EGFR_in_dimers EGFR(II!+)
+Species EGFRdimers EGFR(II!+)
+Molecules recruitedGRB2 GRB2(SH2!+).EGFR()
+Molecules recruitedSHC1 SHC1(PID!+)
+Molecules recruitedPTPN11 PTPN11(nSH2!+).EGFR()
+Molecules recruitedRASA1 RASA1(tSH2!1).EGFR(Y1016~P!1)
+Molecules recruitedGAB1 GAB1(PRS!+).EGFR()
+Molecules recruitedSOS1 SOS1(PRR!+).EGFR()
+Molecules pEGFR EGFR(Y1016~P!?) EGFR(Ygrb2~P!?) EGFR(Yshc1~P!?)
+Molecules pSHC1 SHC1(Y427~P!?)
+Molecules pGAB1 GAB1(Y627~P!?) 
+Molecules GRB2_SOS1_complexes GRB2(nSH3!1).SOS1(PRR!1)
+Molecules GRB2_GAB1_complexes GRB2(cSH3!1).GAB1(PRS!1)
+end observables
+
+begin reaction rules
+
+##### Interaction 1 #####
+# EGF reversibly binds EGFR
+EGF(EGFL)+EGFR(I_III)<->EGF(EGFL!1).EGFR(I_III!1) kp1,km1
+
+##### Interaction 2 #####
+# dimerization of two EGF-bound copies of EGFR
+#   occurs only when both receptors are ligand bound
+EGFR(I_III!+,II)+EGFR(I_III!+,II)->EGFR(I_III!+,II!1).EGFR(I_III!+,II!1) kp2
+# dissociation of a dimer
+EGFR(II!1).EGFR(II!1)->EGFR(II)+EGFR(II) km2
+
+##### Interactions 3, 4/5, and 6/7 #####
+# EGFR autophosphorylation
+#   occurs only within a dimer
+EGFR(II!+,Y1016~0)->EGFR(II!+,Y1016~P) kp
+EGFR(II!+,Ygrb2~0)->EGFR(II!+,Ygrb2~P) kp
+EGFR(II!+,Yshc1~0)->EGFR(II!+,Yshc1~P) kp
+
+##### Interaction 11 #####
+# PTPN11 reversibly binds pEGFR
+PTPN11(nSH2)+EGFR(Y1016~P)<->PTPN11(nSH2!1).EGFR(Y1016~P!1) kp11,km11
+
+##### Interaction 12 #####
+# RASA1 reversibly binds EGFR
+RASA1(tSH2)+EGFR(Y1016~P)<->RASA1(tSH2!1).EGFR(Y1016~P!1) kp12,km12
+
+##### Interaction 13/14 #####
+# GRB2 reversibly binds pEGFR
+GRB2(SH2)+EGFR(Ygrb2~P)<->GRB2(SH2!1).EGFR(Ygrb2~P!1) kpgrb2,kmgrb2
+
+##### Interaction 15/16 #####
+# SHC1 reversibly binds pEGFR
+SHC1(PID)+EGFR(Yshc1~P)<->SHC1(PID!1).EGFR(Yshc1~P!1) kpshc1,kmshc1
+
+##### Interaction 8 #####
+# EGFR-mediated trans phosphorylation of Y427 in SHC1
+EGFR(II!+,Yshc1~P!1).SHC1(PID!1,Y427~0)->EGFR(II!+,Yshc1~P!1).SHC1(PID!1,Y427~P) kp
+
+##### Interaction 18 #####
+# GRB2 reversibly binds pSHC1
+GRB2(SH2)+SHC1(Y427~P)<->GRB2(SH2!1).SHC1(Y427~P!1) kp18,km18
+
+##### Interaction 24 #####
+# SOS1 reversibly binds GRB2
+SOS1(PRR)+GRB2(nSH3,cSH3)->SOS1(PRR!1).GRB2(nSH3!1,cSH3) kp24
+SOS1(PRR!1).GRB2(nSH3!1)->SOS1(PRR)+GRB2(nSH3) km24
+
+##### Interaction 25 #####
+# GAB1 reversibly binds GRB2
+GAB1(PRS)+GRB2(nSH3,cSH3)->GAB1(PRS!1).GRB2(nSH3,cSH3!1) kp25
+GAB1(PRS!1).GRB2(cSH3!1)->GAB1(PRS)+GRB2(cSH3) km25
+
+##### Interaction 9/10 #####
+# EGFR-mediated trans phosphorylation of Y627 in GAB1
+EGFR(II!+,Ygrb2~P!1).GRB2(SH2!1,cSH3!2).GAB1(PRS!2,Y627~0)->\
+EGFR(II!+,Ygrb2~P!1).GRB2(SH2!1,cSH3!2).GAB1(PRS!2,Y627~P) kp
+
+##### Interaction 19/20 #####
+# pGAB1 reversibly binds PTPN11
+GAB1(Y627~P)+PTPN11(nSH2)<->GAB1(Y627~P!1).PTPN11(nSH2!1) kp19,km19
+
+##### Interaciton 17 #####
+# Dephosphorylation of pY1016 in EGFR in trans by
+#   EGFR-associated PTPN11
+#   PTPN11 is directly associated with EGFR
+EGFR(II!1,Y1016~P!2).PTPN11(nSH2!2).EGFR(II!1,Y1016~P)->\
+EGFR(II!1,Y1016~P!2).PTPN11(nSH2!2).EGFR(II!1,Y1016~0) kdSHP2
+#   PTPN11 is indireclty associated with EGFR via GRB2:GAB1
+EGFR(II!1,Ygrb2~P!2).GRB2(SH2!2,cSH3!3).GAB1(PRS!3,Y627~P!4).PTPN11(nSH2!4).EGFR(II!1,Y1016~P)->\
+EGFR(II!1,Ygrb2~P!2).GRB2(SH2!2,cSH3!3).GAB1(PRS!3,Y627~P!4).PTPN11(nSH2!4).EGFR(II!1,Y1016~0) kdSHP2
+#   PTPN11 is indireclty associated with EGFR via SHC1:GRB2:GAB1
+EGFR(II!1,Yshc1~P!2).SHC1(PID!2,Y427~P!3).GRB2(SH2!3,cSH3!4).GAB1(PRS!4,Y627~P!5).PTPN11(nSH2!5).EGFR(II!1,Y1016~P)->\
+EGFR(II!1,Yshc1~P!2).SHC1(PID!2,Y427~P!3).GRB2(SH2!3,cSH3!4).GAB1(PRS!4,Y627~P!5).PTPN11(nSH2!5).EGFR(II!1,Y1016~0) kdSHP2
+
+#A more elegant allternative to the 3 rules above:
+# PTPN11(nSH2!+).EGFR(Y1016~P)->PTPN11(nSH2!+).EGFR(Y1016~0) kdSHP2
+
+##### Interaction 21/22 #####
+# Dephosphorylation of pY627 in EGFR-associated GAB1 in trans by
+#   EGFR-associated PTPN11
+PTPN11(nSH2!+).GAB1(Y627~P)->PTPN11(nSH2!+).GAB1(Y627~0) kdSHP2
+
+##### implict interactions #####
+# unregulated dephosphorylation of pTyr sites
+#   (mediated by constitutively active phosphatases)
+EGFR(Y1016~P)->EGFR(Y1016~0) kd
+EGFR(Ygrb2~P)->EGFR(Ygrb2~0) kd
+EGFR(Yshc1~P)->EGFR(Yshc1~0) kd
+SHC1(Y427~P)->SHC1(Y427~0) kd
+GAB1(Y627~P)->GAB1(Y627~0) kd
+
+end reaction rules
+
+end model
+
+begin actions
+
+#generate_network({overwrite=>1})
+#writeMfile()
+
+# equilibrate
+
+setConcentration("EGF(EGFL)",0)
+
+# Note that RuleBender doesn't recognize 
+#   BioNetGen's new "nf" method flag yet, so the line below
+#   is marked as having an error, but the line is fine.
+simulate({method=>"nf",complex=>1,gml=>630000,t_start=>0,t_end=>100,n_steps=>100})
+
+# perform production simulation
+
+setConcentration("EGF(EGFL)",60000)
+simulate({continue=>1,method=>"nf",complex=>1,gml=>630000,t_start=>0,t_end=>600,n_steps=>200})
+
+end actions

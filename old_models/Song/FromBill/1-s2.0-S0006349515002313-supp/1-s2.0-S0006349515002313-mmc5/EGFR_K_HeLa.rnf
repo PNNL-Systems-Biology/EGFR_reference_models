@@ -1,0 +1,17 @@
+-xml EGFR_K_HeLa.xml 
+-v
+-o EGFR_K_HeLa.gdat
+
+begin
+
+sim 3600 60 
+
+set EGFkp1		  7.6412e-8
+set EGFkp2		  8.8039e-8
+set EGFkp3		  5.6478e-9
+update
+
+sim 1800 30
+
+end
+
