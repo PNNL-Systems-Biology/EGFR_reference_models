@@ -1,0 +1,252 @@
+/// Shedding module:
+model shedding()
+    // Unit definitions:
+    unit substance = 1e-9 mole;
+    unit time_unit = second;
+    unit nM = 1e-9 mole / litre;
+    unit per_nM = litre / 1e-9 mole;
+    unit per_sec = 1 / second;
+    unit nM_per_sec = 1e-9 mole / (litre * second);
+    unit per_nMs = litre / (1e-9 mole * second);
+    unit pl = 1e-12 litre;
+    
+    // Compartments and Species
+    # pool: volumn of far-site extracellular compartment (shared pool among cells)
+    # extra: volumn of near-site extracellular compartment (dedicated pool for one cell)
+    # cell: volumn of the cellular compartment
+    # intra: volumn of endocytic compartment
+    compartment cell, extra, intra, pool;
+    species Tgfa in extra;
+    species pTgfa in pool;
+    species mTgfa in cell;
+    species mTgfai in cell;
+    species RE in cell, REi in intra, Rd in cell;
+    species Rp in cell, Rpi in cell;  
+
+    species iRhom_Tace, ppErk_iRhom_Tace, iRhomp_Tace, iRhomp_Pro1433_Tace, iRhomp_Pro1433, Tace in cell;
+    species iRhomp_Pro1433i, Tacei, iRhomp_Tacei, iRhom_Tacei in intra;
+
+    species Lpa in extra;
+
+    species ppErk, Pro1433 in cell;
+
+    species mRna_Tgfa in cell;
+
+    species R in cell, Ri in intra;
+    
+    // Reactions
+    # Activated ERK (pERK) binds to iRhom-TACE complex and phosphorylate iRhom
+    Erk_iRhom_binding: ppErk + iRhom_Tace -> ppErk_iRhom_Tace; (kf_Erk_iRhom * ppErk * iRhom_Tace - kb_Erk_iRhom * ppErk_iRhom_Tace);
+    Erk_phosphorylate_iRhom: ppErk_iRhom_Tace => ppErk + iRhomp_Tace; kp_Erk_iRhom * ppErk_iRhom_Tace;
+    # Phosphorylated iRhom binds to 14-3-3 then TACE dissociate from iRhom
+    iRhomp_Pro1433_binding: iRhomp_Tace + Pro1433 -> iRhomp_Pro1433_Tace; (kf_iRhomp_Pro1433 * iRhomp_Tace * Pro1433 - kb_iRhomp_Pro1433 * iRhomp_Pro1433_Tace);
+    iRhomp_Tace_dissociate: iRhomp_Pro1433_Tace => iRhomp_Pro1433 + Tace; kb_Tace_iRhomp * iRhomp_Pro1433_Tace;
+    # TACE catalyze the ligands at membrane into soluble ligands
+    Tace_shedding: Tace + mTgfa => Tace + Tgfa; ks_Tace * Tace * mTgfa;
+    # Expression, internalization and degradation of iRhom-TACE complex, TACE, iRhomP-14-3-3 complex, 14-3-3 proteins
+    iRhom_Tacei_expression:  => iRhom_Tacei; ke_iRhom_Tace;
+    Pro1433_expression:  => Pro1433; ke_Pro1433;
+    Pro1433_degradation: Pro1433 => ; kd_Pro1433 * Pro1433;
+    iRhomp_Pro1433_endocytosis: iRhomp_Pro1433 => iRhomp_Pro1433i ; ki_iRhomp_Pro1433 * iRhomp_Pro1433;
+    iRhomp_Pro1433i_degradation: iRhomp_Pro1433i => ; kd_iRhomp_Pro1433 * iRhomp_Pro1433i;
+    Tgfa_diffuses_away: Tgfa => pTgfa; k_Dif_Tgfa * Tgfa;
+    Tgfa_diffuses_back: pTgfa => Tgfa; k_Dif_Tgfa * pTgfa;
+    Tace_endocytosis: Tace => Tacei ; ki_Tace * Tace;
+    Tace_degradation: Tacei => ; kd_Tace * Tacei;
+    iRhom_Tace_endocytosis: iRhom_Tace => iRhom_Tacei; ki_iRhom_Tace * iRhom_Tace;
+    iRhomp_Tace_endocytosis: iRhomp_Tace => iRhomp_Tacei; ki_iRhomp_Tace * iRhomp_Tace;
+    iRhom_Tacei_transportation: iRhom_Tacei => iRhom_Tace; kt_iRhom_Tace * iRhom_Tacei;
+    iRhom_Tace_degradation: iRhom_Tacei => ; kd_iRhom_Tace * iRhom_Tacei;
+    iRhomp_Tace_degradation: iRhomp_Tacei => ; kd_iRhomp_Tace * iRhomp_Tacei;
+    # Phosphorylation of iRhom by Lpa
+    Lpa_phosphorylates_iRhom: Lpa + iRhom_Tace => Lpa + iRhomp_Tace; kp_Lpa_iRhom * (Lpa) * (iRhom_Tace);
+    
+    # TGFa transcription with activated ERK
+    Tgfa_transcription: ppErk -> ppErk + mRna_Tgfa; (Vtr0 + Vtr_max * (ppErk)^n / (Km^n + (ppErk)^n));
+    Tgfa_RNA_degradation: mRna_Tgfa -> ; kd_Rna * mRna_Tgfa;
+    # TGFa translation
+    Tgfa_translation: mRna_Tgfa -> mRna_Tgfa + mTgfai; ktl_Tgfa * mRna_Tgfa;
+    # mTGFa transportation
+    mTgfa_endocytosis: mTgfa -> mTgfai; ki_mTgfa * mTgfa;
+    mTgfa_transportation: mTgfai -> mTgfa; kt_mTgfa * mTgfai;
+    mTgfa_degradation: mTgfai -> ; kd_mTgfai * mTgfai;
+
+    # Tgfa and EGFR endocytosis
+    New_Receptors: => R; Vr; 
+    Receptor_turnover: R => Ri; R*kt;
+    Ligand_binding: Tgfa + R -> RE; (k1*R*Tgfa - k_1*RE);
+    Receptor_ligand_endo: RE => REi; RE*ke;
+    Receptor_degrad: Ri => ; Ri*kx;
+    Receptor_complex_degrad: REi => ; REi*kh;
+    Receptor_dimerization: 2RE => Rd; k2*RE;
+    Receptor_monomerization: Rd => 2RE; k_2*Rd;
+    Dimer_endo: Rd => Rdi; Rd*kt;
+    Receptor_phospho: Rd -> Rp; (k3*Rd - k_3*Rp);
+    Dimer_phospho_endo: Rp => Rpi; Rp*ke;
+
+    // Compartmental volumes
+    cell = 2 pl;
+    extra = 1e-1 pl;
+    intra = 1e-1 pl;
+    pool = 100 pl;
+    
+    // Paramters:
+    # kf_Erk_iRhom: forward binding rate constant of phosphorylated ERK and iRhom
+    kf_Erk_iRhom = 0.01 per_nMs;
+    # kb_Erk_iRhom: dissociation rate constant of ERK and iRhom complex
+    kb_Erk_iRhom = 0.1 per_sec;
+    # kp_Erk_iRhom: phosphorylation rate constant of iRhom by phosphorylated ERK
+    kp_Erk_iRhom = 0.2 per_sec;
+    # kf_iRhomp_Pro1433: forward binding rate constant of phosphorylated iRhom and 14-3-3
+    kf_iRhomp_Pro1433 = 0.001 per_nMs;
+    # kb_iRhomp_Pro1433: dissociation rate constant of phosphorylated iRhom and 14-3-3 complex
+    kb_iRhomp_Pro1433 = 0.01 per_sec;
+    # kb_Tace_iRhomp: dissociation rate constant of TACE from phosphorylated iRhom
+    kb_Tace_iRhomp = 0.1 per_sec;
+    # ks_Tace: rate constant of proteolysis by TACE
+    ks_Tace = 0.006017 per_nMs;
+    # ke_iRhom_Tace: expression rate of iRhom and TACE complex
+    ke_iRhom_Tace = 0.005044 nM_per_sec;
+    # ke_Pro1433: expression rate constant of protein 14-3-3
+    ke_Pro1433 = 0.01 nM_per_sec;
+    # kd_Pro1433: degradation rate constant of protein 14-3-3
+    kd_Pro1433 = 0.0003667 per_sec;
+    # ki_iRhomp_Pro1433: Internalization rate constant of phosphorylated iRhom and 14-3-3 complex
+    ki_iRhomp_Pro1433 = 0.001667 per_sec;
+    # kd_iRhomp_Pro1433: degradation rate constant of phosphorylated iRhom and 14-3-3 complex
+    kd_iRhomp_Pro1433 = 0.0003667 per_sec;
+    # k_Dif_Tgfa: diffusion of soluable TGFalpha
+    k_Dif_Tgfa = 0.01 per_sec;
+    # ki_Tace: internalization rate constant of TACE
+    ki_Tace = 0.0001667 per_sec;
+    # kd_Tace: degradation rate constant of TACE
+    kd_Tace = 0.0003667 per_sec;
+    # ki_iRhom_Tace: internalization rate constant of iRhom and TACE complex
+    ki_iRhom_Tace = 0.0001667 per_sec;
+    # ki_iRhomp_Tace: internalization rate constant of phosphorylated iRhom and TACE complex
+    ki_iRhomp_Tace = 0.0001667 per_sec;
+    # kt_iRhom_Tace: transportation rate constant of iRhom and TACE complex
+    kt_iRhom_Tace = 0.001 per_sec;
+    # kd_iRhom_Tace: degradation rate constant of iRhom and TACE complex
+    kd_iRhom_Tace = 0.002367 per_sec;
+    # kd_iRhomp_Tace: degradation rate constant of phosphorylated iRhom and TACE complex
+    kd_iRhomp_Tace = 0.0003667 per_sec;
+    # kp_Lpa_iRhom: rate constant of LPA activating iRhom (since no clear and detail mechanism, the rate can be a hill equation if needed)
+    kp_Lpa_iRhom = 0.01 per_nMs;
+
+    # Vtr0: basal activation of the Hill equation describing ERK activating TGFalpha expression
+    Vtr0 = 2.768e-6 nM_per_sec;
+    # Vtr_max: max rate of phosphorylated ERK on TGFapha mRNA expression
+    Vtr_max = 8.303e-5 nM_per_sec;
+    # Km: threshold parameter in Hill equation
+    Km = 150 nM;
+    # n: exponent parameter in Hill equation
+    n = 2 # dimensionless
+    # kd_Rna: TGFalpha mRNA degradation
+    kd_Rna = 0.01 per_sec;
+    # ktl_Tgfa: TGFalpha translation rate constant
+    ktl_Tgfa = 0.1667 per_sec;
+    # ki_mTgfa: internalization rate constant of TGFalpha precursor
+    ki_mTgfa = 0.0001667 per_sec;
+    # kt_mTgfa: transportation rate constant of TGFalpha precursor
+    kt_mTgfa = 0.001 per_sec;
+    # kd_mTgfai: degradation rate constant of TGFalpha precursor
+    kd_mTgfai = 0.0003667 per_sec;
+
+    k1 = 0.0016;
+    k1 has per_nMs;
+    k_1 = 0.004;
+    k_1 has per_sec;
+    kt = 0.0012;
+    kt has per_sec;
+    ke = 0.0033;
+    ke has per_sec;
+    Vr = 0.242;
+    Vr has nM_per_sec;
+    kx = 1;
+    kx has per_sec;
+    kh = 0.0004; // 0.00024;
+    kh has per_sec; 
+    k2 = 0.082; // updated 3-20
+    k2 has per_nMs;
+    k_2 = 0.017;  // updated 3-20
+    k_2 has per_sec;
+    k3 = 1.2;   // 0.067; // This is the phosphorylation probability
+    k3 has per_sec;
+    k_3 = 1.3;        // Dephosphorylation probability
+    k3 has per_sec;
+
+    // Species initialization
+    # ppErk: (double) phosphorylated ERK
+    ppErk has nM;
+    ppErk = 0;
+    # iRhom_Tace: protein complex of iRhom and TACE (Adam17)
+    iRhom_Tace has nM;
+    iRhom_Tace = 13.8;
+    # ppErk_iRhom_Tace: protein complex of phosphorylated ERK, iRhom and TACE
+    ppErk_iRhom_Tace has nM;
+    ppErk_iRhom_Tace = 0;
+    # iRhomp_Tace: protein complex of phosphorylated iRhom and TACE
+    iRhomp_Tace has nM;
+    iRhomp_Tace = 0;
+    # Pro1433: 14-3-3 protein
+    Pro1433 has nM;
+    Pro1433 = 0;
+    # iRhomp_Pro1433_Tace: protein complex of phosphorylated iRhom, 14-3-3 and TACE
+    iRhomp_Pro1433_Tace has nM;
+    iRhomp_Pro1433_Tace = 0;
+    # iRhomp_Pro1433: protein complex of phosphorylated iRhom and 14-3-3
+    iRhomp_Pro1433 has nM;
+    iRhomp_Pro1433 = 0;
+    # Tace: TACE protein
+    Tace has nM;
+    Tace = 0;
+    # mTgfa: TGFalpha precursor at membrane
+    mTgfa has nM;
+    mTgfa = 0.1;
+    # Tgfa: soluble TGFalpha near to the cell (accessibly to the receptors on membrane)
+    Tgfa has nM;
+    Tgfa = 0;
+    # pTgfa: TGFalpha in the total extracellular pool (not accessible to cells, far apart)
+    pTgfa has nM;
+    pTgfa = 0;
+    # iRhomp_Pro1433i: complex of phosphorylated iRhom and Pro1433 in endosome
+    iRhomp_Pro1433i has nM;
+    iRhomp_Pro1433i = 0;
+    # Tacei: TACE in endosome
+    Tacei has nM;
+    Tacei = 0;
+    # iRhomp_Tacei: complex of phosphorylated iRhom and TACE in endosome
+    iRhomp_Tacei has nM;
+    iRhomp_Tacei = 0;
+    # iRhom_Tacei: complex of iRhom and TACE in endosome
+    iRhom_Tacei has nM;
+    iRhom_Tacei = 0;
+    # Lpa: LPA
+    Lpa has nM;
+    Lpa = 0;
+
+    # mRna_Tgfa: mRNA of TGFalpha
+    mRna_Tgfa has nM;
+    mRna_Tgfa = 0;
+    # mTgfai: internalized TGFalpha precursor
+    mTgfai has nM;
+    mTgfai = 0;
+    # ppErk: phosphorylated ERK
+    ppErk has nM;
+    ppErk = 0;
+    
+    R = Vr/kt;
+    R has nM;
+    RE = 0;
+    RE has nM;
+    Ri = 0;
+    Ri has nM;
+    REi = 0;
+    REi has nM;
+    Rd = 0;
+    Rdi = 0;
+    Rp = 0;
+    Rpi = 0;
+
+end

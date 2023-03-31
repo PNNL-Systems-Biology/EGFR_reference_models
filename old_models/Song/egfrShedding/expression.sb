@@ -1,0 +1,72 @@
+
+// Ligand expression module:
+model expression()
+    // Unit definitions:
+    unit substance = 1e-9 mole;
+    unit time_unit = second;
+    unit nM = 1e-9 mole / litre;
+    unit per_nM = litre / 1e-9 mole;
+    unit per_sec = 1 / second;
+    unit nM_per_sec = 1e-9 mole / (litre * second);
+    unit per_nMs = litre / (1e-9 mole * second);
+    unit pl = 1e-12 litre;
+
+    // Compartments and Species
+    # pool: volumn of far-site extracellular compartment (shared pool among cells)
+    # extra: volumn of near-site extracellular compartment (dedicated pool for one cell)
+    # cell: volumn of the cellular compartment
+    # intra: volumn of endocytic compartment
+    compartment cell, extra, intra, pool;
+    species mTgfa in cell;
+    species mTgfai in cell;
+    species ppErk, mRna_Tgfa, Tgfa in cell;
+    # TGFa transcription with activated ERK
+    Tgfa_transcription: ppErk -> ppErk + mRna_Tgfa; Vtr0 + Vtr_max * (ppErk)^n / (Km^n + (ppErk)^n) * cell;
+    Tgfa_RNA_degradation: mRna_Tgfa -> ; kd_Rna * mRna_Tgfa * cell;
+    # TGFa translation
+    Tgfa_translation: mRna_Tgfa -> mRna_Tgfa + mTgfai; ktl_Tgfa * mRna_Tgfa * cell;
+    # mTGFa transportation
+    mTgfa_endocytosis: mTgfa -> mTgfai; ki_mTgfa * mTgfa * cell;
+    mTgfa_recycling: mTgfai -> mTgfa; kr_mTgfai * mTgfai * cell;
+    mTgfa_degradation: mTgfai -> ; kd_mTgfai * mTgfai * cell;
+    
+    // Compartmental volumes
+    cell = 1 pl;
+    extra = 1e-3 pl;
+    intra = 1e-3 pl;
+    pool = 1000 pl;
+    
+    // species
+    # mRna_Tgfa: mRNA of TGFalpha
+    mRna_Tgfa has nM;
+    mRna_Tgfa = 1;
+    # mTgfai: internalized TGFalpha precursor
+    mTgfai has nM;
+    mTgfai = 1;
+    # ppErk: phosphorylated ERK
+    ppErk has nM;
+    ppErk = 0;
+    # mTgfa: TGFalpha precursor at membrane
+    mTgfa has nM;
+    mTgfa = 1;
+    
+    // Parameters:
+    # Vtr0: basal activation of the Hill equation describing ERK activating TGFalpha expression
+    Vtr0 = 0 nM_per_sec;
+    # Vtr_max: max rate of phosphorylated ERK on TGFapha mRNA expression
+    Vtr_max = 1 nM_per_sec;
+    # Km: threshold parameter in Hill equation
+    Km = 17 nM;
+    # n: exponent parameter in Hill equation
+    n = 3 # dimensionless
+    # kd_Rna: TGFalpha mRNA degradation
+    kd_Rna = 0.1 per_sec;
+    # ktl_Tgfa: TGFalpha translation rate constant
+    ktl_Tgfa = 0.1 per_sec;
+    # ki_mTgfa: internalization rate constant of TGFalpha precursor
+    ki_mTgfa = 0.001 per_sec;
+    # kr_mTgfai: recycling rate constant of TGFalpha precursor
+    kr_mTgfai = 0.01 per_sec;
+    # kd_mTgfai: degradation rate constant of TGFalpha precursor
+    kd_mTgfai = 0.02 per_sec;
+end
