@@ -1,0 +1,105 @@
+// Created by libAntimony v2.8.1
+model egfrActivation()
+
+  // Compartments and Species:
+  compartment cell, extra, endo;
+  species E, R, RE, RR, RRE, ERRE in cell;
+  species Ri, REi, RRi, RREi, ERREi in endo;
+  species RRp, RRpE, ERRpE in cell;
+  species RRpi, RRpEi, ERRpEi in endo;
+  species RpRp, RpRpE, ERpRpE in cell;
+  species RpRpi, RpRpEi, ERpRpEi in endo;
+  
+  
+  // Reactions:
+  // EGFR module
+  
+  New_Receptors: => R; Vr; 
+  Receptor_endo: R => Ri; R*ki;
+  Ligand_binding_0: E + R -> RE; (kf1*R*E - kf1*K1*RE);
+  Ligand_binding_1: E + RR -> RRE; (kf1/g1*RR*E - kf1*K1*g1*RRE);
+  Ligand_binding_2: E + RRE -> ERRE; (kf1/g2*RRE*E - kf1*K1*g2*ERRE);
+
+  Ligand_binding_3: E + RRp -> RRpE; (kf1/g1/g3*RRp*E - kf1*K1*g1*g3*RRpE);
+  Ligand_binding_4: E + RRpE -> ERRpE; (kf1/g2/g3*RRpE*E - kf1*K1*g2*g3*ERRpE);
+  Ligand_binding_5: E + RpRp -> RpRpE; (kf1/g1/g3/g4*RpRp*E - kf1*K1*g1*g3*g4*RpRpE);
+  Ligand_binding_6: E + RpRpE -> ERpRpE; (kf1/g2/g3/g4*RpRpE*E - kf1*K1*g2*g3*g4*ERpRpE);
+
+  Receptor_Dimerization_0: R + R -> RR; (kf2*R*R - kf2*K2*RR);
+  Receptor_Dimerization_1: RE + R -> RRE; (kf2/g2*R*RE - kf2*K2*g2*RRE);
+  Receptor_Dimerization_2: RE + RE -> ERRE; (kf2/g2/g1*RE*RE - kf2*K2*g2*g1*ERRE);
+
+  Receptor_Phosphorylation_0: RR -> RRp; (kp*RR - kd*RRp);
+  Receptor_Phosphorylation_1: RRp -> RpRp; (kp*g7*RRp - kd*RRp);
+  Receptor_Phosphorylation_2: RRE -> RRpE; (kp*g5*RRE - kd*RRpE);
+  Receptor_Phosphorylation_3: RRpE -> RpRpE; (kp*g5*g7*RRpE - kd*RpRpE);
+  Receptor_Phosphorylation_4: ERRE -> ERRpE; (kp*g5*g6*ERRE - kd*ERRpE);
+  Receptor_Phosphorylation_5: ERRpE -> ERpRpE; (kp*g5*g6*g7*ERRpE - kd*ERpRpE);
+
+  Receptor_Endocytosis_0: R -> Ri; ki*R;
+  Receptor_Endocytosis_1: RE -> REi; ki*RE;
+  Receptor_Endocytosis_2: RR -> RRi; ki*RR;
+  Receptor_Endocytosis_3: RRE -> RREi; ki*RRE;
+  Receptor_Endocytosis_3: ERRE -> ERREi; ki*ERRE;
+
+  Receptor_Endocytosis_4: RRp -> RRpi; ke*RRp;
+  Receptor_Endocytosis_5: RRpE -> RRpEi; ke*RRpE;
+  Receptor_Endocytosis_6: ERRpE -> ERRpEi; ke*ERRpE;
+  Receptor_Endocytosis_7: RpRp -> RpRpi; ke*RpRp;
+  Receptor_Endocytosis_8: RpRpE -> RpRpEi; ke*RpRpE;
+  Receptor_Endocytosis_9: ERpRpE -> ERpRpEi; ke*ERpRpE;
+  
+   
+  // Species initializations:
+  var E = 0;
+  E has nM;
+  R = Vr/ki;
+  R has nM;
+
+ // Compartment initializations:
+  cell = 1;
+  extra = 5000;
+  endo = 1;
+
+ // Variable initializations:
+  Vr = 0.242;
+  Vr has nM_per_sec;
+  kf1 = 0.0016;
+  kf1 has per_nMs;
+  kf2 = 0.004;
+  kf2 has per_sec;
+  ki = 0.0012;
+  ki has per_sec;
+  ke = .0033;
+  ke has per_sec;
+  kp = 1;
+  kp has per_sec;
+  kd = 0.0004;
+  kd has per_sec; 
+  K1 = 1;
+  K1 has nM;
+  K2 = 1;
+  K2 has nM;
+  g1 = 1;
+  g2 = 1;
+  g3 = 1;
+  g4 = 1;
+  g5 = 1;
+  g6 = 1;
+  g7 = 1;
+
+  // Other declarations:
+  var kf1, kf2;
+  const cell, extra;
+
+
+   // Unit definitions:
+  unit substance = 1e-9 mole;
+  unit time_unit = second;
+  unit nM = 1e-9 mole / litre;
+  unit per_nM = litre / 1e-9 mole;
+  unit per_sec = 1 / second;
+  unit nM_per_s = 1e-9 mole / (litre * second);
+  unit per_nMs = litre / (1e-9 mole * second);
+ 
+end

@@ -1,0 +1,77 @@
+// Created by libAntimony v2.8.1
+model egfrActivation()
+
+  // Compartments and Species:
+  compartment cell, extra, endo;
+  species E, R, ER, Rd, ERd, ERp in cell;
+  species Ri, ERi, Rdi, ERdi, ERpi in endo;  
+  
+  // Reactions:
+  // EGFR module
+  New_Receptors: => R; Vr; 
+  LR_binding: E + R -> ER; (kLr0*R*E - kLrR0*ER);
+  LRd_binding: 2E + Rd -> ERd; (kLr1*E*E*Rd - kLrR1*ERd);
+  R_dimerization: 2R -> Rd; (kDi0*R*R - kDiR0*Rd); 
+  ER_dimerization: 2ER -> ERd; (kDi1*R*R - kDiR1*Rd);
+  ERd_phosphorylation: ERd -> ERp; (kPh*ERd - kPhR*ERp)
+  R_endo: R => Ri; R*ki;
+  ER_endo: ER => ERi; ER*ki;
+  Rd_endo: Rd => Rdi; Rd*ki;
+  ERd_endo: ERd => ERdi; Rd*ki;
+  ERp_endo: ERp => ERpi; ERp*ke;
+   
+  // Species initializations:
+  var E = 0;
+  E has nM;
+  R = Vr/ki;
+  R has nM;
+
+ // Compartment initializations:
+  cell = 1;
+  extra = 5000;
+  endo = 1;
+
+ // Variable initializations:
+  Vr = 0.242;
+  Vr has nM_per_sec;
+  kLr0 = 0.0016;
+  kLr0 has per_nMs;
+  kLrR0 = 0.0016;
+  kLrR0 has per_sec;
+  kLr1 = 0.004;
+  kLr1 has per_nM2s;
+  kLrR1 = 0.004;
+  kLrR1 has per_sec;
+  kDi0 = 0.004;
+  kDi0 has per_nMs;
+  kDiR0 = 0.01;
+  kDiR0 has per_sec;
+  kDi1 = 0.004;
+  kDi1 has per_nM2s;
+  kDiR1 = 0.0001;
+  kDiR1 has per_sec;
+  ki = 0.0012;
+  ki has per_sec;
+  ke = .0033;
+  ke has per_sec;
+  kPh = 1;
+  kPh has per_sec;
+  kPhR = 0.0004;
+  kPhR has per_sec; 
+
+  // Other declarations:
+  var kLr0, kLr1, kLrR0, kLrR1, kDi0, kDi1, kDiR0, kDiR1, kPh, kPhR;
+  const cell, extra;
+
+
+   // Unit definitions:
+  unit substance = 1e-9 mole;
+  unit time_unit = second;
+  unit nM = 1e-9 mole / litre;
+  unit per_nM = litre / 1e-9 mole;
+  unit per_sec = 1 / second;
+  unit nM_per_s = 1e-9 mole / (litre * second);
+  unit per_nMs = litre / (1e-9 mole * second);
+  unit per_nM2s = (litre * litre) / (1e-9 mole * 1e-9 mole * second);
+ 
+end

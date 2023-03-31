@@ -1,0 +1,105 @@
+// Created by libAntimony v2.8.1
+model *endocytosis()
+
+  // Compartments and Species:
+  compartment cell, extra, intra;
+  species RE in cell, R in cell, REi in intra, E in extra, Ri in intra, Rd in cell;
+  species Rp in cell, Rpi in intra;
+  
+  
+  // Reactions:
+  // EGFR module
+  
+  New_Receptors: => R; Vr; 
+  Receptor_turnover: R => Ri; R*kt;
+  Ligand_binding1: E + RR -> RRE; (k1*RR*E - k_1*RRE);
+  Ligand_binding2: E + RRE -> ERRE; (k1*RRE*E - k_1*ERRE);
+  Receptor_ligand_endo1: RRE => RREi; RE*ke;
+  Receptor_ligand_endo2: ERRE => ERREi; RE*ke;
+  //  Receptor_degrad: Ri => ; Ri*kx;
+  //  Receptor_complex_degrad: REi => ; REi*kh;
+  Receptor_dimerization: 2R -> RR; (k2*R*R - k_2*RR);
+  Dimer_endo: RR => RRi; RR*kt;
+  Receptor_phospho1: RRE -> RRpE; (k3*RRE - k_3*RRpE);
+  Receptor_phospho2: ERRE -> ERRpE; (k3*ERRE - k_3*ERRpE);
+  Dimer_phospho_endo1: RRpE => RRpEi; RRpE*kep;
+  Dimer_phospho_endo2: ERRp => ERRpEi; ERRpE*kep;
+  
+ 
+  // Species initializations:
+  var E = 1;
+  E has nM;
+  R = Vr/kt;
+  R has nM;
+  RRE = 0;
+  RRE has nM;
+  ERRE = 0;
+  ERRE has nM;
+  Ri = 0;
+  Ri has nM;
+  RREi = 0;
+  RREi has nM;
+  ERREi = 0;
+  ERREi has nM;
+  RRpE = 0;
+  RRpE has nM;
+  ERRpE = 0;
+  ERRpE has nM;
+  RRpEi = 0;
+  RRpEi has nM;
+  ERRpEi = 0;
+  ERRpEi has nM;
+  RR = 0;
+  RR has nM;
+  RRi = 0;
+  RRi has nM
+  
+
+ // Compartment initializations:
+  cell = 1;
+  extra = 5000;
+  intra = 1;
+
+ // Variable initializations:
+  k1 = 0.0016;
+  k1 has per_nMs;
+  k_1 = 0.004;
+  k_1 has per_sec;
+  kt = 0.0012;
+  kt has per_sec;
+  ke = .0033;
+  ke has per_sec;
+  Vr = .242;
+  Vr has nM_per_sec;
+  kep = 0.0033;
+  kep has per_sec;
+  kx = 1;
+  kx has per_sec;
+  kh = 0.0004; // 0.00024;
+  kh has per_sec; 
+  k2 = 0.082;	// updated 3-20
+  k2 has per_nMs;
+  k_2 = 0.017;	// updated 3-20
+  k_2 has per_sec;
+  k3 = 1.2;		// 0.067;	// This is the phosphorylation probability
+  k3 has per_sec;
+  k_3 = 1.3;				// Dephosphorylation probability
+  k_3 has per_sec;
+
+  
+  
+  // Other declarations:
+  // var k_1, k_2, k_3;
+  // const cell, extra, k1, k2, k3;
+
+
+   // Unit definitions:
+  unit substance = 1e-9 mole;
+  unit time_unit = second;
+  unit nM = 1e-9 mole / litre;
+  unit per_nM = litre / 1e-9 mole;
+  unit per_sec = 1 / second;
+  unit nM_per_s = 1e-9 mole / (litre * second);
+  unit per_nMs = litre / (1e-9 mole * second);
+ 
+end
