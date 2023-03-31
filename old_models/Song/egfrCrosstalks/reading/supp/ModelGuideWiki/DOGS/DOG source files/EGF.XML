@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">53</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="100" size="24" style="Bold">EGF</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">6,20</position>
+        <text color="0,0,0" direction="Top" size="14">SS</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">14,31</position>
+        <text color="0,0,0" direction="Top" size="14">SS</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">33,42</position>
+        <text color="0,0,0" direction="Top" size="14">SS</text>
+    </component>
+    <component type="domain">
+        <start direction="Hide">6</start>
+        <end direction="Hide">31</end>
+        <name color="204,204,204" direction="Center" size="14">C2</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">33</start>
+        <end direction="Hide">42</end>
+        <name color="204,204,204" direction="Center" size="14">C1</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">2</position>
+        <text color="0,0,255" direction="Top" size="18">972</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">43</position>
+        <text color="0,0,255" direction="Top" size="18">1013</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">2,43</position>
+        <text color="0,0,255" direction="Bottom" size="18">EGFL</text>
+    </component>
+</project>

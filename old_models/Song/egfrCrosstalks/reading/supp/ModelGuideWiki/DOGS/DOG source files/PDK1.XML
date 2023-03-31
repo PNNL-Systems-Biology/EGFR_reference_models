@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="204,204,204" height="30" size="12">556</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">PDK1</text>
+    </component>
+    <component type="domain">
+        <start direction="Down">82</start>
+        <end direction="Down">342</end>
+        <name color="0,204,255" direction="Center" size="14">S/T kinase</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">459</start>
+        <end direction="Up">550</end>
+        <name color="153,153,255" direction="Center" size="14">PH</name>
+    </component>
+</project>

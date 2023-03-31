@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">222</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="100" size="24" style="Bold">HRG</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">163,177</position>
+        <text color="0,0,0" direction="Bottom" size="14">SS</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">171,191</position>
+        <text color="0,0,0" direction="Top" size="14">SS</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">193,202</position>
+        <text color="0,0,0" direction="Top" size="14">SS</text>
+    </component>
+    <component type="domain">
+        <start direction="Hide">18</start>
+        <end direction="Hide">109</end>
+        <name color="204,204,204" direction="Center" size="14">Ig-like C2-type</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">159</start>
+        <end direction="Hide">203</end>
+        <name color="204,204,204" direction="Center" size="14">EGF-like</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1</position>
+        <text color="0,0,255" direction="Top" size="18">20</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">222</position>
+        <text color="0,0,255" direction="Top" size="18">241</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">159</position>
+        <text color="0,0,255" direction="Top" size="18">178</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">203</position>
+        <text color="0,0,255" direction="Bottom" size="18">222</text>
+    </component>
+</project>

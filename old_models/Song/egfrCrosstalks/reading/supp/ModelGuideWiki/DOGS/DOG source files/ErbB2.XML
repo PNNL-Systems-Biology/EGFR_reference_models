@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">1255</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">ErbB2</text>
+    </component>
+    <component type="domain">
+        <start direction="Down">653</start>
+        <end direction="Hide">675</end>
+        <name color="0,0,0" direction="Hide" size="14">TM</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">720</start>
+        <end direction="Down">987</end>
+        <name color="255,0,51" direction="Center" size="14">Y kinase</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">877</position>
+        <text color="255,255,255" direction="Bottom" size="14">Y877</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">1023</position>
+        <text color="255,255,255" direction="Top" size="14">Y1023</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1139</position>
+        <text color="255,0,51" direction="BottomLeft" size="14">Y1139</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1196</position>
+        <text color="255,0,51" direction="Bottom" size="14">Y1196</text>
+    </component>
+    <component type="site">
+        <position height="60" line="Show">1222</position>
+        <text color="255,0,0" direction="Top" size="14">Y1222</text>
+    </component>
+    <component type="domain">
+        <start direction="Hide">23</start>
+        <end direction="Hide">187</end>
+        <name color="102,102,102" direction="Center" size="14">I/L1</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">332</start>
+        <end direction="Hide">502</end>
+        <name color="102,102,102" direction="Center" size="14">III/L2</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">187</start>
+        <end direction="Hide">332</end>
+        <name color="204,204,204" direction="Center" size="14">II/CR1</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">502</start>
+        <end direction="Hide">653</end>
+        <name color="204,204,204" direction="Center" size="14">IV/CR2</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">23,652</position>
+        <text color="0,0,0" direction="Top" size="14">ectodomain</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1248</position>
+        <text color="255,51,51" direction="TopRight" size="14">Y1248</text>
+    </component>
+</project>

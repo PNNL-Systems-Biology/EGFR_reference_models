@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">648</length>
+    </component>
+    <component type="domain">
+        <start direction="Down">349</start>
+        <end direction="Down">609</end>
+        <name color="0,255,255" direction="Center" size="14">S/T kinase</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">29</position>
+        <text color="0,153,153" direction="Bottom" size="14">S29</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">43</position>
+        <text color="0,153,153" direction="BottomRight" size="14">S43</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">289</position>
+        <text color="0,153,153" direction="Bottom" size="14">S289</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">296</position>
+        <text color="51,255,255" direction="Top" size="14">S296</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">301</position>
+        <text color="0,153,153" direction="BottomRight" size="14">S301</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">642</position>
+        <text color="0,153,153" direction="BottomLeft" size="14">S642</text>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="32" style="Bold">Raf-1</text>
+    </component>
+    <component type="site">
+        <position height="50" line="Show">259</position>
+        <text color="51,102,255" direction="BottomLeft" size="14">S259</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">338</position>
+        <text color="51,255,255" direction="Top" size="14">S338</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">491</position>
+        <text color="51,255,255" direction="Top" size="14">T491</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">494</position>
+        <text color="51,255,255" direction="TopRight" size="14">S494</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">269</position>
+        <text color="255,255,255" direction="TopLeft" size="12">S269</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">471</position>
+        <text color="0,153,153" direction="Bottom" size="14">S471</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">341</position>
+        <text color="255,102,102" direction="TopRight" size="14">Y341</text>
+    </component>
+    <component type="domain">
+        <start direction="Up">56</start>
+        <end direction="Up">131</end>
+        <name color="255,204,102" direction="Center" size="14">RBD</name>
+    </component>
+</project>

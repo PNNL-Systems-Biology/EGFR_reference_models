@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">480</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">Akt1</text>
+    </component>
+    <component type="domain">
+        <start direction="Up">5</start>
+        <end direction="Up">108</end>
+        <name color="153,153,255" direction="Center" size="14">PH</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">150</start>
+        <end direction="Down">408</end>
+        <name color="153,255,255" direction="Center" size="14">S/T kinase</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">408</start>
+        <end direction="Hide">480</end>
+        <name color="153,204,0" direction="Hide" size="14"> AGC-kinase C-terminal</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">444</position>
+        <text color="204,204,0" direction="Top" size="12">AGC-kinase C-terminal tail</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">308</position>
+        <text color="0,204,255" direction="Top" size="14">T308</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">473</position>
+        <text color="0,204,204" direction="BottomLeft" size="14">S473</text>
+    </component>
+</project>

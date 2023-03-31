@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">186</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="32" style="Bold">K-Ras</text>
+    </component>
+    <component type="domain">
+        <start direction="Hide">2</start>
+        <end direction="Down">166</end>
+        <name color="255,255,0" direction="Center" size="14">GTPase</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">10,17</position>
+        <text color="0,0,255" direction="Top" size="12">G1</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">35</position>
+        <text color="0,0,255" direction="Top" size="12">G2</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">57,60</position>
+        <text color="0,0,255" direction="Top" size="12">G3</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">116,119</position>
+        <text color="0,0,255" direction="Top" size="12">G4</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">145,147</position>
+        <text color="0,0,255" direction="Top" size="12">G5</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">166,185</position>
+        <text color="0,0,0" direction="Top" size="12">hypervariable</text>
+    </component>
+</project>

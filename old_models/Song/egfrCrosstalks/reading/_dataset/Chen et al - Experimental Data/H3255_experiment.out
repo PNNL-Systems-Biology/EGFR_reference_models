@@ -1,0 +1,161 @@
+# Notes: Data obtained In-Cell Western (see Methods and Materials).
+# Notes: All data normalized between 0 and 100.
+# Notes: 0 indicates basal value; 100 indicates peak value for one signal across all conditions.
+# Notes: 0 signal in pErbB1 indicate undetectable levels.
+
+Condition: High (5e-9 M) EGF Measured Signal: pAkt
+Time (min)	Signal	Standard Error
+0	3.6	3.5
+2.5	0.99	2.6
+5	21	6.8
+7.5	26	8.4
+10	22	2.8
+15	18	5.5
+30	0	1.7
+45	0	2.4
+60	0	7
+1.2e+02	0	3.1
+
+Condition: High (5e-9 M) EGF Measured Signal: pErbB1
+Time (min)	Signal	Standard Error
+0	5.6	6
+2.5	28	9.6
+5	44	20
+7.5	46	17
+10	55	8.6
+15	70	9.9
+30	1e+02	23
+45	62	18
+60	70	12
+1.2e+02	88	14
+
+Condition: High (5e-9 M) EGF Measured Signal: pERK
+Time (min)	Signal	Standard Error
+0	1.3	1.2
+2.5	34	2.1
+5	75	6.9
+7.5	72	7.5
+10	79	15
+15	1e+02	12
+30	1e+02	24
+45	64	3.3
+60	59	4.6
+1.2e+02	27	2.6
+
+Condition: High (5e-9 M) HRG Measured Signal: pAkt
+Time (min)	Signal	Standard Error
+0	-3.5	2.8
+2.5	30	31
+5	65	27
+7.5	80	32
+10	85	32
+15	97	29
+30	92	19
+45	72	24
+60	90	23
+1.2e+02	89	23
+
+Condition: High (5e-9 M) HRG Measured Signal: pErbB1
+Time (min)	Signal	Standard Error
+0	0	0
+2.5	0	0
+5	0	0
+7.5	0	0
+10	0	0
+15	0	0
+30	0	0
+45	0	0
+60	0	0
+1.2e+02	0	0
+
+Condition: High (5e-9 M) HRG Measured Signal: pERK
+Time (min)	Signal	Standard Error
+0	-2.7	3.3
+2.5	13	6.2
+5	21	11
+7.5	13	7.8
+10	11	7.5
+15	14	3.4
+30	13	6.8
+45	11	3
+60	15	2
+1.2e+02	0.17	3.9
+
+Condition: Low (1e-11 M) EGF Measured Signal: pAkt
+Time (min)	Signal	Standard Error
+0	0.21	4.2
+2.5	0	4.5
+5	4.1	6.5
+7.5	12	5
+10	11	5.4
+15	7.7	5.8
+30	0	3.1
+45	0	2.5
+60	0	2.5
+1.2e+02	0	2.2
+
+Condition: Low (1e-11 M) EGF Measured Signal: pErbB1
+Time (min)	Signal	Standard Error
+0	0	0
+2.5	0	0
+5	0	0
+7.5	0	0
+10	0	0
+15	0	0
+30	0	0
+45	0	0
+60	0	0
+1.2e+02	0	0
+
+Condition: Low (1e-11 M) EGF Measured Signal: pERK
+Time (min)	Signal	Standard Error
+0	0	2.3
+2.5	7.1	0.22
+5	19	6.9
+7.5	5.8	2
+10	0	2.1
+15	1.1	6.7
+30	0.026	5.4
+45	1.4	6.2
+60	2.9	5
+1.2e+02	0	5
+
+Condition: Low (1e-10 M) HRG Measured Signal: pAkt
+Time (min)	Signal	Standard Error
+0	-0.25	4.8
+2.5	19	39
+5	56	43
+7.5	71	46
+10	89	59
+15	1e+02	46
+30	91	39
+45	71	26
+60	85	40
+1.2e+02	92	29
+
+Condition: Low (1e-10 M) HRG Measured Signal: pErbB1
+Time (min)	Signal	Standard Error
+0	0	0
+2.5	0	0
+5	0	0
+7.5	0	0
+10	0	0
+15	0	0
+30	0	0
+45	0	0
+60	0	0
+1.2e+02	0	0
+
+Condition: Low (1e-10 M) HRG Measured Signal: pERK
+Time (min)	Signal	Standard Error
+0	1.7	1.6
+2.5	19	12
+5	28	7.6
+7.5	18	6.4
+10	13	4.4
+15	18	5.9
+30	18	3.2
+45	10	6.3
+60	15	6.7
+1.2e+02	3.6	5.2
+

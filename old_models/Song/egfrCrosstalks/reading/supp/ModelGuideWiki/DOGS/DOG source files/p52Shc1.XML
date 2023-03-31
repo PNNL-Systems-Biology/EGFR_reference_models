@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">473</length>
+    </component>
+    <component type="domain">
+        <start direction="Down">46</start>
+        <end direction="Down">229</end>
+        <name color="153,204,255" direction="Center" size="14">PTB</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">317</position>
+        <text color="0,0,255" direction="Top" size="18">Y317</text>
+    </component>
+    <component type="domain">
+        <start direction="Up">378</start>
+        <end direction="Up">469</end>
+        <name color="255,204,204" direction="Center" size="14">SH2</name>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="100" size="32" style="Bold">Shc1</text>
+    </component>
+</project>

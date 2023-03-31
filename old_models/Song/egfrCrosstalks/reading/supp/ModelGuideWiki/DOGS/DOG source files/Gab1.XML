@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">694</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">Gab1</text>
+    </component>
+    <component type="domain">
+        <start direction="Up">5</start>
+        <end direction="Up">116</end>
+        <name color="153,153,255" direction="Center" size="14">PH</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">447</position>
+        <text color="255,51,51" direction="Top" size="14">Y447</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">472</position>
+        <text color="255,51,51" direction="TopRight" size="14">Y472</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">627</position>
+        <text color="255,0,0" direction="Top" size="14">Y627</text>
+    </component>
+    <component type="site">
+        <position height="50" line="Show">340</position>
+        <text color="0,0,255" direction="Bottom" size="12">IPPPRPPKP (PxxP)</text>
+    </component>
+    <component type="site">
+        <position height="50" line="Show">517</position>
+        <text color="0,0,255" direction="Bottom" size="12">PPVDRNLKP (PxxxR)</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">476</position>
+        <text color="0,204,204" direction="Bottom" size="14">T476</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">312</position>
+        <text color="0,204,204" direction="Bottom" size="14">T312</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">381</position>
+        <text color="0,204,204" direction="Bottom" size="14">S381</text>
+    </component>
+    <component type="site">
+        <position height="10" line="Show">454</position>
+        <text color="0,204,204" direction="BottomLeft" size="14">S454</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">551</position>
+        <text color="0,204,204" direction="Bottom" size="14">S551</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">597</position>
+        <text color="0,204,204" direction="BottomRight" size="14">S597</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">659</position>
+        <text color="255,0,0" direction="TopRight" size="14">Y659</text>
+    </component>
+</project>

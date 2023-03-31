@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">1068</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">p110</text>
+    </component>
+    <component type="domain">
+        <start direction="Hide">1</start>
+        <end direction="Down">109</end>
+        <name color="153,255,204" direction="Center" size="14">ABD</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">133</start>
+        <end direction="Up">314</end>
+        <name color="255,204,51" direction="Center" size="14">RBD</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">319</start>
+        <end direction="Down">428</end>
+        <name color="204,204,204" direction="Center" size="14">C2</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">428</start>
+        <end direction="Hide">797</end>
+        <name color="255,255,255" direction="Center" size="14">Helical</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">797</start>
+        <end direction="Hide">1068</end>
+        <name color="0,204,153" direction="Center" size="14">PI3Kc</name>
+    </component>
+</project>

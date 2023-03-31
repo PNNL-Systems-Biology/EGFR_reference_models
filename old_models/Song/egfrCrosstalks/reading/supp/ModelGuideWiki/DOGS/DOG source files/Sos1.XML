@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="204,204,204" height="30" size="12">1333</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">Sos1</text>
+    </component>
+    <component type="domain">
+        <start direction="Down">200</start>
+        <end direction="Down">390</end>
+        <name color="153,204,255" direction="Center" size="14">DH/RhoGEF</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">444</start>
+        <end direction="Down">548</end>
+        <name color="153,153,255" direction="Center" size="14">PH</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">597</start>
+        <end direction="Down">741</end>
+        <name color="102,255,102" direction="Center" size="14">REM</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">780</start>
+        <end direction="Down">1019</end>
+        <name color="204,255,51" direction="Center" size="14">RasGEF</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1132</position>
+        <text color="0,204,204" direction="TopLeft" size="12">S1132</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1167</position>
+        <text color="0,204,204" direction="Top" size="12">S1167</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1178</position>
+        <text color="0,204,204" direction="TopRight" size="12">S1178</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1193</position>
+        <text color="0,204,204" direction="BottomRight" size="12">S1193</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1151</position>
+        <text color="0,0,255" direction="BottomLeft" size="10">PPVPPR</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1179</position>
+        <text color="0,0,255" direction="Bottom" size="10">PPAIPPR</text>
+    </component>
+    <component type="site">
+        <position height="60" line="Show">1211</position>
+        <text color="0,0,255" direction="Top" size="10">PPLLPPR</text>
+    </component>
+    <component type="site">
+        <position height="5" line="Show">1290</position>
+        <text color="0,0,255" direction="Top" size="10">PPVPPR</text>
+    </component>
+</project>

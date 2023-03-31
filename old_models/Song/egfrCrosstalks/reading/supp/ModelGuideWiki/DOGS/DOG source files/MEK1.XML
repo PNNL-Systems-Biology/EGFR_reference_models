@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">393</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="32" style="Bold">MEK1</text>
+    </component>
+    <component type="domain">
+        <start direction="Down">68</start>
+        <end direction="Down">361</end>
+        <name color="0,153,153" direction="Center" size="14">dual specificity kinase</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">218</position>
+        <text color="0,153,153" direction="BottomLeft" size="14">S218</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">222</position>
+        <text color="0,153,153" direction="BottomRight" size="14">S222</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">292</position>
+        <text color="0,255,255" direction="Top" size="14">T292</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">298</position>
+        <text color="255,255,255" direction="TopRight" size="18">S298</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">262,307</position>
+        <text color="255,255,255" direction="Bottom" size="18">PRR</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">1,15</position>
+        <text color="0,0,0" direction="Top" size="14">D</text>
+    </component>
+</project>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">217</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">Grb2</text>
+    </component>
+    <component type="domain">
+        <start direction="Hide">1</start>
+        <end direction="Down">58</end>
+        <name color="255,102,51" direction="Center" size="14">SH3</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">60</start>
+        <end direction="Up">152</end>
+        <name color="255,204,204" direction="Center" size="14">SH2</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">156</start>
+        <end direction="Up">215</end>
+        <name color="255,102,51" direction="Center" size="14">SH3</name>
+    </component>
+</project>

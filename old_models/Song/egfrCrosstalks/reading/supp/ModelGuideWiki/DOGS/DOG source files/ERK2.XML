@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">360</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="100" size="32" style="Bold">ERK2</text>
+    </component>
+    <component type="domain">
+        <start direction="Down">25</start>
+        <end direction="Down">313</end>
+        <name color="0,255,255" direction="Center" size="14">S/T kinase</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">259</start>
+        <end direction="Down">277</end>
+        <name color="0,204,204" direction="Up" size="14">DNA binding</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">185</position>
+        <text color="0,153,153" direction="BottomLeft" size="14">T185</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">187</position>
+        <text color="255,51,51" direction="BottomRight" size="14">Y187</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Show">313,326</position>
+        <text color="0,0,0" direction="Top" size="14">CD</text>
+    </component>
+</project>

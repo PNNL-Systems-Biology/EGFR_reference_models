@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="128,128,128" height="30" size="12">1038</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="32" style="Bold">p120 RasGAP</text>
+    </component>
+    <component type="domain">
+        <start direction="Down">170</start>
+        <end direction="Down">253</end>
+        <name color="255,204,204" direction="Center" size="14">SH2</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">273</start>
+        <end direction="Up">331</end>
+        <name color="255,153,102" direction="Center" size="14">SH3</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">340</start>
+        <end direction="Down">423</end>
+        <name color="255,204,204" direction="Center" size="14">SH2</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">466</start>
+        <end direction="Down">570</end>
+        <name color="153,153,255" direction="Center" size="14">PH</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">586</start>
+        <end direction="Up">680</end>
+        <name color="204,204,204" direction="Center" size="14">C2</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">689</start>
+        <end direction="Up">1035</end>
+        <name color="255,255,0" direction="Center" size="14">RasGAP</name>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">615</position>
+        <text color="255,255,255" direction="Top" size="18">Y615</text>
+    </component>
+    <component type="site">
+        <position height="30" line="Hide">460</position>
+        <text color="255,255,255" direction="Top" size="18">Y460</text>
+    </component>
+</project>

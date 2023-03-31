@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="DOG 1.0">
+    <component type="protein">
+        <length color="255,255,255" height="30" size="12">724</length>
+    </component>
+    <component type="note">
+        <text color="0,0,0" direction="Up" height="75" size="24" style="Bold">p85</text>
+    </component>
+    <component type="domain">
+        <start direction="Up">3</start>
+        <end direction="Up">79</end>
+        <name color="255,102,0" direction="Center" size="14">SH3</name>
+    </component>
+    <component type="domain">
+        <start direction="Down">113</start>
+        <end direction="Down">301</end>
+        <name color="255,255,204" direction="Center" size="14">BH/RhoGAP</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">333</start>
+        <end direction="Up">428</end>
+        <name color="255,204,204" direction="Center" size="14">nSH2</name>
+    </component>
+    <component type="domain">
+        <start direction="Hide">428</start>
+        <end direction="Hide">624</end>
+        <name color="255,255,255" direction="Center" size="14">iSH2</name>
+    </component>
+    <component type="domain">
+        <start direction="Up">624</start>
+        <end direction="Up">718</end>
+        <name color="255,204,204" direction="Center" size="14">cSH2</name>
+    </component>
+</project>
