@@ -1,0 +1,85 @@
+// Created by libAntimony v2.8.1
+model *EGFR_module_2_12_21()
+
+  // Compartments and Species:
+  compartment cell, extra, intra;
+  species RE in cell, R in cell, REi in intra, E in extra, Ri in intra;
+  species REp in cell, REpi in intra;
+
+  // Reactions:
+  // EGFR module
+  
+  New_Receptors: => R; Vr*cell; 
+  Receptor_turnover: R => Ri; R*kt*cell;
+  Ligand_binding: L + R -> R_L; (k1*R*L - k_1*R_L)*cell;
+  Receptor_ligand_endo: R_L => R_Li; R_L*ke*cell;
+  Receptor_degrad: Ri => ; Ri*kx*cell;
+  Receptor_complex_degrad: R_Li => ; R_Li*kh*cell;
+  Receptor_phospho: R_L -> pR_L; (k3*R_L - k_3*pR_L)*cell;
+  Receptor_phospho_endo: pR_L => pR_Li ; pR_L*ke*cell;
+  Receptor_phosphocomplex_degrad: pR_Li => ; pR_Li*kh*cell;
+  
+  // Species initializations:
+  // fix EGF
+  var L = 1;
+  L has nM;
+  R = 208;
+  R has nM;
+  R_L = 0;
+  R_L has nM;
+  Ri = 0;
+  Ri has nM;
+  R_Li = 0;
+  R_Li has nM;
+  Rd = 0;
+  Rdi = 0;
+  pR_L = 0;
+  pR_Li = 0;
+ 
+
+  // Compartment initializations:
+  cell = 1;
+  extra = 5000;
+  intra = 1;
+
+  // Variable initializations:
+  k1 = 0.0016;		// Forward receptor-ligand rate constant
+  k1 has per_nMs;
+  k_1 = 0.004;		// Reverse receptor-ligand rate constant
+  k_1 has per_sec;
+  kt = 0.0012;		// Endocytosis of empty receptors
+  kt has per_sec;
+  ke = .0033;		// Endocytosis of activated receptors
+  ke has per_sec;
+  Vr = .242;		// Replenishment of empty receptors
+  Vr has nM_per_sec;
+  kx = 0.006;		// Degradation of empty receptors
+  kx has per_sec;
+  kh = 0.004; // 0.00024;	// Degradation of activated receptors
+  kh has per_sec; 
+  k3 = 0.3;		// 0.067;	// This is the phosphorylation probability
+  k3 has per_sec;
+  k_3 = 0.13;			// Dephosphorylation rate constant
+  k3 has per_sec;
+
+  // Other declarations:
+  var k_1, k_2, k_3;
+  const cell, extra, k1, k2, k3;
+
+  // Unit definitions:
+  unit substance = 1e-9 mole;
+  unit time_unit = second;
+  unit nM = 1e-9 mole / litre;
+  unit per_nM = litre / 1e-9 mole;
+  unit per_sec = 1 / second;
+  unit nM_per_s = 1e-9 mole / (litre * second);
+  unit per_nMs = litre / (1e-9 mole * second);
+
+  // Display Names:
+  substance is "nanomole";
+  time_unit is "seconds";
+  per_sec is "per second";
+  nM_per_s is "nM per sec";
+  per_nMs is "per nM per s";
+  extra is "extracellular space";
+end
