@@ -1,0 +1,85 @@
+// Created by libAntimony v2.8.1
+model *GAREM_module_4_4_23())
+
+  // Compartments and Species:
+  compartment cell, extra, intra;
+  species Garem in cell, pGarem in cell, REp_Garem in cell, pR_L_pGarem in cell, pR_L_Garemi in intra;
+  species pR_L in cell, 
+
+  // Reactions:
+  // Garem module
+  // Input: pR_L
+  // Output pR_L_pGarem
+  
+    // Garem-Shp2 complex formation
+  Garem_receptor_bind: pR_L + Garem -> pR_L_Garem; (k1*pR_L*Garem - k_1*pR_L_Garem)*cell;
+  Garem_phosphorylation: pR_L_Garem => pR_L_pGarem; k2*pR_L_Garem*cell;
+  PhosphoGarem_dissociation: pR_L_pGarem -> pR_L + pGarem; (k_3*pR_L_pGarem - k3*pR_L*pGarem)*cell;
+  Phospho_Garem_dephosphorylation: pGarem => Garem; (V4*pGarem/(Km4 + pGarem))*cell
+  
+    // Shc complex formation
+  Shc_receptor_bind: pR_L + Shc -> pR_L_Shc; (k5*pR_L*Shc - k_5*pR_L_Shc)*cell;
+  Shc_phosphorylation: pR_L_Shc => pR_L_pShc; k6*pR_L_Shc*cell;
+  PhosphoShc_dissociation: pR_L_pShc -> pR_L + pShc; (k_7*pR_L_pShc - k7*pR_L*pShc)*cell;
+  Phospho_Shc_dephosphorylation: pShc => Shc; (V8*pShc/(Km8 + pShc))*cell
+  Shc_complex_endo: pR_L_Shc => pR_L_Shci; pR_L_Shc*kt*cell;
+  Phospho_Shc_complex_endo: pR_L_pShc => pR_L_pShci; pR_L_pShc*kt*cell;
+  Shc_complex_recycle: pR_L_Shci => Shc + pR_Li; pR_L_Shci*krec*intra;
+  Phospho_Shc_complex_recycle: pR_L_pShci => pShc + pR_Li; pR_L_pShci*krec*intra;
+
+  
+  
+  
+  // Species initializations:
+  // fix EGF
+  
+  Garem = ?
+  
+  Shc = 67.3;
+  Shc has nM;
+  pR_L_Shc = 0;
+  pR_L_pShc = 0;
+  pR_L_Shci = 0;
+  pR_L_pShci = 0;
+  pShc = 0;
+ 
+
+  // Compartment initializations:
+  cell = 1;
+  intra = 1;
+
+  // Variable initializations:
+  k5 = 23.4;			// Receptor - Shc recruitment
+  k5 has per_nMs;
+  k_5 = 8167;		// Dissociation of Shc from phospho-EGFR
+  k_5 has per_sec;
+  k6 = 1130;			// Phosphorylation of Shc
+  k6 has per_sec;
+  k7 = 0.000652;			// Receptor-pShc forward rate constant
+  k7 has per_nMs;
+  k_7 = 0.40;			// Receptor-pShc reverse rate constant
+  k_7 has per_sec;
+  k8 = 1.3;	
+  k8 has per_sec;
+  V8 = 200;				// Dephosphorylation of Shc
+  V8 has nM_per_s;
+  Km8 = 100;
+  Km8 has nM;
+
+  // Unit definitions:
+  unit substance = 1e-9 mole;
+  unit time_unit = second;
+  unit nM = 1e-9 mole / litre;
+  unit per_nM = litre / 1e-9 mole;
+  unit per_sec = 1 / second;
+  unit nM_per_s = 1e-9 mole / (litre * second);
+  unit per_nMs = litre / (1e-9 mole * second);
+
+  // Display Names:
+  substance is "nanomole";
+  time_unit is "seconds";
+  per_sec is "per second";
+  nM_per_s is "nM per sec";
+  per_nMs is "per nM per s";
+  extra is "extracellular space";
+end
