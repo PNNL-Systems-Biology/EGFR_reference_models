@@ -1,21 +1,15 @@
 // Created by libAntimony v2.8.1
-model *GAREM_module_4_4_23())
+model *SHC_module_4_4_23()
 
   // Compartments and Species:
   compartment cell, extra, intra;
-  species Garem in cell, pGarem in cell, REp_Garem in cell, pR_L_pGarem in cell, pR_L_Garemi in intra;
+  species Shc in cell, pShc in cell, REp_Shc in cell, pR_L_pShc in cell, pR_L_Shci in intra;
   species pR_L in cell, 
 
   // Reactions:
-  // Garem module
+  // Shc module
   // Input: pR_L
-  // Output pR_L_pGarem
-  
-    // Garem-Shp2 complex formation
-  Garem_receptor_bind: pR_L + Garem -> pR_L_Garem; (k1*pR_L*Garem - k_1*pR_L_Garem)*cell;
-  Garem_phosphorylation: pR_L_Garem => pR_L_pGarem; k2*pR_L_Garem*cell;
-  PhosphoGarem_dissociation: pR_L_pGarem -> pR_L + pGarem; (k_3*pR_L_pGarem - k3*pR_L*pGarem)*cell;
-  Phospho_Garem_dephosphorylation: pGarem => Garem; (V4*pGarem/(Km4 + pGarem))*cell
+  // Output pR_L_pShc
   
     // Shc complex formation
   Shc_receptor_bind: pR_L + Shc -> pR_L_Shc; (k5*pR_L*Shc - k_5*pR_L_Shc)*cell;
@@ -32,9 +26,6 @@ model *GAREM_module_4_4_23())
   
   // Species initializations:
   // fix EGF
-  
-  Garem = ?
-  
   Shc = 67.3;
   Shc has nM;
   pR_L_Shc = 0;
