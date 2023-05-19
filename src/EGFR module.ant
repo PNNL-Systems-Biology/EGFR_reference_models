@@ -1,5 +1,5 @@
 // Created by libAntimony v2.8.1
-model *EGFR_module_2_12_21()
+model *EGFR_module()
 
   // Compartments and Species:
   compartment cell, extra, intra;
@@ -9,19 +9,30 @@ model *EGFR_module_2_12_21()
   // Reactions:
   // EGFR module
   
-  New_Receptors: => R; Vr*cell; 
-  Receptor_turnover: R => Ri; R*kt*cell;
-  Ligand_binding: L + R -> R_L; (k1*R*L - k_1*R_L)*cell;
-  Receptor_ligand_endo: R_L => R_Li; R_L*ke*cell;
-  Receptor_degrad: Ri => ; Ri*kx*cell;
-  Receptor_complex_degrad: R_Li => ; R_Li*kh*cell;
-  Receptor_phospho: R_L -> pR_L; (k3*R_L - k_3*pR_L)*cell;
-  Receptor_phospho_endo: pR_L => pR_Li ; pR_L*ke*cell;
-  Receptor_phosphocomplex_degrad: pR_Li => ; pR_Li*kh*cell;
+  New_Receptors: => R; Vr; 
+  Receptor_turnover: R => Ri; kt * R;
+  Ligand_binding: L + R -> R_L; (k1 * R * L - k_1 * R_L);
+  Receptor_ligand_endo: R_L => R_Li; ke * R_L;
+  Receptor_degrad: Ri => ; kx * Ri;
+  Receptor_complex_degrad: R_Li => ; kh * R_Li;
+  Receptor_phospho: R_L -> pR_L; (k3 * R_L - k_3 * pR_L);
+  Receptor_phospho_endo: pR_L => pR_Li ; ke * pR_L;
+  Receptor_phosphocomplex_degrad: pR_Li => ; kh * pR_Li;
   
+  // Module inputs:
+  // L from shedding module
+
+  // Module outputs:
+  aR := pR_L;
+  aR has nM;
+  aRi := pR_Li;
+  aRi has nM;
+  aaR := pR_L + pR_Li;
+  aaR has nM;
+
   // Species initializations:
   // fix EGF
-  var L = 1;
+  var L = 1; # what does 'var' mean?
   L has nM;
   R = 208;
   R has nM;
