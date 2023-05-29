@@ -1,5 +1,5 @@
 // Created by libAntimony v2.8.1
-model *EGFR_module()
+model EGFR_module()
 
   // Compartments and Species:
   compartment cell, extra, intra;
@@ -74,8 +74,8 @@ model *EGFR_module()
   k3 has per_sec;
 
   // Other declarations:
-  var k_1, k_2, k_3;
-  const cell, extra, k1, k2, k3;
+  // var k_1, k_2, k_3;
+  // const cell, extra, k1, k2, k3;
 
   // Unit definitions:
   unit substance = 1e-9 mole;

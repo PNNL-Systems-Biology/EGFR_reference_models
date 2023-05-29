@@ -1,0 +1,53 @@
+
+model GAREM_module()
+
+    // Compartments and Species:
+    compartment cell, extra, intra;
+    species Garem in cell, pGarem in cell, pR_L_pGarem in cell;
+    species input in cell;
+    species Gab2 in cell, Shp2 in cell;
+    species pR_L in cell;
+
+    // Inputs/Outputs:
+
+    // Garem module
+    // Inputs: input
+    // Output Garem_complex
+
+    // Reactions
+
+    // Garem phosphorylation/dephosphorylation
+    J1: input + Garem => input + pGarem; k1*input*Garem*cell;
+    J2: pGarem => Garem; k2*pGarem*cell;
+
+    // Garem-Grb2 binding
+    J3: pGarem + Grb2 -> pGarem_Grb2; (k3*pGarem*Grb2 - k_3*pGarem_Grb2)*cell;
+
+    // Garem-Grb2-input binding
+    J4: pGarem_Grb2 + input -> pGarem_Grb2_input; (k4*pGarem_Grb2*input - k_4*pGarem_Grb2_input)*cell;
+
+    // Garem_complex
+    J5: pGarem_Grb2_input + Shp2 -> Garem_complex; (k5*pGarem_Grb2_input*Shp2 - k_5*Garem_complex)*cell;
+
+    // Species initializations:
+
+    Garem = 1
+    Gab2 = 1
+    Shp2 = 1
+
+    // Compartment initializations:
+    cell = 1;
+    extra = 1;
+    intra = 1;
+
+    // Variable initializations:
+    k1 = 1;
+    k2 = 1;
+    k3 = 1;
+    k_3 = 1;
+    k4 = 1;
+    k_4 = 1;
+    k5 = 1;
+    k_5 = 1;
+
+end
