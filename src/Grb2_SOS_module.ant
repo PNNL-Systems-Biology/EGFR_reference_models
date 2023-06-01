@@ -1,5 +1,5 @@
 // model GrbSos(Rp)
-model *egfr_grb_sos_ras()
+model *Grb2_SOS_module()
 
 // Compartments and Species:
 compartment cell, extra, intra;
