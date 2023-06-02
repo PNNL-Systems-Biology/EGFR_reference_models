@@ -1,4 +1,11 @@
+
+import "EGFR_module.ant"
+import "Garem_module.ant"
+
 model EGFR_Reference_Model()
 
+    EGFR: EGFR_module();
+    Garem: Garem_module();
+    Garem.input is EGFR.pR_L
 
 end
