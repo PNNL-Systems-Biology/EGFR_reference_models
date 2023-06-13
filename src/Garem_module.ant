@@ -10,13 +10,13 @@ model Garem_module()
     // Inputs/Outputs:
 
     // Garem module
-    // Inputs: input
+    // Inputs: aRtot
     // Output Garem_complex
 
     // Reactions
 
     // Garem phosphorylation/dephosphorylation
-    J1: input + Garem => input + pGarem; k1*input*Garem*cell;
+    J1: Garem => pGarem; k1*aRtot*Garem*cell;
     J2: pGarem => Garem; k2*pGarem*cell;
 
     // Garem-Grb2 binding
