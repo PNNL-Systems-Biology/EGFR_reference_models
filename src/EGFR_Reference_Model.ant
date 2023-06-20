@@ -6,6 +6,6 @@ model EGFR_Reference_Model()
 
     EGFR: EGFR_module();
     Garem: Garem_module();
-    Garem.input is EGFR.pR_L
+    Garem.input is EGFR.aRtot
 
 end
