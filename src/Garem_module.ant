@@ -49,5 +49,4 @@ model Garem_module()
     k5 = 1;
     k_5 = 1;
 
->>>>>>> main
 end

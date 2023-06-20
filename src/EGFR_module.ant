@@ -23,15 +23,15 @@ model EGFR_module()
   // L from shedding module
 
   // regulation from Erk module
-  pErk
+  // pErk
 
   // Module outputs:
   aR := pR_L;
   aR has nM;
   aRi := pR_Li;
   aRi has nM;
-  aRtot := pR_L + pR_Li + ppR_L;
-  aRtot has nM;
+  // aRtot := pR_L + pR_Li + ppR_L;
+  // aRtot has nM;
 
   // Species initializations:
   // fix EGF
