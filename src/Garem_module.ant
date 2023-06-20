@@ -5,7 +5,7 @@ model Garem_module()
     compartment cell, extra, intra;
     species Garem in cell, pGarem in cell;
     species input in cell;
-    species Gab2 in cell, Shp2 in cell;
+    species Grb2 in cell, Shp2 in cell;
 
     // Inputs/Outputs:
 
@@ -31,7 +31,7 @@ model Garem_module()
     // Species initializations:
 
     Garem = 1
-    Gab2 = 1
+    Grb2 = 1
     Shp2 = 1
 
     // Compartment initializations:
