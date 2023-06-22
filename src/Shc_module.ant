@@ -3,32 +3,32 @@ model Shc_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
-    species Shc in cell, pShc in cell, REp_Shc in cell, pR_L_pShc in cell, pR_L_Shci in intra;
+    species Shc in cell, pShc in cell, REp_Shc in cell, Shc_complex in cell, pR_L_Shci in intra;
     species input in cell;
 
     // Reactions:
     // Shc module
     // Input: input
-    // Output pR_L_pShc
+    // Output Shc_complex
 
     // Shc complex formation
     Shc_receptor_bind: input + Shc -> pR_L_Shc; (k5*input*Shc - k_5*pR_L_Shc)*cell;
-    Shc_phosphorylation: pR_L_Shc => pR_L_pShc; k6*pR_L_Shc*cell;
-    PhosphoShc_dissociation: pR_L_pShc -> input + pShc; (k_7*pR_L_pShc - k7*input*pShc)*cell;
+    Shc_phosphorylation: pR_L_Shc => Shc_complex; k6*pR_L_Shc*cell;
+    PhosphoShc_dissociation: Shc_complex -> input + pShc; (k_7*Shc_complex - k7*input*pShc)*cell;
     Phospho_Shc_dephosphorylation: pShc => Shc; (V8*pShc/(Km8 + pShc))*cell
     Shc_complex_endo: pR_L_Shc => pR_L_Shci; pR_L_Shc*kt*cell;
-    Phospho_Shc_complex_endo: pR_L_pShc => pR_L_pShci; pR_L_pShc*kt*cell;
+    Phospho_Shc_complex_endo: Shc_complex => Shc_complexi; Shc_complex*kt*cell;
     Shc_complex_recycle: pR_L_Shci => Shc + pR_Li; pR_L_Shci*krec*intra;
-    Phospho_Shc_complex_recycle: pR_L_pShci => pShc + pR_Li; pR_L_pShci*krec*intra;
+    Phospho_Shc_complex_recycle: Shc_complexi => pShc + pR_Li; Shc_complexi*krec*intra;
 
     // Species initializations:
     // fix EGF
     Shc = 67.3;
     Shc has nM;
     pR_L_Shc = 0;
-    pR_L_pShc = 0;
+    Shc_complex = 0;
     pR_L_Shci = 0;
-    pR_L_pShci = 0;
+    Shc_complexi = 0;
     pShc = 0;
 
 
