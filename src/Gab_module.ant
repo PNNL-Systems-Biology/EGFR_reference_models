@@ -3,7 +3,7 @@ model Gab_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
-    species Gab in cell, pGab in cell;
+    species Gab in cell, p__Gab, pp_Gab, p_pGab, pppGab in cell;
     species input in cell;
     species Grb2 in cell, Shp2 in cell;
 
