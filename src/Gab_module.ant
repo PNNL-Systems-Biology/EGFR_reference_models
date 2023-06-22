@@ -3,7 +3,7 @@ model Gab_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
-    species Gab in cell, p__Gab, pp_Gab, p_pGab, pppGab in cell;
+    species Gab in cell, p__Gab in cell;
     species input in cell;
     species Grb2 in cell, Shp2 in cell;
 
@@ -15,7 +15,7 @@ model Gab_module()
     // Reactions
 
     // Gab site 1 phosphorylation/dephosphorylation
-    J1: input + Gab => input + p__Gab; k1*input*Gab*cell;
+    J1: Gab => p__Gab; k1*input*Gab*cell;
     J2: p__Gab => Gab; k2*p__Gab*cell;
 
     // Erk mediated version of site 1 phosphorylation (change Erk to input_2 if implemented)

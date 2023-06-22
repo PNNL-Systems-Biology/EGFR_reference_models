@@ -4,7 +4,7 @@ model Grb2_SOS1_module()
     // Compartments and Species:
     compartment cell, extra, intra;
     species input_1, input_2, input_3, input_4 in cell;
-    species Grb2, SOS1, SOS1p, GS1 in cell;
+    species Grb2, SOS1, GS1 in cell;
     species RasGAP, dRas, tRas, bRasGAP, RasGAP in cell;
 
     // Inputs/Outputs
@@ -39,7 +39,6 @@ model Grb2_SOS1_module()
     GS2 = 3.98;		// updated 3-20
     RasGAP = 25.2;
     dRas = 140; // inactivated Ras
-    Erk = 150;
 
     // Species initializations:
     pR = 0;

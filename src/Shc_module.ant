@@ -3,7 +3,7 @@ model Shc_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
-    species Shc in cell, pShc in cell, REp_Shc in cell, Shc_complex in cell, pR_L_Shci in intra;
+    species Shc in cell, pShc in cell, Shc_complex in cell, pR_L_Shci in intra;
     species input in cell;
 
     // Reactions:

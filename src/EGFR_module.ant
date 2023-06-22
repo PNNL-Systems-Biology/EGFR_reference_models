@@ -3,8 +3,7 @@ model EGFR_module()
 
   // Compartments and Species:
   compartment cell, extra, intra;
-  species RE in cell, R in cell, REi in intra, E in extra, Ri in intra;
-  species REp in cell, REpi in intra;
+  species R in cell, Ri in intra;
 
   // Reactions:
   // EGFR module
