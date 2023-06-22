@@ -1,0 +1,75 @@
+// Created by libAntimony v2.8.1
+model Gab_module()
+
+    // Compartments and Species:
+    compartment cell, extra, intra;
+    species Gab in cell, pGab in cell;
+    species input in cell;
+    species Grb2 in cell, Shp2 in cell;
+
+    // Inputs/Outputs:
+
+    // Garem module
+    // Inputs: input
+    // Output Gab_complex
+
+    // Reactions
+
+    // Gab site 1 phosphorylation/dephosphorylation
+    J1: input + Gab => input + p__Gab; k1*input*Gab*cell;
+    J2: p__Gab => Gab; k2*p__Gab*cell;
+
+    // Erk mediated version of site 1 phosphorylation (change Erk to input_2 if implemented)
+    // J1: Erk + Gab => Erk + p__Gab; k1*Erk*Gab*cell;
+
+    // p__Gab-Grb2 binding
+    J3: p__Gab + Grb2 -> p__Gab_Grb2; (k3*p__Gab*Grb2 - k_3*p__Gab_Grb2)*cell;
+
+    // p__Gab-Grb2-input binding
+    J4: p__Gab_Grb2 + input -> p__Gab_Grb2_input; (k4*p__Gab_Grb2*input - k_4*p__Gab_Grb2_input)*cell;
+
+    // site 2 and 3 phosphorylation
+    J5: p__Gab_Grb2_input -> pp_Gab_Grb2_input; k5*p__Gab_Grb2_input;
+    J6: p__Gab_Grb2_input -> p_pGab_Grb2_input; k6*p__Gab_Grb2_input;
+    J7: pp_Gab_Grb2_input -> pppGab_Grb2_input; k7*pp_Gab_Grb2_input;
+    J8: p_pGab_Grb2_input -> pppGab_Grb2_input; k8*p_pGab_Grb2_input;
+
+    // site 2 and 3 dephosphorylation by Shp2
+    J9: p_pGab_Grb2_input -> p__Gab_Grb2_input; k9*Shp2*p_pGab_Grb2_input;
+    J10: pp_Gab_Grb2_input -> p__Gab_Grb2_input; k10*Shp2*pp_Gab_Grb2_input;
+    J11: pppGab_Grb2_input -> p_pGab_Grb2_input; k11*Shp2*pppGab_Grb2_input;
+    J12: pppGab_Grb2_input -> pp_Gab_Grb2_input; k12*Shp2*pppGab_Grb2_input;
+
+    // Gab_complex
+    J13: pppGab_Grb2_input + Shp2 -> Gab_complex; (k13*pppGab_Grb2_input*Shp2 - k_13*Gab_complex)*cell;
+
+    // Species initializations:
+
+    Gab = 1
+    Grb2 = 1
+    Shp2 = 1
+
+    // Compartment initializations:
+    cell = 1;
+    extra = 1;
+    intra = 1;
+
+    // Variable initializations:
+    k1 = 1;
+    k2 = 1;
+    k3 = 1;
+    k_3 = 1;
+    k4 = 1;
+    k_4 = 1;
+    k5 = 1;
+    k6 = 1;
+    k7 = 1;
+    k8 = 1;
+    k9 = 1;
+    k10 = 1;
+    k11 = 1;
+    k12 = 1;
+    k13 = 1;
+    k_13 = 1;
+
+end
