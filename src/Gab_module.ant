@@ -15,11 +15,12 @@ model Gab_module()
     // Reactions
 
     // Gab site 1 phosphorylation/dephosphorylation
-    J1: Gab => p__Gab; k1*input*Gab*cell;
-    J2: p__Gab => Gab; k2*p__Gab*cell;
+    J1: Gab => p__Gab; ((kcat1*input*Gab)/(Km1 + Gab))*cell;
+    J2: p__Gab => Gab; ((V2*p__Gab)/(Km2 + p__Gab))*cell;
 
-    // Erk mediated version of site 1 phosphorylation (change Erk to input_2 if implemented)
-    // J1: Erk + Gab => Erk + p__Gab; k1*Erk*Gab*cell;
+    // Erk mediated version of site 1 phosphorylation
+    // (Will need aditional detail to be implemented, including another input)
+    // J1: Gab => p__Gab; ((kcat1*Erk*Gab)/(Km1 + Gab))*cell;
 
     // p__Gab-Grb2 binding
     J3: p__Gab + Grb2 -> p__Gab_Grb2; (k3*p__Gab*Grb2 - k_3*p__Gab_Grb2)*cell;
@@ -34,13 +35,14 @@ model Gab_module()
     J8: p_pGab_Grb2_input -> pppGab_Grb2_input; k8*p_pGab_Grb2_input;
 
     // site 2 and 3 dephosphorylation by Shp2
-    J9: p_pGab_Grb2_input -> p__Gab_Grb2_input; k9*Shp2*p_pGab_Grb2_input;
-    J10: pp_Gab_Grb2_input -> p__Gab_Grb2_input; k10*Shp2*pp_Gab_Grb2_input;
-    J11: pppGab_Grb2_input -> p_pGab_Grb2_input; k11*Shp2*pppGab_Grb2_input;
-    J12: pppGab_Grb2_input -> pp_Gab_Grb2_input; k12*Shp2*pppGab_Grb2_input;
+    J9: p_pGab_Grb2_input -> p__Gab_Grb2_input; ((kcat9*Shp2*p_pGab_Grb2_input)/(Km9 + p_pGab_Grb2_input))*cell;
+    J10: pp_Gab_Grb2_input -> p__Gab_Grb2_input; ((kcat10*Shp2*pp_Gab_Grb2_input)/(Km10 + pp_Gab_Grb2_input))*cell;
+    J11: pppGab_Grb2_input -> p_pGab_Grb2_input; ((kcat11*Shp2*pppGab_Grb2_input)/(Km11 + pppGab_Grb2_input))*cell;
+    J12: pppGab_Grb2_input -> pp_Gab_Grb2_input; ((kcat12*Shp2*pppGab_Grb2_input)/(Km12 + pppGab_Grb2_input))*cell;
 
-    // Gab_complex
+    // Gab-complex
     J13: pppGab_Grb2_input + Shp2 -> Gab_complex; (k13*pppGab_Grb2_input*Shp2 - k_13*Gab_complex)*cell;
+
 
     // Species initializations:
 
@@ -54,7 +56,10 @@ model Gab_module()
     intra = 1;
 
     // Variable initializations:
-    k1 = 1;
+    kcat1 = 1;
+    Km1 = 1;
+    V2 = 1;
+    Km2 = 1;
     k2 = 1;
     k3 = 1;
     k_3 = 1;
@@ -70,5 +75,13 @@ model Gab_module()
     k12 = 1;
     k13 = 1;
     k_13 = 1;
+    kcat9 = 1;
+    Km9 = 1;
+    kcat10 = 1;
+    Km10 = 1;
+    kcat11 = 1;
+    Km11 = 1;
+    kcat12 = 1;
+    Km12 = 1;
 
 end
