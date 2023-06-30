@@ -4,7 +4,7 @@ model Garem_module()
     // Compartments and Species:
     compartment cell, extra, intra;
     species Garem in cell, pGarem in cell;
-    species input in cell;
+    species aRtot in cell;
     species Grb2 in cell, Shp2 in cell;
 
     // Inputs/Outputs:
@@ -15,18 +15,20 @@ model Garem_module()
 
     // Reactions
 
-    // Garem phosphorylation/dephosphorylation
-    J1: Garem => pGarem; ((kcat1*input*Garem)/(Km1 + Garem))*cell;
-    J2: pGarem => Garem; ((V2*pGarem)/(Km2 + pGarem))*cell;
 
     // Garem-Grb2 binding
-    J3: pGarem + Grb2 -> pGarem_Grb2; (k3*pGarem*Grb2 - k_3*pGarem_Grb2)*cell;
+    J1: Garem + Grb2 -> Grb2_Garem; k3*Garem*Grb2 - k_3*Garem_Grb2;
 
-    // Garem-Grb2-input binding
-    J4: pGarem_Grb2 + input -> pGarem_Grb2_input; (k4*pGarem_Grb2*input - k_4*pGarem_Grb2_input)*cell;
+    // Garem phosphorylation/dephosphorylation
+    J2: $aRtot + Garem_Grb2 => $aRtot + pGarem_Grb2; (kcat1*aRtot*Garem)/(Km1 + Garem);
+    J3: pGarem => Garem; (V2*pGarem)/(Km2 + pGarem);
 
+    // Garem-Grb2-aRtot binding
+    J4: pGarem_Grb2 + aRtot -> pGarem_Grb2_aRtot; k4*pGarem_Grb2*aRtot - k_4*pGarem_Grb2_aRtot;
+
+    // Song: These two reactions seems not needed, why there is not reaction about Shp2 function?
     // Garem_complex
-    J5: pGarem_Grb2_input + Shp2 -> Garem_complex; (k5*pGarem_Grb2_input*Shp2 - k_5*Garem_complex)*cell;
+    J5: pGarem_Grb2_aRtot + Shp2 -> Garem_complex; k5*pGarem_Grb2_aRtot*Shp2 - k_5*Garem_complex;
 
     // Species initializations:
 

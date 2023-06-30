@@ -10,11 +10,11 @@ model EGFR_module()
   
   New_Receptors: => R; Vr; 
   Receptor_turnover: R => Ri; kt * R;
-  Ligand_binding: L + R -> R_L; (k1 * R * L - k_1 * R_L);
+  Ligand_binding: L + R -> R_L; k1 * R * L - k_1 * R_L;
   Receptor_ligand_endo: R_L => R_Li; ke * R_L;
   Receptor_degrad: Ri => ; kx * Ri;
   Receptor_complex_degrad: R_Li => ; kh * R_Li;
-  Receptor_phospho: R_L -> pR_L; (k3 * R_L - k_3 * pR_L);
+  Receptor_phospho: R_L -> pR_L; k3 * R_L - k_3 * pR_L;
   Receptor_phospho_endo: pR_L => pR_Li ; ke * pR_L;
   Receptor_phosphocomplex_degrad: pR_Li => ; kh * pR_Li;
   
@@ -89,10 +89,10 @@ model EGFR_module()
   unit per_nMs = litre / (1e-9 mole * second);
 
   // Display Names:
-  substance is "nanomole";
-  time_unit is "seconds";
-  per_sec is "per second";
-  nM_per_s is "nM per sec";
-  per_nMs is "per nM per s";
+  substance is "nmole";
+  time_unit is "s";
+  per_sec is "s-1";
+  nM_per_s is "nM/s";
+  per_nMs is "nM-1 s-1";
   extra is "extracellular space";
 end
