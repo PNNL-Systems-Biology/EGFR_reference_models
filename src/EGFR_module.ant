@@ -3,8 +3,7 @@ model EGFR_module()
 
   // Compartments and Species:
   compartment cell, extra, intra;
-  species RE in cell, R in cell, REi in intra, E in extra, Ri in intra;
-  species REp in cell, REpi in intra;
+  species R in cell, Ri in intra;
 
   // Reactions:
   // EGFR module
@@ -30,7 +29,7 @@ model EGFR_module()
   aR has nM;
   aRi := pR_Li;
   aRi has nM;
-  aRtot := pR_L + pR_Li;
+  aRtot := pR_L + pR_Li  // + ppR_L;
   aRtot has nM;
 
   // Species initializations:

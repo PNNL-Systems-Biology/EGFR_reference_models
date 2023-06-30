@@ -5,7 +5,7 @@ model Garem_module()
     compartment cell, extra, intra;
     species Garem in cell, pGarem in cell;
     species input in cell;
-    species Gab2 in cell, Shp2 in cell;
+    species Grb2 in cell, Shp2 in cell;
 
     // Inputs/Outputs:
 
@@ -16,8 +16,8 @@ model Garem_module()
     // Reactions
 
     // Garem phosphorylation/dephosphorylation
-    J1: Garem => pGarem; k1*aRtot*Garem*cell;
-    J2: pGarem => Garem; k2*pGarem*cell;
+    J1: Garem => pGarem; ((kcat1*input*Garem)/(Km1 + Garem))*cell;
+    J2: pGarem => Garem; ((V2*pGarem)/(Km2 + pGarem))*cell;
 
     // Garem-Grb2 binding
     J3: pGarem + Grb2 -> pGarem_Grb2; (k3*pGarem*Grb2 - k_3*pGarem_Grb2)*cell;
@@ -31,7 +31,7 @@ model Garem_module()
     // Species initializations:
 
     Garem = 1
-    Gab2 = 1
+    Grb2 = 1
     Shp2 = 1
 
     // Compartment initializations:
@@ -40,8 +40,10 @@ model Garem_module()
     intra = 1;
 
     // Variable initializations:
-    k1 = 1;
-    k2 = 1;
+    kcat1 = 1;
+    Km1 = 1;
+    V2 = 1;
+    Km2 = 1;
     k3 = 1;
     k_3 = 1;
     k4 = 1;
@@ -49,5 +51,4 @@ model Garem_module()
     k5 = 1;
     k_5 = 1;
 
->>>>>>> main
 end

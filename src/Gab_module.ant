@@ -1,0 +1,119 @@
+// Created by libAntimony v2.8.1
+model Gab_module()
+
+    // Compartments and Species:
+    compartment cell, extra, intra;
+    // species Gab in cell, p__Gab in cell;
+    species Gab in cell, pGab in cell;
+    species input in cell;
+    species Grb2 in cell, Shp2 in cell;
+
+    // Inputs/Outputs:
+
+    // Inputs: input
+    // Output Gab_complex
+
+    // Reactions
+
+    // Gab site 1 phosphorylation/dephosphorylation
+    // J1: Gab => p__Gab; ((kcat1*input*Gab)/(Km1 + Gab))*cell;
+    // J2: p__Gab => Gab; ((V2*p__Gab)/(Km2 + p__Gab))*cell;
+
+    // Erk mediated version of site 1 phosphorylation
+    // (Will need aditional detail to be implemented, including another input)
+    // J1: Gab => p__Gab; ((kcat1*Erk*Gab)/(Km1 + Gab))*cell;
+
+    // p__Gab-Grb2 binding
+    // 3: p__Gab + Grb2 -> p__Gab_Grb2; (k3*p__Gab*Grb2 - k_3*p__Gab_Grb2)*cell;
+
+    // p__Gab-Grb2-input binding
+    // J4: p__Gab_Grb2 + input -> p__Gab_Grb2_input; (k4*p__Gab_Grb2*input - k_4*p__Gab_Grb2_input)*cell;
+
+    // site 2 and 3 phosphorylation
+    // J5: p__Gab_Grb2_input -> pp_Gab_Grb2_input; k5*p__Gab_Grb2_input;
+    // J6: p__Gab_Grb2_input -> p_pGab_Grb2_input; k6*p__Gab_Grb2_input;
+    // J7: pp_Gab_Grb2_input -> pppGab_Grb2_input; k7*pp_Gab_Grb2_input;
+    // J8: p_pGab_Grb2_input -> pppGab_Grb2_input; k8*p_pGab_Grb2_input;
+
+    // site 2 and 3 dephosphorylation by Shp2
+    // J9: p_pGab_Grb2_input -> p__Gab_Grb2_input; ((kcat9*Shp2*p_pGab_Grb2_input)/(Km9 + p_pGab_Grb2_input))*cell;
+    // J10: pp_Gab_Grb2_input -> p__Gab_Grb2_input; ((kcat10*Shp2*pp_Gab_Grb2_input)/(Km10 + pp_Gab_Grb2_input))*cell;
+    // J11: pppGab_Grb2_input -> p_pGab_Grb2_input; ((kcat11*Shp2*pppGab_Grb2_input)/(Km11 + pppGab_Grb2_input))*cell;
+    // J12: pppGab_Grb2_input -> pp_Gab_Grb2_input; ((kcat12*Shp2*pppGab_Grb2_input)/(Km12 + pppGab_Grb2_input))*cell;
+
+    // #####################################
+    // (unordered version)
+
+    // Gab site 1 phosphorylation/dephosphorylation
+    J1: Gab => pGab; ((kcat1*input*Gab)/(Km1 + Gab))*cell;
+    J2: pGab => Gab; ((V2*pGab)/(Km2 + pGab))*cell;
+
+    // Erk mediated version of site 1 phosphorylation
+    // (Will need aditional detail to be implemented, including another input)
+    // J1: Gab => pGab; ((kcat1*Erk*Gab)/(Km1 + Gab))*cell;
+
+    // pGab-Grb2 binding
+    J3: pGab + Grb2 -> pGab_Grb2; (k3*pGab*Grb2 - k_3*pGab_Grb2)*cell;
+
+    // pGab-Grb2-input binding
+    J4: pGab_Grb2 + input -> pGab_Grb2_input; (k4*pGab_Grb2*input - k_4*pGab_Grb2_input)*cell;
+
+    // site 2 and 3 phosphorylation
+    J5: pGab_Grb2_input -> ppGab_Grb2_input; k5*pGab_Grb2_input;
+    J6: ppGab_Grb2_input -> pppGab_Grb2_input; k6*ppGab_Grb2_input;  // for combined 2 and 3 site comment this out
+
+    // site 2 and 3 dephosphorylation by Shp2
+    J9: ppGab_Grb2_input -> pGab_Grb2_input; ((kcat9*Shp2*ppGab_Grb2_input)/(Km9 + ppGab_Grb2_input))*cell;
+    J10: pppGab_Grb2_input -> ppGab_Grb2_input; ((kcat10*Shp2*pppGab_Grb2_input)/(Km10 + pppGab_Grb2_input))*cell;  // for combined 2 and 3 site comment this out
+
+    // #####################################
+
+    // Gab-complex
+    J13: pppGab_Grb2_input + Shp2 -> Gab_complex; (k13*pppGab_Grb2_input*Shp2 - k_13*Gab_complex)*cell;
+
+    // Gab-complex (combined version)
+    // J13: ppGab_Grb2_input + Shp2 -> Gab_complex; (k13*ppGab_Grb2_input*Shp2 - k_13*Gab_complex)*cell;
+
+
+
+
+    // Species initializations:
+
+    Gab = 1
+    Grb2 = 1
+    Shp2 = 1
+
+    // Compartment initializations:
+    cell = 1;
+    extra = 1;
+    intra = 1;
+
+    // Variable initializations:
+    kcat1 = 1;
+    Km1 = 1;
+    V2 = 1;
+    Km2 = 1;
+    k2 = 1;
+    k3 = 1;
+    k_3 = 1;
+    k4 = 1;
+    k_4 = 1;
+    k5 = 1;
+    k6 = 1;
+    // k7 = 1;
+    k8 = 1;
+    k9 = 1;
+    k10 = 1;
+    k12 = 1;
+    k13 = 1;
+    k_13 = 1;
+    kcat9 = 1;
+    Km9 = 1;
+    kcat10 = 1;
+    Km10 = 1;
+    // kcat11 = 1;
+    // Km11 = 1;
+    // kcat12 = 1;
+    // Km12 = 1;
+
+end

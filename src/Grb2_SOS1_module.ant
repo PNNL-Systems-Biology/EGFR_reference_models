@@ -1,0 +1,89 @@
+// model GrbSos(Rp)
+model Grb2_SOS1_module()
+
+    // Compartments and Species:
+    compartment cell, extra, intra;
+    species input_1, input_2, input_3, input_4 in cell;
+    species Grb2, SOS1, GS1 in cell;
+    species RasGAP, dRas, tRas, bRasGAP, RasGAP in cell;
+
+    // Inputs/Outputs
+
+    // Inputs: input_1 (pR) input_2 input_3 input_4
+    // Output: tRas
+
+    // Reactions
+
+    // aggregation of inputs
+    input := input_1 + input_2 + input_3 + input_4
+
+    // Grb2-Sos complex formation
+    Grb2_Sos1_formation: Grb2 + SOS1 -> GS1; (kfGrbSos1*Grb2*SOS1 - kbGrbSos1*GS1);
+
+    // Grb2-Sos-membrane complex formation
+    input_GS1_binding: input + GS1 -> input_GS1; (kfinputGs1*input*GS1 - kbinputGs1*input_GS1);
+
+    // RasGap complex formation
+    pR_RasGap_formation: input_1 + RasGAP -> input_1_RasGAP; (kfpRGap*input_1*RasGAP - kbpRGap*input_1_RasGAP);
+
+    // Ras activation
+    // should this be a separate module?
+    Ras_activation: dRas => tRas; (ktRas*dRas*input_GS1)/(KmRasd + dRas);
+    Ras_deactivation: tRas => dRas; (kdRas*tRas*(bRasGAP+input_1_RasGAP)/(KmRast + tRas));
+
+
+    // Pathway protein abndances
+    Grb2 = 37.11;		// updated 3-20
+    SOS1 = 0.07;		// updated 3-20
+    GS1 = 3.98;		// updated 3-20
+    GS2 = 3.98;		// updated 3-20
+    RasGAP = 25.2;
+    dRas = 140; // inactivated Ras
+
+    // Species initializations:
+    pR = 0;
+    SOS1p = 0;
+    pR_GS2 = 0;
+    bRasGAP = 2e-3;
+    ppErk = 0;
+    tRas = 0; 	// activated Ras
+    SOS1_ppErk = 0;
+
+    // Compartment initializations:
+    cell = 1;
+    extra = 5000;
+    intra = 1;
+
+    // Variables:
+    kfGrbSos1 = 9.45E-6;
+    kfGrbSos1 has per_nMs
+    kbGrbSos1 = 0.0138;
+    kbGrbSos1 has per_sec;
+    kfpRGap = 8.26e-6;
+    kfpRGap has per_nMs;
+    kbpRGap = 10;
+    kbpRGap has per_sec;
+    ktRas = 30.4;
+    ktRas has per_sec;
+    KmRasd = 50;
+    KmRasd has nM;
+    kdRas = 49900;
+    kdRas has per_sec;
+    KmRast = 50;
+    KmRast has nM;
+
+    kfinputGs1 = 0.144;
+    kfinputGs1 has per_nMs;
+    kbinputGs1 = 0.5;
+    kbinputGs1 has per_sec;
+
+    // Unit definitions:
+    unit substance = 1e-9 mole;
+    unit time_unit = second;
+    unit nM = 1e-9 mole / litre;
+    unit per_nM = litre / 1e-9 mole;
+    unit per_sec = 1 / second;
+    unit nM_per_sec = 1e-9 mole / (litre * second);
+    unit per_nMs = litre / (1e-9 mole * second);
+
+end
