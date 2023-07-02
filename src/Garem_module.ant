@@ -16,19 +16,21 @@ model Garem_module()
     // Reactions
 
 
-    // Garem-Grb2 binding
-    J1: Garem + Grb2 -> Grb2_Garem; k3*Garem*Grb2 - k_3*Garem_Grb2;
+    // Grb2_Garem complex formation
+    J1: Garem + Grb2 -> Grb2_Garem; k1*Garem*Grb2 - k_1*Grb2_Garem;
 
-    // Garem phosphorylation/dephosphorylation
-    J2: $aRtot + Garem_Grb2 => $aRtot + pGarem_Grb2; (kcat1*aRtot*Garem)/(Km1 + Garem);
-    J3: pGarem => Garem; (V2*pGarem)/(Km2 + pGarem);
+    // Grb2_Garem phosphorylation/dephosphorylation
+    J2: $aRtot + Grb2_Garem => $aRtot + Grb2_pGarem; (kcat2*aRtot*Grb2_Garem)/(Km2 + Grb2_Garem);
+    J3: Grb2_pGarem => Grb2_Garem; (V3*Grb2_pGarem)/(Km3 + Grb2_pGarem);
 
-    // Garem-Grb2-aRtot binding
-    J4: pGarem_Grb2 + aRtot -> pGarem_Grb2_aRtot; k4*pGarem_Grb2*aRtot - k_4*pGarem_Grb2_aRtot;
+    J4: $aRtot + Grb2_pGarem => $aRtot + Grb2_ppGarem; (kcat4*aRtot*Grb2_Garem)/(Km4 + Grb2_Garem);
+    J5: Grb2_ppGarem => Grb2_pGarem; (V5*Grb2_pGarem)/(Km5 + Grb2_pGarem);
 
-    // Song: These two reactions seems not needed, why there is not reaction about Shp2 function?
-    // Garem_complex
-    J5: pGarem_Grb2_aRtot + Shp2 -> Garem_complex; k5*pGarem_Grb2_aRtot*Shp2 - k_5*Garem_complex;
+    // Grb2_pGarem_Shp2 complex formation 
+    J6: Grb2_ppGarem + Shp2 -> Grb2_ppGarem_Shp2; k6*Grb2_ppGarem*Shp2 - k_6*Grb2_ppGarem_Shp2;
+
+    // Grb2_pGarem_Shp2 phosphorylation/dephosphorylation
+    J7: Grb2_ppGarem_Shp2 -> Grb2_ppGarem_pShp2; k7*Grb2_ppGarem_Shp2 - k_7*Grb2_ppGarem_pShp2;
 
     // Species initializations:
 
@@ -42,15 +44,19 @@ model Garem_module()
     intra = 1;
 
     // Variable initializations:
-    kcat1 = 1;
-    Km1 = 1;
-    V2 = 1;
+    k1 = 0.1;
+    k_1 = 1;
+    kcat2 = 10;
     Km2 = 1;
-    k3 = 1;
-    k_3 = 1;
-    k4 = 1;
-    k_4 = 1;
-    k5 = 1;
-    k_5 = 1;
+    V3 = 0.1;
+    Km3 = 1;
+    kcat4 = kcat2;
+    Km4 = Km2;
+    V5 = V3;
+    Km5 = Km3;
+    k6 = 0.1;
+    k_6 = 1;
+    k7 = 10;
+    k_7 = 1;
 
 end
