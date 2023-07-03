@@ -20,20 +20,20 @@ model Garem_module()
 
 
     // Grb2_Garem complex formation
-    J1: Garem + Grb2 -> Grb2_Garem; k1*Garem*Grb2 - k_1*Grb2_Garem;
+    J1: Garem + Grb2 -> Grb2_Garem; k1 * Garem * Grb2 - k_1 * Grb2_Garem;
 
     // Grb2_Garem phosphorylation/dephosphorylation
-    J2: $aRtot + Grb2_Garem => $aRtot + Grb2_pGarem; (kcat2*aRtot*Grb2_Garem)/(Km2 + Grb2_Garem);
-    J3: Grb2_pGarem => Grb2_Garem; (V3*Grb2_pGarem)/(Km3 + Grb2_pGarem);
+    J2: $aRtot + Grb2_Garem => $aRtot + Grb2_pGarem; (kcat2 * aRtot * Grb2_Garem)/(Km2 + Grb2_Garem);
+    J3: Grb2_pGarem => Grb2_Garem; (V3 * Grb2_pGarem)/(Km3 + Grb2_pGarem);
 
-    J4: $aRtot + Grb2_pGarem => $aRtot + Grb2_ppGarem; (kcat4*aRtot*Grb2_Garem)/(Km4 + Grb2_Garem);
-    J5: Grb2_ppGarem => Grb2_pGarem; (V5*Grb2_pGarem)/(Km5 + Grb2_pGarem);
+    J4: $aRtot + Grb2_pGarem => $aRtot + Grb2_ppGarem; (kcat4 * aRtot * Grb2_Garem)/(Km4 + Grb2_Garem);
+    J5: Grb2_ppGarem => Grb2_pGarem; (V5 * Grb2_pGarem)/(Km5 + Grb2_pGarem);
 
     // Grb2_pGarem_Shp2 complex formation 
-    J6: Grb2_ppGarem + Shp2 -> Grb2_ppGarem_Shp2; k6*Grb2_ppGarem*Shp2 - k_6*Grb2_ppGarem_Shp2;
+    J6: Grb2_ppGarem + Shp2 -> Grb2_ppGarem_Shp2; k6 * Grb2_ppGarem * Shp2 - k_6 * Grb2_ppGarem_Shp2;
 
     // Grb2_pGarem_Shp2 phosphorylation/dephosphorylation
-    J7: Grb2_ppGarem_Shp2 -> Grb2_ppGarem_pShp2; k7*Grb2_ppGarem_Shp2 - k_7*Grb2_ppGarem_pShp2;
+    J7: Grb2_ppGarem_Shp2 -> Grb2_ppGarem_pShp2; k7 * Grb2_ppGarem_Shp2 - k_7 * Grb2_ppGarem_pShp2;
 
     // Species initializations:
 

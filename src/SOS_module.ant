@@ -1,5 +1,5 @@
-// model GrbSos(Rp)
-model Grb_SOS_module()
+// model 
+model SOS_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
@@ -20,13 +20,13 @@ model Grb_SOS_module()
     $aAdptrTot := Gab1_pShp2 + Garem_pShp2 + pShc1 + aRtot;
 
     // Grb2-Sos complex formation
-    J1: Grb2 + SOS1 -> Grb2_SOS1; k1*Grb2*SOS1 - k_1*Grb2_SOS1 ;
+    J1: Grb2 + SOS1 -> Grb2_SOS1; k1 * Grb2 * SOS1 - k_1 * Grb2_SOS1 ;
 
     // Grb2_SOS1 activation
-    J2: $aAdptrTot + Grb2_SOS1 -> $aAdptrTot + Grb2_pSOS1; (kcat2*aAdptrTot*Grb2_SOS1) / (Km2 + Grb2_SOS1);
+    J2: $aAdptrTot + Grb2_SOS1 -> $aAdptrTot + Grb2_pSOS1; (kcat2 * aAdptrTot * Grb2_SOS1) / (Km2 + Grb2_SOS1);
 
     // Grb2_pSOS1 inhibition
-    J3: $Sos1Ihtr + Grb2_pSOS1 -> $Sos1Ihtr + Grb2_ipSOS1; (kcat3*Sos1Ihtr*Grb2_pSOS1) / (Km3 + Grb2_pSOS1);
+    J3: $Sos1Ihtr + Grb2_pSOS1 -> $Sos1Ihtr + Grb2_ipSOS1; (kcat3 * Sos1Ihtr * Grb2_pSOS1) / (Km3 + Grb2_pSOS1);
 
     // Grb2_SOS2 activation
     J4: $aAdptrTot + Grb2_SOS2 -> $aAdptrTot + Grb2_pSOS2; (kcat4 * aAdptrTot * Grb2_SOS2) / (Km4 + Grb2_SOS2);

@@ -30,10 +30,10 @@ model Gab_module()
     J5: Grb2_ppGab1 => Grb2_pGab1; (V5 * Grb2_pGab1)/(Km5 + Grb2_pGab1);
 
     // Grb2_pGab1_Shp2 complex formation 
-    J6: Grb2_ppGab1 + Shp2 -> Grb2_ppGab1_Shp2; k6*Grb2_ppGab1*Shp2 - k_6*Grb2_ppGab1_Shp2;
+    J6: Grb2_ppGab1 + Shp2 -> Grb2_ppGab1_Shp2; k6 * Grb2_ppGab1 * Shp2 - k_6 * Grb2_ppGab1_Shp2;
 
     // Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
-    J7: Grb2_ppGab1_Shp2 -> Grb2_ppGab1_pShp2; k7*Grb2_ppGab1_Shp2 - k_7*Grb2_ppGab1_pShp2;
+    J7: Grb2_ppGab1_Shp2 -> Grb2_ppGab1_pShp2; k7 * Grb2_ppGab1_Shp2 - k_7 * Grb2_ppGab1_pShp2;
 
     // Species initializations:
 

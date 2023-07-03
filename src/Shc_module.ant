@@ -14,9 +14,9 @@ model Shc_module()
     // Output Shc_complex
 
     // Shc1 activation
-    J1: $aRtot + Shc1 -> $aRtot + pShc1; (kcat1*aRtot*Shc1) / (Km1 + Shc1);
-    J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2*Shc1Ihtr*pShc1) / (Km2 + pShc1);
-    // J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3*Shc1Ihtr*Shc1) / (Km3 + Shc1);
+    J1: $aRtot + Shc1 -> $aRtot + pShc1; (kcat1 * aRtot * Shc1) / (Km1 + Shc1);
+    J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2 * Shc1Ihtr * pShc1) / (Km2 + pShc1);
+    // J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3 * Shc1Ihtr * Shc1) / (Km3 + Shc1);
 
     // Species initializations:
     // fix EGF
