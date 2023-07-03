@@ -1,0 +1,81 @@
+// model GrbSos(Rp)
+model Grb_SOS_module()
+
+    // Compartments and Species:
+    compartment cell, extra, intra;
+    species Gab1_pShp2, Garem_pShp2, pShc1, $aRtot, $Sos1Ihtr in cell;
+    species Grb2 in cell;
+    species SOS1, Grb2_SOS1, Grb2_pSOS1, Grb2_ipSOS1 in cell;
+    species SOS2, Grb2_SOS2, Grb2_pSOS2 in cell;
+    // species dRas, tRas in cell;
+
+    // Inputs/Outputs
+
+    // Inputs: 
+    // Output: tRas
+
+    // Reactions
+
+    // aggregation of inputs
+    $aAdptrTot := Gab1_pShp2 + Garem_pShp2 + pShc1 + aRtot;
+
+    // Grb2-Sos complex formation
+    J1: Grb2 + SOS1 -> Grb2_SOS1; k1*Grb2*SOS1 - k_1*Grb2_SOS1 ;
+
+    // Grb2_SOS1 activation
+    J2: $aAdptrTot + Grb2_SOS1 -> $aAdptrTot + Grb2_pSOS1; (kcat2*aAdptrTot*Grb2_SOS1) / (Km2 + Grb2_SOS1);
+
+    // Grb2_pSOS1 inhibition
+    J3: $Sos1Ihtr + Grb2_pSOS1 -> $Sos1Ihtr + Grb2_ipSOS1; (kcat3*Sos1Ihtr*Grb2_pSOS1) / (Km3 + Grb2_pSOS1);
+
+    // Grb2_SOS2 activation
+    J4: $aAdptrTot + Grb2_SOS2 -> $aAdptrTot + Grb2_pSOS2; (kcat4 * aAdptrTot * Grb2_SOS2) / (Km4 + Grb2_SOS2);
+
+    // activate SOS
+    $aSOS := Grb2_pSOS1 + Grb2_pSOS2;
+
+    // Pathway protein abndances
+    Grb2 = 37.11;		// updated 3-20
+    SOS1 = 0.07;		// updated 3-20
+    SOS2 = 0;		// updated 3-20
+    Grb2_SOS1 = 3.98;		// updated 3-20
+    Grb2_SOS2 = 0;		// updated 3-20
+
+    // Species initializations:
+
+    // Compartment initializations:
+    cell = 1;
+    extra = 5000;
+    intra = 1;
+
+    // Variables:
+    k1 = 9.45E-6;
+    k1 has per_nMs
+    k_1 = 0.0138;
+    k_1 has per_sec;
+
+    kcat2 = 10;
+    kcat2 has per_sec;
+    Km2 = 1;
+    Km2 has nM;
+
+    kcat3 = 10;
+    kcat3 has per_sec;
+    Km3 = 1;
+    Km3 has nM;
+
+    kcat4 = 10;
+    kcat4 has per_sec;
+    Km4 = 1;
+    Km4 has nM;
+
+    // Unit definitions:
+    unit substance = 1e-9 mole;
+    unit time_unit = second;
+    unit nM = 1e-9 mole / litre;
+    unit per_nM = litre / 1e-9 mole;
+    unit per_sec = 1 / second;
+    unit nM_per_sec = 1e-9 mole / (litre * second);
+    unit per_nMs = litre / (1e-9 mole * second);
+
+end

@@ -4,19 +4,30 @@ model EGFR_module()
   // Compartments and Species:
   compartment cell, extra, intra;
   species R in cell, Ri in intra;
+  species R_L in cell, R_Li in intra;
+  species pR_L in cell, pR_Li in intra;
 
   // Reactions:
   // EGFR module
   
-  New_Receptors: => R; Vr; 
-  Receptor_turnover: R => Ri; kt * R;
-  Ligand_binding: L + R -> R_L; k1 * R * L - k_1 * R_L;
-  Receptor_ligand_endo: R_L => R_Li; ke * R_L;
-  Receptor_degrad: Ri => ; kx * Ri;
-  Receptor_complex_degrad: R_Li => ; kh * R_Li;
-  Receptor_phospho: R_L -> pR_L; k3 * R_L - k_3 * pR_L;
-  Receptor_phospho_endo: pR_L => pR_Li ; ke * pR_L;
-  Receptor_phosphocomplex_degrad: pR_Li => ; kh * pR_Li;
+  // New_Receptors
+  J1: => R; Vr; 
+  // Receptor_turnover
+  J2: R => Ri; kt * R;
+  // Ligand_binding
+  J3: L + R -> R_L; k1 * R * L - k_1 * R_L;
+  // Receptor_ligand_endo
+  J4: R_L => R_Li; ke * R_L;
+  // Receptor_degrad
+  J5: Ri => ; kx * Ri;
+  // Receptor_complex_degrad
+  J6: R_Li => ; kh * R_Li;
+  // Receptor_phospho
+  J7: R_L -> pR_L; k3 * R_L - k_3 * pR_L;
+  // Receptor_phospho_endo
+  J8: pR_L => pR_Li ; ke * pR_L;
+  // Receptor_phosphocomplex_degrad
+  J9: pR_Li => ; kh * pR_Li;
   
   // Module inputs:
   // L from shedding module
@@ -25,12 +36,12 @@ model EGFR_module()
   // pErk
 
   // Module outputs:
-  aR := pR_L;
-  aR has nM;
-  aRi := pR_Li;
-  aRi has nM;
-  aRtot := pR_L + pR_Li  // + ppR_L;
-  aRtot has nM;
+  $aR := pR_L;
+  $aR has nM;
+  $aRi := pR_Li;
+  $aRi has nM;
+  $aRtot := pR_L + pR_Li  // + ppR_L;
+  $aRtot has nM;
 
   // Species initializations:
   // fix EGF

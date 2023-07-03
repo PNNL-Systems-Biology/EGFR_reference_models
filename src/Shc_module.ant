@@ -3,9 +3,10 @@ model Shc_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
-    species Shc1, pShc1, ipShc1, in cell;
-    species aRtot in cell;
-    species Shc1Ihtr in cell;
+    species Shc1, pShc1, ipShc1 in cell;
+    // species iShc1 in cell;
+    species $aRtot in cell;
+    species $Shc1Ihtr in cell;
 
     // Reactions:
     // Shc module
@@ -14,7 +15,8 @@ model Shc_module()
 
     // Shc1 activation
     J1: $aRtot + Shc1 -> $aRtot + pShc1; (kcat1*aRtot*Shc1) / (Km1 + Shc1);
-    J2: $Shc1Ihtr + pShc1 => $Shc1Ihtr + ipShc1; (kcat2*aRtot*ipShc1) / (Km2 + pShc1);
+    J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2*Shc1Ihtr*pShc1) / (Km2 + pShc1);
+    // J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3*Shc1Ihtr*Shc1) / (Km3 + Shc1);
 
     // Species initializations:
     // fix EGF
@@ -22,6 +24,8 @@ model Shc_module()
     Shc1 has nM;
     pShc1 = 0;
     pShc1 has nM;
+    // iShc1 = 0;
+    // iShc1 has nM;
     ipShc1 = 0;
     ipShc1 has nM;
     Shc1Ihtr = 0;
@@ -42,6 +46,11 @@ model Shc_module()
     kcat2 has per_sec;
     Km2 = 5e3 / 1e2;		// Dissociation of Shc from phospho-EGFR
     Km2 has nM;
+
+    // kcat3 = kcat2;			// Receptor - Shc recruitment
+    // kcat3 has per_sec;
+    // Km3 = Km2;		// Dissociation of Shc from phospho-EGFR
+    // Km3 has nM;
 
 
     // Unit definitions:

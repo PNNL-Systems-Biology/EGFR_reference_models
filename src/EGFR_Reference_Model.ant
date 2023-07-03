@@ -3,7 +3,7 @@ import "EGFR_module.ant"
 import "Garem_module.ant"
 import "Shc_module.ant"
 import "Gab_module.ant"
-import "Grb2_SOS1_module.ant"
+import "Grb_SOS_module.ant"
 
 model EGFR_Reference_Model()
 
@@ -11,15 +11,18 @@ model EGFR_Reference_Model()
     Garem: Garem_module();
     Shc: Shc_module();
     Gab: Gab_module();
-    Grb2_SOS1: Grb2_SOS1_module();
+    Grb_SOS: Grb_SOS_module();
 
-    Garem.input is EGFR.aRtot;
-    Shc.input is EGFR.aRtot;
-    Gab.input is EGFR.aRtot;
+    Garem.aRtot is EGFR.aRtot;
+    Shc.aRtot is EGFR.aRtot;
+    Gab.aRtot is EGFR.aRtot;
+    Grb_SOS.aRtot is EGFR.aRtot;
 
-    Grb2_SOS1.input_1 is EGFR.aRtot;
-    Grb2_SOS1.input_2 is Garem.Garem_complex;
-    Grb2_SOS1.input_3 is Shc.Shc_complex;
-    Grb2_SOS1.input_4 is Gab.Gab_complex;
+    Garem.Grb2 is Grb_SOS.Grb2;
+    Gab.Grb2 is Grb_SOS.Grb2;
+
+    Grb_SOS.Gab1_pShp2 is Gab.Grb2_ppGab1_pShp2;
+    Grb_SOS.Garem_pShp2 is Garem.Grb2_ppGarem_pShp2;
+    Grb_SOS.pShc1 is Shc.pShc1;
 
 end

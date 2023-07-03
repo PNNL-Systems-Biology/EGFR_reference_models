@@ -4,8 +4,11 @@ model Garem_module()
     // Compartments and Species:
     compartment cell, extra, intra;
     species Garem in cell, pGarem in cell;
-    species aRtot in cell;
+    species $aRtot in cell;
     species Grb2 in cell, Shp2 in cell;
+    species Grb2_Garem in cell, Grb2_pGarem in cell;
+    species Grb2_ppGarem in cell, Grb2_ppGarem_Shp2 in cell;
+    species Grb2_ppGarem_pShp2 in cell;
 
     // Inputs/Outputs:
 
