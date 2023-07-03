@@ -1,5 +1,5 @@
 // Created by libAntimony v2.8.1
-model Shc_module()
+model SHC_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;

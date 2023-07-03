@@ -1,29 +1,29 @@
 
 import "EGFR_module.ant"
-import "Garem_module.ant"
-import "Shc_module.ant"
-import "Gab_module.ant"
+import "GAREM_module.ant"
+import "SHC_module.ant"
+import "GAB_module.ant"
 import "SOS_module.ant"
 
 model EGFR_Reference_Model()
 
     EGFR: EGFR_module();
-    Garem: Garem_module();
-    Shc: Shc_module();
-    Gab: Gab_module();
+    GAREM: GAREM_module();
+    SHC: SHC_module();
+    GAB: GAB_module();
     SOS: SOS_module();
 
-    Garem.aRtot is EGFR.aRtot;
-    Shc.aRtot is EGFR.aRtot;
-    Gab.aRtot is EGFR.aRtot;
+    GAREM.aRtot is EGFR.aRtot;
+    SHC.aRtot is EGFR.aRtot;
+    GAB.aRtot is EGFR.aRtot;
     SOS.aRtot is EGFR.aRtot;
 
-    Garem.Grb2 is SOS.Grb2;
-    Gab.Grb2 is SOS.Grb2;
+    GAREM.Grb2 is SOS.Grb2;
+    GAB.Grb2 is SOS.Grb2;
 
-    SOS.Gab1_pShp2 is Gab.Grb2_ppGab1_pShp2;
-    SOS.Garem_pShp2 is Garem.Grb2_ppGarem_pShp2;
-    SOS.pShc1 is Shc.pShc1;
+    SOS.Gab1_pShp2 is GAB.Grb2_ppGab1_pShp2;
+    SOS.Garem_pShp2 is GAREM.Grb2_ppGarem_pShp2;
+    SOS.pShc1 is SHC.pShc1;
 
     species $aSOS in cell;
 

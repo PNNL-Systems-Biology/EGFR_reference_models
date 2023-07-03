@@ -1,5 +1,5 @@
 // Created by libAntimony v2.8.1
-model Gab_module()
+model GAB_module()
 
     // Compartments and Species:
     compartment cell, extra, intra;
