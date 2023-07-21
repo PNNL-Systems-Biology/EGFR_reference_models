@@ -1,0 +1,182 @@
+
+model RAF_activation_cycle()
+
+    // Species:
+    species RAS, RAF, 1433, pRAF, pRAF_1433;
+    species SFK, CK2;
+    species RAS_RAF, RAS_RAFp, RAS_RAFpp, RAS_RAFppp;
+    species MEK, ppMEK;
+    species RAS_RAFppp_Dimer, RAS_RAFppp_Dimer_MEK, RAS_RAFppp_Dimer_2_MEK;
+    species ERK, pERK, ppERK, ppMEK_ERK, ppMEK_pERK;
+    species ppERK_RAS_RAFppp_Dimer, RAS_RAFppp_qq_Dimer;
+    species RAFppp_q;
+
+    // Steps:
+
+    // Step 1:
+    // Auto-inhibited RAF proteins stabilized by 14‑3‑3 proteins bound to
+    // phosphorylated Ser259 at the RAF amino terminus are found in the cytosol.
+
+    // Notes:
+    // need to look into mechanism of Ser259 phosphorylation.
+    // Here it's assumed to be with a saturating kinase.
+
+    RAF -> pRAF; k1 * RAF
+    pRAF + 1433 -> pRAF_1433; k2 * pRAF * 1433 - k_2 * pRAF_1433
+
+
+    // Step 2:
+    // Upon stimulation by mitogens, GTP-loaded RAS directly interacts with
+    // RAF proteins through their RAS-binding domains (RBDs), thereby initiating
+    // plasma membrane recruitment of RAF. The interaction with RAS relieves RAF
+    // auto-inhibition and correlates with Ser259 dephosphorylation and release of
+    // inhibitory 14-3-3.
+
+    RAS + pRAF_1433 -> RAS_pRAF_1433; k3 * RAS * pRAF_1433 - k_3 * RAS_pRAF_1433
+    RAS_pRAF_1433 -> RAS_RAF + 1433; k4 * RAS_pRAF_1433
+
+
+    // Step 3:
+    // Membrane recruitment brings RAF in contact with kinases, including
+    // SRC family kinases (SFKs) and casein kinase 2 (CK2), which phosphorylate a
+    // series of activating sites in the negatively charged (N-) region.
+
+    // Notes:
+    // 1. These phosphorylation sites are placed at the end of RAS to distinguish them from Ser259.
+    // 2. Phosphorylation is sequential here, not combinatorial. We can try both.
+    // 3. There are three phosphorylations here but we can try more or less.
+    // 4. dephosphorylation is needed for delay?
+
+    SFK + RAS_RAF -> SFK_RAS_RAF; k5 * SFK * RAS_RAF
+    SFK_RAS_RAF -> SFK + RAS_RAFp; k6 * SFK_RAS_RAF
+    SFK + RAS_RAFp -> SFK_RAS_RAFp; k7 * SFK * RAS_RAFp
+    SFK_RAS_RAFp -> SFK + RAS_RAFpp; k8 * SFK_RAS_RAFp
+    SFK + RAS_RAFpp -> SFK_RAS_RAFpp; k9 * SFK * RAS_RAFpp
+    SFK_RAS_RAFpp -> SFK + RAS_RAFppp; k10 * SFK_RAS_RAFpp
+
+    CK2 + RAS_RAF -> CK2_RAS_RAF; k11 * CK2 * RAS_RAF
+    CK2_RAS_RAF -> CK2 + RAS_RAFp; k12 * CK2_RAS_RAF
+    CK2 + RAS_RAFp -> CK2_RAS_RAFp; k13 * CK2 * RAS_RAFp
+    CK2_RAS_RAFp -> CK2 + RAS_RAFpp; k14 * CK2_RAS_RAFp
+    CK2 + RAS_RAFpp -> CK2_RAS_RAFpp; k15 * CK2 * RAS_RAFpp
+    CK2_RAS_RAFpp -> CK2 + RAS_RAFppp; k16 * CK2_RAS_RAFpp
+
+
+    // Step 4:
+    // Membrane binding and RAS nanoclustering augment the effective
+    // concentration of RAF and thereby contribute to RAF dimerization. 14‑3‑3
+    // proteins bound to phosphorylated Ser621 at the carboxy‑terminal tail also
+    // participate in RAF kinase domain dimerization.
+
+    // Notes:
+    // 1. Direct membrane binding of RAS, nanoclustering, and the 14-3-3 at the C-terminal are not modeled.
+    // 2. Only the fully phosphorylated RAF (RAS_RAFppp) is dimerized here.
+
+    2 RAS_RAFppp -> RAS_RAFppp_Dimer; k17 * RAS_RAFppp^2 - k_17 * RAS_RAFppp_Dimer
+
+
+    // Step 5:
+    // Dimerization induces RAF catalytic activity, thereby enabling MEK
+    // recruitment and phosphorylation, and signalling down the three-tiered MAPK module.
+
+    // Notes:
+    // I am unsure of the exact sequence of MEK binding and phosphorylation.
+    // Here, the tetramer is the active form and two doubly phosphorylated
+    // species are released simultaneously.
+    // For ERK phosphorylation I've assumed MEK must bind twice.
+
+    RAS_RAFppp_Dimer + MEK -> RAS_RAFppp_Dimer_MEK; k18 * RAS_RAFppp_Dimer * MEK - k_18 * RAS_RAFppp_Dimer_MEK
+    RAS_RAFppp_Dimer_MEK + MEK -> RAS_RAFppp_Dimer_2_MEK; k19 * RAS_RAFppp_Dimer_MEK * MEK - k_19 * RAS_RAFppp_Dimer_2_MEK
+    RAS_RAFppp_Dimer_2_MEK -> RAS_RAFppp_Dimer + ppMEK + ppMEK; k20 * RAS_RAFppp_Dimer_2_MEK
+
+    ppMEK + ERK -> ppMEK_ERK; k21 * ppMEK * ERK - k_21 ppMEK_ERK
+    ppMEK_ERK -> ppMEK + pERK; k22 * ppMEK_ERK
+    ppMEK + pERK -> ppMEK_pERK; k23 * ppMEK * pERK - k_23 ppMEK_pERK
+    ppMEK_pERK -> ppMEK + ppERK; k24 * ppMEK_pERK
+
+
+    // Step 6:
+    // ERK signalling implements a negative feedback loop in which ERK
+    // phosphorylates several inhibitory sites in distinct regions of activated RAF,
+    // causing a release from activated RAS and the disruption of RAF dimers.
+
+    // Notes:
+    // According to ref. 180 there is 1 site that disrupts RAS binding and 3 that
+    // disrupt dimerization. How detailed should this be?
+    // Here it is modeled as aggregate phosphorylation and then full dissolution.
+    // This phosphorylation (one for each monomer) is designated q
+
+    ppERK + RAS_RAFppp_Dimer -> ppERK_RAS_RAFppp_Dimer; k25 * ppERK * RAS_RAFppp_Dimer - k_25 * ppERK_RAS_RAFppp_Dimer
+    ppERK_RAS_RAFppp_Dimer -> ppERK + RAS_RAFppp_qq_Dimer; k26 * ppERK_RAS_RAFppp_Dimer
+
+    RAS_RAFppp_qq_Dimer -> RAS + 2 RAFppp_q; k27 * RAS_RAFppp_qq_Dimer
+
+
+    // Step 7:
+    // Negative feedback is coordinated with dephosphorylation of RAF-activating phosphorylation
+    // sites as well as ERK-targeted phosphorylation sites; hence, RAF proteins are recycled for
+    // later rounds of activation. Note that 14‑3‑3 binding to the RAF carboxy‑terminus is depicted
+    // as constitutive, but recent evidence suggests the possibility of regulation.
+
+    // Note:
+    // I've assumed an aggregate rate of dephosphorylation.
+
+    RAFppp_q -> RAF; k28 * RAFppp_q
+
+
+
+    // Species initializations:
+
+    RAS = 1;
+    RAF = 1;
+    1433 = 1;
+    pRAF_1433 = 1;
+    SFK = 1;
+    CK2 = 1;
+    MEK = 1;
+    ERK = 1;
+
+
+    // Variable initializations:
+    k1 = 1;
+    k2 = 1;
+    k_2 = 1;
+    k4 = 1;
+    k_4 = 1;
+    k4 = 1;
+
+    k5 = 1;
+    k6 = 1;
+    k7 = 1;
+    k8 = 1;
+    k9 = 1;
+    k10 = 1;
+    k11 = 1;
+    k12 = 1;
+    k13 = 1;
+    k14 = 1;
+    k15 = 1;
+    k16 = 1;
+
+    k17 = 1;
+    k_17 = 1;
+    k18 = 1;
+    k_18 = 1;
+    k19 = 1;
+    k_19 = 1;
+    k20 = 1;
+
+    k21 = 1;
+    k_21 = 1;
+    k22 = 1;
+    k23 = 1;
+    k_23 = 1;
+    k24 = 1;
+
+    k25 = 1;
+    k_25 = 1;
+    k26 = 1;
+    k27 = 1;
+    k28 = 1;
+
+end
