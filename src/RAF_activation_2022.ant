@@ -1,0 +1,64 @@
+
+model RAF_activation()
+
+    // Species
+
+    // 'b' means bound at both sites (bi)
+    // 'u' means bound at one sites (uni)
+
+    species RAS
+    species ppRAF_1433b_MEK
+    species RASu_ppRAF_1433b_MEK
+    species RASu_ppRAF_1433u_MEK
+    species RASb_ppRAF_1433u_MEK
+    species MRAS_SHOC2_PP1C
+    species MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK
+    species RASb_pRAF_1433u_MEK
+    species RAFa
+
+    // Reactions
+
+    // Ras binds RBD domain
+    J1: RAS + ppRAF_1433b_MEK -> RASu_ppRAF_1433b_MEK; k1 * RASu * ppRAF_1433b_MEK - k_1 * RASu_ppRAF_1433b_MEK
+
+    // 1433 releasd from C-terminal phosphorylation site
+    J2: RASu_ppRAF_1433b_MEK -> RASu_ppRAF_1433u_MEK; k2 * RASu_ppRAF_1433b_MEK - k_2 * RASu_ppRAF_1433u_MEK
+
+    // RAS binds CRD domain
+    J3: RASu_ppRAF_1433u_MEK -> RASb_ppRAF_1433u_MEK; k3 * RASu_ppRAF_1433u_MEK - k_3 * RASb_ppRAF_1433u_MEK
+
+    // MRAS_SHOC2_PP1C complex dephosphorylates the C-terminal site
+    J4: MRAS_SHOC2_PP1C + RASb_ppRAF_1433u_MEK -> MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_1433u_MEK - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK
+    J5: MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK -> MRAS_SHOC2_PP1C + RASb_pRAF_1433u_MEK; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK
+
+    // RAF complex dimerization (active RAF or RAFa)
+    // Notes:
+    // Release of 1433 is because a single 1433 dimer is bound to both the inactive RAF and active RAF dimer
+    // Allowing for release of 1433 at previous stages is possible but complicates the model.
+    // The reverse (unbinding of the dimer is not taken into account here)
+    J6: 2 RASb_pRAF_1433u_MEK -> RAFa + 1433; k6 * RASb_pRAF_1433u_MEK^2
+
+    // initial values
+    RAS = 1
+    ppRAF_1433b_MEK = 1
+    RASu_ppRAF_1433b_MEK = 0
+    RASu_ppRAF_1433u_MEK = 0
+    RASb_ppRAF_1433u_MEK = 0
+    MRAS_SHOC2_PP1C = 1
+    MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK = 0
+    RASb_pRAF_1433u_MEK = 0
+    RAFa = 0
+
+    // Parameters
+    k1 = 1
+    k_1 = 1
+    k2 = 1
+    k_2 = 1
+    k3 = 1
+    k_3 = 1
+    k4 = 1
+    k_4 = 1
+    k5 = 1
+    k6 = 1
+
+end
