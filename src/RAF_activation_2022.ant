@@ -7,47 +7,54 @@ model RAF_activation()
     // 'u' means bound at one sites (uni)
 
     species RAS
-    species ppRAF_1433b_MEK
-    species RASu_ppRAF_1433b_MEK
-    species RASu_ppRAF_1433u_MEK
-    species RASb_ppRAF_1433u_MEK
+    species ppRAF_d1433b_MEK
+    species RASu_ppRAF_d1433b_MEK
+    species RASu_ppRAF_d1433u_MEK
+    species RASb_ppRAF_d1433u_MEK
     species MRAS_SHOC2_PP1C
-    species MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK
-    species RASb_pRAF_1433u_MEK
+    species MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+    species RASb_pRAF_d1433u_MEK
     species RAFa
+    species d1433
 
     // Reactions
 
+    // Notes: RAS nanoclustering is not taken into account here
+    // Notes: RAS is assumed to be in the GTP bound state
+    // NB: need to implement the input function of t for active RAS (from data)
+    J0: -> RAS; finput_t(t)
+    
     // Ras binds RBD domain
-    J1: RAS + ppRAF_1433b_MEK -> RASu_ppRAF_1433b_MEK; k1 * RASu * ppRAF_1433b_MEK - k_1 * RASu_ppRAF_1433b_MEK
+    J1: RAS + ppRAF_d1433b_MEK -> RASu_ppRAF_d1433b_MEK; k1 * RAS * ppRAF_d1433b_MEK - k_1 * RASu_ppRAF_d1433b_MEK
 
-    // 1433 releasd from C-terminal phosphorylation site
-    J2: RASu_ppRAF_1433b_MEK -> RASu_ppRAF_1433u_MEK; k2 * RASu_ppRAF_1433b_MEK - k_2 * RASu_ppRAF_1433u_MEK
+    // d1433 releasd from C-terminal phosphorylation site
+    J2: RASu_ppRAF_d1433b_MEK -> RASu_ppRAF_d1433u_MEK; k2 * RASu_ppRAF_d1433b_MEK - k_2 * RASu_ppRAF_d1433u_MEK
 
     // RAS binds CRD domain
-    J3: RASu_ppRAF_1433u_MEK -> RASb_ppRAF_1433u_MEK; k3 * RASu_ppRAF_1433u_MEK - k_3 * RASb_ppRAF_1433u_MEK
+    J3: RASu_ppRAF_d1433u_MEK -> RASb_ppRAF_d1433u_MEK; k3 * RASu_ppRAF_d1433u_MEK - k_3 * RASb_ppRAF_d1433u_MEK
 
     // MRAS_SHOC2_PP1C complex dephosphorylates the C-terminal site
-    J4: MRAS_SHOC2_PP1C + RASb_ppRAF_1433u_MEK -> MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_1433u_MEK - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK
-    J5: MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK -> MRAS_SHOC2_PP1C + RASb_pRAF_1433u_MEK; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK
+    J4: MRAS_SHOC2_PP1C + RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_d1433u_MEK - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+    J5: MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C + RASb_pRAF_d1433u_MEK; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
 
     // RAF complex dimerization (active RAF or RAFa)
     // Notes:
-    // Release of 1433 is because a single 1433 dimer is bound to both the inactive RAF and active RAF dimer
-    // Allowing for release of 1433 at previous stages is possible but complicates the model.
+    // Release of d1433 is because a single d1433 dimer is bound to both the inactive RAF and active RAF dimer
+    // Allowing for release of d1433 at previous stages is possible but complicates the model.
     // The reverse (unbinding of the dimer is not taken into account here)
-    J6: 2 RASb_pRAF_1433u_MEK -> RAFa + 1433; k6 * RASb_pRAF_1433u_MEK^2
+    J6: 2 RASb_pRAF_d1433u_MEK -> RAFa + d1433; k6 * RASb_pRAF_d1433u_MEK^2
 
     // initial values
     RAS = 1
-    ppRAF_1433b_MEK = 1
-    RASu_ppRAF_1433b_MEK = 0
-    RASu_ppRAF_1433u_MEK = 0
-    RASb_ppRAF_1433u_MEK = 0
+    ppRAF_d1433b_MEK = 1
+    RASu_ppRAF_d1433b_MEK = 0
+    RASu_ppRAF_d1433u_MEK = 0
+    RASb_ppRAF_d1433u_MEK = 0
     MRAS_SHOC2_PP1C = 1
-    MRAS_SHOC2_PP1C_RASb_ppRAF_1433u_MEK = 0
-    RASb_pRAF_1433u_MEK = 0
+    MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK = 0
+    RASb_pRAF_d1433u_MEK = 0
     RAFa = 0
+    d1433 = 100
 
     // Parameters
     k1 = 1
