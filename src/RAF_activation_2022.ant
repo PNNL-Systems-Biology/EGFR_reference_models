@@ -59,9 +59,9 @@ model RAF_activation()
     J14: ppERK -> pERK; k14 * ppERK
 
     // initial values
-    ppRAF_d1433b_MEK = 10000
-    MRAS_SHOC2_PP1C = 10000
-    ERK = 10000
+    ppRAF_d1433b_MEK = 15.4
+    MRAS_SHOC2_PP1C = 15
+    ERK = 153
 
     // Parameters
     k1 = 1
