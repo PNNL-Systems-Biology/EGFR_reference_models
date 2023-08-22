@@ -41,6 +41,8 @@ model RAF_activation()
     J4: MRAS_SHOC2_PP1C + RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_d1433u_MEK - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
     J5: MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C + RASb_pRAF_d1433u_MEK; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
 
+    # fit this RASb_pRAF_d1433u_MEK
+
     // RAF complex dimerization (active RAF or RAFa_MEK)
     // Notes:
     // The reverse (unbinding of the dimer is not taken into account here)
