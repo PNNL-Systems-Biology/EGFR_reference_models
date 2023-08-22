@@ -30,7 +30,7 @@ r = te.loada('current_model.ant')
 # r = te.loada('current_model_5.ant')
 r.integrator.absolute_tolerance = 1e-12
 r.integrator.relative_tolerance = 1e-12
-sim = r.simulate(0, 12, 1201, selections=['time', 'RAS', 'ppERK', 'RAFa_ppMEK', 'RASb_pRAF_d1433u_MEK'])
+sim = r.simulate(0, 12, 1201, selections=['time', 'RAS', 'RAFa_MEK', 'ppERK', 'RAFa_ppMEK', 'RASb_pRAF_d1433u_MEK'])
 print(11, sim['RASb_pRAF_d1433u_MEK'])
 
 t = np.linspace(0, 12, 1201)
