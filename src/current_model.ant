@@ -11,16 +11,14 @@ model RAF_activation()
 // 'u' means bound at one sites (uni)
 
 species RAS
-species ppRAF_d1433b
-species RASu_ppRAF_d1433b
-species RASu_ppRAF_d1433u
-species RASb_ppRAF_d1433u
+species ppRAF_d1433b_MEK
+species RASu_ppRAF_d1433b_MEK
+species RASu_ppRAF_d1433u_MEK
+species RASb_ppRAF_d1433u_MEK
 species MRAS_SHOC2_PP1C
-species MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u
-species RASb_pRAF_d1433u
-species RAFa, RAFa, RAFa
-species MEK, pMEK, ppMEK
-species tRAFa, RAFa_MEK, RAFa_pMEK
+species MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+species RASb_pRAF_d1433u_MEK
+species RAFa_MEK, RAFa_pMEK, RAFa_ppMEK
 species ERK, pERK, ppERK
 
 // Reactions
@@ -31,73 +29,64 @@ species ERK, pERK, ppERK
 J0: -> RAS; ras(time)
 
 // Ras binds RBD domain
-J1: RAS + ppRAF_d1433b -> RASu_ppRAF_d1433b; k1 * RAS * ppRAF_d1433b - k_1 * RASu_ppRAF_d1433b
+J1: RAS + ppRAF_d1433b_MEK -> RASu_ppRAF_d1433b_MEK; k1 * RAS * ppRAF_d1433b_MEK - k_1 * RASu_ppRAF_d1433b_MEK
 
 // d1433 releasd from C-terminal phosphorylation site
-J2: RASu_ppRAF_d1433b -> RASu_ppRAF_d1433u; k2 * RASu_ppRAF_d1433b - k_2 * RASu_ppRAF_d1433u
+J2: RASu_ppRAF_d1433b_MEK -> RASu_ppRAF_d1433u_MEK; k2 * RASu_ppRAF_d1433b_MEK - k_2 * RASu_ppRAF_d1433u_MEK
 
 // RAS binds CRD domain
-J3: RASu_ppRAF_d1433u -> RASb_ppRAF_d1433u; k3 * RASu_ppRAF_d1433u - k_3 * RASb_ppRAF_d1433u
+J3: RASu_ppRAF_d1433u_MEK -> RASb_ppRAF_d1433u_MEK; k3 * RASu_ppRAF_d1433u_MEK - k_3 * RASb_ppRAF_d1433u_MEK
 
 // MRAS_SHOC2_PP1C complex dephosphorylates the C-terminal site
-J4: MRAS_SHOC2_PP1C + RASb_ppRAF_d1433u -> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_d1433u - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u
-J5: MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u -> MRAS_SHOC2_PP1C + RASb_pRAF_d1433u; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u
+J4: MRAS_SHOC2_PP1C + RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_d1433u_MEK - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+J5: MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C + RASb_pRAF_d1433u_MEK; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
 
-// RAF complex dimerization (active RAF or RAFa)
+# fit this RASb_pRAF_d1433u_MEK
+
+// RAF complex dimerization (active RAF or RAFa_MEK)
 // Notes:
 // The reverse (unbinding of the dimer is not taken into account here)
-J6: 2 RASb_pRAF_d1433u -> RAFa; k6 * RASb_pRAF_d1433u^2
+J6: 2 RASb_pRAF_d1433u_MEK -> RAFa_MEK; k6 * RASb_pRAF_d1433u_MEK^2
 
 // MEK phosphorylation
-J7: RAFa + MEK -> RAFa_MEK; k7 * RAFa * MEK - k_7 * RAFa_MEK
-J8: RAFa_MEK -> RAFa + pMEK; k8 * RAFa_MEK
-J9: RAFa + pMEK -> RAFa_pMEK; k9 * RAFa * pMEK - k_9 * RAFa_pMEK
-J10: RAFa_pMEK -> RAFa + ppMEK; k10 * RAFa_pMEK
-J11: pMEK -> MEK; k11 * pMEK
-J12: ppMEK -> pMEK; k12 * ppMEK
+J7: RAFa_MEK -> RAFa_pMEK; k7 * RAFa_MEK - k_7 * RAFa_pMEK
+J8: RAFa_pMEK -> RAFa_ppMEK; k8 * RAFa_pMEK - k_8 * RAFa_ppMEK
 
 // ERK phosphorylation
-J13: ppMEK + ERK -> ppMEK_ERK; k13 * ppMEK * ERK - k_13 * ppMEK_ERK
-J14: ppMEK_ERK -> ppMEK + pERK; k14 * ppMEK_ERK
-J15: ppMEK + pERK -> ppMEK_pERK; k15 * ppMEK * pERK - k_15 * ppMEK_pERK
-J16: ppMEK_pERK -> ppMEK + ppERK; k16 * ppMEK_pERK
-J17: pERK -> ERK; k17 * pERK
-J18: ppERK -> pERK; k18 * ppERK
-
-tRAFa := RAFa + RAFa_MEK + RAFa_pMEK
+J9: RAFa_ppMEK + ERK -> RAFa_ppMEK_ERK; k9 * RAFa_ppMEK * ERK - k_9 * RAFa_ppMEK_ERK
+J10: RAFa_ppMEK_ERK -> RAFa_ppMEK + pERK; k10 * RAFa_ppMEK_ERK
+J11: RAFa_ppMEK + pERK -> RAFa_ppMEK_pERK; k11 * RAFa_ppMEK * pERK - k_11 * RAFa_ppMEK_pERK
+J12: RAFa_ppMEK_pERK -> RAFa_ppMEK + ppERK; k12 * RAFa_ppMEK_pERK
+J13: pERK -> ERK; k13 * pERK
+J14: ppERK -> pERK; k14 * ppERK
 
 // initial values
-ppRAF_d1433b = 15.4
+ppRAF_d1433b_MEK = 15.4
 MRAS_SHOC2_PP1C = 15
-MEK = 153
 ERK = 153
 
 // Parameters
-k1 = 9.999937229242535
-k_1 = 0.1000012033311235
-k2 = 9.999911400051117
-k_2 = 9.999998706596273
-k3 = 0.5865724305519616
-k_3 = 9.99762680947476
-k4 = 9.99908811970598
-k_4 = 1.0023838199509638
-k5 = 9.99998357193639
-k6 = 9.999907697105728
-k7 = 0.6202619369107415
-k_7 = 9.995363393791044
-k8 = 9.999986319923584
-k9 = 9.99996202379544
-k_9 = 0.1000261971992142
-k10 = 9.999991188806584
-k11 = 0.1000019922978817
-k12 = 0.1000029396151019
-k13 = 0.4606698163625299
-k_13 = 0.1004880341292941
-k14 = 9.999990539926774
-k15 = 9.99998652429722
-k_15 = 0.1000160051487879
-k16 = 4.69288523870223
-k17 = 0.1000112040025409
-k18 = 9.999977073135598
+k1 = 9.93619944118955
+k_1 = 0.1355952065217074
+k2 = 9.932676458977692
+k_2 = 0.3502502107291748
+k3 = 9.960489504796811
+k_3 = 0.1401528498825084
+k4 = 8.873615682775373
+k_4 = 0.5561673414790538
+k5 = 9.934383318370717
+k6 = 9.973605157071017
+k7 = 9.886386812547428
+k_7 = 0.1123640813129661
+k8 = 9.943868687268855
+k_8 = 0.3469897136838192
+k9 = 9.81673729863077
+k_9 = 0.1309279236026463
+k10 = 6.747967060370416
+k11 = 7.553497528015655
+k_11 = 9.861621140124566
+k12 = 9.99749196028231
+k13 = 0.1000925451227128
+k14 = 1.2345593548329743
 
 end
