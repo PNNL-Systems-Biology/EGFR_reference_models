@@ -26,6 +26,7 @@ print(param_dict)
 new_model = ''
 # with open('RAF_activation_2022_mek.ant', 'r') as model:
 with open('RAF_activation_2022.ant', 'r') as model:
+# with open('EGFR_module.ant', 'r') as model:
     lines = model.readlines()
     for i, line in enumerate(lines):
         print(i, line)

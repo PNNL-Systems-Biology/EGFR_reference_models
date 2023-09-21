@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="EGFR_module" id="EGFR_module" substanceUnits="substance" timeUnits="time_unit">
+    <listOfUnitDefinitions>
+      <unitDefinition id="nM">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_sec" name="s-1">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="nM_per_sec"/>
+      <unitDefinition id="per_nMs" name="nM-1 s-1">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="substance" name="nmole">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="time_unit" name="s">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nM">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="nM_per_s" name="nM/s">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="cell" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="extra" name="extracellular space" spatialDimensions="3" size="5000" constant="true"/>
+      <compartment id="intra" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="Tgfa" compartment="default_compartment" initialAmount="5000" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Hbegf" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ar" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Epgn" compartment="extra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Egfr" compartment="cell" initialAmount="208" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iEgfr" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Egfr_Tgfa" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iR_Tgfa" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pEgfr_Tgfa" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ipEgfr_Tgfa" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Egfr_Hbegf" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iR_Hbegf" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pEgfr_Hbegf" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ipEgfr_Hbegf" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Egfr_Ar" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iR_Ar" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pEgfr_Ar" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ipEgfr_Ar" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Egfr_Epgn" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iR_Epgn" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pEgfr_Epgn" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ipEgfr_Epgn" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aRtot" compartment="default_compartment" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
+      <species id="iEgfr_Tgfa" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iEgfr_Hbegf" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iEgfr_Ar" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iEgfr_Epgn" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="Vr" value="8.70706516746104" units="nM_per_sec" constant="true"/>
+      <parameter id="kt" value="0.102935747284563" units="per_sec" constant="true"/>
+      <parameter id="kx" value="0.622679037003279" units="per_sec" constant="true"/>
+      <parameter id="k4" value="0.906889319037872" units="per_nMs" constant="true"/>
+      <parameter id="k_4" value="0.825610152929907" units="per_sec" constant="true"/>
+      <parameter id="ke" value="0.190810929890258" units="per_sec" constant="true"/>
+      <parameter id="kh" value="0.111396529192474" units="per_sec" constant="true"/>
+      <parameter id="k7" value="0.184941500802561" units="per_sec" constant="true"/>
+      <parameter id="k_7" value="1.18162979520134" units="per_sec" constant="true"/>
+      <parameter id="k10" value="0.151743070375735" units="per_nMs" constant="true"/>
+      <parameter id="k_10" value="0.916145647763272" units="per_sec" constant="true"/>
+      <parameter id="k13" value="1.20585372477257" units="per_sec" constant="true"/>
+      <parameter id="k_13" value="4.22566182662203" units="per_sec" constant="true"/>
+      <parameter id="k16" value="0.204802541579403" units="per_nMs" constant="true"/>
+      <parameter id="k_16" value="4.52303673765265" units="per_sec" constant="true"/>
+      <parameter id="k19" value="0.551818784567813" units="per_sec" constant="true"/>
+      <parameter id="k_19" value="0.901038661934037" units="per_sec" constant="true"/>
+      <parameter id="k22" value="0.209467117602312" units="per_nMs" constant="true"/>
+      <parameter id="k_22" value="5.15823880228499" units="per_sec" constant="true"/>
+      <parameter id="k25" value="0.119138134847299" units="per_sec" constant="true"/>
+      <parameter id="k_25" value="0.593138670249239" units="per_sec" constant="true"/>
+      <parameter id="aR" value="0" units="nM" constant="false"/>
+      <parameter id="aRi" value="0" units="nM" constant="false"/>
+    </listOfParameters>
+    <listOfRules>
+      <assignmentRule variable="aRtot">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> aR </ci>
+            <ci> aRi </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="aR">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> pEgfr_Tgfa </ci>
+            <ci> pEgfr_Hbegf </ci>
+            <ci> pEgfr_Ar </ci>
+            <ci> pEgfr_Epgn </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="aRi">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> ipEgfr_Tgfa </ci>
+            <ci> ipEgfr_Hbegf </ci>
+            <ci> ipEgfr_Ar </ci>
+            <ci> ipEgfr_Epgn </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="J1" reversible="false">
+        <listOfProducts>
+          <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> Vr </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iEgfr" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kt </ci>
+              <ci> Egfr </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J3" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iEgfr" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kx </ci>
+              <ci> iEgfr </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J4" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Egfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k4 </ci>
+                <ci> Egfr </ci>
+                <cn> 0.165 </cn>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_4 </ci>
+                <ci> Egfr_Tgfa </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J5" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Egfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iEgfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Egfr_Tgfa </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J6" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iEgfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> iEgfr_Tgfa </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J7" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pEgfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k7 </ci>
+                <ci> Egfr_Tgfa </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_7 </ci>
+                <ci> pEgfr_Tgfa </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J8" reversible="false">
+        <listOfReactants>
+          <speciesReference species="pEgfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> pEgfr_Tgfa </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J9" reversible="false">
+        <listOfReactants>
+          <speciesReference species="ipEgfr_Tgfa" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> ipEgfr_Tgfa </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J10" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Egfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k10 </ci>
+                <ci> Egfr </ci>
+                <cn> 0.165 </cn>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_10 </ci>
+                <ci> Egfr_Hbegf </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J11" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Egfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iEgfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Egfr_Hbegf </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J12" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iEgfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> iEgfr_Hbegf </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J13" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pEgfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k13 </ci>
+                <ci> Egfr_Hbegf </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_13 </ci>
+                <ci> pEgfr_Hbegf </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J14" reversible="false">
+        <listOfReactants>
+          <speciesReference species="pEgfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> pEgfr_Hbegf </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J15" reversible="false">
+        <listOfReactants>
+          <speciesReference species="ipEgfr_Hbegf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> ipEgfr_Hbegf </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J16" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Egfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k16 </ci>
+                <ci> Egfr </ci>
+                <cn> 0.165 </cn>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_16 </ci>
+                <ci> Egfr_Ar </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J17" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Egfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iEgfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Egfr_Ar </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J18" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iEgfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> iEgfr_Ar </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J19" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pEgfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k19 </ci>
+                <ci> Egfr_Ar </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_19 </ci>
+                <ci> pEgfr_Ar </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J20" reversible="false">
+        <listOfReactants>
+          <speciesReference species="pEgfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> pEgfr_Ar </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J21" reversible="false">
+        <listOfReactants>
+          <speciesReference species="ipEgfr_Ar" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> ipEgfr_Ar </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J22" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Egfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k22 </ci>
+                <ci> Egfr </ci>
+                <cn> 0.165 </cn>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_22 </ci>
+                <ci> Egfr_Epgn </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J23" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Egfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iEgfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Egfr_Epgn </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J24" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iEgfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> iEgfr_Epgn </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J25" reversible="true">
+        <listOfReactants>
+          <speciesReference species="Egfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pEgfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k25 </ci>
+                <ci> Egfr_Epgn </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_25 </ci>
+                <ci> pEgfr_Epgn </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J26" reversible="false">
+        <listOfReactants>
+          <speciesReference species="pEgfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> pEgfr_Epgn </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J27" reversible="false">
+        <listOfReactants>
+          <speciesReference species="ipEgfr_Epgn" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kh </ci>
+              <ci> ipEgfr_Epgn </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

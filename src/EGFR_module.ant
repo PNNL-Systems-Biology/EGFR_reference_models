@@ -13,6 +13,7 @@ model EGFR_module()
   species pEgfr_Ar in cell, ipEgfr_Ar in intra;
   species Egfr_Epgn in cell, iR_Epgn in intra;
   species pEgfr_Epgn in cell, ipEgfr_Epgn in intra;
+  species aRtot;
 
   // Reactions:
   // EGFR module
@@ -93,7 +94,7 @@ model EGFR_module()
   // Species initializations:
   // all species has nM units
   // fix EGF
-  var Tgfa = 1;
+  var Tgfa = 5000;
   Egfr = 208;
   iEgfr = 0;
   Egfr_Tgfa = 0;
@@ -156,7 +157,7 @@ model EGFR_module()
   k_16 has per_sec;
   k19 = 0.3;		// 0.067;	// This is the phosphorylation probability
   k19 has per_sec;
-  k_19 = 0.13;19		// Dephosphorylation rate constant
+  k_19 = 0.13;		// Dephosphorylation rate constant
   k_19 has per_sec;
 
   k22 = 0.0016;		// Forward receptor-ligand rate constant
