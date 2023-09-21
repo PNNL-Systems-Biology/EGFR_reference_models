@@ -76,6 +76,7 @@ model RAF_activation()
     k4 = 1
     k_4 = 1
     k5 = 1
+    k_5 = 1
     k6 = 1
     k7 = 1
     k_7 = 1
