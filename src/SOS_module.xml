@@ -33,7 +33,7 @@
                   <apply>
                     <minus/>
                     <ci> t </ci>
-                    <cn type="integer"> 2 </cn>
+                    <cn type="integer"> 0 </cn>
                   </apply>
                   <cn type="integer"> 2 </cn>
                 </apply>
@@ -238,16 +238,16 @@
       <species id="tRas" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="kcat2" value="0.754575026285581" constant="true"/>
-      <parameter id="Km2" value="2.65611923779089" constant="true"/>
-      <parameter id="kcat3" value="7.50409030093679" constant="true"/>
-      <parameter id="Km3" value="5.2926441136712" constant="true"/>
+      <parameter id="kcat2" value="0.752711221686713" constant="true"/>
+      <parameter id="Km2" value="2.17856637680431" constant="true"/>
+      <parameter id="kcat3" value="4.64582093436173" constant="true"/>
+      <parameter id="Km3" value="2.98533408226456" constant="true"/>
       <parameter id="aSOS" value="0" constant="false"/>
-      <parameter id="ktRas" value="4.48123508474801" constant="true"/>
-      <parameter id="KmRasd" value="0.375387747540946" constant="true"/>
-      <parameter id="kdRas" value="0.725519873172223" constant="true"/>
+      <parameter id="ktRas" value="3.97702996955967" constant="true"/>
+      <parameter id="KmRasd" value="0.10063015528444" constant="true"/>
+      <parameter id="kdRas" value="0.751537443408646" constant="true"/>
       <parameter id="GAP" value="1" constant="true"/>
-      <parameter id="KmRast" value="0.101117631128982" constant="true"/>
+      <parameter id="KmRast" value="0.601880220491444" constant="true"/>
     </listOfParameters>
     <listOfRules>
       <assignmentRule variable="aSOS">
