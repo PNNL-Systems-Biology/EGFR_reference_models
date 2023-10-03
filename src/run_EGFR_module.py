@@ -18,8 +18,9 @@ t = np.linspace(0, 12, 1201)
 
 # print(sim)
 
-plt.plot(t, sim['aRtot'], c='red', label='aRtot fit')
-plt.scatter(egfr_time, egfr, c='red', label='aRtot data')
+plt.plot(t, sim['aRtot'], label='active EGFR fit')
+plt.scatter(egfr_time, egfr, label='active EGFR data')
+plt.title('EGFR module')
 
-plt.legend()
+plt.legend(loc='lower right')
 plt.show()

@@ -1,0 +1,93 @@
+
+
+function a(t)
+2.4997820512820517 - 3 * 0.07994551282051288 * (t-0)^2
+end
+function b(t)
+1.5404358974358974 - 2 * 0.4796730769230769 * (t-2) + 3 * 0.06847756410256411 * (t-2)^2
+end
+function c(t)
+0.44347435897435894 - 2 * 0.06880769230769229 * (t-4) + 3 * 0.0022852564102563977 * (t-4)^2
+end
+function d(t)
+0.19566666666666654 - 2 * 0.05509615384615388 * (t-6) + 3 * 0.006131410256410272 * (t-6)^2
+end
+
+// Created by libAntimony v2.8.1
+model SHC_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species Shc1, pShc1, ipShc1 in cell;
+species iShc1 in cell;
+species aRtot in cell;
+species $Shc1Ihtr in cell;
+
+// Reactions:
+// Shc module
+// Input: aRtot
+// Output Shc_complex
+
+J0: -> aRtot; piecewise(a(time), time<=2, b(time), time<=4, c(time), time<=6, d(time), time<=8)
+
+// Shc1 activation
+J1: aRtot + Shc1 -> aRtot + pShc1; (kcat1 * aRtot * Shc1) / (Km1 + Shc1);
+// J1: aRtot + Shc1 -> aRtot + pShc1; kcat1 * aRtot * Shc1;
+J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2 * Shc1Ihtr * pShc1) / (Km2 + pShc1);
+// J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; kcat2 * Shc1Ihtr * pShc1;
+J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3 * Shc1Ihtr * Shc1) / (Km3 + Shc1);
+// J4: shc_phos + pShc1 -> shc_phos + Shc1; (kcat4 * shc_phos * pShc1) / (Km4 + pShc1);
+// J4: shc_phos + pShc1 -> shc_phos + Shc1; kcat4 * shc_phos * pShc1;
+
+
+// Species initializations:
+// fix EGF
+Shc1 = 28.564
+Shc1 has nM;
+pShc1 = 0.74;
+pShc1 has nM;
+iShc1 = 0;
+iShc1 has nM;
+ipShc1 = 0;
+ipShc1 has nM;
+$Shc1Ihtr = 1
+Shc1Ihtr has nM;
+shc_phos = 1
+
+
+// Compartment initializations:
+cell = 1;
+intra = 1;
+
+// Variable initializations:
+kcat1 = 0.7393428437073469 // Receptor - Shc recruitment
+Km1 = 0.0001712418746823 / 23.4; // Dissociation of Shc from phospho-EGFR
+
+kcat2 = 0.0001000170413018 // Receptor - Shc recruitment
+Km2 = 9.998051162271048 / 1e2; // Dissociation of Shc from phospho-EGFR
+
+kcat3 = 9.492777245131522 // Receptor - Shc recruitment
+Km3 = 0.0001162173575844 // Dissociation of Shc from phospho-EGFR
+
+// kcat4 = 9.99990575249888
+// Km4 = 0.3772995966099237
+
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_sec = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_sec is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+
+end

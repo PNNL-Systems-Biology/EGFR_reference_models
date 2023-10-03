@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="SHC_module" id="SHC_module" substanceUnits="substance" timeUnits="time_unit">
+    <listOfFunctionDefinitions>
+      <functionDefinition id="a">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <minus/>
+              <cn> 2.49978205128205 </cn>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.0799455128205129 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 0 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="b">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> 1.5404358974359 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.479673076923077 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.0684775641025641 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="c">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> 0.443474358974359 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.0688076923076923 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 4 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.0022852564102564 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 4 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="d">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> 0.195666666666667 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.0550961538461539 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 6 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.00613141025641027 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 6 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfUnitDefinitions>
+      <unitDefinition id="nM">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="substance" name="nmole">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="time_unit" name="s">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nM">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_sec" name="s-1">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="nM_per_sec" name="nM/s">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nMs" name="nM-1 s-1">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="cell" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="extra" name="extracellular space" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="intra" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="Shc1" compartment="default_compartment" initialAmount="28.564" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pShc1" compartment="default_compartment" initialAmount="0.74" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ipShc1" compartment="cell" initialAmount="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iShc1" compartment="cell" initialAmount="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aRtot" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Shc1Ihtr" compartment="cell" initialConcentration="1" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
+      <species id="shc_phos" compartment="default_compartment" initialAmount="1" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="kcat1" value="2.29713579208052" constant="true"/>
+      <parameter id="kcat4" value="60.3383401468377" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="J0" reversible="true">
+        <listOfProducts>
+          <speciesReference species="aRtot" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> a </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> b </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 4 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> c </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 6 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> d </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 8 </cn>
+                </apply>
+              </piece>
+            </piecewise>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J1" reversible="true">
+        <listOfReactants>
+          <speciesReference species="aRtot" stoichiometry="1" constant="true"/>
+          <speciesReference species="Shc1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="aRtot" stoichiometry="1" constant="true"/>
+          <speciesReference species="pShc1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kcat1 </ci>
+              <ci> aRtot </ci>
+              <ci> Shc1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J4" reversible="true">
+        <listOfReactants>
+          <speciesReference species="shc_phos" stoichiometry="1" constant="true"/>
+          <speciesReference species="pShc1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="shc_phos" stoichiometry="1" constant="true"/>
+          <speciesReference species="Shc1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kcat4 </ci>
+              <ci> shc_phos </ci>
+              <ci> pShc1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

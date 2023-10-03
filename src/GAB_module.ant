@@ -1,71 +1,102 @@
+
+function a(t)
+2.4997820512820517 - 3 * 0.07994551282051288 * (t-0)^2
+end
+function b(t)
+1.5404358974358974 - 2 * 0.4796730769230769 * (t-2) + 3 * 0.06847756410256411 * (t-2)^2
+end
+function c(t)
+0.44347435897435894 - 2 * 0.06880769230769229 * (t-4) + 3 * 0.0022852564102563977 * (t-4)^2
+end
+function d(t)
+0.19566666666666654 - 2 * 0.05509615384615388 * (t-6) + 3 * 0.006131410256410272 * (t-6)^2
+end
+
+function x(t)
+1.0958035714285712 - 2 * 2.220446049250313e-16 * (t-0) + 3 * 0.01479910714285726 * (t-0)^2
+end
+function y(t)
+1.2733928571428572 + 2 * 0.08879464285714345 * (t-2) - 3 * 0.0614955357142859 * (t-2)^2
+end
+function z(t)
+0.8906250000000004 - 2 * 0.28017857142857183 * (t-4) + 3 * 0.022433035714285787 * (t-4)^2
+end
+function w(t)
+0.03910714285714256 - 2 * 0.1455803571428571 * (t-6) + 3 * 0.02426339285714285 * (t-6)^2
+end
+
+
 // Created by libAntimony v2.8.1
 model GAB_module()
 
-    // Compartments and Species:
-    compartment cell, extra, intra;
-    species Gab1, pGab1, peGab1 in cell;
-    species $aRtot, $Gab1Ehcr in cell;
-    species Grb2, Shp2 in cell;
-    species Grb2_Gab1 in cell, Grb2_pGab1 in cell;
-    species Grb2_ppGab1 in cell, Grb2_ppGab1_Shp2 in cell;
-    species Grb2_ppGab1_pShp2 in cell;
+// Compartments and Species:
+compartment cell, extra, intra;
+species Gab1, pGab1, peGab1 in cell;
+species aRtot, $Gab1Ehcr in cell;
+species Grb2, Shp2 in cell;
+species Grb2_Gab1 in cell, Grb2_pGab1 in cell;
+species Grb2_ppGab1 in cell, Grb2_ppGab1_Shp2 in cell;
+species Grb2_ppGab1_pShp2 in cell;
 
-    // Inputs/Outputs:
+// Inputs/Outputs:
 
-    // Gab1 module
-    // Inputs: aRtot
-    // Output Gab1_complex
+// Gab1 module
+// Inputs: aRtot
+// Output Gab1_complex
 
-    // Reactions
+// Reactions
 
+J0: -> aRtot; piecewise(a(time), time<=2, b(time), time<=4, c(time), time<=6, d(time), time<=8)
+J1: -> Shp2; piecewise(x(time), time<=2, y(time), time<=4, z(time), time<=6, w(time), time<=8)
 
-    // Grb2_Gab1 complex formation
-    J1: Gab1 + Grb2 -> Grb2_Gab1; k1 * Gab1 * Grb2 - k_1 * Grb2_Gab1;
+// Grb2_Gab1 complex formation
+J2: Gab1 + Grb2 -> Grb2_Gab1; k1 * Gab1 * Grb2 - k_1 * Grb2_Gab1;
 
-    // Grb2_Gab1 phosphorylation/dephosphorylation
-    J2: $aRtot + $Gab1Ehcr + Grb2_Gab1 => $aRtot + $Gab1Ehcr + Grb2_pGab1; (kcat2 * aRtot * Grb2_Gab1)/(Km2 + Grb2_Gab1) * (1 + m2 * $Gab1Ehcr ^ n2 / (Ke2 ^ n2 + $Gab1Ehcr ^ n2));
-    J3: Grb2_pGab1 => Grb2_Gab1; (V3 * Grb2_pGab1)/(Km3 + Grb2_pGab1);
+// Grb2_Gab1 phosphorylation/dephosphorylation
+J3: aRtot + $Gab1Ehcr + Grb2_Gab1 => aRtot + $Gab1Ehcr + Grb2_pGab1; (kcat2 * aRtot * Grb2_Gab1)/(Km2 + Grb2_Gab1) * (1 + m2 * $Gab1Ehcr ^ n2 / (Ke2 ^ n2 + $Gab1Ehcr ^ n2));
+J4: Grb2_pGab1 => Grb2_Gab1; (V3 * Grb2_pGab1)/(Km3 + Grb2_pGab1);
 
-    J4: $aRtot + $Gab1Ehcr + Grb2_pGab1 => $aRtot + $Gab1Ehcr + Grb2_ppGab1; (kcat4 * aRtot * Grb2_Gab1)/(Km4 + Grb2_Gab1) * (1 + m4 * $Gab1Ehcr ^ n4 / (Ke4 ^ n4 + $Gab1Ehcr ^ n4));
-    J5: Grb2_ppGab1 => Grb2_pGab1; (V5 * Grb2_pGab1)/(Km5 + Grb2_pGab1);
+J5: aRtot + $Gab1Ehcr + Grb2_pGab1 => aRtot + $Gab1Ehcr + Grb2_ppGab1; (kcat4 * aRtot * Grb2_Gab1)/(Km4 + Grb2_Gab1) * (1 + m4 * $Gab1Ehcr ^ n4 / (Ke4 ^ n4 + $Gab1Ehcr ^ n4));
+J6: Grb2_ppGab1 => Grb2_pGab1; (V5 * Grb2_pGab1)/(Km5 + Grb2_pGab1);
 
-    // Grb2_pGab1_Shp2 complex formation 
-    J6: Grb2_ppGab1 + Shp2 -> Grb2_ppGab1_Shp2; k6 * Grb2_ppGab1 * Shp2 - k_6 * Grb2_ppGab1_Shp2;
+// Grb2_pGab1_Shp2 complex formation
+J7: Grb2_ppGab1 + Shp2 -> Grb2_ppGab1_Shp2; k6 * Grb2_ppGab1 * Shp2 - k_6 * Grb2_ppGab1_Shp2;
 
-    // Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
-    J7: Grb2_ppGab1_Shp2 -> Grb2_ppGab1_pShp2; k7 * Grb2_ppGab1_Shp2 - k_7 * Grb2_ppGab1_pShp2;
+// Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
+J8: Grb2_ppGab1_Shp2 -> Grb2_ppGab1_pShp2; k7 * Grb2_ppGab1_Shp2 - k_7 * Grb2_ppGab1_pShp2;
 
-    // Species initializations:
+// Species initializations:
 
-    Gab1 = 1
-    Grb2 = 1
-    Shp2 = 1
+Gab1 = 3.142
+Grb2 = 19.1
+Shp2 = 3.5
+$Gab1Ehcr = 1
 
-    // Compartment initializations:
-    cell = 1;
-    extra = 1;
-    intra = 1;
+// Compartment initializations:
+cell = 1;
+extra = 1;
+intra = 1;
 
-    // Variable initializations:
-    k1 = 0.1;
-    k_1 = 1;
-    kcat2 = 10;
-    Km2 = 1;
-    m2 = 1;
-    n2 = 1;
-    Ke2 = 1;
-    V3 = 0.1;
-    Km3 = 1;
-    kcat4 = kcat2;
-    Km4 = Km2;
-    m4 = m2;
-    n4 = n2;
-    Ke4 = Ke2;
-    V5 = V3;
-    Km5 = Km3;
-    k6 = 0.1;
-    k_6 = 1;
-    k7 = 10;
-    k_7 = 1;
+// Variable initializations:
+k1 = 4.294445967418692
+k_1 = 0.1204584576693468
+kcat2 = 0.1167153593810187
+Km2 = 1.019740114922948
+m2 = 0.7841369937188624
+n2 = 1.0485103740349806
+Ke2 = 1.0830073013299264
+V3 = 8.936320699262762
+Km3 = 0.7451017180864172
+kcat4 = 0.3179980724217036
+Km4 = 0.3071397188146269
+m4 = 2.2802108939637744
+n4 = 0.809005712125913
+Ke4 = 0.3183750718228464
+V5 = 0.7574558196346375
+Km5 = 3.705260923328401
+k6 = 0.8495732775195552
+k_6 = 0.1897879293901053
+k7 = 1.5610579225705803
+k_7 = 3.2180787636664823
 
 end

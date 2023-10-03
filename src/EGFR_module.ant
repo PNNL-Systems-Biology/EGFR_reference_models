@@ -99,7 +99,7 @@ $aRtot has nM;
 // all species has nM units
 // fix EGF
 var Tgfa = 5000;
-Egfr = 208;
+Egfr = 190;
 iEgfr = 0;
 Egfr_Tgfa = 0;
 iEgfr_Tgfa = 0;
@@ -126,31 +126,31 @@ extra = 5000;
 intra = 1;
 
 // Variable initializations:
-kt = 0.1170850208397941 // Endocytosis of empty receptors
-ke = 0.123240939764946 // Endocytosis of activated receptors
-Vr = 9.974302189523208 // Replenishment of empty receptors
-kx = 0.1299692594048219 // Degradation of empty receptors
-kh = 0.1011289772654585 // 0.00024; // Degradation of activated receptors
+kt = 0.494906840687134 // Endocytosis of empty receptors
+ke = 0.1033648681890302 // Endocytosis of activated receptors
+Vr = 7.338322266248808 // Replenishment of empty receptors
+kx = 0.5533051912210702 // Degradation of empty receptors
+kh = 0.1003454760997709 // 0.00024; // Degradation of activated receptors
 
-k4 = 1.011706987437692 // Forward receptor-ligand rate constant
-k_4 = 0.2915959060753223 // Reverse receptor-ligand rate constant
-k7 = 0.3369460497262929 // 0.067; // This is the phosphorylation probability
-k_7 = 3.465558159534264 // Dephosphorylation rate constant
+k4 = 0.1112598353847259 // Forward receptor-ligand rate constant
+k_4 = 6.004005912866197 // Reverse receptor-ligand rate constant
+k7 = 1.1841939576155238 // 0.067; // This is the phosphorylation probability
+k_7 = 4.05735346305901 // Dephosphorylation rate constant
 
-k10 = 0.2572221117415922 // Forward receptor-ligand rate constant
-k_10 = 0.2808669633512481 // Reverse receptor-ligand rate constant
-k13 = 0.1544934854936008 // 0.067; // This is the phosphorylation probability
-k_13 = 3.149422336080644 // Dephosphorylation rate constant
+k10 = 0.5647755104375924 // Forward receptor-ligand rate constant
+k_10 = 5.658385013278595 // Reverse receptor-ligand rate constant
+k13 = 0.1887329095237483 // 0.067; // This is the phosphorylation probability
+k_13 = 4.060717275896334 // Dephosphorylation rate constant
 
-k16 = 0.1469047133736626 // Forward receptor-ligand rate constant
-k_16 = 1.6078894752975967 // Reverse receptor-ligand rate constant
-k19 = 0.1616057204487952 // 0.067; // This is the phosphorylation probability
-k_19 = 4.580030722252246 // Dephosphorylation rate constant
+k16 = 1.2965889753010122 // Forward receptor-ligand rate constant
+k_16 = 5.137445809878094 // Reverse receptor-ligand rate constant
+k19 = 0.153311914022963 // 0.067; // This is the phosphorylation probability
+k_19 = 8.415773330256286 // Dephosphorylation rate constant
 
-k22 = 0.1376214248080926 // Forward receptor-ligand rate constant
-k_22 = 1.119526628216954 // Reverse receptor-ligand rate constant
-k25 = 0.5573945338222349 // 0.067; // This is the phosphorylation probability
-k_25 = 2.359923025623958 // Dephosphorylation rate constant
+k22 = 0.1171945954197966 // Forward receptor-ligand rate constant
+k_22 = 0.4604129020328973 // Reverse receptor-ligand rate constant
+k25 = 9.170941654760831 // 0.067; // This is the phosphorylation probability
+k_25 = 0.1262197821162962 // Dephosphorylation rate constant
 
 // Other declarations:
 // var k_1, k_2, k_3;

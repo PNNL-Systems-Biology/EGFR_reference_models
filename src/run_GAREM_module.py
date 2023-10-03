@@ -17,8 +17,9 @@ r = te.loada('current_model.ant')
 sim = r.simulate(0, 8, 801, selections=['time', 'aRtot', 'Shp2', 'Grb2_ppGarem_pShp2'])
 t = np.linspace(0, 8, 801)
 
-plt.plot(t, sim['Grb2_ppGarem_pShp2'], c='red', label='garem-complex fit')
-plt.scatter(garem_time, garem, c='red', label='garem-complex data')
+plt.plot(t, sim['Grb2_ppGarem_pShp2'], label='garem-complex fit')
+plt.scatter(garem_time, garem, label='garem-complex data')
+plt.title('GAREM module')
 
 plt.legend()
 plt.show()

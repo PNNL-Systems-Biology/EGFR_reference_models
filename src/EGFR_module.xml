@@ -8,19 +8,6 @@
           <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
-      <unitDefinition id="per_sec" name="s-1">
-        <listOfUnits>
-          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
-      <unitDefinition id="nM_per_sec"/>
-      <unitDefinition id="per_nMs" name="nM-1 s-1">
-        <listOfUnits>
-          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
-          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
-          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
-        </listOfUnits>
-      </unitDefinition>
       <unitDefinition id="substance" name="nmole">
         <listOfUnits>
           <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
@@ -37,10 +24,22 @@
           <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
+      <unitDefinition id="per_sec" name="s-1">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
       <unitDefinition id="nM_per_s" name="nM/s">
         <listOfUnits>
           <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
           <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nMs" name="nM-1 s-1">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
           <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
         </listOfUnits>
       </unitDefinition>
@@ -56,7 +55,7 @@
       <species id="Hbegf" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="Ar" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="Epgn" compartment="extra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="Egfr" compartment="cell" initialAmount="208" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Egfr" compartment="cell" initialAmount="190" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="iEgfr" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="Egfr_Tgfa" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="iR_Tgfa" compartment="intra" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
@@ -81,27 +80,27 @@
       <species id="iEgfr_Epgn" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="Vr" value="0.242" units="nM_per_sec" constant="true"/>
-      <parameter id="kt" value="0.0012" units="per_sec" constant="true"/>
-      <parameter id="kx" value="0.006" units="per_sec" constant="true"/>
-      <parameter id="k4" value="0.0016" units="per_nMs" constant="true"/>
-      <parameter id="k_4" value="0.004" units="per_sec" constant="true"/>
-      <parameter id="ke" value="0.0033" units="per_sec" constant="true"/>
-      <parameter id="kh" value="0.004" units="per_sec" constant="true"/>
-      <parameter id="k7" value="0.3" units="per_sec" constant="true"/>
-      <parameter id="k_7" value="0.13" units="per_sec" constant="true"/>
-      <parameter id="k10" value="0.0016" units="per_nMs" constant="true"/>
-      <parameter id="k_10" value="0.001" units="per_sec" constant="true"/>
-      <parameter id="k13" value="0.3" units="per_sec" constant="true"/>
-      <parameter id="k_13" value="0.1313" units="per_sec" constant="true"/>
-      <parameter id="k16" value="0.0016" units="per_nMs" constant="true"/>
-      <parameter id="k_16" value="0.0016" units="per_sec" constant="true"/>
-      <parameter id="k19" value="0.3" units="per_sec" constant="true"/>
-      <parameter id="k_19" value="0.13" units="per_sec" constant="true"/>
-      <parameter id="k22" value="0.0016" units="per_nMs" constant="true"/>
-      <parameter id="k_22" value="0.0022" units="per_sec" constant="true"/>
-      <parameter id="k25" value="0.3" units="per_sec" constant="true"/>
-      <parameter id="k_25" value="0.1325" units="per_sec" constant="true"/>
+      <parameter id="Vr" value="7.33832226624881" constant="true"/>
+      <parameter id="kt" value="0.494906840687134" constant="true"/>
+      <parameter id="kx" value="0.55330519122107" constant="true"/>
+      <parameter id="k4" value="0.111259835384726" constant="true"/>
+      <parameter id="k_4" value="6.0040059128662" constant="true"/>
+      <parameter id="ke" value="0.10336486818903" constant="true"/>
+      <parameter id="kh" value="0.100345476099771" constant="true"/>
+      <parameter id="k7" value="1.18419395761552" constant="true"/>
+      <parameter id="k_7" value="4.05735346305901" constant="true"/>
+      <parameter id="k10" value="0.564775510437592" constant="true"/>
+      <parameter id="k_10" value="5.6583850132786" constant="true"/>
+      <parameter id="k13" value="0.188732909523748" constant="true"/>
+      <parameter id="k_13" value="4.06071727589633" constant="true"/>
+      <parameter id="k16" value="1.29658897530101" constant="true"/>
+      <parameter id="k_16" value="5.13744580987809" constant="true"/>
+      <parameter id="k19" value="0.153311914022963" constant="true"/>
+      <parameter id="k_19" value="8.41577333025629" constant="true"/>
+      <parameter id="k22" value="0.117194595419797" constant="true"/>
+      <parameter id="k_22" value="0.460412902032897" constant="true"/>
+      <parameter id="k25" value="9.17094165476083" constant="true"/>
+      <parameter id="k_25" value="0.126219782116296" constant="true"/>
       <parameter id="aR" value="0" units="nM" constant="false"/>
       <parameter id="aRi" value="0" units="nM" constant="false"/>
     </listOfParameters>
@@ -182,7 +181,6 @@
       </reaction>
       <reaction id="J4" reversible="true">
         <listOfReactants>
-          <speciesReference species="Tgfa" stoichiometry="1" constant="true"/>
           <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
@@ -196,7 +194,7 @@
                 <times/>
                 <ci> k4 </ci>
                 <ci> Egfr </ci>
-                <ci> Tgfa </ci>
+                <cn> 0.165 </cn>
               </apply>
               <apply>
                 <times/>
@@ -296,7 +294,6 @@
       </reaction>
       <reaction id="J10" reversible="true">
         <listOfReactants>
-          <speciesReference species="Hbegf" stoichiometry="1" constant="true"/>
           <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
@@ -310,7 +307,7 @@
                 <times/>
                 <ci> k10 </ci>
                 <ci> Egfr </ci>
-                <ci> Hbegf </ci>
+                <cn> 0.165 </cn>
               </apply>
               <apply>
                 <times/>
@@ -410,7 +407,6 @@
       </reaction>
       <reaction id="J16" reversible="true">
         <listOfReactants>
-          <speciesReference species="Ar" stoichiometry="1" constant="true"/>
           <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
@@ -424,7 +420,7 @@
                 <times/>
                 <ci> k16 </ci>
                 <ci> Egfr </ci>
-                <ci> Ar </ci>
+                <cn> 0.165 </cn>
               </apply>
               <apply>
                 <times/>
@@ -524,7 +520,6 @@
       </reaction>
       <reaction id="J22" reversible="true">
         <listOfReactants>
-          <speciesReference species="Epgn" stoichiometry="1" constant="true"/>
           <speciesReference species="Egfr" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
@@ -538,7 +533,7 @@
                 <times/>
                 <ci> k22 </ci>
                 <ci> Egfr </ci>
-                <ci> Epgn </ci>
+                <cn> 0.165 </cn>
               </apply>
               <apply>
                 <times/>
