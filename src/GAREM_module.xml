@@ -328,20 +328,20 @@
       <species id="Grb2_ppGarem_pShp2" compartment="cell" initialAmount="0.96" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="k1" value="2.48149279481302" constant="true"/>
-      <parameter id="k_1" value="2.84050685754179" constant="true"/>
-      <parameter id="kcat2" value="0.292806340134508" constant="true"/>
-      <parameter id="Km2" value="5.95971443459083" constant="true"/>
-      <parameter id="V3" value="2.37302923216414" constant="true"/>
-      <parameter id="Km3" value="1.35542781087135" constant="true"/>
-      <parameter id="kcat4" value="1.68481257283484" constant="true"/>
-      <parameter id="Km4" value="2.55397721552781" constant="true"/>
-      <parameter id="V5" value="7.89876554546248" constant="true"/>
-      <parameter id="Km5" value="0.17752183910883" constant="true"/>
-      <parameter id="k6" value="4.28476245484901" constant="true"/>
-      <parameter id="k_6" value="0.27524270151784" constant="true"/>
-      <parameter id="k7" value="9.99975965713209" constant="true"/>
-      <parameter id="k_7" value="4.20858819191322" constant="true"/>
+      <parameter id="k1" value="9.67676960324692" constant="true"/>
+      <parameter id="k_1" value="0.226902199236485" constant="true"/>
+      <parameter id="kcat2" value="9.71011305625659" constant="true"/>
+      <parameter id="Km2" value="0.459802109266516" constant="true"/>
+      <parameter id="V3" value="1.99816070511149" constant="true"/>
+      <parameter id="Km3" value="0.125132639525327" constant="true"/>
+      <parameter id="kcat4" value="2.25230490921302" constant="true"/>
+      <parameter id="Km4" value="0.575204245846397" constant="true"/>
+      <parameter id="V5" value="0.139838754745426" constant="true"/>
+      <parameter id="Km5" value="7.84576042490817" constant="true"/>
+      <parameter id="k6" value="9.41658930994732" constant="true"/>
+      <parameter id="k_6" value="3.40003902891007" constant="true"/>
+      <parameter id="k7" value="3.42687631730909" constant="true"/>
+      <parameter id="k_7" value="0.104259146595351" constant="true"/>
     </listOfParameters>
     <listOfReactions>
       <reaction id="J0" reversible="true">
