@@ -1,0 +1,93 @@
+// Created by libAntimony v2.8.1
+model EGFR_module()
+
+// Edited by Steven Wiley 11/21/23
+
+// Compartments and Species:
+compartment cell, extra, intra;
+Lig in extra;
+Egfr in cell;
+iEgfr in intra;
+Egfr_Lig in cell;
+iEgfr_Lig in intra;
+pEgfr_Lig in cell;
+ipEgfr_Lig in intra;
+species aRtot in cell;
+
+// Reactions:
+// EGFR module
+
+// New_Receptors
+J1: => Egfr; Vr;
+// Receptor_turnover
+J2: Egfr => iEgfr; kt * Egfr;
+// Receptor_degrad
+J3: iEgfr => ; kx * iEgfr;
+// Ligand_binding
+J4: Lig + Egfr -> Egfr_Lig; k4 * Egfr * Lig - k_4 * Egfr_Lig;
+// Receptor_ligand_endo
+J5: Egfr_Lig => iEgfr_Lig; ke * Egfr_Lig;
+// Receptor_complex_degrad
+J6: iEgfr_Lig => ; kh * iEgfr_Lig;
+// Receptor_phospho
+J7: Egfr_Lig -> pEgfr_Lig; k7 * Egfr_Lig - k_7 * pEgfr_Lig;
+// Receptor_phospho_endo
+J8: pEgfr_Lig => ipEgfr_Lig ; ke * pEgfr_Lig;
+// Receptor_phosphocomplex_degrad
+J9: ipEgfr_Lig => ; kh * ipEgfr_Lig;
+
+$aRtot := pEgfr_Lig + ipEgfr_Lig;
+$aRtot has nM;
+
+
+// all species has nM units
+// fix Lig
+var Lig = 0.165;
+Lig has nM;
+Egfr = Vr/kt;
+iEgfr = 0;
+Egfr_Lig = 0;
+iEgfr_Lig = 0;
+pEgfr_Lig = 0;
+ipEgfr_Lig = 0;
+
+
+// Compartment initializations:
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// Variable initializations:
+kt = 0.0012; // Endocytosis of empty receptors
+ke = 0.0050968900643818 // Endocytosis of activated receptors
+Vr = 0.242; // Replenishment of empty receptors
+kx = 1; // Degradation of empty receptors - set to eliminate the compartment
+kh = 0.0002435646510411 // 0.00024; // Degradation of activated receptors
+
+k4 = 0.0025961337382796 // Forward receptor-ligand 2nd order rate constant
+k_4 = 0.0047265114264843 // Reverse receptor-ligand rate constant
+k7 = 0.0621299421394651 // 0.067; // This is the phosphorylation probability
+k_7 = 0.2016462360073318 // Dephosphorylation rate constant
+
+
+// Other declarations:
+// var k_1, k_2, k_3;
+// const cell, extra, k1, k2, k3;
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_s = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_s is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+end

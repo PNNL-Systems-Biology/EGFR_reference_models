@@ -1,0 +1,365 @@
+
+
+function x(t)
+1.0958035714285712 - 2 * 2.220446049250313e-16 * (t-0) + 3 * 0.01479910714285726 * (t-0)^2
+end
+function y(t)
+1.2733928571428572 + 2 * 0.08879464285714345 * (t-2) - 3 * 0.0614955357142859 * (t-2)^2
+end
+function z(t)
+0.8906250000000004 - 2 * 0.28017857142857183 * (t-4) + 3 * 0.022433035714285787 * (t-4)^2
+end
+function w(t)
+0.03910714285714256 - 2 * 0.1455803571428571 * (t-6) + 3 * 0.02426339285714285 * (t-6)^2
+end
+
+
+function gx(t)
+1.0958035714285712 - 2 * 2.220446049250313e-16 * (t-0) + 3 * 0.01479910714285726 * (t-0)^2
+end
+function gy(t)
+1.2733928571428572 + 2 * 0.08879464285714345 * (t-2) - 3 * 0.0614955357142859 * (t-2)^2
+end
+function gz(t)
+0.8906250000000004 - 2 * 0.28017857142857183 * (t-4) + 3 * 0.022433035714285787 * (t-4)^2
+end
+function gw(t)
+0.03910714285714256 - 2 * 0.1455803571428571 * (t-6) + 3 * 0.02426339285714285 * (t-6)^2
+end
+
+
+// Created by libAntimony v2.8.1
+model EGFR_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species Tgfa in extra, Hbegf in extra, Ar in extra, Epgn in extra;
+species Egfr in cell, iEgfr in intra;
+species Egfr_Tgfa in cell, iR_Tgfa in intra;
+species pEgfr_Tgfa in cell, ipEgfr_Tgfa in intra;
+species Egfr_Hbegf in cell, iR_Hbegf in intra;
+species pEgfr_Hbegf in cell, ipEgfr_Hbegf in intra;
+species Egfr_Ar in cell, iR_Ar in intra;
+species pEgfr_Ar in cell, ipEgfr_Ar in intra;
+species Egfr_Epgn in cell, iR_Epgn in intra;
+species pEgfr_Epgn in cell, ipEgfr_Epgn in intra;
+// species aRtot;
+
+// GAREM
+species Garem in cell, pGarem in cell;
+species aRtot in cell;
+species Grb2 in cell, Shp2 in cell;
+species Grb2_Garem in cell, Grb2_pGarem in cell;
+species Grb2_ppGarem in cell, Grb2_ppGarem_Shp2 in cell;
+species Grb2_ppGarem_pShp2 in cell;
+
+// SHC
+species Shc1, pShc1, ipShc1 in cell;
+species iShc1 in cell;
+species aRtot in cell;
+species $Shc1Ihtr in cell;
+
+// GAB
+species Gab1, pGab1, peGab1 in cell;
+species aRtot, $Gab1Ehcr in cell;
+species Grb2, Shp2 in cell;
+species Grb2_Gab1 in cell, Grb2_pGab1 in cell;
+species Grb2_ppGab1 in cell, Grb2_ppGab1_Shp2 in cell;
+species Grb2_ppGab1_pShp2 in cell;
+
+// SOS
+species Gab1_pShp2, Garem_pShp2, pShc1, $aRtot, $Sos1Ihtr in cell;
+species Grb2 in cell;
+species SOS1, Grb2_SOS1, Grb2_pSOS1, Grb2_ipSOS1 in cell;
+
+
+// Reactions:
+// EGFR module
+
+// New_Receptors
+J1: => Egfr; Vr;
+// Receptor_turnover
+J2: Egfr => iEgfr; kt * Egfr;
+// Receptor_degrad
+J3: iEgfr => ; kx * iEgfr;
+
+// Ligand_binding
+J4: Tgfa + Egfr -> Egfr_Tgfa; k4 * Egfr * Tgfa - k_4 * Egfr_Tgfa;
+// J4: Egfr -> Egfr_Tgfa; k4 * Egfr * 0.165 - k_4 * Egfr_Tgfa
+// Receptor_ligand_endo
+J5: Egfr_Tgfa => iEgfr_Tgfa; ke * Egfr_Tgfa;
+// Receptor_complex_degrad
+J6: iEgfr_Tgfa => ; kh * iEgfr_Tgfa;
+// Receptor_phospho
+J7: Egfr_Tgfa -> pEgfr_Tgfa; k7 * Egfr_Tgfa - k_7 * pEgfr_Tgfa;
+// Receptor_phospho_endo
+J8: pEgfr_Tgfa => ipEgfr_Tgfa ; ke * pEgfr_Tgfa;
+// Receptor_phosphocomplex_degrad
+J9: ipEgfr_Tgfa => ; kh * ipEgfr_Tgfa;
+
+// Ligand_binding
+J10: Hbegf + Egfr -> Egfr_Hbegf; k10 * Egfr * Hbegf - k_10 * Egfr_Hbegf;
+// J10: Egfr -> Egfr_Hbegf; k10 * Egfr * 0.165 - k_10 * Egfr_Hbegf;
+// Receptor_ligand_endo
+J11: Egfr_Hbegf => iEgfr_Hbegf; ke * Egfr_Hbegf;
+// Receptor_complex_degrad
+J12: iEgfr_Hbegf => ; kh * iEgfr_Hbegf;
+// Receptor_phospho
+J13: Egfr_Hbegf -> pEgfr_Hbegf; k13 * Egfr_Hbegf - k_13 * pEgfr_Hbegf;
+// Receptor_phospho_endo
+J14: pEgfr_Hbegf => ipEgfr_Hbegf ; ke * pEgfr_Hbegf;
+// Receptor_phosphocomplex_degrad
+J15: ipEgfr_Hbegf => ; kh * ipEgfr_Hbegf;
+
+// Ligand_binding
+J16: Ar + Egfr -> Egfr_Ar; k16 * Egfr * Ar - k_16 * Egfr_Ar;
+// J16: Egfr -> Egfr_Ar; k16 * Egfr * 0.165 - k_16 * Egfr_Ar;
+// Receptor_ligand_endo
+J17: Egfr_Ar => iEgfr_Ar; ke * Egfr_Ar;
+// Receptor_complex_degrad
+J18: iEgfr_Ar => ; kh * iEgfr_Ar;
+// Receptor_phospho
+J19: Egfr_Ar -> pEgfr_Ar; k19 * Egfr_Ar - k_19 * pEgfr_Ar;
+// Receptor_phospho_endo
+J20: pEgfr_Ar => ipEgfr_Ar ; ke * pEgfr_Ar;
+// Receptor_phosphocomplex_degrad
+J21: ipEgfr_Ar => ; kh * ipEgfr_Ar;
+
+// Ligand_binding
+J22: Epgn + Egfr -> Egfr_Epgn; k22 * Egfr * Epgn - k_22 * Egfr_Epgn;
+// J22: Egfr -> Egfr_Epgn; k22 * Egfr * 0.165 - k_22 * Egfr_Epgn;
+// Receptor_ligand_endo
+J23: Egfr_Epgn => iEgfr_Epgn; ke * Egfr_Epgn;
+// Receptor_complex_degrad
+J24: iEgfr_Epgn => ; kh * iEgfr_Epgn;
+// Receptor_phospho
+J25: Egfr_Epgn -> pEgfr_Epgn; k25 * Egfr_Epgn - k_25 * pEgfr_Epgn;
+// Receptor_phospho_endo
+J26: pEgfr_Epgn => ipEgfr_Epgn ; ke * pEgfr_Epgn;
+// Receptor_phosphocomplex_degrad
+J27: ipEgfr_Epgn => ; kh * ipEgfr_Epgn;
+
+// Module outputs:
+$aR := pEgfr_Tgfa + pEgfr_Hbegf + pEgfr_Ar + pEgfr_Epgn;
+$aR has nM;
+$aRi := ipEgfr_Tgfa + ipEgfr_Hbegf + ipEgfr_Ar + ipEgfr_Epgn;
+$aRi has nM;
+$aRtot := $aR + $aRi;
+$aRtot has nM;
+
+
+// GAREM
+// J0: -> aRtot; piecewise(a(time), time<=2, b(time), time<=4, c(time), time<=6, d(time), time<=8)
+J28: -> Shp2; piecewise(x(time), time<=2, y(time), time<=4, z(time), time<=6, w(time), time<=8)
+
+// Grb2_Garem complex formation
+J29: Garem + Grb2 -> Grb2_Garem; k29 * Garem * Grb2 - k_29 * Grb2_Garem;
+
+// Grb2_Garem phosphorylation/dephosphorylation
+J30: aRtot + Grb2_Garem => aRtot + Grb2_pGarem; (kcat30 * aRtot * Grb2_Garem)/(Km30 + Grb2_Garem);
+J31: Grb2_pGarem => Grb2_Garem; (V31 * Grb2_pGarem)/(Km31 + Grb2_pGarem);
+
+J32: aRtot + Grb2_pGarem => aRtot + Grb2_ppGarem; (kcat32 * aRtot * Grb2_Garem)/(Km32 + Grb2_Garem);
+J33: Grb2_ppGarem => Grb2_pGarem; (V33 * Grb2_pGarem)/(Km33 + Grb2_pGarem);
+
+// Grb2_pGarem_Shp2 complex formation
+J34: Grb2_ppGarem + Shp2 -> Grb2_ppGarem_Shp2; k34 * Grb2_ppGarem * Shp2 - k_34 * Grb2_ppGarem_Shp2;
+
+// Grb2_pGarem_Shp2 phosphorylation/dephosphorylation
+J35: Grb2_ppGarem_Shp2 -> Grb2_ppGarem_pShp2; k35 * Grb2_ppGarem_Shp2 - k_35 * Grb2_ppGarem_pShp2;
+
+// SHC
+J36: aRtot + Shc1 -> aRtot + pShc1; kcat36 * aRtot * Shc1;
+J37: shc_phos + pShc1 -> shc_phos + Shc1; kcat37 * shc_phos * pShc1;
+
+// GAB
+J38: -> Shp2; piecewise(gx(time), time<=2, gy(time), time<=4, gz(time), time<=6, gw(time), time<=8)
+
+// Grb2_Gab1 complex formation
+J39: Gab1 + Grb2 -> Grb2_Gab1; k39 * Gab1 * Grb2 - k_39 * Grb2_Gab1;
+
+// Grb2_Gab1 phosphorylation/dephosphorylation
+J40: aRtot + $Gab1Ehcr + Grb2_Gab1 => aRtot + $Gab1Ehcr + Grb2_pGab1; (kcat40 * aRtot * Grb2_Gab1)/(Km40 + Grb2_Gab1) * (1 + m40 * $Gab1Ehcr ^ n40 / (Ke40 ^ n40 + $Gab1Ehcr ^ n40));
+J41: Grb2_pGab1 => Grb2_Gab1; (V41 * Grb2_pGab1)/(Km41 + Grb2_pGab1);
+
+J42: aRtot + $Gab1Ehcr + Grb2_pGab1 => aRtot + $Gab1Ehcr + Grb2_ppGab1; (kcat42 * aRtot * Grb2_Gab1)/(Km42 + Grb2_Gab1) * (1 + m42 * $Gab1Ehcr ^ n42 / (Ke42 ^ n42 + $Gab1Ehcr ^ n42));
+J43: Grb2_ppGab1 => Grb2_pGab1; (V43 * Grb2_pGab1)/(Km43 + Grb2_pGab1);
+
+// Grb2_pGab1_Shp2 complex formation
+J44: Grb2_ppGab1 + Shp2 -> Grb2_ppGab1_Shp2; k44 * Grb2_ppGab1 * Shp2 - k_44 * Grb2_ppGab1_Shp2;
+
+// Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
+J45: Grb2_ppGab1_Shp2 -> Grb2_ppGab1_pShp2; k45 * Grb2_ppGab1_Shp2 - k_45 * Grb2_ppGab1_pShp2;
+
+// SOS
+// aggregation of inputs
+aAdptrTot := Grb2_ppGab1_pShp2 + Grb2_ppGarem_pShp2 + pShc1  // + aRtot;
+
+// Grb2_SOS1 activation
+J46: aAdptrTot + Grb2_SOS1 -> aAdptrTot + Grb2_pSOS1; (kcat46 * aAdptrTot * Grb2_SOS1) / (Km46 + Grb2_SOS1);
+
+// Grb2_pSOS1 inhibition
+J47: $Sos1Ihtr + Grb2_pSOS1 -> $Sos1Ihtr + Grb2_ipSOS1; (kcat47 * Sos1Ihtr * Grb2_pSOS1) / (Km47 + Grb2_pSOS1);
+
+// activate SOS
+$aSOS := Grb2_pSOS1 // + Grb2_pSOS2;
+
+// Ras module
+J48: dRas => tRas; (ktRas*dRas*aSOS/(KmRasd + dRas));
+J49: tRas => dRas; (kdRas*tRas*GAP/(KmRast + tRas));
+
+
+// Species initializations:
+// all species has nM units
+// fix EGF
+var Tgfa = 0.165;
+Egfr = 190;
+iEgfr = 0;
+Egfr_Tgfa = 0;
+iEgfr_Tgfa = 0;
+pEgfr_Tgfa = 0;
+ipEgfr_Tgfa = 0;
+Egfr_Hbegf = 0;
+iEgfr_Hbegf = 0;
+pEgfr_Hbegf = 0;
+ipEgfr_Hbegf = 0;
+Egfr_Ar = 0;
+iEgfr_Ar = 0;
+pEgfr_Ar = 0;
+ipEgfr_Ar = 0;
+Egfr_Epgn = 0;
+iEgfr_Epgn = 0;
+pEgfr_Epgn = 0;
+ipEgfr_Epgn = 0;
+
+// GAREM
+Garem = 15.510
+Grb2 = 19.1
+Shp2 = 3.5
+Grb2_ppGarem_pShp2 = 0.96
+
+// SHC
+Shc1 = 28.564
+pShc1 = 0.74;
+iShc1 = 0;
+ipShc1 = 0;
+$Shc1Ihtr = 1
+shc_phos = 1
+
+// GAB
+Gab1 = 3.142
+Grb2 = 19.1
+Shp2 = 3.5
+$Gab1Ehcr = 1
+
+// SOS
+Grb2_SOS1 = 6.2
+Sos1Ihtr = 1
+GAP = 1
+dRas = 98
+
+// Compartment initializations:
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// Variable initializations:
+kt = 0.5738355338172565 // Endocytosis of empty receptors
+ke = 0.1026914116559139 // Endocytosis of activated receptors
+Vr = 9.617071336041764 // Replenishment of empty receptors
+kx = 0.1698682067561215 // Degradation of empty receptors
+kh = 0.1038553952079035 // 0.00024; // Degradation of activated receptors
+
+k4 = 0.1318142980321879 // Forward receptor-ligand rate constant
+k_4 = 0.2590951515905496 // Reverse receptor-ligand rate constant
+k7 = 6.148602796150489 // 0.067; // This is the phosphorylation probability
+k_7 = 0.2565968288080184 // Dephosphorylation rate constant
+
+k10 = 2.9352088920301727 // Forward receptor-ligand rate constant
+k_10 = 3.7064321098681887 // Reverse receptor-ligand rate constant
+k13 = 7.208025648149343 // 0.067; // This is the phosphorylation probability
+k_13 = 6.067754181491617 // Dephosphorylation rate constant
+
+k16 = 0.1132043445634123 // Forward receptor-ligand rate constant
+k_16 = 1.2276249165377546 // Reverse receptor-ligand rate constant
+k19 = 0.4034643489039161 // 0.067; // This is the phosphorylation probability
+k_19 = 0.4147037369785962 // Dephosphorylation rate constant
+
+k22 = 0.4923400407445386 // Forward receptor-ligand rate constant
+k_22 = 0.3157747096921688 // Reverse receptor-ligand rate constant
+k25 = 2.115872357777392 // 0.067; // This is the phosphorylation probability
+k_25 = 0.1344450043263954 // Dephosphorylation rate constant
+
+// GAREM
+k29 = 9.676769603246916
+k_29 = 0.2269021992364847
+kcat30 = 9.710113056256588
+Km30 = 0.4598021092665165
+V31 = 1.998160705111488
+Km31 = 0.1251326395253272
+kcat32 = 2.252304909213019
+Km32 = 0.5752042458463965
+V33 = 0.1398387547454256
+Km33 = 7.845760424908174
+k34 = 9.41658930994732
+k_34 = 3.400039028910069
+k35 = 3.4268763173090937
+k_35 = 0.1042591465953506
+
+// SHC
+kcat36 = 2.2971357920805198
+kcat37 = 60.338340146837744
+
+// GAB
+k39 = 4.294445967418692
+k_39 = 0.1204584576693468
+kcat40 = 0.1167153593810187
+Km40 = 1.019740114922948
+m40 = 0.7841369937188624
+n40 = 1.0485103740349806
+Ke40 = 1.0830073013299264
+V41 = 8.936320699262762
+Km41 = 0.7451017180864172
+kcat42 = 0.3179980724217036
+Km42 = 0.3071397188146269
+m42 = 2.2802108939637744
+n42 = 0.809005712125913
+Ke42 = 0.3183750718228464
+V43 = 0.7574558196346375
+Km43 = 3.705260923328401
+k44 = 0.8495732775195552
+k_44 = 0.1897879293901053
+k45 = 1.5610579225705803
+k_45 = 3.2180787636664823
+
+// SOS
+kcat46 = 0.5271984243916862
+Km46 = 0.2126528300576308
+kcat47 = 9.99997420556397
+Km47 = 7.718076360631921
+ktRas = 4.436440936113107
+KmRasd = 1.132468709426225
+kdRas = 0.7401491419142731
+KmRast = 0.134574607224175
+
+// Other declarations:
+// var k_1, k_2, k_3;
+// const cell, extra, k1, k2, k3;
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_s = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_s is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+end

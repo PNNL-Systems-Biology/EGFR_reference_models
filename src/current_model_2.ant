@@ -1,0 +1,90 @@
+// Function
+function ras(t)
+12.69798 - 2 * 1.9101 * t + 3 * 0.08355 * t ^ 2
+end
+
+model RAF_activation()
+
+// Species
+
+// 'b' means bound at both sites (bi)
+// 'u' means bound at one sites (uni)
+
+species RAS
+species ppRAF_d1433b_MEK
+species RASu_ppRAF_d1433b_MEK
+species RASu_ppRAF_d1433u_MEK
+species RASb_ppRAF_d1433u_MEK
+species MRAS_SHOC2_PP1C
+species MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+species RASb_pRAF_d1433u_MEK
+species RAFa_MEK, RAFa_pMEK, RAFa_ppMEK
+species ERK, pERK, ppERK
+
+// Reactions
+
+// Notes: RAS nanoclustering is not taken into account here
+// Notes: RAS is assumed to be in the GTP bound state
+
+J0: -> RAS; ras(time)
+
+// Ras binds RBD domain
+J1: RAS + ppRAF_d1433b_MEK -> RASu_ppRAF_d1433b_MEK; k1 * RAS * ppRAF_d1433b_MEK - k_1 * RASu_ppRAF_d1433b_MEK
+
+// d1433 releasd from C-terminal phosphorylation site
+J2: RASu_ppRAF_d1433b_MEK -> RASu_ppRAF_d1433u_MEK; k2 * RASu_ppRAF_d1433b_MEK - k_2 * RASu_ppRAF_d1433u_MEK
+
+// RAS binds CRD domain
+J3: RASu_ppRAF_d1433u_MEK -> RASb_ppRAF_d1433u_MEK; k3 * RASu_ppRAF_d1433u_MEK - k_3 * RASb_ppRAF_d1433u_MEK
+
+// MRAS_SHOC2_PP1C complex dephosphorylates the C-terminal site
+J4: MRAS_SHOC2_PP1C + RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK; k4 * MRAS_SHOC2_PP1C * RASb_ppRAF_d1433u_MEK - k_4 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+J5: MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK -> MRAS_SHOC2_PP1C + RASb_pRAF_d1433u_MEK; k5 * MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u_MEK
+
+// RAF complex dimerization (active RAF or RAFa_MEK)
+// Notes:
+// The reverse (unbinding of the dimer is not taken into account here)
+J6: 2 RASb_pRAF_d1433u_MEK -> RAFa_MEK; k6 * RASb_pRAF_d1433u_MEK^2
+
+// MEK phosphorylation
+J7: RAFa_MEK -> RAFa_pMEK; k7 * RAFa_MEK - k_7 * RAFa_pMEK
+J8: RAFa_pMEK -> RAFa_ppMEK; k8 * RAFa_pMEK - k_8 * RAFa_ppMEK
+
+// ERK phosphorylation
+J9: RAFa_ppMEK + ERK -> RAFa_ppMEK_ERK; k9 * RAFa_ppMEK * ERK - k_9 * RAFa_ppMEK_ERK
+J10: RAFa_ppMEK_ERK -> RAFa_ppMEK + pERK; k10 * RAFa_ppMEK_ERK
+J11: RAFa_ppMEK + pERK -> RAFa_ppMEK_pERK; k11 * RAFa_ppMEK * pERK - k_11 * RAFa_ppMEK_pERK
+J12: RAFa_ppMEK_pERK -> RAFa_ppMEK + ppERK; k12 * RAFa_ppMEK_pERK
+J13: pERK -> ERK; k13 * pERK
+J14: ppERK -> pERK; k14 * ppERK
+
+// initial values
+ppRAF_d1433b_MEK = 15.4
+MRAS_SHOC2_PP1C = 15
+ERK = 153
+
+// Parameters
+k1 = 180.02619762978026
+k_1 = 0.0001537769244912
+k2 = 4.498594017749679
+k_2 = 144376.66334453027
+k3 = 222793.81731934383
+k_3 = 0.0004581415009296
+k4 = 1709024.2397921633
+k_4 = 8660.910961329831
+k5 = 2.605425179187096
+k6 = 553290.7118423949
+k7 = 38717.29504543416
+k_7 = 0.0258626365492998
+k8 = 14.565422746564384
+k_8 = 1772.2691228276892
+k9 = 0.8754195204954595
+k_9 = 0.0387169769399751
+k10 = 2863.365867519245
+k11 = 46.812610909495696
+k_11 = 0.0064054892697665
+k12 = 10162.622227498878
+k13 = 2.125217051175423e-06
+k14 = 0.2164777863613004
+
+end

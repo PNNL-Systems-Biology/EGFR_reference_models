@@ -6,7 +6,7 @@ import pandas as pd
 import tellurium as te
 
 shc_datafile = 'shc.txt'
-egfr_datafile = 'egfr.txt'
+# egfr_datafile = 'egfr.txt'
 
 # egfr_df = pd.read_csv(egfr_datafile, delimiter=r"\s+")
 # egfr_time = np.array(egfr_df['Time'])

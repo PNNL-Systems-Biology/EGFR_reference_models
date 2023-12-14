@@ -1,9 +1,10 @@
 
 import "EGFR_module.ant"
-import "GAREM_module.ant"
-import "SHC_module.ant"
-import "GAB_module.ant"
-import "SOS_module.ant"
+import "GAREM_module_m.ant"
+import "SHC_MA_module_m.ant"
+import "GAB_module_m.ant"
+import "SOS_module2_m.ant"
+// import "RAF_activation_2022_m.ant"
 
 model EGFR_Reference_Model()
 
@@ -12,21 +13,25 @@ model EGFR_Reference_Model()
     SHC: SHC_module();
     GAB: GAB_module();
     SOS: SOS_module();
+    // RAF: RAF_activation();
 
     GAREM.aRtot is EGFR.aRtot;
     SHC.aRtot is EGFR.aRtot;
     GAB.aRtot is EGFR.aRtot;
-    SOS.aRtot is EGFR.aRtot;
+    // SOS.aRtot is EGFR.aRtot;
 
-    GAREM.Grb2 is SOS.Grb2;
-    GAB.Grb2 is SOS.Grb2;
+    // GAREM.Grb2 is SOS.Grb2;
+    // GAB.Grb2 is SOS.Grb2;
 
     SOS.Gab1_pShp2 is GAB.Grb2_ppGab1_pShp2;
     SOS.Garem_pShp2 is GAREM.Grb2_ppGarem_pShp2;
     SOS.pShc1 is SHC.pShc1;
 
-    species $aSOS in cell;
+    // RAF.RAS is SOS.tRas;
 
-    $aSOS is SOS.aSOS;
+    // species $aSOS in cell;
+    // $aSOS is SOS.aSOS;
+
+
 
 end

@@ -1,0 +1,67 @@
+// Created by libAntimony v2.8.1
+model SHC_module()
+
+    // Compartments and Species:
+    compartment cell, extra, intra;
+    species Shc1, pShc1, ipShc1 in cell;
+    // species iShc1 in cell;
+    species aRtot in cell;
+    species $Shc1Ihtr in cell;
+
+    // Reactions:
+    // Shc module
+    // Input: aRtot
+    // Output Shc_complex
+
+    // Shc1 activation
+    J1: aRtot + Shc1 -> aRtot + pShc1; (kcat1 * aRtot * Shc1) / (Km1 + Shc1);
+    J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2 * Shc1Ihtr * pShc1) / (Km2 + pShc1);
+    // J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3 * Shc1Ihtr * Shc1) / (Km3 + Shc1);
+
+    // Species initializations:
+    // fix EGF
+    Shc1 = 28.564
+    Shc1 has nM;
+    pShc1 = 0;
+    pShc1 has nM;
+    // iShc1 = 0;
+    // iShc1 has nM;
+    ipShc1 = 0;
+    ipShc1 has nM;
+    Shc1Ihtr = 0;
+    Shc1Ihtr has nM;
+
+
+    // Compartment initializations:
+    cell = 1;
+    intra = 1;
+
+    // Variable initializations:
+    kcat1 = 1130;			// Receptor - Shc recruitment
+    Km1 = 8167 / 23.4;		// Dissociation of Shc from phospho-EGFR
+
+    kcat2 = 1e3;			// Receptor - Shc recruitment
+    Km2 = 5e3 / 1e2;		// Dissociation of Shc from phospho-EGFR
+
+    // kcat3 = kcat2;			// Receptor - Shc recruitment
+    // Km3 = Km2;		// Dissociation of Shc from phospho-EGFR
+
+
+    // Unit definitions:
+    unit substance = 1e-9 mole;
+    unit time_unit = second;
+    unit nM = 1e-9 mole / litre;
+    unit per_nM = litre / 1e-9 mole;
+    unit per_sec = 1 / second;
+    unit nM_per_sec = 1e-9 mole / (litre * second);
+    unit per_nMs = litre / (1e-9 mole * second);
+
+    // Display Names:
+    substance is "nmole";
+    time_unit is "s";
+    per_sec is "s-1";
+    nM_per_sec is "nM/s";
+    per_nMs is "nM-1 s-1";
+    extra is "extracellular space";
+
+end

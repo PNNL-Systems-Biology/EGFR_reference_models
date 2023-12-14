@@ -1,0 +1,195 @@
+// model GrbSos(Rp)
+model *Grb2_SOS_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species pR, Grb2, SOS1, SOS1p, GS1, pR_GS1, SOS2, SOS2p, GS2, pR_GS2 in cell;
+species Shc, pR_Shc, pR_pShc, pShc in cell;
+species pR_pShc_GS1, pShc_GS1, pR_pShc_GS2, pShc_GS2 in cell;
+species RasGAP, pR_RasGAP in cell;
+species dRas, tRas, bRasGAP, pR_RasGAP, RasGAP in cell;
+
+// Reactions:
+// Grb2-Sos complex formation
+Grb2_Sos1_formation: Grb2 + SOS1 -> GS1; (kfGrbSos1*Grb2*SOS1 - kbGrbSos1*GS1);
+Grb2_Sos2_formation: Grb2 + SOS2 -> GS2; (kfGrbSos2*Grb2*SOS2 - kbGrbSos2*GS2);
+
+// Shc complex formation
+Shc_pR_bind: pR + Shc -> pR_Shc; (kfpRShc*pR*Shc - kbpRShc*pR_Shc);
+Shc_phosphorylation: pR_Shc => pR_pShc; kppRShc*pR_Shc;
+PhosphoShc_dissociation: pR_pShc -> pR + pShc; (kbpRShcp*pShc*pR_pShc - kfpRShcp*pR*pShc);
+Phospho_Shc_dephosphorylation: pShc => Shc; kdShcp*pShc; // (vShcp*pShc/(KmShcp + pShc));
+
+// Direct Grb2-Sos-receptor complex formation  
+pR_GS1_binding: pR + GS1 -> pR_GS1; (kfpRGs1*pR*GS1 - kbpRGs1*pR_GS1);
+pR_GS2_binding: pR + GS2 -> pR_GS2; (kfpRGs2*pR*GS2 - kbpRGs2*pR_GS2);
+
+// Indirect Grb2-Sos - pShc-receptor complex formation
+pR_Shc_GS1_formation: pR_pShc + GS1 -> pR_pShc_GS1; (kfpRShcpGs1*pR_pShc*GS1 - kbpRShcpGS1*pR_pShc_GS1); // form the pShc-receptor complex
+pShc_GS1_formation: pShc + GS1 -> pShc_GS1; (kfShcpGs1*pShc*GS1 - kbShcpGs1*pShc_GS1);
+pR_Shc_GS1_formation2: pR + pShc_GS1 -> pR_pShc_GS1; (kfpRShcpGs12*pR*pShc_GS1 - kbpRShcpGs12*pR_pShc_GS1);
+
+pR_Shc_GS2_formation: pR_pShc + GS2 -> pR_pShc_GS2; (kfpRShcpGs2*pR_pShc*GS2 - kbpRShcpGS2*pR_pShc_GS2); // form the pShc-receptor complex
+pShc_GS2_formation: pShc + GS2 -> pShc_GS2; (kfShcpGs2*pShc*GS2 - kbShcpGs2*pShc_GS2);
+pR_Shc_GS2_formation2: pR + pShc_GS2 -> pR_pShc_GS2; (kfpRShcpGs22*pR*pShc_GS2 - kbpRShcpGs22*pR_pShc_GS2);
+
+// RasGap complex formation
+pR_RasGap_formation: pR + RasGAP -> pR_RasGAP; (kfpRGap*pR*RasGAP - kbpRGap*pR_RasGAP);
+
+// Ras module
+Ras_activation: dRas => tRas; (ktRas*dRas*(pR_pShc_GS1 + pR_pShc_GS2 + pR_GS1 + pShc_GS1 + pR_pShc_GS2 + pR_GS2 + pShc_GS2)/(KmRasd + dRas));
+Ras_deactivation: tRas => dRas; (kdRas*tRas*(bRasGAP+pR_RasGAP)/(KmRast + tRas));
+
+// Ras to pErk
+Erk_activation: tRas + Erk => tRas + ppErk; Erk * (bErk + mErk * tRas ^ n / (KmErk ^ n + tRas ^ n))
+
+// Negative feedback from Erk
+Sos1_Erk_binding: SOS1 + ppErk -> SOS1_ppErk; (kfErkSos1*SOS1*ppErk - kbErkSos1*SOS1_ppErk);	// Binding of SOS by Erk
+Sos1_phosphorylation: SOS1_ppErk => ppErk + SOS1p; (kpErkSos1*SOS1_ppErk);		// phosphorylation of SOS
+Sos1_dephosphorylation: SOS1p => SOS1; (kdSos1*SOS1p);				// dephosphorylation of pSOS
+
+Sos2_Erk_binding: SOS2 + ppErk -> SOS2_ppErk; (kfErkSos2*SOS2*ppErk - kbErkSos2*SOS2_ppErk);	// Binding of SOS by Erk
+Sos2_phosphorylation: SOS2_ppErk => ppErk + SOS2p; (kpErkSos2*SOS2_ppErk);		// phosphorylation of SOS
+Sos2_dephosphorylation: SOS2p => SOS2; (kdSos2*SOS2p);				// dephosphorylation of pSOS
+
+// Pathway protein abndances
+Grb2 = 37.11;		// updated 3-20
+SOS1 = 0.07;		// updated 3-20
+SOS2 = 0.07;		// updated 3-20
+GS1 = 3.98;		// updated 3-20
+GS2 = 3.98;		// updated 3-20
+Shc = 67.3;
+RasGAP = 25.2;
+dRas = 140; // inactivated Ras
+Erk = 150;
+
+// Species initializations:
+pR = 0;
+SOS1p = 0;
+SOS2p = 0;
+pR_Shc = 0;
+pR_pShc = 0;
+pShc = 0;
+pR_GS1 = 0;
+pR_GS2 = 0;
+pR_pShc_GS1 = 0;
+pR_pShc_GS2 = 0;
+pShc_GS1 = 0;
+pShc_GS2 = 0;
+bRasGAP = 2e-3;
+pR_RasGAP = 0;
+ppErk = 0;
+tRas = 0; 	// activated Ras
+pR_RasGAP = 0;
+SOS1_ppErk = 0;
+SOS2_ppErk = 0;
+
+// Compartment initializations:
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// Variables:
+kfGrbSos1 = 9.45E-6;
+kfGrbSos1 has per_nMs
+kbGrbSos1 = 0.0138;
+kbGrbSos1 has per_sec;
+kfGrbSos2 = 9.45E-6;
+kfGrbSos2 has per_nMs
+kbGrbSos2 = 0.0138;
+kbGrbSos2 has per_sec;
+kfpRShc = 0.1;
+kfpRShc has per_nMs;
+kbpRShc = 2;
+kbpRShc has per_sec;
+kppRShc = 0.6;
+kppRShc has per_sec;
+kbpRShcp = 2;
+kbpRShcp has per_sec;
+kfpRShcp = 0.144;
+kfpRShcp has per_nMs;
+// vShcp = 200;
+// vShcp has nM_per_sec;
+// KmShcp = 100;
+// KmShcp has nM;
+kdShcp = 0.01;
+kdShcp has per_sec;
+kfpRGs1 = 0.144;
+kfpRGs1 has per_nMs;
+kbpRGs1 = 0.5;
+kbpRGs1 has per_sec;
+kfpRGs2 = 0.144;
+kfpRGs2 has per_nMs;
+kbpRGs2 = 0.5;
+kbpRGs2 has per_sec;
+kfpRShcpGs1 = 0.729;
+kfpRShcpGs1 has per_nMs;
+kbpRShcpGS1 = 7.3;
+kbpRShcpGS1 has per_sec;
+kfShcpGs1 = 0.202;
+kfShcpGs1 has per_nMs;
+kbShcpGs1 = 10.2;
+kbShcpGs1 has per_sec;
+kfpRShcpGs12 = 0.000547;
+kfpRShcpGs12 has per_nMs;
+kbpRShcpGs12 = 2;
+kbpRShcpGs12 has per_sec;
+kfpRShcpGs2 = 0.729;
+kfpRShcpGs2 has per_nMs;
+kbpRShcpGS2 = 7.3;
+kbpRShcpGS2 has per_sec;
+kfShcpGs2 = 0.202;
+kfShcpGs2 has per_nMs;
+kbShcpGs2 = 10.2;
+kbShcpGs2 has per_sec;
+kfpRShcpGs22 = 0.000547;
+kfpRShcpGs22 has per_nMs;
+kbpRShcpGs22 = 2;
+kbpRShcpGs22 has per_sec;
+kfpRGap = 8.26e-6;
+kfpRGap has per_nMs;
+kbpRGap = 10;
+kbpRGap has per_sec;
+ktRas = 30.4;
+ktRas has per_sec;
+KmRasd = 50;
+KmRasd has nM;
+kdRas = 49900;
+kdRas has per_sec;
+KmRast = 50;
+KmRast has nM;
+bErk = 0.05;
+bErk has per_sec;
+mErk = 1;
+mErk has per_sec;
+n = 2;
+KmErk = 70;
+KmErk has nM;
+kfErkSos1 = 2.5E-4;
+kfErkSos1 has per_nMs;
+kbErkSos1 = 0.1;
+kbErkSos1 has per_sec;
+kpErkSos1 = 1.0;
+kpErkSos1 has per_sec;
+kdSos1 = 0.1;
+kdSos1 has per_sec;
+kfErkSos2 = 2.5E-4;
+kfErkSos2 has per_nMs;
+kbErkSos2 = 0.1;
+kbErkSos2 has per_sec;
+kpErkSos2 = 1.0;
+kpErkSos2 has per_sec;
+kdSos2 = 0.1;
+kdSos2 has per_sec;
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_sec = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+end
+

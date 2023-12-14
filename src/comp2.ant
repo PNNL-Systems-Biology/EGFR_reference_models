@@ -1,0 +1,18 @@
+
+model comp()
+
+compartment compA, compB, compC;
+species A in compA;
+species B in compB, C in compC;
+
+compA = 2
+compB = 1
+compC = 1
+
+A = 1
+B = 2
+C = 0
+
+J1: A + B -> C; A * B
+
+end

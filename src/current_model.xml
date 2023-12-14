@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="RAF_activation" id="RAF_activation">
+    <listOfFunctionDefinitions>
+      <functionDefinition id="a">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <cn> 5.23700956937799 </cn>
+              <apply>
+                <times/>
+                <cn type="integer"> 2 </cn>
+                <cn type="e-notation"> 4.44089209850063 <sep/> -16 </cn>
+                <apply>
+                  <minus/>
+                  <ci> t </ci>
+                  <cn type="integer"> 0 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.0932476076555022 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 0 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="b">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <minus/>
+              <apply>
+                <plus/>
+                <cn> 6.35598086124402 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.559485645933013 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.534988038277512 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="c">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> 2.17406698564593 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 2.65044258373206 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 4 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.641704545454546 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 4 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="d">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <minus/>
+              <apply>
+                <plus/>
+                <cn> -0.727248803827752 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 1.19978468899522 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 6 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.36183014354067 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 6 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> -0.270071770334928 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.971196172248804 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 8 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn> 0.161866028708134 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 8 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="g">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <cn> -2.21084545454546 </cn>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="RAS" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ppRAF_d1433b" compartment="default_compartment" initialAmount="15.4" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RASu_ppRAF_d1433b" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RASu_ppRAF_d1433u" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RASb_ppRAF_d1433u" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="MRAS_SHOC2_PP1C" compartment="default_compartment" initialAmount="15" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RASb_pRAF_d1433u" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RAFa" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RAFa_MEK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RAFa_pMEK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RAFa_ppMEK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ERK" compartment="default_compartment" initialAmount="153" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pERK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ppERK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mek_phos" compartment="default_compartment" initialAmount="100" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="MEK" compartment="default_compartment" initialAmount="153" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RAFa_ppMEK_ERK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RAFa_ppMEK_pERK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="k1" value="9.13213246141321" constant="true"/>
+      <parameter id="k_1" value="0.0001055093521159" constant="true"/>
+      <parameter id="k2" value="0.227976230786357" constant="true"/>
+      <parameter id="k_2" value="0.000677857499061" constant="true"/>
+      <parameter id="k3" value="7450.14078622114" constant="true"/>
+      <parameter id="k_3" value="0.891915640081909" constant="true"/>
+      <parameter id="k4" value="1409.5247776867" constant="true"/>
+      <parameter id="k_4" value="5409.93069629575" constant="true"/>
+      <parameter id="k5" value="5346.17304692392" constant="true"/>
+      <parameter id="k_5" value="0.0037834268323127" constant="true"/>
+      <parameter id="k6" value="7116.82276381934" constant="true"/>
+      <parameter id="k_6" value="4652.38585872724" constant="true"/>
+      <parameter id="k7" value="0.0143883854226153" constant="true"/>
+      <parameter id="k_7" value="1828.96411614923" constant="true"/>
+      <parameter id="k71" value="8199.15924193453" constant="true"/>
+      <parameter id="k_71" value="45.6410038887662" constant="true"/>
+      <parameter id="k8" value="9566.45402977007" constant="true"/>
+      <parameter id="k_8" value="0.0068003131834961" constant="true"/>
+      <parameter id="k9" value="0.0233454200358357" constant="true"/>
+      <parameter id="k_9" value="79.8698689935705" constant="true"/>
+      <parameter id="k10" value="9554.51431093478" constant="true"/>
+      <parameter id="k11" value="9863.46057014277" constant="true"/>
+      <parameter id="k_11" value="0.149071980171689" constant="true"/>
+      <parameter id="k12" value="1194.02293478223" constant="true"/>
+      <parameter id="k13" value="0.0104543078295223" constant="true"/>
+      <parameter id="k14" value="33.4649762140579" constant="true"/>
+      <parameter id="k72" value="0.00312427683899" constant="true"/>
+      <parameter id="k81" value="0.0233906695634359" constant="true"/>
+      <parameter id="k_81" value="64.6819041982461" constant="true"/>
+      <parameter id="k82" value="3.72975734989507" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="J0" reversible="true">
+        <listOfProducts>
+          <speciesReference species="RAS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> a </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> b </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 4 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> c </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 6 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> d </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 8 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> f </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 10 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> g </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 12 </cn>
+                </apply>
+              </piece>
+            </piecewise>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J1" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAS" stoichiometry="1" constant="true"/>
+          <speciesReference species="ppRAF_d1433b" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RASu_ppRAF_d1433b" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k1 </ci>
+                <ci> RAS </ci>
+                <ci> ppRAF_d1433b </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_1 </ci>
+                <ci> RASu_ppRAF_d1433b </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J2" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RASu_ppRAF_d1433b" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RASu_ppRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k2 </ci>
+                <ci> RASu_ppRAF_d1433b </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_2 </ci>
+                <ci> RASu_ppRAF_d1433u </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J3" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RASu_ppRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RASb_ppRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k3 </ci>
+                <ci> RASu_ppRAF_d1433u </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_3 </ci>
+                <ci> RASb_ppRAF_d1433u </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J4" reversible="true">
+        <listOfReactants>
+          <speciesReference species="MRAS_SHOC2_PP1C" stoichiometry="1" constant="true"/>
+          <speciesReference species="RASb_ppRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k4 </ci>
+                <ci> MRAS_SHOC2_PP1C </ci>
+                <ci> RASb_ppRAF_d1433u </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_4 </ci>
+                <ci> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J5" reversible="true">
+        <listOfReactants>
+          <speciesReference species="MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="MRAS_SHOC2_PP1C" stoichiometry="1" constant="true"/>
+          <speciesReference species="RASb_pRAF_d1433u" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="RASb_ppRAF_d1433u"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k5 </ci>
+                <ci> MRAS_SHOC2_PP1C_RASb_ppRAF_d1433u </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_5 </ci>
+                <ci> RASb_ppRAF_d1433u </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J6" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RASb_pRAF_d1433u" stoichiometry="2" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k6 </ci>
+                <apply>
+                  <power/>
+                  <ci> RASb_pRAF_d1433u </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_6 </ci>
+                <ci> RAFa </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J7" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa" stoichiometry="1" constant="true"/>
+          <speciesReference species="MEK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_MEK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k7 </ci>
+                <ci> RAFa </ci>
+                <ci> MEK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_7 </ci>
+                <ci> RAFa_MEK </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J71" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa_MEK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_pMEK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k71 </ci>
+                <ci> RAFa_MEK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_71 </ci>
+                <ci> RAFa_pMEK </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J8" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa_pMEK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_ppMEK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k8 </ci>
+                <ci> RAFa_pMEK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_8 </ci>
+                <ci> RAFa_ppMEK </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J9" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa_ppMEK" stoichiometry="1" constant="true"/>
+          <speciesReference species="ERK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_ppMEK_ERK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k9 </ci>
+                <ci> RAFa_ppMEK </ci>
+                <ci> ERK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_9 </ci>
+                <ci> RAFa_ppMEK_ERK </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J10" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa_ppMEK_ERK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_ppMEK" stoichiometry="1" constant="true"/>
+          <speciesReference species="pERK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k10 </ci>
+              <ci> RAFa_ppMEK_ERK </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J11" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa_ppMEK" stoichiometry="1" constant="true"/>
+          <speciesReference species="pERK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_ppMEK_pERK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k11 </ci>
+                <ci> RAFa_ppMEK </ci>
+                <ci> pERK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_11 </ci>
+                <ci> RAFa_ppMEK_pERK </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J12" reversible="true">
+        <listOfReactants>
+          <speciesReference species="RAFa_ppMEK_pERK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RAFa_ppMEK" stoichiometry="1" constant="true"/>
+          <speciesReference species="ppERK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k12 </ci>
+              <ci> RAFa_ppMEK_pERK </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J13" reversible="true">
+        <listOfReactants>
+          <speciesReference species="pERK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ERK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k13 </ci>
+              <ci> pERK </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J14" reversible="true">
+        <listOfReactants>
+          <speciesReference species="ppERK" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pERK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k14 </ci>
+              <ci> ppERK </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

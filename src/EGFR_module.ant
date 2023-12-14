@@ -3,7 +3,7 @@ model EGFR_module()
 
 // Compartments and Species:
 compartment cell, extra, intra;
-species Tgfa, Hbegf, Ar, Epgn in extra
+species Tgfa in extra, Hbegf in extra, Ar in extra, Epgn in extra;
 species Egfr in cell, iEgfr in intra;
 species Egfr_Tgfa in cell, iR_Tgfa in intra;
 species pEgfr_Tgfa in cell, ipEgfr_Tgfa in intra;
@@ -26,8 +26,8 @@ J2: Egfr => iEgfr; kt * Egfr;
 J3: iEgfr => ; kx * iEgfr;
 
 // Ligand_binding
-// J4: Tgfa + Egfr -> Egfr_Tgfa; k4 * Egfr * Tgfa - k_4 * Egfr_Tgfa;
-J4: Egfr -> Egfr_Tgfa; k4 * Egfr * 0.165 - k_4 * Egfr_Tgfa
+J4: Tgfa + Egfr -> Egfr_Tgfa; k4 * Egfr * Tgfa - k_4 * Egfr_Tgfa;
+// J4: Egfr -> Egfr_Tgfa; k4 * Egfr * 0.165 - k_4 * Egfr_Tgfa
 // Receptor_ligand_endo
 J5: Egfr_Tgfa => iEgfr_Tgfa; ke * Egfr_Tgfa;
 // Receptor_complex_degrad
@@ -40,8 +40,8 @@ J8: pEgfr_Tgfa => ipEgfr_Tgfa ; ke * pEgfr_Tgfa;
 J9: ipEgfr_Tgfa => ; kh * ipEgfr_Tgfa;
 
 // Ligand_binding
-// J10: Hbegf + Egfr -> Egfr_Hbegf; k10 * Egfr * Hbegf - k_10 * Egfr_Hbegf;
-J10: Egfr -> Egfr_Hbegf; k10 * Egfr * 0.165 - k_10 * Egfr_Hbegf;
+J10: Hbegf + Egfr -> Egfr_Hbegf; k10 * Egfr * Hbegf - k_10 * Egfr_Hbegf;
+// J10: Egfr -> Egfr_Hbegf; k10 * Egfr * 0.165 - k_10 * Egfr_Hbegf;
 // Receptor_ligand_endo
 J11: Egfr_Hbegf => iEgfr_Hbegf; ke * Egfr_Hbegf;
 // Receptor_complex_degrad
@@ -54,8 +54,8 @@ J14: pEgfr_Hbegf => ipEgfr_Hbegf ; ke * pEgfr_Hbegf;
 J15: ipEgfr_Hbegf => ; kh * ipEgfr_Hbegf;
 
 // Ligand_binding
-// J16: Ar + Egfr -> Egfr_Ar; k16 * Egfr * Ar - k_16 * Egfr_Ar;
-J16: Egfr -> Egfr_Ar; k16 * Egfr * 0.165 - k_16 * Egfr_Ar;
+J16: Ar + Egfr -> Egfr_Ar; k16 * Egfr * Ar - k_16 * Egfr_Ar;
+// J16: Egfr -> Egfr_Ar; k16 * Egfr * 0.165 - k_16 * Egfr_Ar;
 // Receptor_ligand_endo
 J17: Egfr_Ar => iEgfr_Ar; ke * Egfr_Ar;
 // Receptor_complex_degrad
@@ -68,8 +68,8 @@ J20: pEgfr_Ar => ipEgfr_Ar ; ke * pEgfr_Ar;
 J21: ipEgfr_Ar => ; kh * ipEgfr_Ar;
 
 // Ligand_binding
-// J22: Epgn + Egfr -> Egfr_Epgn; k22 * Egfr * Epgn - k_22 * Egfr_Epgn;
-J22: Egfr -> Egfr_Epgn; k22 * Egfr * 0.165 - k_22 * Egfr_Epgn;
+J22: Epgn + Egfr -> Egfr_Epgn; k22 * Egfr * Epgn - k_22 * Egfr_Epgn;
+// J22: Egfr -> Egfr_Epgn; k22 * Egfr * 0.165 - k_22 * Egfr_Epgn;
 // Receptor_ligand_endo
 J23: Egfr_Epgn => iEgfr_Epgn; ke * Egfr_Epgn;
 // Receptor_complex_degrad
@@ -98,7 +98,7 @@ $aRtot has nM;
 // Species initializations:
 // all species has nM units
 // fix EGF
-var Tgfa = 5000;
+var Tgfa = 0.165;
 Egfr = 190;
 iEgfr = 0;
 Egfr_Tgfa = 0;
@@ -126,31 +126,31 @@ extra = 5000;
 intra = 1;
 
 // Variable initializations:
-kt = 0.494906840687134 // Endocytosis of empty receptors
-ke = 0.1033648681890302 // Endocytosis of activated receptors
-Vr = 7.338322266248808 // Replenishment of empty receptors
-kx = 0.5533051912210702 // Degradation of empty receptors
-kh = 0.1003454760997709 // 0.00024; // Degradation of activated receptors
+kt = 0.5738355338172565 // Endocytosis of empty receptors
+ke = 0.1026914116559139 // Endocytosis of activated receptors
+Vr = 9.617071336041764 // Replenishment of empty receptors
+kx = 0.1698682067561215 // Degradation of empty receptors
+kh = 0.1038553952079035 // 0.00024; // Degradation of activated receptors
 
-k4 = 0.1112598353847259 // Forward receptor-ligand rate constant
-k_4 = 6.004005912866197 // Reverse receptor-ligand rate constant
-k7 = 1.1841939576155238 // 0.067; // This is the phosphorylation probability
-k_7 = 4.05735346305901 // Dephosphorylation rate constant
+k4 = 0.1318142980321879 // Forward receptor-ligand rate constant
+k_4 = 0.2590951515905496 // Reverse receptor-ligand rate constant
+k7 = 6.148602796150489 // 0.067; // This is the phosphorylation probability
+k_7 = 0.2565968288080184 // Dephosphorylation rate constant
 
-k10 = 0.5647755104375924 // Forward receptor-ligand rate constant
-k_10 = 5.658385013278595 // Reverse receptor-ligand rate constant
-k13 = 0.1887329095237483 // 0.067; // This is the phosphorylation probability
-k_13 = 4.060717275896334 // Dephosphorylation rate constant
+k10 = 2.9352088920301727 // Forward receptor-ligand rate constant
+k_10 = 3.7064321098681887 // Reverse receptor-ligand rate constant
+k13 = 7.208025648149343 // 0.067; // This is the phosphorylation probability
+k_13 = 6.067754181491617 // Dephosphorylation rate constant
 
-k16 = 1.2965889753010122 // Forward receptor-ligand rate constant
-k_16 = 5.137445809878094 // Reverse receptor-ligand rate constant
-k19 = 0.153311914022963 // 0.067; // This is the phosphorylation probability
-k_19 = 8.415773330256286 // Dephosphorylation rate constant
+k16 = 0.1132043445634123 // Forward receptor-ligand rate constant
+k_16 = 1.2276249165377546 // Reverse receptor-ligand rate constant
+k19 = 0.4034643489039161 // 0.067; // This is the phosphorylation probability
+k_19 = 0.4147037369785962 // Dephosphorylation rate constant
 
-k22 = 0.1171945954197966 // Forward receptor-ligand rate constant
-k_22 = 0.4604129020328973 // Reverse receptor-ligand rate constant
-k25 = 9.170941654760831 // 0.067; // This is the phosphorylation probability
-k_25 = 0.1262197821162962 // Dephosphorylation rate constant
+k22 = 0.4923400407445386 // Forward receptor-ligand rate constant
+k_22 = 0.3157747096921688 // Reverse receptor-ligand rate constant
+k25 = 2.115872357777392 // 0.067; // This is the phosphorylation probability
+k_25 = 0.1344450043263954 // Dephosphorylation rate constant
 
 // Other declarations:
 // var k_1, k_2, k_3;

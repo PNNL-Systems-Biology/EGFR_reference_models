@@ -1,0 +1,16 @@
+    // Function
+    function ras(t)
+        12.69798 - 2 * 1.9101 * t + 3 * 0.08355 * t ** 2
+    end
+
+
+kt = 0.0012; // Endocytosis of empty receptors
+ke = 0.0018561417539699 // Endocytosis of activated receptors
+Vr = 0.242; // Replenishment of empty receptors
+kx = 1; // Degradation of empty receptors - set to eliminate the compartment
+kh = 0.907270340127776 // 0.00024; // Degradation of activated receptors
+
+k4 = 0.0040687156716129 // Forward receptor-ligand 2nd order rate constant
+k_4 = 0.0028970914837053 // Reverse receptor-ligand rate constant
+k7 = 0.0595199203117083 // 0.067; // This is the phosphorylation probability
+k_7 = 0.1596990722445665 // Dephosphorylation rate constant

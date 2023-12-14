@@ -235,36 +235,36 @@
       <species id="RAFa_ppMEK_pERK" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="k1" value="579.633569369942" constant="true"/>
-      <parameter id="k_1" value="0.0513301139360723" constant="true"/>
-      <parameter id="k2" value="1.84773255686658" constant="true"/>
-      <parameter id="k_2" value="0.0026763130131904" constant="true"/>
-      <parameter id="k3" value="1.28045291480519" constant="true"/>
-      <parameter id="k_3" value="0.0001508775061902" constant="true"/>
-      <parameter id="k4" value="3.77177581307318" constant="true"/>
-      <parameter id="k_4" value="0.0004014424367798" constant="true"/>
-      <parameter id="k5" value="1.06809329461193" constant="true"/>
-      <parameter id="k_5" value="6.17943261028534" constant="true"/>
-      <parameter id="k6" value="1326.34516874774" constant="true"/>
-      <parameter id="k_6" value="1137.89407511918" constant="true"/>
-      <parameter id="k7" value="128.240506583656" constant="true"/>
-      <parameter id="k_7" value="273.069379593295" constant="true"/>
-      <parameter id="k71" value="14.7873146411252" constant="true"/>
-      <parameter id="k8" value="2792.84117685889" constant="true"/>
-      <parameter id="k9" value="902.366453309062" constant="true"/>
-      <parameter id="k_9" value="7.93935604473291" constant="true"/>
-      <parameter id="k10" value="9446.70568743756" constant="true"/>
-      <parameter id="k11" value="0.0488797276556238" constant="true"/>
-      <parameter id="k_11" value="1.71893876665535" constant="true"/>
-      <parameter id="k12" value="2932.76664526219" constant="true"/>
-      <parameter id="k13" value="0.0001179641813852" constant="true"/>
-      <parameter id="k14" value="0.614139830363304" constant="true"/>
-      <parameter id="k_71" value="127.935798155501" constant="true"/>
+      <parameter id="k1" value="0.818883886048297" constant="true"/>
+      <parameter id="k_1" value="9.99998987673385" constant="true"/>
+      <parameter id="k2" value="2.53289038302342" constant="true"/>
+      <parameter id="k_2" value="9.99955905337359" constant="true"/>
+      <parameter id="k3" value="9.99907073428811" constant="true"/>
+      <parameter id="k_3" value="0.10024041778571" constant="true"/>
+      <parameter id="k4" value="9.99963458263164" constant="true"/>
+      <parameter id="k_4" value="0.100799027364761" constant="true"/>
+      <parameter id="k5" value="9.99965737788929" constant="true"/>
+      <parameter id="k_5" value="0.10078857489163" constant="true"/>
+      <parameter id="k6" value="9.13305308015071" constant="true"/>
+      <parameter id="k_6" value="9.99135856628666" constant="true"/>
+      <parameter id="k7" value="9.97823400415132" constant="true"/>
+      <parameter id="k_7" value="0.165119462681093" constant="true"/>
+      <parameter id="k71" value="9.99996623553863" constant="true"/>
+      <parameter id="k_71" value="0.100132141459491" constant="true"/>
+      <parameter id="k8" value="9.99999945130094" constant="true"/>
+      <parameter id="k_8" value="0.100030982590696" constant="true"/>
+      <parameter id="k9" value="0.100000353238184" constant="true"/>
+      <parameter id="k_9" value="9.99994984406807" constant="true"/>
+      <parameter id="k10" value="4.41533123346735" constant="true"/>
+      <parameter id="k11" value="9.99996979226396" constant="true"/>
+      <parameter id="k_11" value="0.100033204372639" constant="true"/>
+      <parameter id="k12" value="9.99998796016584" constant="true"/>
+      <parameter id="k13" value="0.100005933645511" constant="true"/>
+      <parameter id="k14" value="0.100017660458681" constant="true"/>
       <parameter id="k72" value="0.00312427683899" constant="true"/>
       <parameter id="k81" value="0.0233906695634359" constant="true"/>
       <parameter id="k_81" value="64.6819041982461" constant="true"/>
       <parameter id="k82" value="3.72975734989507" constant="true"/>
-      <parameter id="k_8" value="322.17177885302" constant="true"/>
     </listOfParameters>
     <listOfReactions>
       <reaction id="J0" reversible="true">
@@ -543,9 +543,17 @@
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
-              <times/>
-              <ci> k71 </ci>
-              <ci> RAFa_MEK </ci>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k71 </ci>
+                <ci> RAFa_MEK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_71 </ci>
+                <ci> RAFa_pMEK </ci>
+              </apply>
             </apply>
           </math>
         </kineticLaw>
@@ -560,9 +568,17 @@
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
-              <times/>
-              <ci> k8 </ci>
-              <ci> RAFa_pMEK </ci>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k8 </ci>
+                <ci> RAFa_pMEK </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_8 </ci>
+                <ci> RAFa_ppMEK </ci>
+              </apply>
             </apply>
           </math>
         </kineticLaw>

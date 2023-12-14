@@ -1,0 +1,7 @@
+model foo()
+  A := piecewise(time+3, time<2, time+5)
+end
+
+model bar()
+ F: foo()
+end

@@ -26,7 +26,8 @@ popt, pcov = curve_fit(cubic, time, Rp, bounds = ([0, -100, -100, -100], [100, 1
 
 erk_df = pd.read_csv(erk_datafile, delimiter=r"\s+")
 erk_time = np.array(erk_df['Time'])
-erk = np.array(erk_df['Rp'])
+# print(erk_df)
+# erk = np.array(erk_df['Rp'])
 
 r = te.loada('current_model.ant')
 sim = r.simulate(0, 10, 101, selections=['time', 'ppERK'])

@@ -5,7 +5,7 @@ model EGFR_module()
 
 // Compartments and Species:
 compartment cell, extra, intra;
-Lig in extra;
+Lig in cell;
 Egfr in cell;
 iEgfr in intra;
 Egfr_Lig in cell;

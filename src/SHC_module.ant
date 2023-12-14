@@ -1,73 +1,137 @@
+
+
+function a(t)
+2.4997820512820517 - 3 * 0.07994551282051288 * (t-0)^2
+end
+function b(t)
+1.5404358974358974 - 2 * 0.4796730769230769 * (t-2) + 3 * 0.06847756410256411 * (t-2)^2
+end
+function c(t)
+0.44347435897435894 - 2 * 0.06880769230769229 * (t-4) + 3 * 0.0022852564102563977 * (t-4)^2
+end
+function d(t)
+0.19566666666666654 - 2 * 0.05509615384615388 * (t-6) + 3 * 0.006131410256410272 * (t-6)^2
+end
+
+function x(t)
+2.046875 - 3 * 0.07921875 * (t-0)^2
+end
+function y(t)
+1.09625 - 2 * 0.47531250000000025 * (t-2) + 3 * 0.09609375000000009 * (t-2)^2
+end
+function z(t)
+0.34812499999999996 + 2 * 0.1012500000000002 * (t-4) - 3 * 0.04015625000000006 * (t-4)^2
+end
+function u(t)
+0.2712500000000001 - 2 * 0.1396875000000001 * (t-6) + 3 * 0.023281250000000017 * (t-6)^2
+end
+function v(t)
+0.23097343750000915
+end
+
 // Created by libAntimony v2.8.1
 model SHC_module()
 
-    // Compartments and Species:
-    compartment cell, extra, intra;
-    species Shc1, pShc1, ipShc1 in cell;
-    // species iShc1 in cell;
-    species $aRtot in cell;
-    species $Shc1Ihtr in cell;
+// Compartments and Species:
+compartment cell, extra, intra;
+species Shc1, pShc1, ipShc1 in cell;
+species iShc1 in cell;
+species aRtot in cell;
+species $Shc1Ihtr in cell;
+species $ShcTot in cell;
+species mTor in cell;
 
-    // Reactions:
-    // Shc module
-    // Input: aRtot
-    // Output Shc_complex
+// Reactions:
+// Shc module
+// Input: aRtot
+// Output Shc_complex
 
-    // Shc1 activation
-    J1: $aRtot + Shc1 -> $aRtot + pShc1; (kcat1 * aRtot * Shc1) / (Km1 + Shc1);
-    J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2 * Shc1Ihtr * pShc1) / (Km2 + pShc1);
-    // J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3 * Shc1Ihtr * Shc1) / (Km3 + Shc1);
+J0: -> aRtot; piecewise(a(time), time<=2, b(time), time<=4, c(time), time<=6, d(time), time<=8)
+J00: -> mTor; piecewise(x(time), time<=2, y(time), time<=4, z(time), time<=6, u(time), time<=8)
 
-    // Species initializations:
-    // fix EGF
-    Shc1 = 67.3;
-    Shc1 has nM;
-    pShc1 = 0;
-    pShc1 has nM;
-    // iShc1 = 0;
-    // iShc1 has nM;
-    ipShc1 = 0;
-    ipShc1 has nM;
-    Shc1Ihtr = 0;
-    Shc1Ihtr has nM;
+// Shc1 activation
+// J1: aRtot + Shc1 -> aRtot + pShc1; (kcat1 * aRtot * Shc1) / (Km1 + Shc1);
+J1: aRtot + Shc1 -> aRtot + pShc1; kcat1 * aRtot * Shc1;
+// J5: pShc1 -> Shc1; k5 * pShc1
 
+// J2: mTor + pShc1 -> mTor + piShc1; (kcat2 * mTor * pShc1) / (Km2 + pShc1);
+J2: mTor + pShc1 -> mTor + piShc1; kcat2 * mTor * pShc1;
+J6: piShc1 -> pShc1; k6 * piShc1
 
-    // Compartment initializations:
-    cell = 1;
-    intra = 1;
+// J3: phos + piShc1 -> phos_piShc1; k3 * phos * piShc1 - k_3 * phos_piShc1;
 
-    // Variable initializations:
-    kcat1 = 1130;			// Receptor - Shc recruitment
-    kcat1 has per_sec;
-    Km1 = 8167 / 23.4;		// Dissociation of Shc from phospho-EGFR
-    Km1 has nM;
-
-    kcat2 = 1e3;			// Receptor - Shc recruitment
-    kcat2 has per_sec;
-    Km2 = 5e3 / 1e2;		// Dissociation of Shc from phospho-EGFR
-    Km2 has nM;
-
-    // kcat3 = kcat2;			// Receptor - Shc recruitment
-    // kcat3 has per_sec;
-    // Km3 = Km2;		// Dissociation of Shc from phospho-EGFR
-    // Km3 has nM;
+J4: piShc1 -> iShc1; k4 * piShc1 - k_4 * iShc1;
 
 
-    // Unit definitions:
-    unit substance = 1e-9 mole;
-    unit time_unit = second;
-    unit nM = 1e-9 mole / litre;
-    unit per_nM = litre / 1e-9 mole;
-    unit per_sec = 1 / second;
-    unit nM_per_sec = 1e-9 mole / (litre * second);
-    unit per_nMs = litre / (1e-9 mole * second);
+$ShcTot := pShc1 + piShc1;
 
-    // Display Names:
-    substance is "nmole";
-    time_unit is "s";
-    per_sec is "s-1";
-    nM_per_sec is "nM/s";
-    per_nMs is "nM-1 s-1";
-    extra is "extracellular space";
+// J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; (kcat2 * Shc1Ihtr * pShc1) / (Km2 + pShc1);
+// J2: $Shc1Ihtr + pShc1 -> $Shc1Ihtr + ipShc1; kcat2 * Shc1Ihtr * pShc1;
+
+// J3: $Shc1Ihtr + Shc1 -> $Shc1Ihtr + iShc1; (kcat3 * Shc1Ihtr * Shc1) / (Km3 + Shc1);
+
+// J4: shc_phos + pShc1 -> shc_phos + Shc1; (kcat4 * shc_phos * pShc1) / (Km4 + pShc1);
+// J4: shc_phos + pShc1 -> shc_phos + Shc1; kcat4 * shc_phos * pShc1;
+
+
+// Species initializations:
+// fix EGF
+Shc1 = 28.564
+Shc1 has nM;
+pShc1 = 0.74;
+mTor = 0.74;
+pShc1 has nM;
+iShc1 = 0;
+iShc1 has nM;
+ipShc1 = 0;
+ipShc1 has nM;
+$Shc1Ihtr = 1
+Shc1Ihtr has nM;
+shc_phos = 1
+
+
+// Compartment initializations:
+cell = 1;
+intra = 1;
+
+// Variable initializations:
+kcat1 = 36.84787242339509 // Receptor - Shc recruitment
+Km1 = 0.0325824422033914 / 23.4; // Dissociation of Shc from phospho-EGFR
+
+kcat2 = 0.0016358875015427 // Receptor - Shc recruitment
+Km2 = 999.998898411203 / 1e2; // Dissociation of Shc from phospho-EGFR
+
+// kcat3 = 9.096234174862907 // Receptor - Shc recruitment
+// Km3 = 0.2349512698319994 // Dissociation of Shc from phospho-EGFR
+
+k3 = 118.17171286817415
+k_3 = 1.6726728275314469
+
+k4 = 0.0202296643915947
+k_4 = 670.3693087661179
+
+kcat4 = 60.405441858413454
+// Km4 = 0.3772995966099237
+
+k5 = 999.9680515650964
+k6 = 0.0010007027022219
+
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_sec = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_sec is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
 
 end

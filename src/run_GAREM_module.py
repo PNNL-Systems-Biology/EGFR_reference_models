@@ -11,11 +11,11 @@ garem_df = pd.read_csv(garem_datafile, delimiter=r"\s+")
 garem_time = np.array(garem_df['Time'])
 garem = np.array(garem_df['Grb2_ppGarem_pShp2'])
 
-r = te.loada('current_model.ant')
+r = te.loada('GAREM_module.ant')
 # r.integrator.absolute_tolerance = 1e-12
 # r.integrator.relative_tolerance = 1e-12
-sim = r.simulate(0, 8, 801, selections=['time', 'aRtot', 'Shp2', 'Grb2_ppGarem_pShp2'])
-t = np.linspace(0, 8, 801)
+sim = r.simulate(0, 8, 81, selections=['time', 'aRtot', 'Shp2', 'Grb2_ppGarem_pShp2'])
+t = np.linspace(0, 8, 81)
 
 plt.plot(t, sim['Grb2_ppGarem_pShp2'], label='garem-complex fit')
 plt.scatter(garem_time, garem, label='garem-complex data')
