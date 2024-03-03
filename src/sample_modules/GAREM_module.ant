@@ -1,0 +1,96 @@
+
+function a(t)
+2.4997820512820517 - 3 * 0.07994551282051288 * (t-0)^2
+end
+function b(t)
+1.5404358974358974 - 2 * 0.4796730769230769 * (t-2) + 3 * 0.06847756410256411 * (t-2)^2
+end
+function c(t)
+0.44347435897435894 - 2 * 0.06880769230769229 * (t-4) + 3 * 0.0022852564102563977 * (t-4)^2
+end
+function d(t)
+0.19566666666666654 - 2 * 0.05509615384615388 * (t-6) + 3 * 0.006131410256410272 * (t-6)^2
+end
+
+function x(t)
+1.0958035714285712 - 2 * 2.220446049250313e-16 * (t-0) + 3 * 0.01479910714285726 * (t-0)^2
+end
+function y(t)
+1.2733928571428572 + 2 * 0.08879464285714345 * (t-2) - 3 * 0.0614955357142859 * (t-2)^2
+end
+function z(t)
+0.8906250000000004 - 2 * 0.28017857142857183 * (t-4) + 3 * 0.022433035714285787 * (t-4)^2
+end
+function w(t)
+0.03910714285714256 - 2 * 0.1455803571428571 * (t-6) + 3 * 0.02426339285714285 * (t-6)^2
+end
+
+
+// Created by libAntimony v2.8.1
+model GAREM_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species Garem in cell, pGarem in cell;
+species aRtot in cell;
+species Grb2 in cell, Shp2 in cell;
+species Grb2_Garem in cell, Grb2_pGarem in cell;
+species Grb2_ppGarem in cell, Grb2_ppGarem_Shp2 in cell;
+species Grb2_ppGarem_pShp2 in cell;
+
+// Inputs/Outputs:
+
+// Garem module
+// Inputs: aRtot
+// Output Garem_complex
+
+// Reactions
+
+J0: -> aRtot; piecewise(a(time), time<=2, b(time), time<=4, c(time), time<=6, d(time), time<=8)
+J1: -> Shp2; piecewise(x(time), time<=2, y(time), time<=4, z(time), time<=6, w(time), time<=8)
+
+// Grb2_Garem complex formation
+J2: Garem + Grb2 -> Grb2_Garem; k1 * Garem * Grb2 - k_1 * Grb2_Garem;
+
+// Grb2_Garem phosphorylation/dephosphorylation
+J3: aRtot + Grb2_Garem => aRtot + Grb2_pGarem; (kcat2 * aRtot * Grb2_Garem)/(Km2 + Grb2_Garem);
+J4: Grb2_pGarem => Grb2_Garem; (V3 * Grb2_pGarem)/(Km3 + Grb2_pGarem);
+
+J5: aRtot + Grb2_pGarem => aRtot + Grb2_ppGarem; (kcat4 * aRtot * Grb2_Garem)/(Km4 + Grb2_Garem);
+J6: Grb2_ppGarem => Grb2_pGarem; (V5 * Grb2_pGarem)/(Km5 + Grb2_pGarem);
+
+// Grb2_pGarem_Shp2 complex formation
+J7: Grb2_ppGarem + Shp2 -> Grb2_ppGarem_Shp2; k6 * Grb2_ppGarem * Shp2 - k_6 * Grb2_ppGarem_Shp2;
+
+// Grb2_pGarem_Shp2 phosphorylation/dephosphorylation
+J8: Grb2_ppGarem_Shp2 -> Grb2_ppGarem_pShp2; k7 * Grb2_ppGarem_Shp2 - k_7 * Grb2_ppGarem_pShp2;
+
+// Species initializations:
+
+Garem = 15.510
+Grb2 = 19.1
+Shp2 = 3.5
+Grb2_ppGarem_pShp2 = 0.96
+
+// Compartment initializations:
+cell = 1;
+extra = 1;
+intra = 1;
+
+// Variable initializations:
+k1 = 2.481492794813023
+k_1 = 2.840506857541795
+kcat2 = 0.2928063401345082
+Km2 = 5.959714434590828
+V3 = 2.373029232164136
+Km3 = 1.3554278108713465
+kcat4 = 1.6848125728348382
+Km4 = 2.55397721552781
+V5 = 7.898765545462475
+Km5 = 0.1775218391088305
+k6 = 4.284762454849009
+k_6 = 0.2752427015178402
+k7 = 9.99975965713209
+k_7 = 4.208588191913216
+
+end

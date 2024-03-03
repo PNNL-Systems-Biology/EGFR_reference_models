@@ -1,0 +1,114 @@
+
+function a(t)
+0.07279613095238097 - 2 * 1.2197274440461925e-19 * (t-0) - 3 * 7.670924272486772e-07 * (t-0)^2
+end
+function b(t)
+0.03965773809523808 - 2 * 0.0002761532738095238 * (t-120) + 3 * 8.377769510582009e-07 * (t-120)^2
+end
+function c(t)
+0.009572916666666662 + 2 * 2.5446428571428583e-05 * (t-240) - 3 * 1.5345982142857123e-07 * (t-240)^2
+end
+function d(t)
+0.009050595238095243 - 2 * 2.979910714285715e-05 * (t-360) + 3 * 8.277529761904775e-08 * (t-360)^2
+end
+function f(t)
+0.0054748820033433164
+end
+
+// model
+model SOS_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species Gab1_pShp2, Garem_pShp2, pShc1, $aRtot, $Sos1Ihtr in cell;
+species Grb2 in cell;
+species SOS1, Grb2_SOS1, Grb2_pSOS1, Grb2_ipSOS1 in cell;
+// species SOS2, Grb2_SOS2, Grb2_pSOS2 in cell;
+// species dRas, tRas, GAP in cell;
+
+// Inputs/Outputs
+
+// Inputs:
+// Output: tRas
+
+// Reactions
+
+// Uncomment the following for single module fitting and simulation
+J0: -> aAdptrTot; piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480, f(time), time<=600)
+
+// Uncomment the following to aggregate the inputs for incorporation into a larger model
+// aAdptrTot := Gab1_pShp2 + Garem_pShp2 + pShc1
+
+// Grb2-Sos complex formation
+// J1: Grb2 + SOS1 -> Grb2_SOS1; k1 * Grb2 * SOS1 - k_1 * Grb2_SOS1;
+
+// Grb2_SOS1 activation
+// J2: aAdptrTot + Grb2_SOS1 -> aAdptrTot + Grb2_pSOS1; (kcat2 * aAdptrTot * Grb2_SOS1) / (Km2 + Grb2_SOS1);
+J2: aAdptrTot + Grb2_SOS1 -> aAdptrTot + Grb2_pSOS1; k2 * aAdptrTot * Grb2_SOS1;
+
+// Grb2_pSOS1 inhibition
+// J3: $Sos1Ihtr + Grb2_pSOS1 -> $Sos1Ihtr + Grb2_ipSOS1; (kcat3 * Sos1Ihtr * Grb2_pSOS1) / (Km3 + Grb2_pSOS1);
+J3: $Sos1Ihtr + Grb2_pSOS1 -> $Sos1Ihtr + Grb2_ipSOS1; k3 * Sos1Ihtr * Grb2_pSOS1;
+
+// Grb2_SOS2 activation
+// J4: aAdptrTot + Grb2_SOS2 -> aAdptrTot + Grb2_pSOS2; (kcat4 * aAdptrTot * Grb2_SOS2) / (Km4 + Grb2_SOS2);
+
+// activate SOS
+$aSOS := Grb2_pSOS1 // + Grb2_pSOS2;
+
+// Ras module
+// J5: dRas => tRas; (ktRas*dRas*aSOS/(KmRasd + dRas));
+// J6: tRas => dRas; (kdRas*tRas*GAP/(KmRast + tRas));
+J5: dRas => tRas; k5 * dRas * aSOS;
+J6: tRas => dRas; k6 * tRas * GAP;
+
+// Pathway protein abndances
+// aAdptrTot = 2.06
+// Grb2 = 37.11; // updated 3-20
+// SOS1 = 0.07; // updated 3-20
+// SOS2 = 0; // updated 3-20
+Grb2_SOS1 = 6.2; // updated 3-20
+// Grb2_SOS2 = 0; // updated 3-20
+Sos1Ihtr = 1
+GAP = 1
+dRas = 98
+
+// Species initializations:
+
+// Compartment initializations:
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// Variables:
+
+k2 = 0.0034114399472863
+k3 = 0.0143218901623226
+k5 = 0.0007258290084045
+k6 = 0.0008217339404579
+
+// k1 = 9.45E-6;
+// k1 has per_nMs
+// k_1 = 0.0138;
+// k_1 has per_sec;
+// kcat2 = 0.5271984243916862
+// Km2 = 0.2126528300576308
+// kcat3 = 9.99997420556397
+// Km3 = 7.718076360631921
+// kcat4 = 10;
+// Km4 = 1;
+// ktRas = 4.436440936113107
+// KmRasd = 1.132468709426225
+// kdRas = 0.7401491419142731
+// KmRast = 0.134574607224175
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_sec = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+end

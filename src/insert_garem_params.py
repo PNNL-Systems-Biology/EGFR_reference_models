@@ -23,11 +23,14 @@ for i, name in enumerate(names):
 
 print(param_dict)
 
+model_name = 'GAREM_module_1'
+
 new_model = ''
 # with open('RAF_activation_2022_mek.ant', 'r') as model:
 # with open('RAF_activation_2022.ant', 'r') as model:
-with open('GAREM_module.ant', 'r') as model:
+# with open('GAREM_module.ant', 'r') as model:
 # with open('EGFR_module.ant', 'r') as model:
+with open(model_name + '.ant', 'r') as model:
     lines = model.readlines()
     for i, line in enumerate(lines):
         print(i, line)
@@ -40,10 +43,9 @@ with open('GAREM_module.ant', 'r') as model:
 
 print(new_model)
 
-with open('GAREM_module.ant', 'w') as cur_mod:
+with open(model_name + '.ant', 'w') as cur_mod:
     cur_mod.write(new_model)
 
-r = te.loada('GAREM_module.ant')
-r.exportToSBML('GAREM_module.xml')
-
+r = te.loada(model_name + '.ant')
+r.exportToSBML(model_name + '.xml')
 

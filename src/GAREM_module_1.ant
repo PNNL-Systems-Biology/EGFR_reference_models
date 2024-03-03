@@ -1,0 +1,136 @@
+
+// Cubic spline functions for phosphorylated receptor (pEgfr_Lig). Used for individual module fitting.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+// function a(t)
+// 0.041663034188034194 - 2 * 1.1519648082658485e-19 * (t-0) - 3 * 3.7011811490978085e-07 * (t-0)^2
+// end
+// function b(t)
+// 0.025673931623931626 - 2 * 0.00013324252136752136 * (t-120) + 3 * 3.170257597340929e-07 * (t-120)^2
+// end
+// function c(t)
+// 0.007391239316239316 - 2 * 1.911324786324786e-05 * (t-240) + 3 * 1.0579890788224071e-08 * (t-240)^2
+// end
+// function d(t)
+// 0.003261111111111109 - 2 * 1.5304487179487186e-05 * (t-360) + 3 * 2.838615859449198e-08 * (t-360)^2
+// end
+
+function a(t)
+2 * (0.041663034188034194 - 2 * 1.1519648082658485e-19 * (t-0) - 3 * 3.7011811490978085e-07 * (t-0)^2)
+end
+function b(t)
+2 * (0.025673931623931626 - 2 * 0.00013324252136752136 * (t-120) + 3 * 3.170257597340929e-07 * (t-120)^2)
+end
+function c(t)
+2 * (0.007391239316239316 - 2 * 1.911324786324786e-05 * (t-240) + 3 * 1.0579890788224071e-08 * (t-240)^2)
+end
+function d(t)
+2 * (0.003261111111111109 - 2 * 1.5304487179487186e-05 * (t-360) + 3 * 2.838615859449198e-08 * (t-360)^2)
+end
+
+// Cubic spline functions for Shp2, a necessary input function to the module. Fit to PTPN11 data.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+function x(t)
+0.018263392857142853 + 3 * 6.851438492063495e-08 * (t-0)^2
+end
+function y(t)
+0.021223214285714286 + 2 * 2.466517857142873e-05 * (t-120) - 3 * 2.8470155423280497e-07 * (t-120)^2
+end
+function z(t)
+0.014843750000000008 - 2 * 7.782738095238109e-05 * (t-240) + 3 * 1.0385664682539723e-07 * (t-240)^2
+end
+function w(t)
+0.0006517857142857094 - 2 * 4.043898809523809e-05 * (t-360) + 3 * 1.123305224867725e-07 * (t-360)^2
+end
+
+
+// Created by libAntimony v2.8.1
+model GAREM_module()
+
+// Compartments and Species:
+compartment cell, extra, intra
+species Garem in cell
+species pGarem in cell
+var pEgfr_Lig in cell
+species Grb2 in cell
+species Shp2 in cell
+species Grb2_Garem in cell
+species aR_Grb2_Garem in cell
+species aR_Grb2_pGarem in cell
+species aR_Grb2_ppGarem in cell
+species aR_Grb2_ppGarem_Shp2 in cell
+species aR_Grb2_ppGarem_pShp2 in cell
+
+// Inputs/Outputs:
+
+// Garem module
+// Inputs: pEgfr_Lig
+// Output Garem_complex
+
+// Reactions
+
+// Uncomment the following line (J0 - pEgfr_Lig production) for individual module fiting.
+F0: -> pEgfr_Lig; piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480)
+
+// Shp2 production
+F1: -> Shp2; piecewise(x(time), time<=120, y(time), time<=240, z(time), time<=360, w(time), time<=480)
+
+// Grb2_Garem complex formation
+J1: Garem + Grb2 -> Grb2_Garem; k1 * Garem * Grb2 - k_1 * Grb2_Garem;
+
+// Biniding of Grb2_Garem complex to phosphorylated receptor (pEgfr_Lig)
+J2: pEgfr_Lig + Grb2_Garem => aR_Grb2_Garem; k2 * pEgfr_Lig * Grb2_Garem - k_2 * aR_Grb2_Garem;
+
+// Phosphorylation of first and second sites on Garem-Grb2 (mass action)
+J3: aR_Grb2_Garem => aR_Grb2_pGarem; k3 * aR_Grb2_Garem - k_3 * aR_Grb2_pGarem;
+J4: aR_Grb2_pGarem => aR_Grb2_ppGarem; k3 * aR_Grb2_pGarem - k_3 * aR_Grb2_ppGarem;
+
+// aR_Grb2_ppGarem_Shp2 complex formation
+J5: aR_Grb2_ppGarem + Shp2 => aR_Grb2_ppGarem_Shp2; k4 * aR_Grb2_ppGarem * Shp2 - k_4 * aR_Grb2_ppGarem_Shp2;
+
+// aR_Grb2_ppGarem_Shp2 phosphorylation (mass action)
+J6: aR_Grb2_ppGarem_Shp2 => aR_Grb2_ppGarem_pShp2; k5 * aR_Grb2_ppGarem_Shp2 - k_5 * aR_Grb2_ppGarem_pShp2;
+
+// =========================================================================================
+
+// Species initializations:
+
+Garem = 15.510
+Grb2 = 37.11
+// Grb2 = 19.1
+pEgfr_Lig = .8
+
+// Question: is Garem saturated with Grb2?
+// Grb2_Garem = 15.510
+Grb2_Garem = 3.0
+aR_Grb2_Garem = 0.1
+
+aR_Grb2_pGarem = 0.1
+aR_Grb2_ppGarem = 0.96
+
+Shp2 = 3.5
+# Shp2 = 28.5
+aR_Grb2_ppGarem_Shp2 = 0.1
+aR_Grb2_ppGarem_pShp2 = 1.0
+
+// Compartment initializations:
+cell = 1;
+extra = 1;
+intra = 1;
+
+// Variable initializations:
+k1 = 0.1491403587906402
+k_1 = 0.0803098799356431
+k2 = 0.1543989825665919
+k_2 = 0.097172605532668
+k3 = 0.4707769033219525
+k_3 = 0.0716433246944363
+k4 = 0.1400916668497593
+k_4 = 0.1887135110314108
+k5 = 0.281458643508201
+k_5 = 0.1408063195112369
+
+end

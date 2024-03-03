@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="SOS_module" id="SOS_module" substanceUnits="substance" timeUnits="time_unit">
+    <listOfFunctionDefinitions>
+      <functionDefinition id="a1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <minus/>
+                  <cn> 0.0364821428571429 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 1.15196480826585 <sep/> -19 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 0 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 4.21213624338624 <sep/> -7 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 0 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="b1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <cn> 0.0182857142857143 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn> 0.000151636904761905 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 120 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 4.74123677248677 <sep/> -7 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 120 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="c1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> 0.002375 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 1.9047619047619 <sep/> -5 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 240 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 4.58829365079362 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 240 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="d1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> 0.00496428571428571 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 2.52976190476195 <sep/> -6 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 360 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 7.02711640211658 <sep/> -9 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 360 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <cn> 0.00526784189401988 </cn>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="a2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> 0.0341145833333333 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 8.13151629364128 <sep/> -20 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 0 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 3.66753472222223 <sep/> -7 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 0 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="b2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <cn> 0.0182708333333333 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn> 0.00013203125 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 120 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 4.44878472222222 <sep/> -7 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 120 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="c2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> 0.00580208333333333 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 2.8125 <sep/> -5 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 240 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 1.85908564814815 <sep/> -7 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 240 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="d2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <cn> 0.00452083333333334 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 3.88020833333334 <sep/> -5 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 360 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 1.07783564814815 <sep/> -7 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 360 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <cn> -0.000135182776332923 </cn>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="a3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <plus/>
+                <cn> 0.00222619047619048 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 1.90145502645502 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 0 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="b3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> 0.00304761904761905 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 6.84523809523809 <sep/> -6 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 120 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 7.77116402116402 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 120 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="c3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <cn> 0.00133333333333333 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 2.11309523809524 <sep/> -5 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 240 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 7.77116402116402 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 240 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="d3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <apply>
+                <minus/>
+                <apply>
+                  <plus/>
+                  <cn> -0.000380952380952381 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> 2 </cn>
+                    <cn type="e-notation"> 6.8452380952381 <sep/> -6 </cn>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 360 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 3 </cn>
+                  <cn type="e-notation"> 1.90145502645503 <sep/> -8 </cn>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <minus/>
+                      <ci> t </ci>
+                      <cn type="integer"> 360 </cn>
+                    </apply>
+                    <cn type="integer"> 2 </cn>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <cn type="integer"> 1 </cn>
+              <cn> 0.000440434928903233 </cn>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="x">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <cn> -0.0276775793650794 </cn>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn type="e-notation"> 1.97413745590829 <sep/> -6 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 0 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="y">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <minus/>
+              <apply>
+                <plus/>
+                <cn> 0.0576051587301587 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.000710689484126984 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 120 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn type="e-notation"> 2.56165950176367 <sep/> -6 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 120 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="z">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> 0.117506944444444 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.000211507936507937 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 240 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn type="e-notation"> 8.76667217813081 <sep/> -9 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 240 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="w">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> t </ci>
+            </bvar>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <cn> 0.0174980158730159 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <cn> 0.000205195932539683 </cn>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 480 </cn>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 3 </cn>
+                <cn type="e-notation"> 2.84994350749559 <sep/> -7 </cn>
+                <apply>
+                  <power/>
+                  <apply>
+                    <minus/>
+                    <ci> t </ci>
+                    <cn type="integer"> 480 </cn>
+                  </apply>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfUnitDefinitions>
+      <unitDefinition id="substance">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="time_unit">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="nM">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nM">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_sec">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="nM_per_sec">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nMs">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="cell" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="extra" spatialDimensions="3" size="5000" constant="true"/>
+      <compartment id="intra" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="aR_Grb2_ppGab1_pShp2" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aR_Grb2_ppGarem_pShp2" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aR_pShc1" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2" compartment="cell" initialAmount="37.11" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="SOS1" compartment="cell" initialAmount="0.07" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2_SOS1" compartment="cell" initialAmount="3.98" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2_pSOS1" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2_ipSOS1" compartment="cell" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ad1_Grb2_SOS1" compartment="cell" initialAmount="0.5" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iAd1_Grb2_SOS1" compartment="cell" initialAmount="0.2" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iaR_Grb2_ppGarem_pShp2" compartment="cell" initialAmount="0.05" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ad2_Grb2_SOS1" compartment="cell" initialAmount="0.5" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iAd2_Grb2_SOS1" compartment="cell" initialAmount="0.2" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iaR_Grb2_ppGab1_pShp2" compartment="cell" initialAmount="0.05" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ad3_Grb2_SOS1" compartment="cell" initialAmount="0.5" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iAd3_Grb2_SOS1" compartment="cell" initialAmount="0.2" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="iaR_pShc1" compartment="cell" initialAmount="0.5" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ipEgfr_Lig" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Shp2" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2_Garem" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2_Gab1" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Shc1" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aSOS" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aAdptrTot" compartment="default_compartment" initialAmount="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ras" compartment="default_compartment" initialAmount="141.65" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aRas" compartment="default_compartment" initialAmount="2.7" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rasa1" compartment="default_compartment" initialAmount="98" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aRSK" compartment="default_compartment" initialAmount="2" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pSOS1" compartment="default_compartment" initialAmount="0.01" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="k9" value="0.611778445658572" constant="true"/>
+      <parameter id="k_9" value="0.401448836015714" constant="true"/>
+      <parameter id="k11" value="0.613056289624548" constant="true"/>
+      <parameter id="k12" value="0.813018902151421" constant="true"/>
+      <parameter id="k10" value="0.220735486921147" constant="true"/>
+      <parameter id="k_10" value="0.26739593211812" constant="true"/>
+      <parameter id="ke" value="0.0012167087598766" constant="true"/>
+      <parameter id="kr" value="0.419977787529093" constant="true"/>
+      <parameter id="kr2" value="0.776275034805082" constant="true"/>
+      <parameter id="k13" value="1.55005946232451" constant="true"/>
+      <parameter id="k14" value="0.421956008363877" constant="true"/>
+    </listOfParameters>
+    <listOfRules>
+      <assignmentRule variable="aAdptrTot">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> aR_Grb2_ppGab1_pShp2 </ci>
+            <ci> aR_Grb2_ppGarem_pShp2 </ci>
+            <ci> aR_pShc1 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="F1" reversible="true">
+        <listOfProducts>
+          <speciesReference species="aR_Grb2_ppGarem_pShp2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> a1 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 120 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> b1 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 240 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> c1 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 360 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> d1 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 480 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> f1 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 600 </cn>
+                </apply>
+              </piece>
+            </piecewise>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="F2" reversible="true">
+        <listOfProducts>
+          <speciesReference species="aR_pShc1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> a2 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 120 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> b2 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 240 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> c2 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 360 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> d2 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 480 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> f2 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 600 </cn>
+                </apply>
+              </piece>
+            </piecewise>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="F3" reversible="true">
+        <listOfProducts>
+          <speciesReference species="aR_Grb2_ppGab1_pShp2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> a3 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 120 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> b3 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 240 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> c3 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 360 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> d3 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 480 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> f3 </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 600 </cn>
+                </apply>
+              </piece>
+            </piecewise>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="F4" reversible="true">
+        <listOfProducts>
+          <speciesReference species="aRSK" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <piecewise>
+              <piece>
+                <apply>
+                  <ci> x </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 120 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> y </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 240 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> z </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 480 </cn>
+                </apply>
+              </piece>
+              <piece>
+                <apply>
+                  <ci> w </ci>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                </apply>
+                <apply>
+                  <leq/>
+                  <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                  <cn type="integer"> 720 </cn>
+                </apply>
+              </piece>
+            </piecewise>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J1" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Ad1_Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="Ras" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ad1_Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="aRas" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k13 </ci>
+              <ci> Ad1_Grb2_SOS1 </ci>
+              <ci> Ras </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Ad2_Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="Ras" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ad2_Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="aRas" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k13 </ci>
+              <ci> Ad2_Grb2_SOS1 </ci>
+              <ci> Ras </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J3" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Ad3_Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="Ras" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ad3_Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="aRas" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k13 </ci>
+              <ci> Ad3_Grb2_SOS1 </ci>
+              <ci> Ras </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J4" reversible="false">
+        <listOfReactants>
+          <speciesReference species="aRas" stoichiometry="1" constant="true"/>
+          <speciesReference species="Rasa1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ras" stoichiometry="1" constant="true"/>
+          <speciesReference species="Rasa1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k14 </ci>
+              <ci> aRas </ci>
+              <ci> Rasa1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J5" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Ad1_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iAd1_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Ad1_Grb2_SOS1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J6" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iAd1_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="iaR_Grb2_ppGarem_pShp2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kr </ci>
+              <ci> iAd1_Grb2_SOS1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J7" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iaR_Grb2_ppGarem_pShp2" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Lig" stoichiometry="1" constant="true"/>
+          <speciesReference species="Grb2_Garem" stoichiometry="1" constant="true"/>
+          <speciesReference species="Shp2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kr2 </ci>
+              <ci> iaR_Grb2_ppGarem_pShp2 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J8" reversible="true">
+        <listOfReactants>
+          <speciesReference species="aR_Grb2_ppGab1_pShp2" stoichiometry="1" constant="true"/>
+          <speciesReference species="Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ad2_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k10 </ci>
+                <ci> aR_Grb2_ppGab1_pShp2 </ci>
+                <ci> Grb2_SOS1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_10 </ci>
+                <ci> Ad2_Grb2_SOS1 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J9" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Ad2_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iAd2_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Ad2_Grb2_SOS1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J10" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iAd2_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="iaR_Grb2_ppGab1_pShp2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kr </ci>
+              <ci> iAd2_Grb2_SOS1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J11" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iaR_Grb2_ppGab1_pShp2" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Lig" stoichiometry="1" constant="true"/>
+          <speciesReference species="Grb2_Gab1" stoichiometry="1" constant="true"/>
+          <speciesReference species="Shp2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kr2 </ci>
+              <ci> iaR_Grb2_ppGab1_pShp2 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J12" reversible="true">
+        <listOfReactants>
+          <speciesReference species="aR_pShc1" stoichiometry="1" constant="true"/>
+          <speciesReference species="Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ad3_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> k10 </ci>
+                <ci> aR_pShc1 </ci>
+                <ci> Grb2_SOS1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k_10 </ci>
+                <ci> Ad3_Grb2_SOS1 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J13" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Ad3_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="iAd3_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Ad3_Grb2_SOS1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J14" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iAd3_Grb2_SOS1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Grb2_SOS1" stoichiometry="1" constant="true"/>
+          <speciesReference species="iaR_pShc1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kr </ci>
+              <ci> iAd3_Grb2_SOS1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="J15" reversible="false">
+        <listOfReactants>
+          <speciesReference species="iaR_pShc1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ipEgfr_Lig" stoichiometry="1" constant="true"/>
+          <speciesReference species="Shc1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kr2 </ci>
+              <ci> iaR_pShc1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

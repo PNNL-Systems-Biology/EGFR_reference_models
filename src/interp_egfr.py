@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 
 # calculate 5 natural cubic spline polynomials for 6 points
 # (x,y) = (0,12) (1,14) (2,22) (3,39) (4,58) (5,77)
-x = np.array([0, 2, 4, 6, 8, 10, 12])
+x = np.array([0, 120, 240, 360, 480, 600, 720])
 y = np.array([0, 4.36, 6.07, 6.7, 6.92, 6.96, 6.94])
+y = np.array([0, 2*4.36, 2*6.07, 2*6.7, 2*6.92, 2*6.96, 2*6.94])
 
 # calculate natural cubic spline polynomials
 cs = CubicSpline(x, y, bc_type='natural')
@@ -66,11 +67,11 @@ print('S3(3< x<=8) = ', a3, ' + ', b3, '(x-6) + ', c3, '(x-6)^2  + ', d3, '(x-6)
 # So we can calculate S(1.25) by using equation S1(1< x<=2)
 # print('S(1.25) = ', a1 + b1*0.25 + c1*(0.25**2) + d1*(0.25**3))
 
-xs = np.arange(0, 10, .1)
+xs = np.arange(0, 720, .1)
 fig, ax = plt.subplots(figsize=(6.5, 4))
 ax.plot(x, y, 'o', label='data', c='blue')
 ax.plot(xs, cs(xs), label="input curve", c='blue')
 plt.title('EGFR input')
-ax.set_xlim(-0.5, 9.5)
+ax.set_xlim(-0.5, 730)
 ax.legend(loc='lower right', ncol=2)
 plt.show()

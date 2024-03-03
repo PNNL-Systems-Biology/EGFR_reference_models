@@ -1,0 +1,75 @@
+
+// Temporary input function. This is from the ras data.
+
+function a(t)
+0.08728349282296652 + 2 * -2.303929616531697e-19 * (t-0) + 3 * 4.3170188729399365e-07 * (t-0)^2
+end
+function b(t)
+0.10593301435406699 + 2 * 0.00015541267942583727 * (t-120) + 3 * -2.4767964735069996e-06 * (t-120)^2
+end
+function c(t)
+0.03623444976076555 + 2 * -0.0007362340510366826 * (t-240) + 3 * 2.970854377104377e-06 * (t-240)^2
+end
+function d(t)
+-0.012120813397129199 + 2 * 0.0003332735247208932 * (t-360) + 3 * -1.6751395534290271e-06 * (t-360)^2
+end
+function f(t)
+-0.004501196172248801 + 2 * -0.0002697767145135566 * (t-480) + 3 * 7.493797625376575e-07 * (t-480)^2
+end
+function g(t)
+-2.2108454545454572
+end
+
+// model
+model RAS_module()
+
+// Compartments and Species:
+compartment cell, extra, intra
+
+species Ad1_Grb2_SOS1 in cell
+species Ad2_Grb2_SOS1 in cell
+species Ad3_Grb2_SOS1 in cell
+species Ras in cell
+species aRas in cell
+species Rasa1 in cell
+
+// Reactions
+
+// Uncomment the following for single module fitting and simulation
+F0: -> Ad1_Grb2_SOS1; .25 * piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480, f(time), time<=600, g(time), time<=720)
+F1: -> Ad2_Grb2_SOS1; .5 * piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480, f(time), time<=600, g(time), time<=720)
+F2: -> Ad3_Grb2_SOS1; .25 * piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480, f(time), time<=600, g(time), time<=720)
+
+// Activation (x3) and deactivation of Ras
+J1: Ad1_Grb2_SOS1 + Ras => Ad1_Grb2_SOS1 + aRas; k13 * Ad1_Grb2_SOS1 * Ras
+J2: Ad2_Grb2_SOS1 + Ras => Ad2_Grb2_SOS1 + aRas; k13 * Ad2_Grb2_SOS1 * Ras
+J3: Ad3_Grb2_SOS1 + Ras => Ad3_Grb2_SOS1 + aRas; k13 * Ad3_Grb2_SOS1 * Ras
+J4: aRas + Rasa1 => Ras + Rasa1; k14 * aRas * Rasa1
+
+aSOS := Ad1_Grb2_SOS1 + Ad2_Grb2_SOS1 + Ad3_Grb2_SOS1
+
+// Initial values
+Ras = 141.65
+aRas = 2.7
+Rasa1 = 98.0
+
+// Compartment initializations:
+cell = 1
+extra = 5000
+intra = 1
+
+// Parameters:
+k13 = 0.9
+k14 = 0.5
+
+
+// Unit definitions:
+unit substance = 1e-9 mole
+unit time_unit = second
+unit nM = 1e-9 mole / litre
+unit per_nM = litre / 1e-9 mole
+unit per_sec = 1 / second
+unit nM_per_sec = 1e-9 mole / (litre * second)
+unit per_nMs = litre / (1e-9 mole * second)
+
+end

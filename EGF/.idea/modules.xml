@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/EGF.iml" filepath="$PROJECT_DIR$/.idea/EGF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HypBuilder/.idea/HypBuilder.iml" filepath="$PROJECT_DIR$/../HypBuilder/.idea/HypBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HypBuilderEx/.idea/HypBuilderEx.iml" filepath="$PROJECT_DIR$/../HypBuilderEx/.idea/HypBuilderEx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Model_Variation/.idea/Model_Variation.iml" filepath="$PROJECT_DIR$/../Model_Variation/.idea/Model_Variation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PyBNF/.idea/PyBNF.iml" filepath="$PROJECT_DIR$/../PyBNF/.idea/PyBNF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PyDREAM/.idea/PyDREAM.iml" filepath="$PROJECT_DIR$/../PyDREAM/.idea/PyDREAM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PyMultiNest/.idea/PyMultiNest.iml" filepath="$PROJECT_DIR$/../PyMultiNest/.idea/PyMultiNest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PyRosetta4.Release.python36.ubuntu.release/.idea/PyRosetta4.Release.python36.ubuntu.release.iml" filepath="$PROJECT_DIR$/../PyRosetta4.Release.python36.ubuntu.release/.idea/PyRosetta4.Release.python36.ubuntu.release.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RNG/.idea/RNG.iml" filepath="$PROJECT_DIR$/../RNG/.idea/RNG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RetroMCA/.idea/RetroMCA.iml" filepath="$PROJECT_DIR$/../RetroMCA/.idea/RetroMCA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Signaling/.idea/Signaling.iml" filepath="$PROJECT_DIR$/../Signaling/.idea/Signaling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pymc3/.idea/pymc3.iml" filepath="$PROJECT_DIR$/../pymc3/.idea/pymc3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pysb/.idea/pysb.iml" filepath="$PROJECT_DIR$/../pysb/.idea/pysb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../teUtils/.idea/teUtils.iml" filepath="$PROJECT_DIR$/../teUtils/.idea/teUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tellurium/.idea/tellurium.iml" filepath="$PROJECT_DIR$/../tellurium/.idea/tellurium.iml" />
+    </modules>
+  </component>
+</project>

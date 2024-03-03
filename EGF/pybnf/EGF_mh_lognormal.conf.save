@@ -1,0 +1,130 @@
+# Fitting the EGF model
+
+# Model specification
+
+# Base Models
+model = EGF_rp.xml : egfrp_sd.exp
+model = EGF_erkp.xml : egferkp_sd.exp
+
+
+# dose responses for EGFR pY1173 phosphorylation
+mutant = EGF_rp 1 E=0.4: egfrp1_sd.exp
+mutant = EGF_rp 2 E=1.0: egfrp2_sd.exp
+mutant = EGF_rp 3 E=2.5: egfrp3_sd.exp
+mutant = EGF_rp 4 E=5.0: egfrp4_sd.exp
+mutant = EGF_rp 5 E=10.0: egfrp5_sd.exp
+mutant = EGF_rp 6 E=20.0: egfrp6_sd.exp
+mutant = EGF_rp 7 E=100.0: egfrp7_sd.exp
+
+
+# dose responses for ERK phosphorylation
+mutant = EGF_erkp 1 E=0.0017: egferkp1_sd.exp
+mutant = EGF_erkp 2 E=0.0050: egferkp2_sd.exp
+mutant = EGF_erkp 3 E=0.0165: egferkp3_sd.exp
+mutant = EGF_erkp 4 E=0.0496: egferkp4_sd.exp
+mutant = EGF_erkp 5 E=0.1654: egferkp5_sd.exp
+mutant = EGF_erkp 6 E=0.4963: egferkp6_sd.exp
+mutant = EGF_erkp 7 E=1.6543: egferkp7_sd.exp
+mutant = EGF_erkp 8 E=4.9629: egferkp8.exp
+mutant = EGF_erkp 9 E=16.543: egferkp9.exp
+
+
+output_dir=/home/michael/PycharmProjects/EGF/output
+
+
+# Algorithm and objective function choice
+
+fit_type = mh
+objfunc = chi_sq
+#step_size = 0.2
+burn_in = 10000
+population_size=16
+max_iterations=100000
+
+#fit_type = ss
+#fit_type = pso
+#objfunc = sos
+#population_size = 8
+#population_size = 64
+#max_iterations = 1000
+
+# Parameters
+
+
+lognormal_var =	Km62 2 0.3
+lognormal_var =	Km63 2 0.3
+lognormal_var =	Km65 2 0.3
+lognormal_var =	Km66 2 0.3
+lognormal_var =	Km67 2 0.3
+lognormal_var =	Km68 2 0.3
+lognormal_var =	Km69 2 0.3
+lognormal_var =	Km70 2 0.3
+lognormal_var =	Km71 2 0.3
+lognormal_var =	Km72 2 0.3
+lognormal_var =	Km73 2 0.3
+lognormal_var =	Km8	2 0.3
+
+lognormal_var =	V69 1 0.3
+lognormal_var =	V72 1 0.3
+lognormal_var =	V73 1 0.3
+lognormal_var =	V8 1 0.3
+
+lognormal_var =	k10 -3 0.3
+lognormal_var =	k11 -3 0.3
+lognormal_var =	k13 -3 0.3
+lognormal_var =	k2 -3 0.3
+lognormal_var =	k204 -3 0.3
+lognormal_var =	k205 -3 0.3
+lognormal_var =	k206 -3 0.3
+lognormal_var =	k3 0 0.3
+lognormal_var =	k4 -3 0.3
+lognormal_var =	k5 -3 0.3
+lognormal_var =	k6 0 0.3
+lognormal_var =	k60 -3 0.3
+lognormal_var =	k61 -3 0.3
+lognormal_var =	k7 -3 0.3
+lognormal_var =	k9 -3 0.3
+
+lognormal_var =	k_10 0 0.3
+lognormal_var =	k_11 0 0.3
+lognormal_var =	k_13 0 0.3
+lognormal_var =	k_2 0 0.3
+lognormal_var =	k_204 0 0.3
+lognormal_var =	k_205 0 0.3
+lognormal_var =	k_206 0 0.3
+lognormal_var =	k_3 0 0.3
+lognormal_var =	k_4 0 0.3
+lognormal_var =	k_5 0 0.3
+lognormal_var =	k_60 0 0.3
+lognormal_var =	k_61 0 0.3
+lognormal_var =	k_7 0 0.3
+lognormal_var =	k_9 0 0.3
+
+lognormal_var =	kcat205 0 0.3
+lognormal_var =	kcat60 0 0.3
+lognormal_var =	kcat62 0 0.3
+lognormal_var =	kcat63 0 0.3
+lognormal_var =	kcat65 0 0.3
+lognormal_var =	kcat66 1 0.3
+lognormal_var =	kcat67 1 0.3
+lognormal_var =	kcat68 0 0.3
+lognormal_var =	kcat70 0 0.3
+lognormal_var =	kcat71 0 0.3
+
+lognormal_var =	kcat_205 0 0.3
+lognormal_var =	kcat_60 0 0.3
+
+lognormal_var =	krec 0 0.3
+
+
+#sbml_integrator=euler
+#delete_old_files=2
+#output_every=10
+verbosity=2
+
+
+# Actions
+
+time_course = model:EGF_rp, time:100, suffix:egfrp
+time_course = model:EGF_erkp, time:7300, suffix:egferkp
+

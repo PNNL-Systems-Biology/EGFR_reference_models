@@ -1,0 +1,3 @@
+// P -> R; variable_hill(P, Km, n, kr1, kr2) * (1/(E + 1)) * (1/(Spry2 + 1));
+
+Erk:    R -> E; T_CM_sp(k7, k8, P, R, KmR, KmE, m7, m8);

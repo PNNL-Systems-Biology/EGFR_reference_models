@@ -1,0 +1,175 @@
+// Created by libAntimony v2.8.1
+model EGFR_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species Tgfa in extra, Hbegf in extra, Ar in extra, Epgn in extra;
+species Egfr in cell, iEgfr in intra;
+species Egfr_Tgfa in cell, iR_Tgfa in intra;
+species pEgfr_Tgfa in cell, ipEgfr_Tgfa in intra;
+species Egfr_Hbegf in cell, iR_Hbegf in intra;
+species pEgfr_Hbegf in cell, ipEgfr_Hbegf in intra;
+species Egfr_Ar in cell, iR_Ar in intra;
+species pEgfr_Ar in cell, ipEgfr_Ar in intra;
+species Egfr_Epgn in cell, iR_Epgn in intra;
+species pEgfr_Epgn in cell, ipEgfr_Epgn in intra;
+species aRtot;
+
+// Reactions:
+// EGFR module
+
+// New_Receptors
+J1: => Egfr; Vr;
+// Receptor_turnover
+J2: Egfr => iEgfr; kt * Egfr;
+// Receptor_degrad
+J3: iEgfr => ; kx * iEgfr;
+
+// Ligand_binding
+J4: Tgfa + Egfr -> Egfr_Tgfa; k4 * Egfr * Tgfa - k_4 * Egfr_Tgfa;
+// J4: Egfr -> Egfr_Tgfa; k4 * Egfr * 0.165 - k_4 * Egfr_Tgfa
+// Receptor_ligand_endo
+J5: Egfr_Tgfa => iEgfr_Tgfa; ke * Egfr_Tgfa;
+// Receptor_complex_degrad
+J6: iEgfr_Tgfa => ; kh * iEgfr_Tgfa;
+// Receptor_phospho
+J7: Egfr_Tgfa -> pEgfr_Tgfa; k7 * Egfr_Tgfa - k_7 * pEgfr_Tgfa;
+// Receptor_phospho_endo
+J8: pEgfr_Tgfa => ipEgfr_Tgfa ; ke * pEgfr_Tgfa;
+// Receptor_phosphocomplex_degrad
+J9: ipEgfr_Tgfa => ; kh * ipEgfr_Tgfa;
+
+// Ligand_binding
+J10: Hbegf + Egfr -> Egfr_Hbegf; k10 * Egfr * Hbegf - k_10 * Egfr_Hbegf;
+// J10: Egfr -> Egfr_Hbegf; k10 * Egfr * 0.165 - k_10 * Egfr_Hbegf;
+// Receptor_ligand_endo
+J11: Egfr_Hbegf => iEgfr_Hbegf; ke * Egfr_Hbegf;
+// Receptor_complex_degrad
+J12: iEgfr_Hbegf => ; kh * iEgfr_Hbegf;
+// Receptor_phospho
+J13: Egfr_Hbegf -> pEgfr_Hbegf; k13 * Egfr_Hbegf - k_13 * pEgfr_Hbegf;
+// Receptor_phospho_endo
+J14: pEgfr_Hbegf => ipEgfr_Hbegf ; ke * pEgfr_Hbegf;
+// Receptor_phosphocomplex_degrad
+J15: ipEgfr_Hbegf => ; kh * ipEgfr_Hbegf;
+
+// Ligand_binding
+J16: Ar + Egfr -> Egfr_Ar; k16 * Egfr * Ar - k_16 * Egfr_Ar;
+// J16: Egfr -> Egfr_Ar; k16 * Egfr * 0.165 - k_16 * Egfr_Ar;
+// Receptor_ligand_endo
+J17: Egfr_Ar => iEgfr_Ar; ke * Egfr_Ar;
+// Receptor_complex_degrad
+J18: iEgfr_Ar => ; kh * iEgfr_Ar;
+// Receptor_phospho
+J19: Egfr_Ar -> pEgfr_Ar; k19 * Egfr_Ar - k_19 * pEgfr_Ar;
+// Receptor_phospho_endo
+J20: pEgfr_Ar => ipEgfr_Ar ; ke * pEgfr_Ar;
+// Receptor_phosphocomplex_degrad
+J21: ipEgfr_Ar => ; kh * ipEgfr_Ar;
+
+// Ligand_binding
+J22: Epgn + Egfr -> Egfr_Epgn; k22 * Egfr * Epgn - k_22 * Egfr_Epgn;
+// J22: Egfr -> Egfr_Epgn; k22 * Egfr * 0.165 - k_22 * Egfr_Epgn;
+// Receptor_ligand_endo
+J23: Egfr_Epgn => iEgfr_Epgn; ke * Egfr_Epgn;
+// Receptor_complex_degrad
+J24: iEgfr_Epgn => ; kh * iEgfr_Epgn;
+// Receptor_phospho
+J25: Egfr_Epgn -> pEgfr_Epgn; k25 * Egfr_Epgn - k_25 * pEgfr_Epgn;
+// Receptor_phospho_endo
+J26: pEgfr_Epgn => ipEgfr_Epgn ; ke * pEgfr_Epgn;
+// Receptor_phosphocomplex_degrad
+J27: ipEgfr_Epgn => ; kh * ipEgfr_Epgn;
+
+// Module inputs:
+// L from shedding module
+
+// regulation from Erk module
+// pErk
+
+// Module outputs:
+$aR := pEgfr_Tgfa + pEgfr_Hbegf + pEgfr_Ar + pEgfr_Epgn;
+$aR has nM;
+$aRi := ipEgfr_Tgfa + ipEgfr_Hbegf + ipEgfr_Ar + ipEgfr_Epgn;
+$aRi has nM;
+$aRtot := $aR + $aRi;
+$aRtot has nM;
+
+// Species initializations:
+// all species has nM units
+// fix EGF
+var Tgfa = 0.165;
+Egfr = 190;
+iEgfr = 0;
+Egfr_Tgfa = 0;
+iEgfr_Tgfa = 0;
+pEgfr_Tgfa = 0;
+ipEgfr_Tgfa = 0;
+Egfr_Hbegf = 0;
+iEgfr_Hbegf = 0;
+pEgfr_Hbegf = 0;
+ipEgfr_Hbegf = 0;
+Egfr_Ar = 0;
+iEgfr_Ar = 0;
+pEgfr_Ar = 0;
+ipEgfr_Ar = 0;
+Egfr_Epgn = 0;
+iEgfr_Epgn = 0;
+pEgfr_Epgn = 0;
+ipEgfr_Epgn = 0;
+
+
+
+// Compartment initializations:
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// Variable initializations:
+kt = 0.5738355338172565 // Endocytosis of empty receptors
+ke = 0.1026914116559139 // Endocytosis of activated receptors
+Vr = 9.617071336041764 // Replenishment of empty receptors
+kx = 0.1698682067561215 // Degradation of empty receptors
+kh = 0.1038553952079035 // 0.00024; // Degradation of activated receptors
+
+k4 = 0.1318142980321879 // Forward receptor-ligand rate constant
+k_4 = 0.2590951515905496 // Reverse receptor-ligand rate constant
+k7 = 6.148602796150489 // 0.067; // This is the phosphorylation probability
+k_7 = 0.2565968288080184 // Dephosphorylation rate constant
+
+k10 = 2.9352088920301727 // Forward receptor-ligand rate constant
+k_10 = 3.7064321098681887 // Reverse receptor-ligand rate constant
+k13 = 7.208025648149343 // 0.067; // This is the phosphorylation probability
+k_13 = 6.067754181491617 // Dephosphorylation rate constant
+
+k16 = 0.1132043445634123 // Forward receptor-ligand rate constant
+k_16 = 1.2276249165377546 // Reverse receptor-ligand rate constant
+k19 = 0.4034643489039161 // 0.067; // This is the phosphorylation probability
+k_19 = 0.4147037369785962 // Dephosphorylation rate constant
+
+k22 = 0.4923400407445386 // Forward receptor-ligand rate constant
+k_22 = 0.3157747096921688 // Reverse receptor-ligand rate constant
+k25 = 2.115872357777392 // 0.067; // This is the phosphorylation probability
+k_25 = 0.1344450043263954 // Dephosphorylation rate constant
+
+// Other declarations:
+// var k_1, k_2, k_3;
+// const cell, extra, k1, k2, k3;
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_s = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_s is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+end

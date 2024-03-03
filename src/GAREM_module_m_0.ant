@@ -1,0 +1,152 @@
+
+// Cubic spline functions for phosphorylated receptor (aRtot). Used for individual module fitting.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+function a(t)
+2.4997820512820517 - 3 * 0.07994551282051288 * (t-0)^2
+end
+function b(t)
+1.5404358974358974 - 2 * 0.4796730769230769 * (t-2) + 3 * 0.06847756410256411 * (t-2)^2
+end
+function c(t)
+0.44347435897435894 - 2 * 0.06880769230769229 * (t-4) + 3 * 0.0022852564102563977 * (t-4)^2
+end
+function d(t)
+0.19566666666666654 - 2 * 0.05509615384615388 * (t-6) + 3 * 0.006131410256410272 * (t-6)^2
+end
+
+// Cubic spline functions for Shp2, a necessary input function to the module. Fit to PTPN11 data.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+function x(t)
+1.0958035714285712 - 2 * 2.220446049250313e-16 * (t-0) + 3 * 0.01479910714285726 * (t-0)^2
+end
+function y(t)
+1.2733928571428572 + 2 * 0.08879464285714345 * (t-2) - 3 * 0.0614955357142859 * (t-2)^2
+end
+function z(t)
+0.8906250000000004 - 2 * 0.28017857142857183 * (t-4) + 3 * 0.022433035714285787 * (t-4)^2
+end
+function w(t)
+0.03910714285714256 - 2 * 0.1455803571428571 * (t-6) + 3 * 0.02426339285714285 * (t-6)^2
+end
+
+
+// Created by libAntimony v2.8.1
+model GAREM_module()
+
+// Compartments and Species:
+// todo: remove extra/intra compartments
+compartment cell, extra, intra;
+species Garem in cell, pGarem in cell;
+var aRtot in cell;
+species Grb2 in cell, Shp2 in cell;
+species Grb2_Garem in cell, Grb2_pGarem in cell;
+species Grb2_ppGarem in cell, Grb2_ppGarem_Shp2 in cell;
+species Grb2_ppGarem_pShp2 in cell;
+species aRtot_Grb2_pGarem in cell;
+
+// Inputs/Outputs:
+
+// Garem module
+// Inputs: aRtot
+// Output Garem_complex
+
+// Reactions
+
+// Uncomment the following line (J0 - aRtot production) for individual module fiting.
+J0: -> aRtot; piecewise(a(time), time<=2, b(time), time<=4, c(time), time<=6, d(time), time<=8)
+
+// Shp2 production
+J1: -> Shp2; piecewise(x(time), time<=2, y(time), time<=4, z(time), time<=6, w(time), time<=8)
+
+// Biniding of Grb2_Garem complex to phosphorylated receptor (aRtot)
+J2: aRtot + Grb2_Garem => aRtot_Grb2_Garem; k2 * aRtot * Grb2_Garem - k_2 * aRtot_Grb2_Garem;
+
+// -----------------------------------------------------------------------------------------
+
+// Phosphorylation of first and second sites on Garem-Grb2 (Michaelis-Menten)
+// J3: aRtot_Grb2_Garem => aRtot_Grb2_pGarem; (kcat3 * aRtot_Grb2_Garem)/(Km3 + aRtot_Grb2_Garem);
+// J4: aRtot_Grb2_pGarem => aRtot_Grb2_ppGarem; (kcat4 * aRtot_Grb2_pGarem)/(Km4 + aRtot_Grb2_pGarem);
+
+// Dephosphorylation of first and second sites on Garem-Grb2 (Michaelis-Menten))
+// J5: aRtot_Grb2_pGarem => aRtot_Grb2_Garem; (V5 * aRtot_Grb2_pGarem)/(Km5 + aRtot_Grb2_pGarem);
+// J6: aRtot_Grb2_ppGarem => aRtot_Grb2_pGarem; (V6 * aRtot_Grb2_ppGarem)/(Km6 + aRtot_Grb2_ppGarem);
+
+// ---------------------------------------------------------------------
+
+// Phosphorylation of first and second sites on Garem-Grb2 (mass action)
+J3: aRtot_Grb2_Garem => aRtot_Grb2_pGarem; k3 * aRtot_Grb2_Garem;
+J4: aRtot_Grb2_pGarem => aRtot_Grb2_ppGarem; k4 * aRtot_Grb2_pGarem;
+
+// Dephosphorylation of first and second sites on Garem-Grb2 (mass action)
+// J5: aRtot_Grb2_pGarem => aRtot_Grb2_Garem; k5 * aRtot_Grb2_pGarem;
+// J6: aRtot_Grb2_ppGarem => aRtot_Grb2_pGarem; k6 * aRtot_Grb2_ppGarem;
+
+// -----------------------------------------------------------------------------------------
+
+// aRtot_Grb2_ppGarem_Shp2 complex formation
+J7: aRtot_Grb2_ppGarem + Shp2 => aRtot_Grb2_ppGarem_Shp2; k7 * aRtot_Grb2_ppGarem * Shp2 - k_7 * aRtot_Grb2_ppGarem_Shp2;
+
+// -----------------------------------------------------------------------------------------
+
+// aRtot_Grb2_ppGarem_Shp2 phosphorylation/dephosphorylation (Michaelis-Menten)
+// J8: aRtot_Grb2_ppGarem_Shp2 => aRtot_Grb2_ppGarem_pShp2; (kcat8 * aRtot_Grb2_ppGarem_Shp2)/(Km8 + aRtot_Grb2_ppGarem_Shp2);
+// J9: aRtot_Grb2_ppGarem_pShp2 => aRtot_Grb2_ppGarem_Shp2; (V9 * aRtot_Grb2_ppGarem_pShp2)/(Km9 + aRtot_Grb2_ppGarem_pShp2);
+
+// ---------------------------------------------------------------------
+
+// aRtot_Grb2_ppGarem_Shp2 phosphorylation/dephosphorylation (mass action)
+J8: aRtot_Grb2_ppGarem_Shp2 => aRtot_Grb2_ppGarem_pShp2; k8 * aRtot_Grb2_ppGarem_Shp2;
+// J9: aRtot_Grb2_ppGarem_pShp2 => aRtot_Grb2_ppGarem_Shp2; k9 * aRtot_Grb2_ppGarem_pShp2;
+
+// =========================================================================================
+
+// Species initializations:
+
+// Garem = 15.510
+// Grb2 = 19.1
+
+// Question: is Garem saturated with Grb2 ?
+Grb2_Garem = 15.510
+
+Shp2 = 3.5
+aRtot_Grb2_ppGarem = 0.96
+
+// Compartment initializations:
+cell = 1;
+extra = 1;
+intra = 1;
+
+// Variable initializations:
+k2 = 9.993618561464263
+k_2 = 2.7473492291940672e-06
+
+kcat3 = 0.0002168731619536
+Km3 = 6.281829777225212e-06
+kcat4 = 0.0114824138535187
+Km4 = 1.6034284411179706e-06
+V5 = 0.0699519757671497
+Km5 = 6.700447543330675e-05
+V6 = 0.0003710376793347
+Km6 = 9.175696162039036e-06
+
+k3 = 9.99935928355198
+k4 = 9.99945725655408
+k5 = 7.069796414116817
+k6 = 0.0016657839211047
+
+k7 = 0.0616891294234523
+k_7 = 1.7712769580296497
+
+kcat8 = 9.485985575784863e-06
+Km8 = 0.1433618825104808
+V9 = 5.677754129574952e-06
+Km9 = 0.0877668269939604
+
+k8 = 1.5308857769018706e-06
+k9 = 4.340044719447529e-06
+
+end

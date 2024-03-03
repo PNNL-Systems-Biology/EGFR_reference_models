@@ -14,16 +14,17 @@ shc_datafile = 'shc.txt'
 
 shc_df = pd.read_csv(shc_datafile, delimiter=r"\s+")
 shc_time = np.array(shc_df['Time'])
-shc = np.array(shc_df['pShc1'])
+shc = np.array(shc_df['aR_pShc1'])
 
-r = te.loada('SHC_MA_module.ant')
-r.integrator.absolute_tolerance = 1e-12
-r.integrator.relative_tolerance = 1e-12
-sim = r.simulate(0, 8, 81, selections=['time', 'aRtot', 'pShc1'])
-t = np.linspace(0, 8, 81)
+r = te.loada('SHC_module_1.ant')
+# r.integrator.absolute_tolerance = 1e-12
+# r.integrator.relative_tolerance = 1e-12
+sim = r.simulate(0, 480, 4801, selections=['time', 'aR_pShc1'])
+t = np.linspace(0, 480, 4801)
 
-plt.plot(t, sim['pShc1'], label='shc-complex fit')
+plt.plot(t, sim['aR_pShc1'], label='shc-complex fit')
 plt.scatter(shc_time, shc, label='shc-complex data')
+# plt.plot(t, sim['aRtot'], label='aRtot')
 plt.title('SHC1 module')
 # plt.plot(t, sim['aRtot'], c='red', label='egfr fit')
 # plt.scatter(egfr_time, egfr, c='red', label='egfr data')

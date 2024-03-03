@@ -11,20 +11,21 @@ import tellurium as te
 # sos_input_time = np.array(sos_input_df['Time'])
 # sos_input = np.array(sos_input_df['aAdptrTot'])
 
-ras_datafile = 'ras.txt'
+ras_datafile = 'aSos.txt'
 
 ras_df = pd.read_csv(ras_datafile, delimiter=r"\s+")
 ras_time = np.array(ras_df['Time'])
-ras = np.array(ras_df['tRas'])
+ras = np.array(ras_df['aSOS'])
 
-r = te.loada('SOS_module2.ant')
+r = te.loada('SOS_module_1.ant')
 # r.integrator.absolute_tolerance = 1e-12
 # r.integrator.relative_tolerance = 1e-12
-sim = r.simulate(0, 10, 1201, selections=['time', 'aAdptrTot', 'Grb2_pSOS1', 'Grb2_ipSOS1', 'aSOS', 'dRas', 'tRas'])
-t = np.linspace(0, 10, 1201)
+sim = r.simulate(0, 600, 6001, selections=['time', 'aSOS', 'aAdptrTot'])
+t = np.linspace(0, 600, 6001)
 
-plt.plot(t, sim['tRas'], label='tRas fit')
-plt.scatter(ras_time, ras, label='tRas data')
+plt.plot(t, sim['aAdptrTot'], label='unbound input')
+plt.plot(t, sim['aSOS'], label='aSOS')
+# plt.scatter(ras_time, ras, label='aSOS data')
 # plt.plot(t, sim['aAdptrTot'], label='agg input fit')
 # plt.scatter(sos_input_time, sos_input, label='agg input data')
 # plt.plot(t, sim['aRtot'], label='aRtot')

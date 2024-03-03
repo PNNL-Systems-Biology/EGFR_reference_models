@@ -1,0 +1,1427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+  <model metaid="EGF_erkp" id="EGF_erkp" substanceUnits="substance" timeUnits="time_unit">
+    <listOfUnitDefinitions>
+      <unitDefinition id="nM">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nMs">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_sec">
+        <listOfUnits>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="nM_per_sec"/>
+      <unitDefinition id="nM_per_s">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+          <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+          <unit kind="second" exponent="-1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="substance">
+        <listOfUnits>
+          <unit kind="mole" exponent="1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="time_unit">
+        <listOfUnits>
+          <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="per_nM">
+        <listOfUnits>
+          <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+          <unit kind="mole" exponent="-1" scale="-9" multiplier="1"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="cell" spatialDimensions="3" size="1" constant="true"/>
+      <compartment id="extra" spatialDimensions="3" size="5000" constant="true"/>
+      <compartment id="intra" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="RE" compartment="cell" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="R" compartment="cell" initialConcentration="201.666666666667" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="REi" compartment="intra" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="E" compartment="extra" initialConcentration="82.5" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Ri" compartment="intra" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rd" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Grb2" compartment="cell" initialConcentration="37.11" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="SOS" compartment="cell" initialConcentration="0.07" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="SOSp" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="GS" compartment="cell" initialConcentration="3.98" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_GS" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_GSi" compartment="intra" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Shc" compartment="cell" initialConcentration="67.3" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_Shc" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_pShc" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pShc" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_Shci" compartment="intra" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_pShci" compartment="intra" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_pShc_GS" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pShc_GS" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_pShc_GSi" compartment="intra" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="RasGAP" compartment="cell" initialConcentration="25.2" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp_RasGAP" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="IRp_RasGAP" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="dRas" compartment="cell" initialConcentration="140" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="tRas" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="bRasGAP" compartment="cell" initialConcentration="0.002" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Raf" compartment="cell" initialConcentration="30" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rafp" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aRaf" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="aaRaf" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Mek" compartment="cell" initialConcentration="128.3" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ppMek" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Erk" compartment="cell" initialConcentration="150" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pErk" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ppErk" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="SOS_ppErk" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Pro1433" compartment="cell" initialConcentration="500" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="SOSp_Pro1433" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Raf_ppErk" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rafp_Pro1433" compartment="cell" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rdi" compartment="default_compartment" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rpi" compartment="default_compartment" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="Vr" value="0.242" units="nM_per_sec" constant="true"/>
+      <parameter id="kt" value="0.0012" units="per_sec" constant="true"/>
+      <parameter id="k1" value="0.0016" units="per_nMs" constant="true"/>
+      <parameter id="k_1" value="0.004" units="per_sec" constant="false"/>
+      <parameter id="ke" value="0.0033" units="per_sec" constant="true"/>
+      <parameter id="kx" value="1" units="per_sec" constant="true"/>
+      <parameter id="kh" value="0.0004" units="per_sec" constant="true"/>
+      <parameter id="k2" value="0.082" units="per_nMs" constant="true"/>
+      <parameter id="k_2" value="0.017" units="per_sec" constant="false"/>
+      <parameter id="k3" value="1.2" units="per_sec" constant="true"/>
+      <parameter id="k_3" value="1.3" constant="true"/>
+      <parameter id="k204" value="9.45e-06" units="per_nMs" constant="true"/>
+      <parameter id="k_204" value="0.0138" units="per_sec" constant="true"/>
+      <parameter id="k5" value="0.1" units="per_nMs" constant="true"/>
+      <parameter id="k_5" value="2" units="per_sec" constant="false"/>
+      <parameter id="k6" value="0.6" units="per_sec" constant="true"/>
+      <parameter id="k_7" value="2" units="per_sec" constant="false"/>
+      <parameter id="k7" value="0.144" units="per_nMs" constant="true"/>
+      <parameter id="V8" value="200" units="nM_per_s" constant="true"/>
+      <parameter id="Km8" value="100" units="nM" constant="true"/>
+      <parameter id="krec" value="0.005" units="per_sec" constant="true"/>
+      <parameter id="k4" value="1.44" units="per_nMs" constant="true"/>
+      <parameter id="k_4" value="0.5" units="per_sec" constant="false"/>
+      <parameter id="k9" value="7.29" units="per_nMs" constant="true"/>
+      <parameter id="k_9" value="7.3" units="per_sec" constant="false"/>
+      <parameter id="k11" value="0.202" units="per_nMs" constant="false"/>
+      <parameter id="k_11" value="10.2" units="per_sec" constant="false"/>
+      <parameter id="k10" value="0.000547" units="per_nMs" constant="true"/>
+      <parameter id="k_10" value="2" units="per_sec" constant="false"/>
+      <parameter id="k13" value="8.26e-06" units="per_nMs" constant="true"/>
+      <parameter id="k_13" value="10" units="per_sec" constant="true"/>
+      <parameter id="kcat62" value="30.4" units="per_sec" constant="true"/>
+      <parameter id="Km62" value="50" units="nM" constant="true"/>
+      <parameter id="kcat63" value="49900" units="per_sec" constant="true"/>
+      <parameter id="Km63" value="50" units="nM" constant="true"/>
+      <parameter id="kcat65" value="1" units="per_sec" constant="true"/>
+      <parameter id="Km65" value="400" units="nM" constant="true"/>
+      <parameter id="kcat66" value="14" units="nM_per_s" constant="true"/>
+      <parameter id="Km66" value="10" units="nM" constant="true"/>
+      <parameter id="kcat67" value="100" units="nM_per_s" constant="true"/>
+      <parameter id="Km67" value="1000" units="nM" constant="true"/>
+      <parameter id="kcat68" value="0.754" units="per_sec" constant="true"/>
+      <parameter id="Km68" value="50" units="nM" constant="true"/>
+      <parameter id="V69" value="100" units="nM_per_s" constant="true"/>
+      <parameter id="Km69" value="675" units="nM" constant="true"/>
+      <parameter id="kcat70" value="0.0529" units="per_sec" constant="true"/>
+      <parameter id="Km70" value="300" units="nM" constant="true"/>
+      <parameter id="Km71" value="200" units="nM" constant="true"/>
+      <parameter id="kcat71" value="0.807" units="per_sec" constant="true"/>
+      <parameter id="V72" value="93.5" units="nM_per_s" constant="true"/>
+      <parameter id="Km72" value="5950" units="nM" constant="true"/>
+      <parameter id="Km73" value="500" units="nM" constant="true"/>
+      <parameter id="V73" value="17.1" units="nM_per_s" constant="true"/>
+      <parameter id="k205" value="0.00025" units="per_nMs" constant="true"/>
+      <parameter id="k_205" value="0.025" units="per_sec" constant="true"/>
+      <parameter id="kcat205" value="1" units="per_sec" constant="true"/>
+      <parameter id="kcat_205" value="0.1" units="per_sec" constant="true"/>
+      <parameter id="k206" value="0.001" units="per_nMs" constant="true"/>
+      <parameter id="k_206" value="0.001" units="per_sec" constant="true"/>
+      <parameter id="k60" value="0.001" units="per_nMs" constant="true"/>
+      <parameter id="k_60" value="0.025" units="per_sec" constant="true"/>
+      <parameter id="kcat60" value="0.5" units="per_sec" constant="true"/>
+      <parameter id="kcat_60" value="1" units="per_sec" constant="true"/>
+      <parameter id="k61" value="0.001" units="per_nMs" constant="true"/>
+      <parameter id="k_61" value="0.001" units="per_sec" constant="true"/>
+    </listOfParameters>
+    <listOfInitialAssignments>
+      <initialAssignment symbol="R">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> Vr </ci>
+            <ci> kt </ci>
+          </apply>
+        </math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+    <listOfReactions>
+      <reaction id="New_Receptors" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="R" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Vr </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_turnover" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="R" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Ri" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> R </ci>
+              <ci> kt </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Ligand_binding" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="E" stoichiometry="1" constant="true"/>
+          <speciesReference species="R" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RE" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k1 </ci>
+                  <ci> R </ci>
+                  <ci> E </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_1 </ci>
+                  <ci> RE </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_ligand_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="RE" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="REi" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> RE </ci>
+              <ci> ke </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_degrad" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Ri" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Ri </ci>
+              <ci> kx </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_complex_degrad" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="REi" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> REi </ci>
+              <ci> kh </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_dimerization" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="RE" stoichiometry="2" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rd" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k2 </ci>
+              <ci> RE </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_monomerization" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rd" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="RE" stoichiometry="2" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k_2 </ci>
+              <ci> Rd </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Dimer_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rd" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rdi" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rd </ci>
+              <ci> kt </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_phospho" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rd" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k3 </ci>
+                  <ci> Rd </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_3 </ci>
+                  <ci> Rp </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Dimer_phospho_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rpi" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp </ci>
+              <ci> ke </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Grb2_Sos_formation" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Grb2" stoichiometry="1" constant="true"/>
+          <speciesReference species="SOS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> Grb2 </ci>
+                  <ci> SOS </ci>
+                  <ci> k204 </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> GS </ci>
+                  <ci> k_204 </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Shc_receptor_bind" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+          <speciesReference species="Shc" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_Shc" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k5 </ci>
+                  <ci> Rp </ci>
+                  <ci> Shc </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_5 </ci>
+                  <ci> Rp_Shc </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Shc_phosphorylation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_Shc" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_pShc" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> k6 </ci>
+              <ci> Rp_Shc </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="PhosphoShc_dissociation" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_pShc" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+          <speciesReference species="pShc" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k_7 </ci>
+                  <ci> Rp_pShc </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k7 </ci>
+                  <ci> Rp </ci>
+                  <ci> pShc </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Phospho_Shc_dephosphorylation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="pShc" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Shc" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> V8 </ci>
+                  <ci> pShc </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km8 </ci>
+                  <ci> pShc </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Shc_complex_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_Shc" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_Shci" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_Shc </ci>
+              <ci> kt </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Phospho_Shc_complex_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_pShc" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_pShci" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_pShc </ci>
+              <ci> kt </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Shc_complex_recycle" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_Shci" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Shc" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_Shci </ci>
+              <ci> krec </ci>
+              <ci> intra </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Phospho_Shc_complex_recycle" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_pShci" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pShc" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_pShci </ci>
+              <ci> krec </ci>
+              <ci> intra </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_GS_binding" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+          <speciesReference species="GS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> Rp </ci>
+                  <ci> GS </ci>
+                  <ci> k4 </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_4 </ci>
+                  <ci> Rp_GS </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_GS_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_GS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_GSi" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_GS </ci>
+              <ci> ke </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="GS_endo_recycle" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_GSi" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_GSi </ci>
+              <ci> krec </ci>
+              <ci> intra </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_Shc_GS_formation" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_pShc" stoichiometry="1" constant="true"/>
+          <speciesReference species="GS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_pShc_GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k9 </ci>
+                  <ci> Rp_pShc </ci>
+                  <ci> GS </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_9 </ci>
+                  <ci> Rp_pShc_GS </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="pShc_GS_formation" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="pShc" stoichiometry="1" constant="true"/>
+          <speciesReference species="GS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pShc_GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k11 </ci>
+                  <ci> pShc </ci>
+                  <ci> GS </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_11 </ci>
+                  <ci> pShc_GS </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_Shc_GS_formation2" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+          <speciesReference species="pShc_GS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_pShc_GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k10 </ci>
+                  <ci> Rp </ci>
+                  <ci> pShc_GS </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_10 </ci>
+                  <ci> Rp_pShc_GS </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_Shc_GS_endo" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_pShc_GS" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_pShc_GSi" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> ke </ci>
+              <ci> Rp_pShc_GS </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Shc_GS_recycle" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp_pShc_GSi" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Shc" stoichiometry="1" constant="true"/>
+          <speciesReference species="GS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rp_pShc_GSi </ci>
+              <ci> krec </ci>
+              <ci> intra </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Receptor_RasGap_formation" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+          <speciesReference species="RasGAP" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp_RasGAP" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k13 </ci>
+                  <ci> Rp </ci>
+                  <ci> RasGAP </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> k_13 </ci>
+                  <ci> Rp_RasGAP </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_62" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="dRas" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="tRas" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Rp_GS"/>
+          <modifierSpeciesReference species="Rp_pShc_GS"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat62 </ci>
+                  <ci> dRas </ci>
+                  <apply>
+                    <plus/>
+                    <ci> Rp_pShc_GS </ci>
+                    <ci> Rp_GS </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km62 </ci>
+                  <ci> dRas </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_63" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="tRas" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="dRas" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Rp_RasGAP"/>
+          <modifierSpeciesReference species="bRasGAP"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat63 </ci>
+                  <ci> tRas </ci>
+                  <apply>
+                    <plus/>
+                    <ci> bRasGAP </ci>
+                    <ci> Rp_RasGAP </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km63 </ci>
+                  <ci> tRas </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_65" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Raf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="aRaf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="tRas"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat65 </ci>
+                  <ci> tRas </ci>
+                  <ci> Raf </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km65 </ci>
+                  <ci> Raf </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_66" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="aRaf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="aaRaf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat66 </ci>
+                  <ci> aRaf </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km66 </ci>
+                  <ci> aRaf </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_67" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="aaRaf" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Raf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat67 </ci>
+                  <ci> aaRaf </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km67 </ci>
+                  <ci> aaRaf </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_68" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Mek" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ppMek" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="aaRaf"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat68 </ci>
+                  <ci> aaRaf </ci>
+                  <ci> Mek </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km68 </ci>
+                  <ci> Mek </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_69" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="ppMek" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Mek" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> V69 </ci>
+                  <ci> ppMek </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km69 </ci>
+                  <ci> ppMek </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_70" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Erk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pErk" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="ppMek"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat70 </ci>
+                  <ci> Erk </ci>
+                  <ci> ppMek </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km70 </ci>
+                  <ci> Erk </ci>
+                  <apply>
+                    <times/>
+                    <ci> pErk </ci>
+                    <apply>
+                      <divide/>
+                      <ci> Km70 </ci>
+                      <ci> Km71 </ci>
+                    </apply>
+                  </apply>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_71" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="pErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ppErk" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="ppMek"/>
+          <modifierSpeciesReference species="Erk"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> kcat71 </ci>
+                  <ci> pErk </ci>
+                  <ci> ppMek </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km71 </ci>
+                  <ci> pErk </ci>
+                  <apply>
+                    <times/>
+                    <ci> Erk </ci>
+                    <apply>
+                      <divide/>
+                      <ci> Km71 </ci>
+                      <ci> Km70 </ci>
+                    </apply>
+                  </apply>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_72" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="ppErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pErk" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> V72 </ci>
+                  <ci> ppErk </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km72 </ci>
+                  <ci> ppErk </ci>
+                  <apply>
+                    <times/>
+                    <ci> pErk </ci>
+                    <apply>
+                      <divide/>
+                      <ci> Km72 </ci>
+                      <ci> Km73 </ci>
+                    </apply>
+                  </apply>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="reaction_73" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="pErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Erk" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="ppErk"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> V73 </ci>
+                  <ci> pErk </ci>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Km73 </ci>
+                  <ci> pErk </ci>
+                  <apply>
+                    <times/>
+                    <ci> ppErk </ci>
+                    <apply>
+                      <divide/>
+                      <ci> Km73 </ci>
+                      <ci> Km72 </ci>
+                    </apply>
+                  </apply>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Sos_Erk_binding" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="SOS" stoichiometry="1" constant="true"/>
+          <speciesReference species="ppErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SOS_ppErk" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> SOS </ci>
+                  <ci> ppErk </ci>
+                  <ci> k205 </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> SOS_ppErk </ci>
+                  <ci> k_205 </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Sos_phosphorylation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="SOS_ppErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ppErk" stoichiometry="1" constant="true"/>
+          <speciesReference species="SOSp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> SOS_ppErk </ci>
+              <ci> kcat205 </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Sos_dephosphorylation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="SOSp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SOS" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> SOSp </ci>
+              <ci> kcat_205 </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="SOS_sequestration" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="SOSp" stoichiometry="1" constant="true"/>
+          <speciesReference species="Pro1433" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="SOSp_Pro1433" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> SOSp </ci>
+                  <ci> Pro1433 </ci>
+                  <ci> k206 </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> SOSp_Pro1433 </ci>
+                  <ci> k_206 </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf_Erk_binding" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Raf" stoichiometry="1" constant="true"/>
+          <speciesReference species="ppErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Raf_ppErk" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="Rafp"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> k60 </ci>
+                  <ci> ppErk </ci>
+                  <ci> Raf </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> Rafp </ci>
+                  <ci> k_60 </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf_phosphorylation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Raf_ppErk" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ppErk" stoichiometry="1" constant="true"/>
+          <speciesReference species="Rafp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Raf_ppErk </ci>
+              <ci> kcat60 </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf_dephosphorylation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rafp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Raf" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> Rafp </ci>
+              <ci> kcat_60 </ci>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Raf_sequestration" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rafp" stoichiometry="1" constant="true"/>
+          <speciesReference species="Pro1433" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rafp_Pro1433" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> Rafp </ci>
+                  <ci> Pro1433 </ci>
+                  <ci> k61 </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> Rafp_Pro1433 </ci>
+                  <ci> k_61 </ci>
+                </apply>
+              </apply>
+              <ci> cell </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

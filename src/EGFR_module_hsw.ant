@@ -5,14 +5,13 @@ model EGFR_module()
 
 // Compartments and Species:
 compartment cell, extra, intra;
-Lig in extra;
-Egfr in cell;
-iEgfr in intra;
-Egfr_Lig in cell;
-iEgfr_Lig in intra;
-pEgfr_Lig in cell;
-ipEgfr_Lig in intra;
-species aRtot in cell;
+species Lig in extra;
+species Egfr in cell;
+species iEgfr in intra;
+species Egfr_Lig in cell;
+species iEgfr_Lig in intra;
+species pEgfr_Lig in cell;
+species ipEgfr_Lig in intra;
 
 // Reactions:
 // EGFR module
@@ -36,9 +35,6 @@ J8: pEgfr_Lig => ipEgfr_Lig ; ke * pEgfr_Lig;
 // Receptor_phosphocomplex_degrad
 J9: ipEgfr_Lig => ; kh * ipEgfr_Lig;
 
-$aRtot := pEgfr_Lig + ipEgfr_Lig;
-$aRtot has nM;
-
 
 // all species has nM units
 // fix Lig
@@ -46,11 +42,11 @@ $aRtot has nM;
 var Lig = 0.2;
 Lig has nM;
 Egfr = Vr/kt;
-iEgfr = 0;
-Egfr_Lig = 0;
-iEgfr_Lig = 0;
-pEgfr_Lig = 0;
-ipEgfr_Lig = 0;
+iEgfr = 67;
+Egfr_Lig = 2;
+iEgfr_Lig = 1;
+pEgfr_Lig = .8;
+ipEgfr_Lig = .4;
 
 
 // Compartment initializations:
@@ -60,15 +56,15 @@ intra = 1;
 
 // Variable initializations:
 kt = 0.0012; // Endocytosis of empty receptors
-ke = 0.0072994793516101 // Endocytosis of activated receptors
+ke = 0.0029110375116594 // Endocytosis of activated receptors
 Vr = 0.242; // Replenishment of empty receptors
 kx = 1; // Degradation of empty receptors - set to eliminate the compartment
-kh = 0.0006826108199894 // 0.00024; // Degradation of activated receptors
+kh = 0.0002454426878347 // 0.00024; // Degradation of activated receptors
 
-k4 = 0.0031999943261548 // Forward receptor-ligand 2nd order rate constant
-k_4 = 0.0020006725164496 // Reverse receptor-ligand rate constant
-k7 = 0.0641942703101092 // 0.067; // This is the phosphorylation probability
-k_7 = 0.2582212779062402 // Dephosphorylation rate constant
+k4 = 0.0031999338338785 // Forward receptor-ligand 2nd order rate constant
+k_4 = 0.0047525398517944 // Reverse receptor-ligand rate constant
+k7 = 0.041936888564649 // 0.067; // This is the phosphorylation probability
+k_7 = 0.0650000852811364 // Dephosphorylation rate constant
 
 
 // Other declarations:

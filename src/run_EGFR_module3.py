@@ -8,7 +8,7 @@ egfr_datafile = 'egfr.txt'
 
 egfr_df = pd.read_csv(egfr_datafile, delimiter=r"\s+")
 egfr_time = np.array(egfr_df['Time'])
-egfr = np.array(egfr_df['aRtot'])
+egfr = np.array(egfr_df['pEgfr_Lig'])
 
 # r = te.loada('EGFR_module2.ant')
 # r = te.loada('EGFR_module.ant')
@@ -33,7 +33,7 @@ r = te.loada('EGFR_module_hsw.ant')
 # r.integrator.absolute_tolerance = 1e-12
 # r.integrator.relative_tolerance = 1e-12
 # sim = r.simulate(0, 12, 1201, selections=['time', 'Lig', 'aRtot'])
-sim = r.simulate(0, 720, 7201, selections=['time', 'aRtot', 'Egfr', 'iEgfr'])
+sim = r.simulate(0, 720, 7201, selections=['time', 'pEgfr_Lig', 'Egfr', 'iEgfr'])
 t = np.linspace(0, 720, 7201)
 
 # print(r.steadyState())
@@ -90,9 +90,9 @@ fit_response = []
 for i in range(len(dose)):
     r.reset()
     r.Lig = dose[i]
-    sim = r.simulate(0, 80, 801, selections=['time', 'aRtot', 'Egfr', 'iEgfr'])
+    sim = r.simulate(0, 80, 801, selections=['time', 'pEgfr_Lig', 'Egfr', 'iEgfr'])
     # print(sim['aRtot'])
-    fit_response = sim['aRtot']
+    fit_response = sim['pEgfr_Lig']
     sim_times = sim['time']
     # print(fit_response)
     color = next(ax._get_lines.prop_cycler)['color']

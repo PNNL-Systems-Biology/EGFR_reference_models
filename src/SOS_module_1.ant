@@ -1,0 +1,240 @@
+
+// aggregate garem, Gab1 , and Shc1 input
+
+// function a(t)
+// 0.07279613095238097 - 2 * 1.2197274440461925e-19 * (t-0) - 3 * 7.670924272486772e-07 * (t-0)^2
+// end
+// function b(t)
+// 0.03965773809523808 - 2 * 0.0002761532738095238 * (t-120) + 3 * 8.377769510582009e-07 * (t-120)^2
+// end
+// function c(t)
+// 0.009572916666666662 + 2 * 2.5446428571428583e-05 * (t-240) - 3 * 1.5345982142857123e-07 * (t-240)^2
+// end
+// function d(t)
+// 0.009050595238095243 - 2 * 2.979910714285715e-05 * (t-360) + 3 * 8.277529761904775e-08 * (t-360)^2
+// end
+// function f(t)
+// 0.0054748820033433164
+// end
+
+// Garem functions
+
+function a1(t)
+1*(0.036482142857142866 - 2 * 1.1519648082658485e-19 * (t-0) - 3 * 4.212136243386239e-07 * (t-0)^2)
+end
+function b1(t)
+1*(0.018285714285714287 - 2 * 0.00015163690476190474 * (t-120) + 3 * 4.741236772486772e-07 * (t-120)^2)
+end
+function c1(t)
+1*(0.0023749999999999978 + 2 * 1.9047619047619e-05 * (t-240) - 3 * 4.588293650793624e-08 * (t-240)^2)
+end
+function d1(t)
+1*(0.004964285714285712 + 2 * 2.5297619047619525e-06 * (t-360) - 3 * 7.027116402116575e-09 * (t-360)^2)
+end
+function f1(t)
+1*(0.005267841894019877)
+end
+
+// Shc functions
+
+function a2(t)
+1*(0.03411458333333333 + 2 * 8.131516293641283e-20 * (t-0) - 3 * 3.6675347222222277e-07 * (t-0)^2)
+end
+function b2(t)
+1*(0.01827083333333333 - 2 * 0.00013203125000000001 * (t-120) + 3 * 4.4487847222222234e-07 * (t-120)^2)
+end
+function c2(t)
+1*(0.005802083333333334 + 2 * 2.8125000000000047e-05 * (t-240) - 3 * 1.8590856481481508e-07 * (t-240)^2)
+end
+function d2(t)
+1*(0.004520833333333335 - 2 * 3.880208333333336e-05 * (t-360) + 3 * 1.077835648148149e-07 * (t-360)^2)
+end
+function f2(t)
+1*(-0.0001351827763329231)
+end
+
+// Gab functions
+
+function a3(t)
+1*(0.002226190476190477 + 3 * 1.9014550264550238e-08 * (t-0)^2)
+end
+function b3(t)
+1*(0.0030476190476190477 + 2 * 6.845238095238088e-06 * (t-120) - 3 * 7.771164021164016e-08 * (t-120)^2)
+end
+function c3(t)
+1*(0.001333333333333333 - 2 * 2.1130952380952377e-05 * (t-240) + 3 * 7.77116402116402e-08 * (t-240)^2)
+end
+function d3(t)
+1*(-0.00038095238095238085 + 2 * 6.845238095238096e-06 * (t-360) - 3 * 1.9014550264550267e-08 * (t-360)^2)
+end
+function f3(t)
+1*(0.00044043492890323256)
+end
+
+// aRSK input function
+
+function x(t)
+-0.02767757936507937 + 3 * 1.9741374559082894e-06 * (t-0)^2
+end
+function y(t)
+0.057605158730158736 + 2 * 0.0007106894841269842 * (t-120) - 3 * 2.561659501763669e-06 * (t-120)^2
+end
+function z(t)
+0.11750694444444446 - 2 * 0.00021150793650793662 * (t-240) + 3 * 8.766672178130808e-09 * (t-240)^2
+end
+function w(t)
+0.017498015873015877 - 2 * 0.00020519593253968258 * (t-480) + 3 * 2.849943507495591e-07 * (t-480)^2
+end
+
+// model
+model SOS_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+
+species aR_Grb2_ppGab1_pShp2 in cell
+species aR_Grb2_ppGarem_pShp2 in cell
+species aR_pShc1 in cell
+species Grb2 in cell
+species SOS1 in cell
+species Grb2_SOS1 in cell
+species Grb2_pSOS1 in cell
+species Grb2_ipSOS1 in cell
+
+species Ad1_Grb2_SOS1 in cell
+species iAd1_Grb2_SOS1 in cell
+species iaR_Grb2_ppGarem_pShp2 in cell
+
+species Ad2_Grb2_SOS1 in cell
+species iAd2_Grb2_SOS1 in cell
+species iaR_Grb2_ppGab1_pShp2 in cell
+
+species Ad3_Grb2_SOS1 in cell
+species iAd3_Grb2_SOS1 in cell
+species iaR_pShc1 in cell
+
+species ipEgfr_Lig
+species Shp2
+species Grb2_Garem
+species Grb2_Gab1
+species Shc1
+
+species aSOS
+species aAdptrTot
+
+// species SOS2 in cell
+// species Grb2_SOS2 in cell
+// species Grb2_pSOS2 in cell
+// species dRas in cell
+// species tRas in cell
+// species GAP in cell
+
+// Inputs/Outputs
+
+// Inputs:
+// Output: tRas
+
+// Reactions
+
+// Uncomment the following for single module fitting and simulation
+// F0: -> aAdptrTot; piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480, f(time), time<=600)
+
+F1: -> aR_Grb2_ppGarem_pShp2; piecewise(a1(time), time<=120, b1(time), time<=240, c1(time), time<=360, d1(time), time<=480, f1(time), time<=600)
+F2: -> aR_pShc1; piecewise(a2(time), time<=120, b2(time), time<=240, c2(time), time<=360, d2(time), time<=480, f2(time), time<=600)
+F3: -> aR_Grb2_ppGab1_pShp2; piecewise(a3(time), time<=120, b3(time), time<=240, c3(time), time<=360, d3(time), time<=480, f3(time), time<=600)
+
+F4: -> aRSK; piecewise(x(time), time<=120, y(time), time<=240, z(time), time<=480, w(time), time<=720)
+
+// Aggregate the inputs
+aAdptrTot := aR_Grb2_ppGab1_pShp2 + aR_Grb2_ppGarem_pShp2 + aR_pShc1
+
+// Grb2-Sos complex formation
+J1: Grb2 + SOS1 -> Grb2_SOS1; k9 * Grb2 * SOS1 - k_9 * Grb2_SOS1
+
+// Grb2_pSOS1 inhibition
+J2: aRSK + Grb2_SOS1 -> Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
+
+// Dephosphorylation of pSOS1
+J3: pSOS1 -> SOS1; k12 * pSOS1
+
+// Grb2_SOS1 Garem binding, inhibition and two step recycling
+J4: aR_Grb2_ppGarem_pShp2 + Grb2_SOS1 -> Ad1_Grb2_SOS1; k10 * aR_Grb2_ppGarem_pShp2 * Grb2_SOS1 - k_10 * Ad1_Grb2_SOS1
+J5: Ad1_Grb2_SOS1 => iAd1_Grb2_SOS1; ke * Ad1_Grb2_SOS1
+J6: iAd1_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGarem_pShp2; kr * iAd1_Grb2_SOS1
+J7: iaR_Grb2_ppGarem_pShp2 => ipEgfr_Lig + Grb2_Garem + Shp2; kr2 * iaR_Grb2_ppGarem_pShp2
+
+// Grb2_SOS1 Gab1 binding, inhibition and two step recycling
+J8: aR_Grb2_ppGab1_pShp2 + Grb2_SOS1 -> Ad2_Grb2_SOS1; k10 * aR_Grb2_ppGab1_pShp2 * Grb2_SOS1 - k_10 * Ad2_Grb2_SOS1
+J9: Ad2_Grb2_SOS1 => iAd2_Grb2_SOS1; ke * Ad2_Grb2_SOS1
+J10: iAd2_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGab1_pShp2; kr * iAd2_Grb2_SOS1
+J11: iaR_Grb2_ppGab1_pShp2 => ipEgfr_Lig + Grb2_Gab1 + Shp2; kr2 * iaR_Grb2_ppGab1_pShp2
+
+// Grb2_SOS1 Garem binding, inhibition and two step recycling
+J12: aR_pShc1 + Grb2_SOS1 -> Ad3_Grb2_SOS1; k10 * aR_pShc1 * Grb2_SOS1 - k_10 * Ad3_Grb2_SOS1
+J13: Ad3_Grb2_SOS1 => iAd3_Grb2_SOS1; ke * Ad3_Grb2_SOS1
+J14: iAd3_Grb2_SOS1 => Grb2_SOS1 + iaR_pShc1; kr * iAd3_Grb2_SOS1
+J15: iaR_pShc1 => ipEgfr_Lig + Shc1; kr2 * iaR_pShc1
+
+// Grb2_SOS1 activation
+// J2: aAdptrTot + Grb2_SOS1 -> Ad_Grb2_SOS1; k10 * aAdptrTot * Grb2_SOS1 - k_10 * Ad_Grb2_SOS1;
+// aR_Grb2_ppGab1_pShp2 + aR_Grb2_ppGarem_pShp2 + aR_pShc1 + Grb2_SOS1 -> Ad_Grb2_SOS1; f * (aR_Grb2_ppGab1_pShp2 + aR_Grb2_ppGarem_pShp2 + aR_pShc1) * Grb2_SOS1 - r * Ad_Grb2_SOS1;
+// J4: Ad_Grb2_SOS1 -> iAd_Grb2_SOS1; ke * Ad_Grb2_SOS1;
+// J5: iAd_Grb2_SOS1 -> Grb2_SOS1 + aAdptrTot; kr * iAd_Grb2_SOS1;
+// J6: pSOS1 -> SOS1; k12 * pSOS1;
+
+// active SOS
+aSOS := Ad1_Grb2_SOS1 + Ad2_Grb2_SOS1 + Ad3_Grb2_SOS1
+
+// Ras module
+// J5: dRas => tRas; (ktRas*dRas*aSOS/(KmRasd + dRas));
+// J6: tRas => dRas; (kdRas*tRas*GAP/(KmRast + tRas));
+// J5: dRas => tRas; k5 * dRas * aSOS;
+// J6: tRas => dRas; k6 * tRas * GAP;
+
+// Initial values
+Grb2 = 37.11
+SOS1 = 0.07
+# SOS1 = 40
+Grb2_SOS1 = 3.98
+aRSK = 2.0
+pSOS1 = 0.01
+Ad1_Grb2_SOS1 = 0.50
+iAd1_Grb2_SOS1 = 0.20
+iaR_Grb2_ppGarem_pShp2 = 0.05
+Ad2_Grb2_SOS1 = 0.50
+iAd2_Grb2_SOS1 = 0.20
+iaR_Grb2_ppGab1_pShp2 = 0.05
+Ad3_Grb2_SOS1 = 0.50
+iAd3_Grb2_SOS1 = 0.20
+iaR_pShc1 = 0.50
+
+// GAP = 1
+// dRas = 98
+
+// Compartment initializations:
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// Parameters:
+k9 = 0.1452223364137164
+k_9 = 0.2297702082120433
+k11 = 0.2743562142034469
+k12 = 0.2686119955127669
+k10 = 0.5926782591479758
+k_10 = 3.2542395023031863
+ke = 7.660187587037803e-06
+kr = 0.1806954791967591
+kr2 = 0.142391693722026
+
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_sec = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+end

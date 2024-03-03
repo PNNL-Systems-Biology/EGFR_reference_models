@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/pybnf/output_sa_node0" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.6 (py36)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="PyDREAM" />
+    <orderEntry type="module" module-name="pymc3" />
+    <orderEntry type="module" module-name="tellurium" />
+    <orderEntry type="module" module-name="PyBNF" />
+    <orderEntry type="module" module-name="Model_Variation" />
+    <orderEntry type="module" module-name="HypBuilderEx" />
+    <orderEntry type="module" module-name="RNG" />
+    <orderEntry type="module" module-name="PyMultiNest" />
+    <orderEntry type="module" module-name="pysb" />
+    <orderEntry type="module" module-name="PyRosetta4.Release.python36.ubuntu.release" />
+    <orderEntry type="module" module-name="Signaling" />
+    <orderEntry type="module" module-name="RetroMCA" />
+    <orderEntry type="module" module-name="teUtils" />
+    <orderEntry type="module" module-name="HypBuilder" />
+  </component>
+</module>

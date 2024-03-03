@@ -1,0 +1,7 @@
+2020-09-10 16:32:02,264 pybnf.pybnf     INFO     MainProcess Running PyBNF v1.1.1
+2020-09-10 16:32:02,264 pybnf.pybnf     INFO     MainProcess Loading configuration file: EGF_CM.conf
+2020-09-10 16:32:02,281 pybnf.pybnf     ERROR    MainProcess Terminating due to a PybnfError:
+2020-09-10 16:32:02,281 pybnf.pybnf     ERROR    MainProcess Misconfigured config key '; mutant = EGF_CM_rp 1 L=0.4: egfrpSD1.exp' at line: 23
+2020-09-10 16:32:02,281 root            INFO     MainProcess No cluster to tear down
+2020-09-10 16:32:02,281 pybnf.pybnf     INFO     MainProcess Fitting unsuccessful.  Attempting cleanup
+2020-09-10 16:32:02,281 pybnf.pybnf     INFO     MainProcess Total fitting time: 0:00:00

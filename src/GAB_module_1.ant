@@ -1,0 +1,109 @@
+
+// Cubic spline functions for phosphorylated receptor (aRtot). Used for individual module fitting.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+function a(t)
+0.041663034188034194 - 2 * 1.1519648082658485e-19 * (t-0) - 3 * 3.7011811490978085e-07 * (t-0)^2
+end
+function b(t)
+0.025673931623931626 - 2 * 0.00013324252136752136 * (t-120) + 3 * 3.170257597340929e-07 * (t-120)^2
+end
+function c(t)
+0.007391239316239316 - 2 * 1.911324786324786e-05 * (t-240) + 3 * 1.0579890788224071e-08 * (t-240)^2
+end
+function d(t)
+0.003261111111111109 - 2 * 1.5304487179487186e-05 * (t-360) + 3 * 2.838615859449198e-08 * (t-360)^2
+end
+
+// Cubic spline functions for Shp2, a necessary input function to the module. Fit to PTPN11 data.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+function x(t)
+0.018263392857142853 + 3 * 6.851438492063495e-08 * (t-0)^2
+end
+function y(t)
+0.021223214285714286 + 2 * 2.466517857142873e-05 * (t-120) - 3 * 2.8470155423280497e-07 * (t-120)^2
+end
+function z(t)
+0.014843750000000008 - 2 * 7.782738095238109e-05 * (t-240) + 3 * 1.0385664682539723e-07 * (t-240)^2
+end
+function w(t)
+0.0006517857142857094 - 2 * 4.043898809523809e-05 * (t-360) + 3 * 1.123305224867725e-07 * (t-360)^2
+end
+
+
+// Created by libAntimony v2.8.1
+model GAB_module()
+
+// Compartments and Species:
+compartment cell, extra, intra
+species Gab1 in cell
+species pGab1 in cell
+species pEgfr_Lig in cell
+species Grb2 in cell
+species Shp2 in cell
+species aR_Grb2_Gab1 in cell
+species aR_Grb2_pGab1 in cell
+species aR_Grb2_ppGab1 in cell
+species aR_Grb2_ppGab1_Shp2 in cell
+species aR_Grb2_ppGab1_pShp2 in cell
+
+// Inputs/Outputs:
+
+// Gab1 module
+// Inputs: pEgfr_Lig
+// Output Gab1_complex
+
+// Reactions
+
+F3: -> pEgfr_Lig; piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480)
+F4: -> Shp2; piecewise(x(time), time<=120, y(time), time<=240, z(time), time<=360, w(time), time<=480)
+
+// Grb2_Gab1 complex formation
+J2: Gab1 + Grb2 -> Grb2_Gab1; k7 * Gab1 * Grb2 - k_7 * Grb2_Gab1;
+
+// Grb2_Gab1 receptor association
+J3: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1; k8 * pEgfr_Lig * Grb2_Gab1 - k_8 * aR_Grb2_Gab1;
+
+// Grb2_Gab1 phosphorylation/dephosphorylation (2 sites)
+J4: aR_Grb2_Gab1 -> aR_Grb2_pGab1; k3 * aR_Grb2_Gab1 - k_3 * aR_Grb2_pGab1;
+J5: aR_Grb2_pGab1 -> aR_Grb2_ppGab1; k3 * aR_Grb2_pGab1 - k_3 * aR_Grb2_ppGab1;
+
+//Grb2_pGab1_Shp2 complex formation
+J6: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2; k8 * aR_Grb2_ppGab1 * Shp2 - k_8 * aR_Grb2_ppGab1_Shp2;
+
+//Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
+J7: aR_Grb2_ppGab1_Shp2 -> aR_Grb2_ppGab1_pShp2; k5 * aR_Grb2_ppGab1_Shp2 - k_5 * aR_Grb2_ppGab1_pShp2
+
+// Species initializations:
+
+Gab1 = 3.142
+Grb2_Gab1 = 4
+aR_Grb2_Gab1 = 0.1
+aR_Grb2_pGab1 = 0.1
+aR_Grb2_ppGab1 = 0.36
+aR_Grb2_ppGab1_Shp2 = 0.1
+aR_Grb2_ppGab1_pShp2 = 0.1
+
+Grb2 = 19.1
+Shp2 = 3.5
+// Shp2 = 28.5
+
+// Compartment initializations:
+cell = 1;
+extra = 1;
+intra = 1;
+
+// Variable initializations:
+k3 = 0.2371457235327287
+k_3 = 0.2159941183203677
+k5 = 0.0940476406789365
+k_5 = 0.2544776623027833
+k7 = 4.536605806233206
+k_7 = 0.1465029182951989
+k8 = 0.2469766070769331
+k_8 = 0.4476309651681753
+
+end

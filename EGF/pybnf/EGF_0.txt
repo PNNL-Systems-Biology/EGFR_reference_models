@@ -1,0 +1,145 @@
+# Fitting the EGF model
+
+# Model specification
+
+# Base EGF Model
+model = EGF.xml : none
+
+# dose responses for EGFR pY998 phosphorylation
+#mutant = EGF egfr998_0.2 E=0.2: EGF egfr998_0.2.exp
+#mutant = EGF egfr998_0.4 E=0.4: EGF egfr998_0.4.exp
+#mutant = EGF egfr998_1.0 E=1.0: EGF egfr998_1.0.exp
+#mutant = EGF egfr998_2.5 E=2.5: EGF egfr998_2.5.exp
+#mutant = EGF egfr998_5.0 E=5.0: EGF egfr998_5.0.exp
+#mutant = EGF egfr998_10.0 E=10.0: EGF egfr998_10.0.exp
+#mutant = EGF egfr998_20.0 E=20.0: EGF egfr998_20.0.exp
+#mutant = EGF egfr998_100.0 E=100.0: EGF egfr998_100.0.exp
+
+# dose responses for EGFR pY1069 phosphorylation
+#mutant = EGF egfr1069_0.2 E=0.2: EGF egfr1069_0.2.exp
+#mutant = EGF egfr1069_0.4 E=0.4: EGF egfr1069_0.4.exp
+#mutant = EGF egfr1069_1.0 E=1.0: EGF egfr1069_1.0.exp
+#mutant = EGF egfr1069_2.5 E=2.5: EGF egfr1069_2.5.exp
+#mutant = EGF egfr1069_5.0 E=5.0: EGF egfr1069_5.0.exp
+#mutant = EGF egfr1069_10.0 E=10.0: EGF egfr1069_10.0.exp
+#mutant = EGF egfr1069_20.0 E=20.0: EGF egfr1069_20.0.exp
+#mutant = EGF egfr1069_100.0 E=100.0: EGF egfr1069_100.0.exp
+
+# dose responses for EGFR pY1092 phosphorylation
+#mutant = EGF egfr1092_0.2 E=0.2: EGF egfr1092_0.2.exp
+#mutant = EGF egfr1092_0.4 E=0.4: EGF egfr1092_0.4.exp
+#mutant = EGF egfr1092_1.0 E=1.0: EGF egfr1092_1.0.exp
+#mutant = EGF egfr1092_2.5 E=2.5: EGF egfr1092_2.5.exp
+#mutant = EGF egfr1092_5.0 E=5.0: EGF egfr1092_5.0.exp
+#mutant = EGF egfr1092_10.0 E=10.0: EGF egfr1092_10.0.exp
+#mutant = EGF egfr1092_20.0 E=20.0: EGF egfr1092_20.0.exp
+#mutant = EGF egfr1092_100.0 E=100.0: EGF egfr1092_100.0.exp
+
+# dose responses for EGFR pY1173 phosphorylation
+#mutant = EGF egfr1173_0.2 E=0.2: EGF egfr1173_0.2.exp
+#mutant = EGF egfr1173_0.4 E=0.4: EGF egfr1173_0.4.exp
+#mutant = EGF egfr1173_1.0 E=1.0: EGF egfr1173_1.0.exp
+#mutant = EGF egfr1173_2.5 E=2.5: EGF egfr1173_2.5.exp
+#mutant = EGF egfr1173_5.0 E=5.0: EGF egfr1173_5.0.exp
+#mutant = EGF egfr1173_10.0 E=10.0: EGF egfr1173_10.0.exp
+#mutant = EGF egfr1173_20.0 E=20.0: EGF egfr1173_20.0.exp
+#mutant = EGF egfr1173_100.0 E=100.0: EGF egfr1173_100.0.exp
+
+# dose responses for EGFR pY1197 phosphorylation
+#mutant = EGF egfr1197_0.2 E=0.2: EGF egfr1197_0.2.exp
+#mutant = EGF egfr1197_0.4 E=0.4: EGF egfr1197_0.4.exp
+#mutant = EGF egfr1197_1.0 E=1.0: EGF egfr1197_1.0.exp
+#mutant = EGF egfr1197_2.5 E=2.5: EGF egfr1197_2.5.exp
+#mutant = EGF egfr1197_5.0 E=5.0: EGF egfr1197_5.0.exp
+#mutant = EGF egfr1197_10.0 E=10.0: EGF egfr1197_10.0.exp
+#mutant = EGF egfr1197_20.0 E=20.0: EGF egfr1197_20.0.exp
+#mutant = EGF egfr1197_100.0 E=100.0: EGF egfr1197_100.0.exp
+
+
+# ERK phosphorylation
+model = 
+
+output_dir=/home/michael/PycharmProjects
+
+# Algorithm and objective function choice
+fit_type = mh
+objfunc = chi_sq
+population_size=10
+max_iterations=1000
+burn_in=200
+
+# Parameters
+lognormal_var =	k2 
+lognormal_var =	k_2 
+lognormal_var =	k3 
+lognormal_var =	k5 
+lognormal_var =	k_5 
+lognormal_var =	k6 
+lognormal_var =	k7 
+lognormal_var =	k_7 
+lognormal_var =	V8 
+lognormal_var =	Km8 
+
+lognormal_var =	k4 
+lognormal_var =	k_4 
+lognormal_var =	k9 
+lognormal_var =	k_9 
+lognormal_var =	k10 
+lognormal_var =	k_10 
+lognormal_var =	k11 
+lognormal_var =	k_11 
+lognormal_var =	k13 
+lognormal_var =	k_13 
+lognormal_var =	kcat62 
+lognormal_var =	Km62 
+lognormal_var =	kcat63 
+lognormal_var =	Km63 
+lognormal_var =	k204 
+lognormal_var =	k_204 
+
+lognormal_var =	kcat65 
+lognormal_var =	Km65 
+lognormal_var =	k66 
+lognormal_var =	Km66 
+lognormal_var =	k67 
+lognormal_var =	Km67 
+lognormal_var =	kcat68 
+lognormal_var =	Km68 
+lognormal_var =	V69 
+lognormal_var =	Km69 
+lognormal_var =	kcat70 
+lognormal_var =	Km70 
+lognormal_var =	kcat71 
+lognormal_var =	Km71 
+lognormal_var =	V72 
+lognormal_var =	Km72 
+lognormal_var =	V73 
+lognormal_var =	Km73 
+
+lognormal_var =	k_3 
+lognormal_var =	krec 
+lognormal_var =	k205 
+lognormal_var =	k_205 
+lognormal_var =	kcat205 
+lognormal_var =	kcat_205 
+lognormal_var =	k206 
+lognormal_var =	k_206 
+lognormal_var =	k60 
+lognormal_var =	k_60 
+lognormal_var =	kcat60 
+lognormal_var =	kcat_60 
+lognormal_var =	k61 
+lognormal_var =	k_61 
+
+
+
+#delete_old_files=2
+#output_every=10
+#verbosity=2
+
+#sbml_integrator=euler
+
+# Actions
+
+time_course = model:EGF, time:80, suffix:egfrp_0.2
+

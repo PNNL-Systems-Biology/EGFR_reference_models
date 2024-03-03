@@ -1,0 +1,21 @@
+
+import tellurium as te
+
+r = te.loada('''
+model *EGF_master_network()
+
+  // Compartments
+  // compartment extracell;
+  compartment cytosol;
+  compartment vesicle;
+
+  // Compartment initializations
+  // const extracell = 5000;
+  const cytosol = 1;
+  const vesicle = 1;
+
+  // Reactions
+  
+
+end
+''')

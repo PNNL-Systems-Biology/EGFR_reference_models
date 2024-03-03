@@ -1,0 +1,75 @@
+
+// Cubic spline functions for phosphorylated receptor (pEgfr_Lig). Used for individual module fitting.
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+function a(t)
+0.041663034188034194 - 2 * 1.1519648082658485e-19 * (t-0) - 3 * 3.7011811490978085e-07 * (t-0)^2
+end
+function b(t)
+0.025673931623931626 - 2 * 0.00013324252136752136 * (t-120) + 3 * 3.170257597340929e-07 * (t-120)^2
+end
+function c(t)
+0.007391239316239316 - 2 * 1.911324786324786e-05 * (t-240) + 3 * 1.0579890788224071e-08 * (t-240)^2
+end
+function d(t)
+0.003261111111111109 - 2 * 1.5304487179487186e-05 * (t-360) + 3 * 2.838615859449198e-08 * (t-360)^2
+end
+
+// Created by libAntimony v2.8.1
+model SHC_module()
+
+// Compartments and Species:
+compartment cell, extra, intra;
+species Shc1, pShc1, ipShc1 in cell;
+species iShc1 in cell;
+species pEgfr_Lig in cell;
+species $Shc1Ihtr in cell;
+
+// Reactions:
+// Shc module
+// Input: pEgfr_Lig
+// Output Shc_complex
+
+F2: -> pEgfr_Lig; piecewise(a(time), time<=120, b(time), time<=240, c(time), time<=360, d(time), time<=480)
+
+// Shc1 activation
+J7: pEgfr_Lig + Shc1 -> aR_Shc1; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
+J8: aR_Shc1 -> aR_pShc1; k3 * aR_Shc1 - k_3 * aR_pShc1;
+
+
+
+// Species initializations:
+// fix EGF
+Shc1 = 28.564
+aR_Shc1 = 1
+aR_pShc1 = .74
+
+// Compartment initializations:
+cell = 1;
+intra = 1;
+
+// Variable initializations:
+k6 = 0.0073324178858075
+k_6 = 0.0008400968844442
+k3 = 0.9169852695213894
+k_3 = 0.3830706167816242
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_sec = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_sec is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+
+end

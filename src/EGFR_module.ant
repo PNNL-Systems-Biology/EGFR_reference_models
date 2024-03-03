@@ -88,12 +88,12 @@ J27: ipEgfr_Epgn => ; kh * ipEgfr_Epgn;
 // pErk
 
 // Module outputs:
-$aR := pEgfr_Tgfa + pEgfr_Hbegf + pEgfr_Ar + pEgfr_Epgn;
-$aR has nM;
-$aRi := ipEgfr_Tgfa + ipEgfr_Hbegf + ipEgfr_Ar + ipEgfr_Epgn;
-$aRi has nM;
-$aRtot := $aR + $aRi;
-$aRtot has nM;
+// aR := pEgfr_Tgfa + pEgfr_Hbegf + pEgfr_Ar + pEgfr_Epgn;
+// aR has nM;
+// aRi := ipEgfr_Tgfa + ipEgfr_Hbegf + ipEgfr_Ar + ipEgfr_Epgn;
+// aRi has nM;
+// aRtot := aR + aRi;
+// aRtot has nM;
 
 // Species initializations:
 // all species has nM units

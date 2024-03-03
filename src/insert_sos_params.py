@@ -23,8 +23,10 @@ for i, name in enumerate(names):
 
 print(param_dict)
 
+model_name = 'SOS_module_1'
+
 new_model = ''
-with open('SOS_module2.ant', 'r') as model:
+with open(model_name + '.ant', 'r') as model:
     lines = model.readlines()
     for i, line in enumerate(lines):
         print(i, line)
@@ -37,10 +39,10 @@ with open('SOS_module2.ant', 'r') as model:
 
 print(new_model)
 
-with open('SOS_module2.ant', 'w') as cur_mod:
+with open(model_name + '.ant', 'w') as cur_mod:
     cur_mod.write(new_model)
 
-r = te.loada('SOS_module2.ant')
-r.exportToSBML('SOS_module2.xml')
+r = te.loada(model_name + '.ant')
+r.exportToSBML(model_name + '.xml')
 
 

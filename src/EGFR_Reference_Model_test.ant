@@ -1,0 +1,15 @@
+
+import "EGFR_module.ant"
+import "GAREM_module_m.ant"
+
+model EGFR_Reference_Model()
+
+    EGFR: EGFR_module();
+    GAREM: GAREM_module();
+
+    var GAREM.aRtot
+    var EGFR.pEgfr_Tgfa
+    GAREM.aRtot is EGFR.pEgfr_Tgfa;
+    var GAREM.aRtot
+
+end

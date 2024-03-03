@@ -1,0 +1,18 @@
+
+model workaround()
+
+species B
+
+A := B
+ -> C ; A * D
+ B -> ; A * D
+ D -> ; A * D
+
+X + Y -> Z; X * Y
+
+B = 1
+D = 1
+X = 1
+Y = 1
+
+end

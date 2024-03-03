@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+  <model metaid="coarse_grained_EGF" id="coarse_grained_EGF">
+    <listOfFunctionDefinitions>
+      <functionDefinition id="T_PM_sp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> v </ci>
+            </bvar>
+            <bvar>
+              <ci> kf </ci>
+            </bvar>
+            <bvar>
+              <ci> kr </ci>
+            </bvar>
+            <bvar>
+              <ci> s </ci>
+            </bvar>
+            <bvar>
+              <ci> p </ci>
+            </bvar>
+            <bvar>
+              <ci> Kms </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmp </ci>
+            </bvar>
+            <bvar>
+              <ci> ms </ci>
+            </bvar>
+            <bvar>
+              <ci> mp </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <ci> v </ci>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> kf </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> s </ci>
+                      <ci> Kms </ci>
+                    </apply>
+                    <ci> ms </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> kr </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> p </ci>
+                      <ci> Kmp </ci>
+                    </apply>
+                    <ci> mp </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="Reg_T_PM_asp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> v </ci>
+            </bvar>
+            <bvar>
+              <ci> ra </ci>
+            </bvar>
+            <bvar>
+              <ci> kf </ci>
+            </bvar>
+            <bvar>
+              <ci> kr </ci>
+            </bvar>
+            <bvar>
+              <ci> a </ci>
+            </bvar>
+            <bvar>
+              <ci> s </ci>
+            </bvar>
+            <bvar>
+              <ci> p </ci>
+            </bvar>
+            <bvar>
+              <ci> Kma </ci>
+            </bvar>
+            <bvar>
+              <ci> Kms </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmp </ci>
+            </bvar>
+            <bvar>
+              <ci> wa </ci>
+            </bvar>
+            <bvar>
+              <ci> ms </ci>
+            </bvar>
+            <bvar>
+              <ci> mp </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <ci> v </ci>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <ci> ra </ci>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn type="integer"> 1 </cn>
+                      <ci> ra </ci>
+                    </apply>
+                    <apply>
+                      <divide/>
+                      <apply>
+                        <divide/>
+                        <ci> a </ci>
+                        <ci> Kma </ci>
+                      </apply>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <apply>
+                          <divide/>
+                          <ci> a </ci>
+                          <ci> Kma </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wa </ci>
+              </apply>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> kf </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> s </ci>
+                      <ci> Kms </ci>
+                    </apply>
+                    <ci> ms </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> kr </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> p </ci>
+                      <ci> Kmp </ci>
+                    </apply>
+                    <ci> mp </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="Reg_T_PM_isp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> v </ci>
+            </bvar>
+            <bvar>
+              <ci> ri </ci>
+            </bvar>
+            <bvar>
+              <ci> kf </ci>
+            </bvar>
+            <bvar>
+              <ci> kr </ci>
+            </bvar>
+            <bvar>
+              <ci> i </ci>
+            </bvar>
+            <bvar>
+              <ci> s </ci>
+            </bvar>
+            <bvar>
+              <ci> p </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmi </ci>
+            </bvar>
+            <bvar>
+              <ci> Kms </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmp </ci>
+            </bvar>
+            <bvar>
+              <ci> wi </ci>
+            </bvar>
+            <bvar>
+              <ci> ms </ci>
+            </bvar>
+            <bvar>
+              <ci> mp </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <ci> v </ci>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <ci> ri </ci>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn type="integer"> 1 </cn>
+                      <ci> ri </ci>
+                    </apply>
+                    <apply>
+                      <divide/>
+                      <cn type="integer"> 1 </cn>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <apply>
+                          <divide/>
+                          <ci> i </ci>
+                          <ci> Kmi </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wi </ci>
+              </apply>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> kf </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> s </ci>
+                      <ci> Kms </ci>
+                    </apply>
+                    <ci> ms </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> kr </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> p </ci>
+                      <ci> Kmp </ci>
+                    </apply>
+                    <ci> mp </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="Reg_T_PM_iiisp">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar>
+              <ci> v </ci>
+            </bvar>
+            <bvar>
+              <ci> ri1 </ci>
+            </bvar>
+            <bvar>
+              <ci> ri2 </ci>
+            </bvar>
+            <bvar>
+              <ci> ri3 </ci>
+            </bvar>
+            <bvar>
+              <ci> kf </ci>
+            </bvar>
+            <bvar>
+              <ci> kr </ci>
+            </bvar>
+            <bvar>
+              <ci> i1 </ci>
+            </bvar>
+            <bvar>
+              <ci> i2 </ci>
+            </bvar>
+            <bvar>
+              <ci> i3 </ci>
+            </bvar>
+            <bvar>
+              <ci> s </ci>
+            </bvar>
+            <bvar>
+              <ci> p </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmi1 </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmi2 </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmi3 </ci>
+            </bvar>
+            <bvar>
+              <ci> Kms </ci>
+            </bvar>
+            <bvar>
+              <ci> Kmp </ci>
+            </bvar>
+            <bvar>
+              <ci> wi1 </ci>
+            </bvar>
+            <bvar>
+              <ci> wi2 </ci>
+            </bvar>
+            <bvar>
+              <ci> wi3 </ci>
+            </bvar>
+            <bvar>
+              <ci> ms </ci>
+            </bvar>
+            <bvar>
+              <ci> mp </ci>
+            </bvar>
+            <apply>
+              <times/>
+              <ci> v </ci>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <ci> ri1 </ci>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn type="integer"> 1 </cn>
+                      <ci> ri1 </ci>
+                    </apply>
+                    <apply>
+                      <divide/>
+                      <cn type="integer"> 1 </cn>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <apply>
+                          <divide/>
+                          <ci> i1 </ci>
+                          <ci> Kmi1 </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wi1 </ci>
+              </apply>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <ci> ri2 </ci>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn type="integer"> 1 </cn>
+                      <ci> ri2 </ci>
+                    </apply>
+                    <apply>
+                      <divide/>
+                      <cn type="integer"> 1 </cn>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <apply>
+                          <divide/>
+                          <ci> i2 </ci>
+                          <ci> Kmi2 </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wi2 </ci>
+              </apply>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <ci> ri3 </ci>
+                  <apply>
+                    <times/>
+                    <apply>
+                      <minus/>
+                      <cn type="integer"> 1 </cn>
+                      <ci> ri3 </ci>
+                    </apply>
+                    <apply>
+                      <divide/>
+                      <cn type="integer"> 1 </cn>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <apply>
+                          <divide/>
+                          <ci> i3 </ci>
+                          <ci> Kmi3 </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <ci> wi3 </ci>
+              </apply>
+              <apply>
+                <minus/>
+                <apply>
+                  <times/>
+                  <ci> kf </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> s </ci>
+                      <ci> Kms </ci>
+                    </apply>
+                    <ci> ms </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> kr </ci>
+                  <apply>
+                    <power/>
+                    <apply>
+                      <divide/>
+                      <ci> p </ci>
+                      <ci> Kmp </ci>
+                    </apply>
+                    <ci> mp </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfCompartments>
+      <compartment sboTerm="SBO:0000410" id="default_compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="L" compartment="default_compartment" initialConcentration="1000" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="E" compartment="default_compartment" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="R" compartment="default_compartment" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="Rp" compartment="default_compartment" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="Mig6" value="1" constant="true"/>
+      <parameter id="Spry2" value="1" constant="true"/>
+      <parameter id="Precursor" value="1" constant="true"/>
+      <parameter id="v1" value="1" constant="true"/>
+      <parameter id="ro1" value="1" constant="true"/>
+      <parameter id="k1" value="1" constant="true"/>
+      <parameter id="k2" value="1" constant="true"/>
+      <parameter id="KmPre" value="1" constant="true"/>
+      <parameter id="KmE" value="1" constant="true"/>
+      <parameter id="KmL" value="1" constant="true"/>
+      <parameter id="w1" value="1" constant="true"/>
+      <parameter id="m1" value="1" constant="true"/>
+      <parameter id="m2" value="1" constant="true"/>
+      <parameter id="v2" value="1" constant="true"/>
+      <parameter id="ro2" value="1" constant="true"/>
+      <parameter id="k3" value="1" constant="true"/>
+      <parameter id="k4" value="1" constant="true"/>
+      <parameter id="KmMig" value="1" constant="true"/>
+      <parameter id="KmP" value="1" constant="true"/>
+      <parameter id="w2" value="1" constant="true"/>
+      <parameter id="m3" value="1" constant="true"/>
+      <parameter id="m4" value="1" constant="true"/>
+      <parameter id="v3" value="1" constant="true"/>
+      <parameter id="ro3" value="1" constant="true"/>
+      <parameter id="ro4" value="1" constant="true"/>
+      <parameter id="ro5" value="1" constant="true"/>
+      <parameter id="k5" value="1" constant="true"/>
+      <parameter id="k6" value="1" constant="true"/>
+      <parameter id="KmSpr" value="1" constant="true"/>
+      <parameter id="KmPi" value="1" constant="true"/>
+      <parameter id="KmEi" value="1" constant="true"/>
+      <parameter id="KmR" value="1" constant="true"/>
+      <parameter id="w3" value="1" constant="true"/>
+      <parameter id="w4" value="1" constant="true"/>
+      <parameter id="w5" value="1" constant="true"/>
+      <parameter id="m5" value="1" constant="true"/>
+      <parameter id="m6" value="1" constant="true"/>
+      <parameter id="v4" value="1" constant="true"/>
+      <parameter id="k7" value="1" constant="true"/>
+      <parameter id="k8" value="1" constant="true"/>
+      <parameter id="m7" value="1" constant="true"/>
+      <parameter id="m8" value="1" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="Ligand" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="E" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="L" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <ci> Reg_T_PM_asp </ci>
+              <ci> v1 </ci>
+              <ci> ro1 </ci>
+              <ci> k1 </ci>
+              <ci> k2 </ci>
+              <ci> Precursor </ci>
+              <ci> E </ci>
+              <ci> L </ci>
+              <ci> KmPre </ci>
+              <ci> KmE </ci>
+              <ci> KmL </ci>
+              <ci> w1 </ci>
+              <ci> m1 </ci>
+              <ci> m2 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="EGFRp" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="L" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <ci> Reg_T_PM_isp </ci>
+              <ci> v2 </ci>
+              <ci> ro2 </ci>
+              <ci> k3 </ci>
+              <ci> k4 </ci>
+              <ci> Mig6 </ci>
+              <ci> L </ci>
+              <ci> Rp </ci>
+              <ci> KmMig </ci>
+              <ci> KmL </ci>
+              <ci> KmP </ci>
+              <ci> w2 </ci>
+              <ci> m3 </ci>
+              <ci> m4 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Ras" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="Rp" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="R" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="E"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <ci> Reg_T_PM_iiisp </ci>
+              <ci> v3 </ci>
+              <ci> ro3 </ci>
+              <ci> ro4 </ci>
+              <ci> ro5 </ci>
+              <ci> k5 </ci>
+              <ci> k6 </ci>
+              <ci> Spry2 </ci>
+              <ci> Rp </ci>
+              <ci> E </ci>
+              <ci> Rp </ci>
+              <ci> R </ci>
+              <ci> KmSpr </ci>
+              <ci> KmPi </ci>
+              <ci> KmEi </ci>
+              <ci> KmP </ci>
+              <ci> KmR </ci>
+              <ci> w3 </ci>
+              <ci> w4 </ci>
+              <ci> w5 </ci>
+              <ci> m5 </ci>
+              <ci> m6 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Erk" reversible="true" fast="false">
+        <listOfReactants>
+          <speciesReference species="R" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="E" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <ci> T_PM_sp </ci>
+              <ci> v4 </ci>
+              <ci> k7 </ci>
+              <ci> k8 </ci>
+              <ci> R </ci>
+              <ci> E </ci>
+              <ci> KmR </ci>
+              <ci> KmE </ci>
+              <ci> m7 </ci>
+              <ci> m8 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
