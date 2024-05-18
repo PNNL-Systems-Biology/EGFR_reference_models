@@ -5,9 +5,9 @@ import tellurium as te
 data = None
 # with open('results/results_a/Results/sorted_params_final.txt', 'r') as file:
 
-# with open('Results/sorted_params_final.txt', 'r') as file:
+with open('Results/sorted_params_final.txt', 'r') as file:
 # with open('Results/sorted_params_0.txt', 'r') as file:
-with open('Results/sorted_params_1.txt', 'r') as file:
+# with open('Results/sorted_params_1.txt', 'r') as file:
 # with open('Results/sorted_params_2.txt', 'r') as file:
     data = file.read().replace('#', '')
 
@@ -27,7 +27,7 @@ for i, name in enumerate(names):
 
 print(param_dict)
 
-model_name = 'EGFR_sequential_fit_2'
+model_name = 'EGFR_2_4'
 
 new_model = ''
 with open(model_name + '.ant', 'r') as model:

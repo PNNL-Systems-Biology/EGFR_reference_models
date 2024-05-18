@@ -6,6 +6,8 @@ data = None
 # with open('results/results_a/Results/sorted_params_final.txt', 'r') as file:
 
 with open('Results/sorted_params_final.txt', 'r') as file:
+# with open('Results2/Results/sorted_params_final.txt', 'r') as file:
+# with open('Results1/Results/sorted_params_final.txt', 'r') as file:
 # with open('Results/sorted_params_0.txt', 'r') as file:
 # with open('Results/sorted_params_1.txt', 'r') as file:
 # with open('Results/sorted_params_2.txt', 'r') as file:
@@ -14,6 +16,8 @@ with open('Results/sorted_params_final.txt', 'r') as file:
 # with open('Results/sorted_params_5.txt', 'r') as file:
 # with open('Results/sorted_params_6.txt', 'r') as file:
 # with open('Results/sorted_params_14.txt', 'r') as file:
+# with open('Results/sorted_params_17.txt', 'r') as file:
+# with open('Results/sorted_params_24.txt', 'r') as file:
 # with open('Results/sorted_params_40.txt', 'r') as file:
     data = file.read().replace('#', '')
 
@@ -37,9 +41,12 @@ print(param_dict)
 # model_name = 'EGFR_sequential_fit_4b'
 # model_name = 'EGFR_sequential_fit_4c'
 # model_name = 'EGFR_sequential_fit_4d'
+# model_name = 'EGFR_sequential_fit_4e'
 # model_name = 'EGFR_sequential_fit_4e2'
-model_name = 'EGFR_sequential_fit_4e'
 # model_name = 'EGFR_sequential_fit_4f'
+# model_name = 'EGFR_sequential_fit_4g'
+# model_name = 'EGFR_sequential_fit_4h'
+model_name = 'EGFR_sequential_fit_4h'
 
 new_model = ''
 with open(model_name + '.ant', 'r') as model:

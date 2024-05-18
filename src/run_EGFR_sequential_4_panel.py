@@ -39,8 +39,8 @@ ras = np.array(l2_df['aRas'])
 # r = te.loada('EGFR_sequential_fit_4a.ant')
 # r = te.loada('EGFR_sequential_fit_4c.ant')
 # r = te.loada('EGFR_sequential_fit_4d.ant')
-r = te.loada('EGFR_sequential_fit_4e.ant')
-# r = te.loada('EGFR_sequential_fit_4e2.ant')
+# r = te.loada('EGFR_sequential_fit_4e.ant')
+r = te.loada('EGFR_sequential_fit_4e2.ant')
 # r = te.loada('EGFR_sequential_fit_4f.ant')
 
 # r.integrator.absolute_tolerance = 1e-12
@@ -107,6 +107,8 @@ dose1 = [0.0, 0.00495, 0.0165, 0.0495, 0.165, 0.495, 1.65, 4.95, 16.5]
 dose2 = [0.0, 0.00495, 0.0165, 0.0495, 0.165, 0.495, 1.65, 4.95]
 dose_RSK = [0.22, 0.76, 0.82, 7.01, 20.89, 21.66, 22.41, 20.23, 30.0]
 dose_RSK2 = [0.22, 0.76, 0.82, 7.01, 20.89, 21.66, 22.41, 20.23]
+scale = [0.014854827819041188, 0.05131667792032411, 0.05536799459824442, 0.47332883187035785, 1.4105334233625928,
+         1.462525320729237, 1.513166779203241, 1.3659689399054693, 2.025658338960162]
 times = [240]
 # response1 = [[0.22], [0.28], [0.31], [0.33], [0.41], [0.52], [0.47], [0.47], [0.48]]
 # response2 = [[0.51], [0.65], [0.72], [0.78], [0.95], [1.2], [1.1], [1.11], [1.13]]
@@ -136,7 +138,8 @@ fit240 = []
 for i in range(len(dose1)):
     r.reset()
     r.Lig = dose1[i]
-    r.aRSK = dose_RSK[i]
+    # r.aRSK = dose_RSK[i]
+    # r.scale_parameter = scale[i]
     sim = r.simulate(0, 720, 7201, selections=['time', 'pSOS1', 'aRas', 'aRSK'])
 #     fit240.append(sim[2400][1])
 #     print(sim['time'][2400])
@@ -149,7 +152,8 @@ for i in range(len(dose1)):
 for i in range(len(dose2)):
     r.reset()
     r.Lig = dose2[i]
-    r.aRSK = dose_RSK2[i]
+    # r.aRSK = dose_RSK2[i]
+    # r.scale_parameter = scale[i]
     sim = r.simulate(0, 720, 7201, selections=['time', 'pSOS1', 'aRas', 'aRSK'])
 #     fit240.append(sim[2400][1])
 #     print(sim['time'][2400])
@@ -187,7 +191,7 @@ ax[1, 1].plot(t, sim['aRas'], label='aRas fit')
 ax[1, 1].scatter(l2_time, ras, label='aRas data')
 
 ax[1, 0].plot(t, sim['pSOS1'], label='pSos fit')
-ax[1, 0].scatter(l2_time, ras, label='pSos data')
+ax[1, 0].scatter(l2_time, sos, label='pSos data')
 
 #
 #     ax[1, 0].plot(sim_times, fit_response2, color=color, label=dose[i])

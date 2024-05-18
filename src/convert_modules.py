@@ -36,7 +36,20 @@ import tellurium as te
 # module_list = ['EGFR_sequential_fit_4d.ant']
 # module_list = ['EGFR_sequential_fit_4e.ant']
 # module_list = ['EGFR_sequential_fit_4e2.ant']
-module_list = ['EGFR_sequential_fit_4f.ant']
+# module_list = ['EGFR_sequential_fit_4f.ant']
+# module_list = ['EGFR_sequential_fit_4g.ant']
+# module_list = ['EGFR_sequential_fit_4h.ant']
+# module_list = ['EGFR_sequential_fit_full.ant']
+# module_list = ['EGFR_1_4.ant']
+# module_list = ['EGFR_2_4.ant']
+# module_list = ['EGFR_4_HSW.ant']
+# module_list = ['EGFR_4_HSW_1.ant']
+# module_list = ['EGFR_5_HSW_MK_rev.ant']
+# module_list = ['EGFR_5_HSW_MK_rev_2.ant']
+# module_list = ['EGFR_5_HSW_MK_rev_3.ant']
+# module_list = ['EGFR_5_HSW_MK-rev.ant']
+# module_list = ['EGFR_8a.ant']
+module_list = ['EGFR_8b.ant']
 
 for module in module_list:
     r = te.loada(module)

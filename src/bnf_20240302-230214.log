@@ -1,7 +1,0 @@
-2024-03-02 23:02:14,986 pybnf.pybnf     INFO     MainProcess Running PyBNF v1.2.2
-2024-03-02 23:02:14,993 pybnf.pybnf     INFO     MainProcess Loading configuration file: EGFR_sequential_fit_4e_de.conf
-2024-03-02 23:02:15,360 pybnf.pybnf     ERROR    MainProcess Terminating due to a PybnfError:
-2024-03-02 23:02:15,360 pybnf.pybnf     ERROR    MainProcess Experimental file name level4_1.exp in mutant model 1. This file name should consist of the model suffix it corresponds to, followed by the mutant name (e.g. level4a_1.exp)
-2024-03-02 23:02:15,360 root            INFO     MainProcess No cluster to tear down
-2024-03-02 23:02:15,360 pybnf.pybnf     INFO     MainProcess Fitting unsuccessful.  Attempting cleanup
-2024-03-02 23:02:15,360 pybnf.pybnf     INFO     MainProcess Total fitting time: 0:00:00

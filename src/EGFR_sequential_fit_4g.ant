@@ -209,62 +209,62 @@ J16: aR_Grb2_ppGarem_Shp2 -> aR_Grb2_ppGarem_pShp2; k5 * aR_Grb2_ppGarem_Shp2 - 
 
 // GAB
 // Grb2_Gab1 complex formation
-J19: Gab1 + Grb2 -> Grb2_Gab1; k7 * Gab1 * Grb2 - k_7 * Grb2_Gab1;
+J17: Gab1 + Grb2 -> Grb2_Gab1; k7 * Gab1 * Grb2 - k_7 * Grb2_Gab1;
 
 // Grb2_Gab1 receptor association
-J20: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1; k8 * pEgfr_Lig * Grb2_Gab1 - k_8 * aR_Grb2_Gab1;
+J18: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1; k8 * pEgfr_Lig * Grb2_Gab1 - k_8 * aR_Grb2_Gab1;
 
 // Grb2_Gab1 phosphorylation/dephosphorylation (2 sites)
-J21: aR_Grb2_Gab1 -> aR_Grb2_pGab1; k3 * aR_Grb2_Gab1 - k_3 * aR_Grb2_pGab1;
-J22: aR_Grb2_pGab1 -> aR_Grb2_ppGab1; k3 * aR_Grb2_pGab1 - k_3 * aR_Grb2_ppGab1;
+J19: aR_Grb2_Gab1 -> aR_Grb2_pGab1; k3 * aR_Grb2_Gab1 - k_3 * aR_Grb2_pGab1;
+J20: aR_Grb2_pGab1 -> aR_Grb2_ppGab1; k3 * aR_Grb2_pGab1 - k_3 * aR_Grb2_ppGab1;
 
 //Grb2_pGab1_Shp2 complex formation
-J23: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2; k8 * aR_Grb2_ppGab1 * Shp2 - k_8 * aR_Grb2_ppGab1_Shp2;
+J21: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2; k8 * aR_Grb2_ppGab1 * Shp2 - k_8 * aR_Grb2_ppGab1_Shp2;
 
 //Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
-J24: aR_Grb2_ppGab1_Shp2 -> aR_Grb2_ppGab1_pShp2; k5 * aR_Grb2_ppGab1_Shp2 - k_5 * aR_Grb2_ppGab1_pShp2
+J22: aR_Grb2_ppGab1_Shp2 -> aR_Grb2_ppGab1_pShp2; k5 * aR_Grb2_ppGab1_Shp2 - k_5 * aR_Grb2_ppGab1_pShp2
 
 
 // SHC
-J17: pEgfr_Lig + Shc1 -> aR_Shc1; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
-J18: aR_Shc1 -> aR_pShc1; k3 * aR_Shc1 - k_3 * aR_pShc1;
+J23: pEgfr_Lig + Shc1 -> aR_Shc1; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
+J24: aR_Shc1 -> aR_pShc1; k3 * aR_Shc1 - k_3 * aR_pShc1;
 
 
 // SOS
 // Grb2-Sos complex formation
-J19: Grb2 + SOS1 -> Grb2_SOS1; k9 * Grb2 * SOS1 - k_9 * Grb2_SOS1
+J25: Grb2 + SOS1 -> Grb2_SOS1; k9 * Grb2 * SOS1 - k_9 * Grb2_SOS1
 
 // Grb2_pSOS1 inhibition
-J20: aRSK + Grb2_SOS1 -> aRSK + Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
-// J20: Grb2_SOS1 -> Grb2 + pSOS1; k11 * aRSK
+// J26: aRSK + Grb2_SOS1 -> aRSK + Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
+// J26: Grb2_SOS1 -> Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
 
 // Dephosphorylation of pSOS1
-J21: pSOS1 -> SOS1; k12 * pSOS1
+// J27: pSOS1 -> SOS1; k12 * pSOS1
 
 // Grb2_SOS1 Garem binding, inhibition and two step recycling
-J22: aR_Grb2_ppGarem_pShp2 + Grb2_SOS1 -> Ad1_Grb2_SOS1; k10a * aR_Grb2_ppGarem_pShp2 * Grb2_SOS1 - k_10a * Ad1_Grb2_SOS1
-J23: Ad1_Grb2_SOS1 => iAd1_Grb2_SOS1; ke * Ad1_Grb2_SOS1
-J24: iAd1_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGarem_pShp2; kr1a * iAd1_Grb2_SOS1
-J25: iaR_Grb2_ppGarem_pShp2 => ipEgfr_Lig + Grb2_Garem + Shp2; kr2a * iaR_Grb2_ppGarem_pShp2
+J28: aR_Grb2_ppGarem_pShp2 + Grb2_SOS1 -> Ad1_Grb2_SOS1; k10a * aR_Grb2_ppGarem_pShp2 * Grb2_SOS1 - k_10a * Ad1_Grb2_SOS1
+J29: Ad1_Grb2_SOS1 => iAd1_Grb2_SOS1; ke * Ad1_Grb2_SOS1
+J30: iAd1_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGarem_pShp2; kr1a * iAd1_Grb2_SOS1
+J31: iaR_Grb2_ppGarem_pShp2 => ipEgfr_Lig + Grb2_Garem + Shp2; kr2a * iaR_Grb2_ppGarem_pShp2
 
 // Grb2_SOS1 Gab1 binding, inhibition and two step recycling
-J26: aR_Grb2_ppGab1_pShp2 + Grb2_SOS1 -> Ad2_Grb2_SOS1; k10b * aR_Grb2_ppGab1_pShp2 * Grb2_SOS1 - k_10b * Ad2_Grb2_SOS1
-J27: Ad2_Grb2_SOS1 => iAd2_Grb2_SOS1; ke * Ad2_Grb2_SOS1
-J28: iAd2_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGab1_pShp2; kr1b * iAd2_Grb2_SOS1
-J29: iaR_Grb2_ppGab1_pShp2 => ipEgfr_Lig + Grb2_Gab1 + Shp2; kr2b * iaR_Grb2_ppGab1_pShp2
+J32: aR_Grb2_ppGab1_pShp2 + Grb2_SOS1 -> Ad2_Grb2_SOS1; k10b * aR_Grb2_ppGab1_pShp2 * Grb2_SOS1 - k_10b * Ad2_Grb2_SOS1
+J33: Ad2_Grb2_SOS1 => iAd2_Grb2_SOS1; ke * Ad2_Grb2_SOS1
+J34: iAd2_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGab1_pShp2; kr1b * iAd2_Grb2_SOS1
+J35: iaR_Grb2_ppGab1_pShp2 => ipEgfr_Lig + Grb2_Gab1 + Shp2; kr2b * iaR_Grb2_ppGab1_pShp2
 
 // Grb2_SOS1 Shc1 binding, inhibition and two step recycling
-J30: aR_pShc1 + Grb2_SOS1 -> Ad3_Grb2_SOS1; k10c * aR_pShc1 * Grb2_SOS1 - k_10c * Ad3_Grb2_SOS1
-J31: Ad3_Grb2_SOS1 => iAd3_Grb2_SOS1; ke * Ad3_Grb2_SOS1
-J32: iAd3_Grb2_SOS1 => Grb2_SOS1 + iaR_pShc1; kr1c * iAd3_Grb2_SOS1
-J33: iaR_pShc1 => ipEgfr_Lig + Shc1; kr2c * iaR_pShc1
+J36: aR_pShc1 + Grb2_SOS1 -> Ad3_Grb2_SOS1; k10c * aR_pShc1 * Grb2_SOS1 - k_10c * Ad3_Grb2_SOS1
+J37: Ad3_Grb2_SOS1 => iAd3_Grb2_SOS1; ke * Ad3_Grb2_SOS1
+J38: iAd3_Grb2_SOS1 => Grb2_SOS1 + iaR_pShc1; kr1c * iAd3_Grb2_SOS1
+J39: iaR_pShc1 => ipEgfr_Lig + Shc1; kr2c * iaR_pShc1
 
 
 // RAS
-J34: Ad1_Grb2_SOS1 + Ras => Ad1_Grb2_SOS1 + aRas; k13a * Ad1_Grb2_SOS1 * Ras
-J35: Ad2_Grb2_SOS1 + Ras => Ad2_Grb2_SOS1 + aRas; k13b * Ad2_Grb2_SOS1 * Ras
-J36: Ad3_Grb2_SOS1 + Ras => Ad3_Grb2_SOS1 + aRas; k13c * Ad3_Grb2_SOS1 * Ras
-J37: aRas + Rasa1 => Ras + Rasa1; k14 * aRas * Rasa1
+J40: Ad1_Grb2_SOS1 + Ras => Ad1_Grb2_SOS1 + aRas; k13a * Ad1_Grb2_SOS1 * Ras
+J41: Ad2_Grb2_SOS1 + Ras => Ad2_Grb2_SOS1 + aRas; k13b * Ad2_Grb2_SOS1 * Ras
+J42: Ad3_Grb2_SOS1 + Ras => Ad3_Grb2_SOS1 + aRas; k13c * Ad3_Grb2_SOS1 * Ras
+J43: aRas + Rasa1 => Ras + Rasa1; k14 * aRas * Rasa1
 
 // --------------------------------------------------------------------
 
@@ -295,11 +295,11 @@ Grb2_Garem = 3.0
 aR_Grb2_Garem = 0.1
 aR_Grb2_pGarem = 0.1
 aR_Grb2_ppGarem = 0.1 // 0.96
-Shp2 = 28.5 // 3.5
+// Shp2 = 28.5 // 3.5
 // Shp2 = 0
-aR_Grb2_ppGarem_Shp2 = 0.22
+// aR_Grb2_ppGarem_Shp2 = 0.22
 // aR_Grb2_ppGarem_Shp2 = 0.0
-aR_Grb2_ppGarem_pShp2 = 0.0 // 0.0 // 1.0
+// aR_Grb2_ppGarem_pShp2 = 0.0 // 0.0 // 1.0
 
 // SHC
 Shc1 = 28.0 // 28.564
@@ -321,14 +321,17 @@ SOS1 = 0.07
 Grb2_SOS1 = 3.98
 aRSK = 14.81
 pSOS1 = 0.01
-Ad1_Grb2_SOS1 = 0.50
-iAd1_Grb2_SOS1 = 0.20
-iaR_Grb2_ppGarem_pShp2 = 0.05
+
+// Ad1_Grb2_SOS1 = 0.50
+// iAd1_Grb2_SOS1 = 0.20
+// iaR_Grb2_ppGarem_pShp2 = 0.05
 // iaR_Grb2_ppGarem_pShp2 = 0.0
-Ad2_Grb2_SOS1 = 0.50
-iAd2_Grb2_SOS1 = 0.20
-iaR_Grb2_ppGab1_pShp2 = 0.05
+
+// Ad2_Grb2_SOS1 = 0.50
+// iAd2_Grb2_SOS1 = 0.20
+// iaR_Grb2_ppGab1_pShp2 = 0.05
 // iaR_Grb2_ppGab1_pShp2 = 0.0
+
 Ad3_Grb2_SOS1 = 0.50
 iAd3_Grb2_SOS1 = 0.20
 iaR_pShc1 = 0.50
@@ -381,29 +384,29 @@ k_7 = 0.000138
 k8 = 0.0125022016193475
 k_8 = 1.093754325465082e-05
 
-k9 = 453.6402930307749
-k_9 = 192.45816532839012
+k9 = 0.0000945
+k_9 = 0.000138
 
-k10a = 1.700032797903883e-05
-k_10a = 0.0257599679976315
-k10b = 1.5101022221023803e-05
-k_10b = 0.0294218159124621
-k10c = 0.005931587626338
-k_10c = 0.0021431396699057
-k11 = 3.1665614769547834
-k12 = 94.25913272316596
-kr1a = 0.0363816369868528
-kr2a = 0.0001147333673281
-kr1b = 0.0344004804814237
-kr2b = 1.2769558798607802e-05
-kr1c = 0.0007850665954328
-kr2c = 0.0188282785565441
+k10a = 1.8780774293963303e-05
+k_10a = 0.0730956226749864
+k10b = 994.5008995000528
+k_10b = 5.90471144625884e-05
+k10c = 0.0435425693994984
+k_10c = 931.6411810526776
+k11 = 0.0611693273926212
+k12 = 4.9970328262825536e-05
+kr1a = 0.0792559540998844
+kr2a = 1.2857730801393183e-05
+kr1b = 0.083057705308144
+kr2b = 0.0008069324831938
+kr1c = 2.288864479903537
+kr2c = 14.400520850003051
 
-k13a = 1.097254317667902e-05
-k13b = 1.4035399231380651e-05
-k13c = 0.0013808511863142
+k13a = 0.0006114462065055
+k13b = 0.0089323270180484
+k13c = 0.6605744952336878
 
-k14 = 0.0001040687566104
+k14 = 1.0054164730281249e-05
 
 // --------------------------------------------------------------------
 

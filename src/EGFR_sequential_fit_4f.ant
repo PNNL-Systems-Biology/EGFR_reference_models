@@ -211,62 +211,64 @@ J16: aR_Grb2_ppGarem_Shp2 -> aR_Grb2_ppGarem_pShp2; k5 * aR_Grb2_ppGarem_Shp2 - 
 
 // GAB
 // Grb2_Gab1 complex formation
-J19: Gab1 + Grb2 -> Grb2_Gab1; k7 * Gab1 * Grb2 - k_7 * Grb2_Gab1;
+J17: Gab1 + Grb2 -> Grb2_Gab1; k7 * Gab1 * Grb2 - k_7 * Grb2_Gab1;
 
 // Grb2_Gab1 receptor association
-J20: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1; k8 * pEgfr_Lig * Grb2_Gab1 - k_8 * aR_Grb2_Gab1;
+J18: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1; k8 * pEgfr_Lig * Grb2_Gab1 - k_8 * aR_Grb2_Gab1;
 
 // Grb2_Gab1 phosphorylation/dephosphorylation (2 sites)
-J21: aR_Grb2_Gab1 -> aR_Grb2_pGab1; k3 * aR_Grb2_Gab1 - k_3 * aR_Grb2_pGab1;
-J22: aR_Grb2_pGab1 -> aR_Grb2_ppGab1; k3 * aR_Grb2_pGab1 - k_3 * aR_Grb2_ppGab1;
+J19: aR_Grb2_Gab1 -> aR_Grb2_pGab1; k3 * aR_Grb2_Gab1 - k_3 * aR_Grb2_pGab1;
+J20: aR_Grb2_pGab1 -> aR_Grb2_ppGab1; k3 * aR_Grb2_pGab1 - k_3 * aR_Grb2_ppGab1;
 
 //Grb2_pGab1_Shp2 complex formation
-J23: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2; k8 * aR_Grb2_ppGab1 * Shp2 - k_8 * aR_Grb2_ppGab1_Shp2;
+J21: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2; k8 * aR_Grb2_ppGab1 * Shp2 - k_8 * aR_Grb2_ppGab1_Shp2;
 
 //Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
-J24: aR_Grb2_ppGab1_Shp2 -> aR_Grb2_ppGab1_pShp2; k5 * aR_Grb2_ppGab1_Shp2 - k_5 * aR_Grb2_ppGab1_pShp2
+J22: aR_Grb2_ppGab1_Shp2 -> aR_Grb2_ppGab1_pShp2; k5 * aR_Grb2_ppGab1_Shp2 - k_5 * aR_Grb2_ppGab1_pShp2
 
 
 // SHC
-J17: pEgfr_Lig + Shc1 -> aR_Shc1; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
-J18: aR_Shc1 -> aR_pShc1; k3 * aR_Shc1 - k_3 * aR_pShc1;
+J23: pEgfr_Lig + Shc1 -> aR_Shc1; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
+J24: aR_Shc1 -> aR_pShc1; k3 * aR_Shc1 - k_3 * aR_pShc1;
 
 
 // SOS
 // Grb2-Sos complex formation
-J19: Grb2 + SOS1 -> Grb2_SOS1; k9 * Grb2 * SOS1 - k_9 * Grb2_SOS1
+J25: Grb2 + SOS1 -> Grb2_SOS1; k9 * Grb2 * SOS1 - k_9 * Grb2_SOS1
 
 // Grb2_pSOS1 inhibition
-// J20: aRSK + Grb2_SOS1 -> aRSK + Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
-J20: Grb2_SOS1 -> Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
+J26: aRSK + Grb2_SOS1 -> aRSK + Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
+// J26: Grb2_SOS1 -> Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
 
 // Dephosphorylation of pSOS1
-J21: pSOS1 -> SOS1; k12 * pSOS1
+J27: pSOS1 -> SOS1; k12 * pSOS1
 
 // Grb2_SOS1 Garem binding, inhibition and two step recycling
-J22: aR_Grb2_ppGarem_pShp2 + Grb2_SOS1 -> Ad1_Grb2_SOS1; k10a * aR_Grb2_ppGarem_pShp2 * Grb2_SOS1 - k_10a * Ad1_Grb2_SOS1
-J23: Ad1_Grb2_SOS1 => iAd1_Grb2_SOS1; ke * Ad1_Grb2_SOS1
-J24: iAd1_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGarem_pShp2; kr1a * iAd1_Grb2_SOS1
-J25: iaR_Grb2_ppGarem_pShp2 => ipEgfr_Lig + Grb2_Garem + Shp2; kr2a * iaR_Grb2_ppGarem_pShp2
+J28: aR_Grb2_ppGarem_pShp2 + Grb2_SOS1 -> Ad1_Grb2_SOS1; k10a * aR_Grb2_ppGarem_pShp2 * Grb2_SOS1 - k_10a * Ad1_Grb2_SOS1
+J29: Ad1_Grb2_SOS1 => iAd1_Grb2_SOS1; ke * Ad1_Grb2_SOS1
+J30: iAd1_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGarem_pShp2; kr1a * iAd1_Grb2_SOS1
+J31: iaR_Grb2_ppGarem_pShp2 => ipEgfr_Lig + Grb2_Garem + Shp2; kr2a * iaR_Grb2_ppGarem_pShp2
 
 // Grb2_SOS1 Gab1 binding, inhibition and two step recycling
-J26: aR_Grb2_ppGab1_pShp2 + Grb2_SOS1 -> Ad2_Grb2_SOS1; k10b * aR_Grb2_ppGab1_pShp2 * Grb2_SOS1 - k_10b * Ad2_Grb2_SOS1
-J27: Ad2_Grb2_SOS1 => iAd2_Grb2_SOS1; ke * Ad2_Grb2_SOS1
-J28: iAd2_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGab1_pShp2; kr1b * iAd2_Grb2_SOS1
-J29: iaR_Grb2_ppGab1_pShp2 => ipEgfr_Lig + Grb2_Gab1 + Shp2; kr2b * iaR_Grb2_ppGab1_pShp2
+J32: aR_Grb2_ppGab1_pShp2 + Grb2_SOS1 -> Ad2_Grb2_SOS1; k10b * aR_Grb2_ppGab1_pShp2 * Grb2_SOS1 - k_10b * Ad2_Grb2_SOS1
+J33: Ad2_Grb2_SOS1 => iAd2_Grb2_SOS1; ke * Ad2_Grb2_SOS1
+J34: iAd2_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGab1_pShp2; kr1b * iAd2_Grb2_SOS1
+J35: iaR_Grb2_ppGab1_pShp2 => ipEgfr_Lig + Grb2_Gab1 + Shp2; kr2b * iaR_Grb2_ppGab1_pShp2
 
 // Grb2_SOS1 Shc1 binding, inhibition and two step recycling
-J30: aR_pShc1 + Grb2_SOS1 -> Ad3_Grb2_SOS1; k10c * aR_pShc1 * Grb2_SOS1 - k_10c * Ad3_Grb2_SOS1
-J31: Ad3_Grb2_SOS1 => iAd3_Grb2_SOS1; ke * Ad3_Grb2_SOS1
-J32: iAd3_Grb2_SOS1 => Grb2_SOS1 + iaR_pShc1; kr1c * iAd3_Grb2_SOS1
-J33: iaR_pShc1 => ipEgfr_Lig + Shc1; kr2c * iaR_pShc1
+J36: aR_pShc1 + Grb2_SOS1 -> Ad3_Grb2_SOS1; k10c * aR_pShc1 * Grb2_SOS1 - k_10c * Ad3_Grb2_SOS1
+J37: Ad3_Grb2_SOS1 => iAd3_Grb2_SOS1; ke * Ad3_Grb2_SOS1
+J38: iAd3_Grb2_SOS1 => Grb2_SOS1 + iaR_pShc1; kr1c * iAd3_Grb2_SOS1
+J39: iaR_pShc1 => ipEgfr_Lig + Shc1; kr2c * iaR_pShc1
 
 
 // RAS
-J34: Ad1_Grb2_SOS1 + Ras => Ad1_Grb2_SOS1 + aRas; k13a * Ad1_Grb2_SOS1 * Ras
-J35: Ad2_Grb2_SOS1 + Ras => Ad2_Grb2_SOS1 + aRas; k13b * Ad2_Grb2_SOS1 * Ras
-J36: Ad3_Grb2_SOS1 + Ras => Ad3_Grb2_SOS1 + aRas; k13c * Ad3_Grb2_SOS1 * Ras
-J37: aRas + Rasa1 => Ras + Rasa1; k14 * aRas * Rasa1
+J40: Ad1_Grb2_SOS1 + Ras => Ad1_Grb2_SOS1 + aRas; k13a * Ad1_Grb2_SOS1 * Ras
+J41: Ad2_Grb2_SOS1 + Ras => Ad2_Grb2_SOS1 + aRas; k13b * Ad2_Grb2_SOS1 * Ras
+J42: Ad3_Grb2_SOS1 + Ras => Ad3_Grb2_SOS1 + aRas; k13c * Ad3_Grb2_SOS1 * Ras
+J43: aRas + Rasa1 => Ras + Rasa1; k14 * aRas * Rasa1
+
+total_SOS := SOS1 + Grb2_SOS1 + pSOS1
 
 // --------------------------------------------------------------------
 
@@ -381,29 +383,29 @@ k_7 = 0.000138
 k8 = 0.0125022016193475
 k_8 = 1.093754325465082e-05
 
-k9 = 0.3012624768143124
-k_9 = 0.1466228184690043
+k9 = 0.0000945
+k_9 = 0.000138
 
-k10a = 4.010115191024291e-05
-k_10a = 0.0101209801091561
-k10b = 202.09535017144475
-k_10b = 0.0001785512981525
-k10c = 320.23987033061866
-k_10c = 928.164967429053
-k11 = 0.0001260229406836
-k12 = 1.034532737282368e-05
-kr1a = 0.0145708800926925
-kr2a = 5.209632836213896
-kr1b = 0.0142165980484838
-kr2b = 1.5208453923907887e-05
-kr1c = 471.4921671122778
-kr2c = 609.9119795548938
+k10a = 4.7727845285696174e-05
+k_10a = 5.548842650240967
+k10b = 8.860131216905222e-05
+k_10b = 0.306389554296344
+k10c = 0.0282373157080738
+k_10c = 6.85056104538311
+k11 = 0.0001367877067043
+k12 = 0.0289271640336509
+kr1a = 0.0057268643129044
+kr2a = 0.2979934955596866
+kr1b = 0.0002863383433734
+kr2b = 2.416487715872847e-05
+kr1c = 9.868863086512668
+kr2c = 0.000942394495462
 
-k13a = 1.4589723859976817e-05
-k13b = 1.2756773828988136e-05
-k13c = 0.0018737290019935
+k13a = 0.0044383945774527
+k13b = 0.0001753865510407
+k13c = 0.0673293635324732
 
-k14 = 0.000180809511767
+k14 = 0.0001635092583106
 
 // --------------------------------------------------------------------
 

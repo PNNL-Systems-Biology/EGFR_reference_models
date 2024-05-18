@@ -39,9 +39,10 @@ import math
 # r = te.loada('EGFR_sequential_fit_4a.ant')
 # r = te.loada('EGFR_sequential_fit_4c.ant')
 # r = te.loada('EGFR_sequential_fit_4d.ant')
-r = te.loada('EGFR_sequential_fit_4e.ant')
+# r = te.loada('EGFR_sequential_fit_4e.ant')
 # r = te.loada('EGFR_sequential_fit_4e2.ant')
 # r = te.loada('EGFR_sequential_fit_4f.ant')
+r = te.loada('EGFR_sequential_fit_4h.ant')
 
 # r.integrator.absolute_tolerance = 1e-12
 # r.integrator.relative_tolerance = 1e-12
