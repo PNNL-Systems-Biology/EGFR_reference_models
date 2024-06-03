@@ -5,6 +5,7 @@ import tellurium as te
 data = None
 
 with open('Results/sorted_params_final.txt', 'r') as file:
+# with open('Results/sorted_params_20.txt', 'r') as file:
     data = file.read().replace('#', '')
 
 with open('parameters', 'w') as params:
@@ -21,6 +22,8 @@ param_dict = dict()
 for i, name in enumerate(names):
     param_dict[name] = best[i]
 
+print(param_dict)
+quit()
 model_name = 'EGFR_8a'
 
 new_model = ''
