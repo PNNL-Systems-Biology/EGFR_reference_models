@@ -48,8 +48,8 @@ import tellurium as te
 # module_list = ['EGFR_5_HSW_MK_rev_2.ant']
 # module_list = ['EGFR_5_HSW_MK_rev_3.ant']
 # module_list = ['EGFR_5_HSW_MK-rev.ant']
-# module_list = ['EGFR_8a.ant']
-module_list = ['EGFR_8b.ant']
+module_list = ['EGFR_8a.ant', 'EGFR_8b.ant']
+# module_list = ['EGFR_8b.ant']
 
 for module in module_list:
     r = te.loada(module)
