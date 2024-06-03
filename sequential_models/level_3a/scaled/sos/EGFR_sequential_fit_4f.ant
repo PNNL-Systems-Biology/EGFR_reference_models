@@ -1,0 +1,428 @@
+
+// Cubic spline functions for Shp2, a necessary input function to the module. Fit to PTPN11 data.
+
+# 0 3.5
+# 2 5.81
+# 4 8.22
+# 6 9.06
+# 8 8.75
+
+// Currently omitted in favor of a large Shp2 initial value (Shp2 = 28.5)
+// Cubic splines are only valid between points and potentially drastically overfit the model.
+// This should replaced in the future.
+
+// function x(t)
+// 0.018263392857142853 + 3 * 6.851438492063495e-08 * (t-0)^2
+// end
+// function y(t)
+// 0.021223214285714286 + 2 * 2.466517857142873e-05 * (t-120) - 3 * 2.8470155423280497e-07 * (t-120)^2
+// end
+// function z(t)
+// 0.014843750000000008 - 2 * 7.782738095238109e-05 * (t-240) + 3 * 1.0385664682539723e-07 * (t-240)^2
+// end
+// function w(t)
+// 0.0006517857142857094 - 2 * 4.043898809523809e-05 * (t-360) + 3 * 1.123305224867725e-07 * (t-360)^2
+// end
+
+
+// aRSK input function
+
+function x(t)
+-0.02767757936507937 + 3 * 1.9741374559082894e-06 * (t-0)^2
+end
+function y(t)
+0.057605158730158736 + 2 * 0.0007106894841269842 * (t-120) - 3 * 2.561659501763669e-06 * (t-120)^2
+end
+function z(t)
+0.11750694444444446 - 2 * 0.00021150793650793662 * (t-240) + 3 * 8.766672178130808e-09 * (t-240)^2
+end
+function w(t)
+0.017498015873015877 - 2 * 0.00020519593253968258 * (t-480) + 3 * 2.849943507495591e-07 * (t-480)^2
+end
+
+
+// RSK RAS ratio function
+
+// function x(t)
+// 0.740740740740741 - 0.006903677260075101 * (t-0) - 6.776263578034403e-21 * (t-0)^2 + 1.5854594203157707e-07 * (t-0)^3
+// end
+// function y(t)
+// 0.186266857362294 - 5.449256431097351e-05 * (t-120) + 5.707653913136773e-05 * (t-120)^2 - 1.8818037302528042e-07 * (t-120)^3
+// end
+// function z(t)
+// 0.676454228548988 + 0.005514484712525168 * (t-240) - 1.0668395157733194e-05 * (t-240)^2 + 5.272239147273847e-09 * (t-240)^3
+// end
+// function w(t)
+// 1.45831443244151 + 0.0013046979614621558 * (t-480) - 6.872382971696027e-06 * (t-480)^2 + 9.544976349577814e-09 * (t-480)^3
+// end
+
+
+// --------------------------------------------------------------------
+
+// Created by libAntimony v2.8.1
+model EGFR_combined()
+
+// Compartments:
+compartment cell, extra, intra;
+
+// --------------------------------------------------------------------
+
+//Species
+
+// EGFR
+species Lig in extra
+species Egfr in cell
+species iEgfr in intra
+species Egfr_Lig in cell
+species iEgfr_Lig in intra
+species pEgfr_Lig in cell
+species ipEgfr_Lig in intra
+species aRtot in cell
+
+// GAREM
+species Garem in cell
+// species pGarem in cell
+// species pEgfr_Lig in cell
+species Grb2 in cell
+species Shp2 in cell
+species Grb2_Garem in cell
+// species Grb2_pGarem in cell
+// species Grb2_ppGarem in cell
+species aR_Grb2_ppGarem_Shp2 in cell
+species aR_Grb2_ppGarem_pShp2 in cell
+species aR_Grb2_Garem in cell
+species aR_Grb2_pGarem in cell
+species aR_Grb2_ppGarem in cell
+
+// SHC
+species Shc1 in cell
+species aR_Shc1 in cell
+species aR_pShc1 in cell
+// species ipShc1 in cell
+// species iShc1 in cell
+// species pEgfr_Lig in cell
+
+// GAB
+species Gab1 in cell
+// species pGab1 in cell
+// species peGab1 in cell
+// species pEgfr_Lig in cell
+// species Grb2 in cell
+// species Shp2 in cell
+species Grb2_Gab1 in cell
+species aR_Grb2_Gab1 in cell
+species aR_Grb2_pGab1 in cell
+species aR_Grb2_ppGab1 in cell
+species aR_Grb2_ppGab1_Shp2 in cell
+species aR_Grb2_ppGab1_pShp2 in cell
+
+// SOS
+species SOS1 in cell
+species Grb2_SOS1 in cell
+// species aRSK in cell
+species pSOS1 in cell
+// species aR_Grb2_ppGab1_pShp2 in cell
+// species aR_Grb2_ppGarem_pShp2 in cell
+// species aR_pShc1 in cell
+// species Grb2 in cell
+// species Grb2_pSOS1 in cell
+// species Grb2_ipSOS1 in cell
+//
+species Ad1_Grb2_SOS1 in cell
+species iAd1_Grb2_SOS1 in cell
+species iaR_Grb2_ppGarem_pShp2 in cell
+//
+species Ad2_Grb2_SOS1 in cell
+species iAd2_Grb2_SOS1 in cell
+species iaR_Grb2_ppGab1_pShp2 in cell
+//
+species Ad3_Grb2_SOS1 in cell
+species iAd3_Grb2_SOS1 in cell
+species iaR_pShc1 in cell
+
+// RAS
+species Ras in cell
+species aRas in cell
+species Rasa1 in cell
+
+
+// --------------------------------------------------------------------
+
+// Functions:
+
+// Shp2 production
+// F0: -> Shp2; piecewise(x(time), time<=120, y(time), time<=240, z(time), time<=360, w(time), time<=480)
+
+scale_parameter = 1
+
+// aRSK production (temporary)
+F1: -> aRSK; scale_parameter * piecewise(x(time), time<=120, y(time), time<=240, z(time), time<=480, w(time), time<=720)
+
+// aRSK as time-series ratio of RAS
+// RSK_RAS_ratio := piecewise(x(time), time<=120, y(time), time<=240, z(time), time<=480, w(time), time<=720)
+// aRSK := RSK_RAS_ratio * aRas
+
+// --------------------------------------------------------------------
+
+// Reactions:
+
+
+// EGFR
+
+// New_Receptors
+J1: => Egfr; Vr;
+// Receptor_turnover
+J2: Egfr => iEgfr; kt * Egfr;
+// Receptor_degrad
+J3: iEgfr => ; kx * iEgfr;
+// Ligand_binding
+// J4: Lig + Egfr -> Egfr_Lig; kf * Egfr * Lig - kr * Egfr_Lig;
+J4: Egfr -> Egfr_Lig; kf * Egfr * Lig - kr * Egfr_Lig;
+// Receptor_ligand_endo
+J5: Egfr_Lig => iEgfr_Lig; ke * Egfr_Lig;
+// Receptor_complex_degrad
+J6: iEgfr_Lig => ; kh * iEgfr_Lig;
+// Receptor_phospho
+J7: Egfr_Lig -> pEgfr_Lig; kp * Egfr_Lig - k_p * pEgfr_Lig;
+// Receptor_phospho_endo
+J8: pEgfr_Lig => ipEgfr_Lig ; ke * pEgfr_Lig;
+// Receptor_phosphocomplex_degrad
+J9: ipEgfr_Lig => ; kh * ipEgfr_Lig;
+
+
+// GAREM
+
+// Grb2_Garem complex formation
+J10: Garem + Grb2 -> Grb2_Garem; k1 * Garem * Grb2 - k_1 * Grb2_Garem;
+
+// Biniding of Grb2_Garem complex to phosphorylated receptor (pEgfr_Lig)
+J11: pEgfr_Lig + Grb2_Garem -> aR_Grb2_Garem; k2 * pEgfr_Lig * Grb2_Garem - k_2 * aR_Grb2_Garem;
+
+// Phosphorylation of first and second sites on Garem-Grb2 (mass action)
+J13: aR_Grb2_Garem -> aR_Grb2_pGarem; k3 * aR_Grb2_Garem - k_3 * aR_Grb2_pGarem;
+J14: aR_Grb2_pGarem -> aR_Grb2_ppGarem; k3 * aR_Grb2_pGarem - k_3 * aR_Grb2_ppGarem;
+
+// aR_Grb2_ppGarem_Shp2 complex formation
+J15: aR_Grb2_ppGarem + Shp2 -> aR_Grb2_ppGarem_Shp2; k4 * aR_Grb2_ppGarem * Shp2 - k_4 * aR_Grb2_ppGarem_Shp2;
+
+// aR_Grb2_ppGarem_Shp2 phosphorylation (mass action)
+J16: aR_Grb2_ppGarem_Shp2 -> aR_Grb2_ppGarem_pShp2; k5 * aR_Grb2_ppGarem_Shp2 - k_5 * aR_Grb2_ppGarem_pShp2;
+
+
+// GAB
+// Grb2_Gab1 complex formation
+J19: Gab1 + Grb2 -> Grb2_Gab1; k7 * Gab1 * Grb2 - k_7 * Grb2_Gab1;
+
+// Grb2_Gab1 receptor association
+J20: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1; k8 * pEgfr_Lig * Grb2_Gab1 - k_8 * aR_Grb2_Gab1;
+
+// Grb2_Gab1 phosphorylation/dephosphorylation (2 sites)
+J21: aR_Grb2_Gab1 -> aR_Grb2_pGab1; k3 * aR_Grb2_Gab1 - k_3 * aR_Grb2_pGab1;
+J22: aR_Grb2_pGab1 -> aR_Grb2_ppGab1; k3 * aR_Grb2_pGab1 - k_3 * aR_Grb2_ppGab1;
+
+//Grb2_pGab1_Shp2 complex formation
+J23: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2; k8 * aR_Grb2_ppGab1 * Shp2 - k_8 * aR_Grb2_ppGab1_Shp2;
+
+//Grb2_pGab1_Shp2 phosphorylation/dephosphorylation
+J24: aR_Grb2_ppGab1_Shp2 -> aR_Grb2_ppGab1_pShp2; k5 * aR_Grb2_ppGab1_Shp2 - k_5 * aR_Grb2_ppGab1_pShp2
+
+
+// SHC
+J17: pEgfr_Lig + Shc1 -> aR_Shc1; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
+J18: aR_Shc1 -> aR_pShc1; k3 * aR_Shc1 - k_3 * aR_pShc1;
+
+
+// SOS
+// Grb2-Sos complex formation
+J19: Grb2 + SOS1 -> Grb2_SOS1; k9 * Grb2 * SOS1 - k_9 * Grb2_SOS1
+
+// Grb2_pSOS1 inhibition
+// J20: aRSK + Grb2_SOS1 -> aRSK + Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
+J20: Grb2_SOS1 -> Grb2 + pSOS1; k11 * aRSK * Grb2_SOS1
+
+// Dephosphorylation of pSOS1
+J21: pSOS1 -> SOS1; k12 * pSOS1
+
+// Grb2_SOS1 Garem binding, inhibition and two step recycling
+J22: aR_Grb2_ppGarem_pShp2 + Grb2_SOS1 -> Ad1_Grb2_SOS1; k10a * aR_Grb2_ppGarem_pShp2 * Grb2_SOS1 - k_10a * Ad1_Grb2_SOS1
+J23: Ad1_Grb2_SOS1 => iAd1_Grb2_SOS1; ke * Ad1_Grb2_SOS1
+J24: iAd1_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGarem_pShp2; kr1a * iAd1_Grb2_SOS1
+J25: iaR_Grb2_ppGarem_pShp2 => ipEgfr_Lig + Grb2_Garem + Shp2; kr2a * iaR_Grb2_ppGarem_pShp2
+
+// Grb2_SOS1 Gab1 binding, inhibition and two step recycling
+J26: aR_Grb2_ppGab1_pShp2 + Grb2_SOS1 -> Ad2_Grb2_SOS1; k10b * aR_Grb2_ppGab1_pShp2 * Grb2_SOS1 - k_10b * Ad2_Grb2_SOS1
+J27: Ad2_Grb2_SOS1 => iAd2_Grb2_SOS1; ke * Ad2_Grb2_SOS1
+J28: iAd2_Grb2_SOS1 => Grb2_SOS1 + iaR_Grb2_ppGab1_pShp2; kr1b * iAd2_Grb2_SOS1
+J29: iaR_Grb2_ppGab1_pShp2 => ipEgfr_Lig + Grb2_Gab1 + Shp2; kr2b * iaR_Grb2_ppGab1_pShp2
+
+// Grb2_SOS1 Shc1 binding, inhibition and two step recycling
+J30: aR_pShc1 + Grb2_SOS1 -> Ad3_Grb2_SOS1; k10c * aR_pShc1 * Grb2_SOS1 - k_10c * Ad3_Grb2_SOS1
+J31: Ad3_Grb2_SOS1 => iAd3_Grb2_SOS1; ke * Ad3_Grb2_SOS1
+J32: iAd3_Grb2_SOS1 => Grb2_SOS1 + iaR_pShc1; kr1c * iAd3_Grb2_SOS1
+J33: iaR_pShc1 => ipEgfr_Lig + Shc1; kr2c * iaR_pShc1
+
+
+// RAS
+J34: Ad1_Grb2_SOS1 + Ras => Ad1_Grb2_SOS1 + aRas; k13a * Ad1_Grb2_SOS1 * Ras
+J35: Ad2_Grb2_SOS1 + Ras => Ad2_Grb2_SOS1 + aRas; k13b * Ad2_Grb2_SOS1 * Ras
+J36: Ad3_Grb2_SOS1 + Ras => Ad3_Grb2_SOS1 + aRas; k13c * Ad3_Grb2_SOS1 * Ras
+J37: aRas + Rasa1 => Ras + Rasa1; k14 * aRas * Rasa1
+
+total_SOS := SOS1 + Grb2_SOS1 + pSOS1
+
+// --------------------------------------------------------------------
+
+// Initial Values:
+
+
+// all species has nM units
+
+// EGFR
+
+// fix Lig
+var Lig = 0.165;
+# var Lig = 0.0;
+Lig has nM;
+Egfr = 135;
+iEgfr = 73;
+Egfr_Lig = 0.12;
+iEgfr_Lig = 0.06;
+pEgfr_Lig = .8;
+ipEgfr_Lig = .4;
+
+aRtot := pEgfr_Lig + ipEgfr_Lig
+
+// GAREM
+Garem = 1.0 // 15.510
+Grb2 = 37.11
+Grb2_Garem = 3.0
+aR_Grb2_Garem = 0.1
+aR_Grb2_pGarem = 0.1
+aR_Grb2_ppGarem = 0.1 // 0.96
+Shp2 = 28.5 // 3.5
+// Shp2 = 0
+aR_Grb2_ppGarem_Shp2 = 0.22
+// aR_Grb2_ppGarem_Shp2 = 0.0
+aR_Grb2_ppGarem_pShp2 = 0.0 // 0.0 // 1.0
+
+// SHC
+Shc1 = 28.0 // 28.564
+Shc1 has nM;
+aR_Shc1 = 0.0
+aR_pShc1 = 0.0 // 2.0 // .74
+
+// GAB
+Gab1 = 1.0 // 3.142
+Grb2_Gab1 = 4.0
+aR_Grb2_Gab1 = 0.1
+aR_Grb2_pGab1 = 0.0
+aR_Grb2_ppGab1 = 0.0 // 0.1 // 0.36
+aR_Grb2_ppGab1_Shp2 = 0.0
+aR_Grb2_ppGab1_pShp2 = 0.0 // 1.0 // 0.1
+
+// SOS
+SOS1 = 0.07
+Grb2_SOS1 = 3.98
+aRSK = 2.6
+pSOS1 = 0.01
+Ad1_Grb2_SOS1 = 0.50
+iAd1_Grb2_SOS1 = 0.20
+iaR_Grb2_ppGarem_pShp2 = 0.05
+// iaR_Grb2_ppGarem_pShp2 = 0.0
+Ad2_Grb2_SOS1 = 0.50
+iAd2_Grb2_SOS1 = 0.20
+iaR_Grb2_ppGab1_pShp2 = 0.05
+// iaR_Grb2_ppGab1_pShp2 = 0.0
+Ad3_Grb2_SOS1 = 0.50
+iAd3_Grb2_SOS1 = 0.20
+iaR_pShc1 = 0.50
+
+Ras = 98.0
+aRas = 1.43
+Rasa1 = 98.0
+
+// --------------------------------------------------------------------
+
+// Compartment initializations:
+
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// --------------------------------------------------------------------
+
+// Parameters:
+
+Vr = 0.242; // Replenishment of empty receptors
+kt = 0.0012; // Endocytosis of empty receptors
+kx = 1; // Degradation of empty receptors - set to eliminate the compartment
+ke = 0.0037; // Endocytosis of activated receptors
+kh = 0.0004; // 0.00024; // Degradation of activated receptors
+
+kf = 0.0089067989356655 // 0.0016; // Forward receptor-ligand 2nd order rate constant
+kr = 0.000737076373668 // 0.004; // Reverse receptor-ligand rate constant
+kp = 0.1914236012000976 // 0.067; // This is the phosphorylation probability
+
+k_p = 0.13; // Dephosphorylation rate constant
+
+k1 = 0.0001
+k_1 = 0.000138
+
+k2 = 0.0432121707173137
+k_2 = 0.0921580668696979
+k3 = 0.3024101534566144
+k_3 = 0.9991385320023792
+k4 = 0.8546155797841792
+k_4 = 1.3233154587031654e-05
+k5 = 0.067
+k_5 = 0.13
+k6 = 0.1959965623013354
+k_6 = 0.618362674699001
+k7 = 0.0001
+k_7 = 0.000138
+k8 = 0.0125022016193475
+k_8 = 1.093754325465082e-05
+
+k9 = 6.745883548986986e-05
+k_9 = 0.0002050117470311
+
+k10a = 0.0005153170038051
+k_10a = 20.86906711636678
+k10b = 0.0054980077320471
+k_10b = 818.9468643110441
+k10c = 0.0089530417137309
+k_10c = 0.0068005128562385
+k11 = 0.0007178399557059
+k12 = 0.0212683873519231
+kr1a = 0.0148504887344919
+kr2a = 4.795029813037015e-05
+kr1b = 0.0155126679559248
+kr2b = 69.24981559001665
+kr1c = 0.0013021104088761
+kr2c = 0.0112497138233047
+
+k13a = 0.0029205240287617
+k13b = 2.639761277485578e-05
+k13c = 0.0009267418670525
+
+k14 = 5.458275879680376e-05
+
+// --------------------------------------------------------------------
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_s = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_s is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+end
