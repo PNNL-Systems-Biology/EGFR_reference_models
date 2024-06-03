@@ -1,0 +1,222 @@
+
+// --------------------------------------------------------------------
+
+// Created by libAntimony v2.8.1
+model EGFR_combined()
+
+// Compartments:
+compartment cell, extra, intra;
+
+// --------------------------------------------------------------------
+
+//Species
+
+// EGFR
+species Lig in extra
+species Egfr in cell
+species iEgfr in intra
+species Egfr_Lig in cell
+species iEgfr_Lig in intra
+species pEgfr_Lig in cell
+species ipEgfr_Lig in intra
+species aRtot in cell
+species pGAREMtot in cell
+species pGAB1tot in cell
+species pSHC1tot in cell
+
+// --------------------------------------------------------------------
+
+// Reactions:
+
+
+// EGFR
+
+// New_Receptors
+J1: => Egfr; Vr;
+// Receptor_turnover
+J2: Egfr => iEgfr; kt * Egfr;
+// Receptor_degrad
+J3: iEgfr => ; kx * iEgfr;
+// Ligand_binding
+// J4: Lig + Egfr -> Egfr_Lig; kf * Egfr * Lig - kr * Egfr_Lig;
+J4: Egfr -> Egfr_Lig; kf * Egfr * Lig - kr * Egfr_Lig;
+// Receptor_ligand_endo
+J5: Egfr_Lig => iEgfr_Lig; ke * Egfr_Lig;
+// Receptor_complex_degrad
+J6: iEgfr_Lig => ; kh * iEgfr_Lig;
+// Receptor_phospho
+J7: Egfr_Lig -> pEgfr_Lig; kp * Egfr_Lig - k_p * pEgfr_Lig;
+// Receptor_phospho_endo
+J8: pEgfr_Lig => ipEgfr_Lig ; ke * pEgfr_Lig;
+// Receptor_phosphocomplex_degrad
+J9: ipEgfr_Lig => ; kh * ipEgfr_Lig;
+
+// Garem
+
+// Grb2_Garem complex formation
+J10: Garem + Grb2 -> Grb2_Garem ; k1 * Garem * Grb2 - k_1 * Grb2_Garem;
+// Grb2_Garem receptor association
+J11: pEgfr_Lig + Grb2_Garem -> aR_Grb2_Garem ; k2 * pEgfr_Lig * Grb2_Garem - k_2 * aR_Grb2_Garem;
+// Grb2_Garem phosphorylation
+J12: aR_Grb2_Garem => aR_Grb2_pGarem ; kp * aR_Grb2_Garem;
+// Grb2_pGarem dissociation
+J13: aR_Grb2_pGarem => pEgfr_Lig + Grb2_pGarem ; k_2 * aR_Grb2_pGarem;
+// Grb2_pGarem dephosphorylation
+J14: Grb2_pGarem => Grb2_Garem ; k_p * Grb2_pGarem;
+// Grb2_pGarem double phosphorylation
+J15: aR_Grb2_pGarem => aR_Grb2_ppGarem ; kp * aR_Grb2_pGarem;
+// Grb2_ppGarem dissociation
+J16: aR_Grb2_ppGarem => pEgfr_Lig + Grb2_ppGarem ; k_2 * aR_Grb2_ppGarem;
+// Grb2_ppGarem dephosphorylation
+J17: Grb2_ppGarem => Grb2_pGarem ; k_p * Grb2_ppGarem;
+// Grb2_ppGarem_Shp2 complex formation
+J18: aR_Grb2_ppGarem + Shp2 -> aR_Grb2_ppGarem_Shp2 ; k3 *aR_Grb2_ppGarem * Shp2 - k_3 * aR_Grb2_ppGarem_Shp2;
+// Grb2_ppGarem_Shp2 phosphorylation
+J19: aR_Grb2_ppGarem_Shp2 => aR_Grb2_ppGarem_pShp2 ; kp * aR_Grb2_ppGarem_Shp2;
+// Grb2_ppGarem_pShp2 dissociation
+J20: aR_Grb2_ppGarem_pShp2 => aR_Grb2_ppGarem + pShp2 ; k_3 * aR_Grb2_ppGarem_pShp2;
+// pShp2 dephosphorylation
+J21: pShp2 => Shp2 ; k_p * pShp2;
+
+// GAB
+
+// Grb2_Gab1 complex formation
+J22: Gab1 + Grb2 -> Grb2_Gab1 ; k4 * Gab1 * Grb2 - k_4 * Grb2_Gab1;
+// Grb2_Gab1 receptor association
+J23: pEgfr_Lig + Grb2_Gab1 -> aR_Grb2_Gab1 ; k5 * pEgfr_Lig * Grb2_Gab1 - k_5 * aR_Grb2_Gab1;
+// Grb2_Gab1 phosphorylation
+J24: aR_Grb2_Gab1 => aR_Grb2_pGab1 ; kp * aR_Grb2_Gab1;
+// Grb2_pGab1 dissociation
+J25: aR_Grb2_pGab1 => pEgfr_Lig + Grb2_pGab1 ; k_5 * aR_Grb2_pGarem;
+// Grb2_pGab1 dephosphorylation
+J26: Grb2_pGab1 => Grb2_Gab1 ; k_p * Grb2_pGarem;
+// Grb2_pGab1 phosphorylation
+J27: aR_Grb2_pGab1 => aR_Grb2_ppGab1 ; kp * aR_Grb2_pGab1;
+// Grb2_ppGab1 dissociation
+J28: aR_Grb2_ppGab1 => pEgfr_Lig + Grb2_ppGab1 ; k_5 * aR_Grb2_ppGarem;
+// Grb2_ppGab1 dephosphorylation
+J29: Grb2_ppGab1 => Grb2_pGab1 ; k_p * Grb2_ppGarem;
+// Grb2_pGab1_Shp2 complex formation
+J30: aR_Grb2_ppGab1 + Shp2 -> aR_Grb2_ppGab1_Shp2 ; k3 *aR_Grb2_ppGab1 * Shp2 - k_3 * aR_Grb2_ppGab1_Shp2;
+// Grb2_pGab1_Shp2 phosphorylation
+J31: aR_Grb2_ppGab1_Shp2 => aR_Grb2_ppGab1_pShp2 ; kp * aR_Grb2_ppGab1_Shp2;
+// Grb2_ppGab1_pShp2 dissociation
+J32: aR_Grb2_ppGab1_pShp2 => aR_Grb2_ppGab1 + pShp2 ; k_3 * aR_Grb2_ppGarem_pShp2;
+
+// SHC
+
+// SHC1 activated EGFR association
+J33: pEgfr_Lig + Shc1 -> aR_Shc1 ; k6 * pEgfr_Lig * Shc1 - k_6 * aR_Shc1;
+// SHC1 phosphorylation
+J34: aR_Shc1 => aR_pShc1 ; kp * aR_Shc1;
+// pSHC1 dissociation
+J35: aR_pShc1 => pEgfr_Lig + pShc1 ; k_7 * aR_Shc1;
+// pSHC1 dephosphorylation
+J36: pShc1 => Shc1 ; k_p * pShc1;
+
+
+// --------------------------------------------------------------------
+
+// Initial Values:
+
+
+// all species has nM units
+
+var Lig = 0.165;
+Lig has nM;
+Egfr = 135;
+iEgfr = 73;
+Egfr_Lig = 0.12;
+iEgfr_Lig = 0.06;
+pEgfr_Lig = .8;
+ipEgfr_Lig = .4;
+
+aRtot := pEgfr_Lig + ipEgfr_Lig
+
+Garem = 1.0
+Grb2 = 37.11
+Grb2_Garem = 3.0
+aR_Grb2_Garem = 0.10
+aR_Grb2_pGarem = 0.10
+aR_Grb2_ppGarem = 0.10
+aR_Grb2_ppGarem_Shp2 = 0.22
+Shp2 = 28.50
+aR_Grb2_ppGarem_pShp2 = 0.0
+
+Shc1 = 28.00
+aR_Shc1 = 0.0
+aR_pShc1 = 0.0
+
+Gab1 = 1.00
+Grb2_Gab1 = 4.00
+aR_Grb2_Gab1 = 0.10
+aR_Grb2_pGab1 = 0.0
+aR_Grb2_ppGab1 = 0.0
+aR_Grb2_ppGab1_Shp2 = 0.0
+aR_Grb2_ppGab1_pShp2 = 0.0
+
+// pGAREMtot := aR_Grb2_pGarem + aR_Grb2_ppGarem + Grb2_pGarem + Grb2_ppGarem + aR_Grb2_ppGarem_Shp2 + aR_Grb2_ppGarem_pShp2
+// pGAB1tot := aR_Grb2_pGab1 + aR_Grb2_ppGab1 + Grb2_pGab1 + Grb2_ppGab1 + aR_Grb2_ppGab1_Shp2 + aR_Grb2_ppGab1_pShp2
+// pSHC1tot := aR_pShc1 + pShc1
+
+pGAREMtot := aR_Grb2_ppGarem_pShp2
+pGAB1tot := aR_Grb2_ppGab1_pShp2
+pSHC1tot := aR_pShc1
+
+// --------------------------------------------------------------------
+
+// Compartment initializations:
+
+cell = 1;
+extra = 5000;
+intra = 1;
+
+// --------------------------------------------------------------------
+
+// Parameters:
+
+Vr = 0.242; // Replenishment of empty receptors
+kt = 0.0012; // Endocytosis of empty receptors
+kx = 1; // Degradation of empty receptors - set to eliminate the compartment
+ke = 0.0037; // Endocytosis of activated receptors
+kh = 0.0004; // 0.00024; // Degradation of activated receptors
+
+kf = 0.016 // 0.0016; // Forward receptor-ligand 2nd order rate constant
+kr = 0.0069 // 0.004; // Reverse receptor-ligand rate constant
+
+kp = 0.0099733292803193 // 0.067; // This is the phosphorylation probability
+k_p = 0.046; // Dephosphorylation rate constant
+
+k1 = 0.05
+k_1 = 0.9553876841497264
+k2 = 0.05
+k_2 = 0.0104799687505888
+k3 = 0.05
+k_3 = 0.0074159569424517
+k4 = 0.05
+k_4 = 0.0087361126209796
+k5 = 0.05
+k_5 = 0.0074377235099548
+k6 = 0.05
+k_6 = 0.0074307203761276
+k_7 = 0.0084280303027878
+
+// --------------------------------------------------------------------
+
+// Unit definitions:
+unit substance = 1e-9 mole;
+unit time_unit = second;
+unit nM = 1e-9 mole / litre;
+unit per_nM = litre / 1e-9 mole;
+unit per_sec = 1 / second;
+unit nM_per_s = 1e-9 mole / (litre * second);
+unit per_nMs = litre / (1e-9 mole * second);
+
+// Display Names:
+substance is "nmole";
+time_unit is "s";
+per_sec is "s-1";
+nM_per_s is "nM/s";
+per_nMs is "nM-1 s-1";
+extra is "extracellular space";
+end
