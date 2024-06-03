@@ -7,6 +7,7 @@ data = None
 with open('Results/sorted_params_final.txt', 'r') as file:
 # with open('Results/sorted_params_10.txt', 'r') as file:
 # with open('Results/sorted_params_11.txt', 'r') as file:
+# with open('Results/sorted_params_20.txt', 'r') as file:
     data = file.read().replace('#', '')
 
 with open('parameters', 'w') as params:
